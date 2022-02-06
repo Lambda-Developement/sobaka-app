@@ -72,7 +72,7 @@ input[type="checkbox"]:focus,input[type="radio"]:focus,select.form-select:focus,
 .form-check-inline > input[type="checkbox"].form-check-input:checked{
     border: 1px solid #FE974D;
     background-color: #F47934;
-    background-image: url("../svg/white_check.svg");
+    background-image: url("../svg/checkMark.svg");
     background-repeat: no-repeat;
     background-size: 10px;
     background-position:  center center;
@@ -96,7 +96,7 @@ input[type="checkbox"]:focus,input[type="radio"]:focus,select.form-select:focus,
 .form-check-inline > input[type="radio"].form-check-input:checked{
     border: 1px solid #FE974D;
     background-color: #FFFFFF;
-    background-image: url("../svg/blue_circle.svg");
+    background-image: url("../svg/orange_circle.svg");
     background-repeat: no-repeat;
     background-size: 10px;
     background-position:  center center;
@@ -139,12 +139,14 @@ label.form-check-label{
 .link-white img{
     margin-right : 8px; 
     }
-.link-white a{
+a.link-white {
     color: #FFFFFF;
 }
-.link-orange a{
+a.link-orange {
     color: #FF7116;
-
+}
+a {
+    text-decoration: none;
 }
 /* лайн эдиты и прочее */
 input[type="email"].form-control,input[type="password"].form-control{
