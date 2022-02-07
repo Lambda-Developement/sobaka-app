@@ -316,6 +316,9 @@ h3.text-common{
     flex-direction: row;
     align-items: center;
     background-color: white;
+    border-bottom-left-radius: 1.3rem;
+    border-bottom-right-radius: 1.3rem;
+    box-shadow: 0 0 2rem rgb(241, 241, 241);
 }
 
 .screen-hat .mb-3 {
