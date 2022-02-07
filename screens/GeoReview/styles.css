@@ -255,3 +255,28 @@ p.text-common{
     overflow: hidden;
     text-overflow: ellipsis;
 }
+p.btn-text{
+    font-size:14px;
+}
+button.btn.btn-filled{
+    height: 40px;
+    width:fit-content;
+    padding: 2px 13px 2px 13px;
+}
+h3.text-common{
+    text-align: left;
+    font-size: 14px;
+    font-width: 500;
+}
+.circle{
+    background-color:  #C4C4C4;
+    border-radius: 18px;
+    width:36px;
+    height:36px;
+}
+h3.text-attention{
+    margin:0;
+    font-size:18px;
+    font-weight: 500;
+    color:white;
+}
