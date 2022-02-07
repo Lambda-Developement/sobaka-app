@@ -13,18 +13,26 @@
 </head>
 
 <body>
-    <div style="height: 812px;">
-        <h1 class="text-center" style="margin-top: 201px;margin-left: 67px;">Войдите или зарегистрируйтесь </h1>
+    <div >
+        <h1 class="text-attention" style="text-align: center; margin-top: 201px;margin-left: 30px; color:rgba(255, 255, 255, 1)">Войдите или зарегистрируйтесь </h1>
         
-        <input class ="box" type="password" style="width: 290px;height: 50px;margin-left: 43px;margin-top: 8px;" placeholder="name@example.com"/>
+            <div class="mb-3">
+        <label for="exampleFormControlInput1" class="form-label"></label>
+        <input type="email" class="form-control" style="width: 290px;
+        height: 50px; margin-left: 43px;" id="exampleFormControlInput1" placeholder="name@example.com">
+    </div>
+    <div class="mb-3">
+        <label for="exampleFormControlInput2" class="form-label"></label>
+        <input type="password" class="form-control" style="width: 290px;
+        height: 50px; margin-top: 8px; margin-left: 43px;" id="exampleFormControlInput2" placeholder="******">
+    </div>
         
-        <input class ="box" type="password" style="width: 290px;height: 50px;margin-left: 43px;margin-top: 8px;" placeholder="*******"/>
+        <a href="#"  style="color:rgba(57, 57, 57, 1); margin-top: 10px; margin-left: 215px;">Забыли пароль?</a>
         
-        <a href="#"  style="color:rgba(57, 57, 57, 1); margin-top: 40px; margin-left: 215px;">Забыли пароль?</a>
-        
-       <button class="box"><p class="btn-text">Войти</p></button>
-        
-       <button class="box1"><p class="btn-text1">Зарегистрироваться</p></button>
+       <div class="mb-3">
+        <button class="btn btn-hollow" style="margin-top: 30px; margin-left: 43px;"><p class="btn-text" >Войти</p></button>
+        <button class="btn btn-hollow2" style="margin-top: 10px; margin-left: 43px;"><p class="btn-text">Зарегистрироваться</p></button>
+    </div>
     </div>
 </body>
 
