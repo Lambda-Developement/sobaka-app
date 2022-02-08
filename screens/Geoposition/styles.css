@@ -1,5 +1,5 @@
 #map{
-    background-color: red;
+    background-color: lightblue;
 }
 body{
     width: 100%;
@@ -41,10 +41,14 @@ html{
     background-position: center center;
     background-size:25px;
 }
+h3.text-bold{
+    font-size: 14px;
+    text-align: left;
+}
 h3.text-description{
     font-family: gilroy;
     font-weight: 400;
-    font-size: 12px;
+    font-size: 10px;
     color: rgba(189, 189, 189, 1);
     margin:0;
     white-space: nowrap;
@@ -122,17 +126,20 @@ button.btn-hollow.btn-gps.btn-minus{
 a {
     text-decoration: none;
 }
-.parking-info{
+.geopoint-info{
     height: 124px;
     background: #FFFFFF;
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.17);
-    border-radius: 12px;
-    width: 70%;
-}
-.parking-popup{
-    position: fixed;
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
     width: 100%;
-    bottom: 120px;
+    border-bottom: 2px solid rgba(243, 243, 243, 1);
+}
+.geopoint-popup{
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    z-index: 3;
 }
 .new{
     width:fit-content;
@@ -194,6 +201,7 @@ img{
 }
 #info{
     display: none;
+    z-index: 2;
 }
 #icons-here{
     z-index: 1;
@@ -241,4 +249,75 @@ img{
 .nav-bar {
     display: flex;
     flex-direction: row;
+}
+.my-position{
+    width:50px;
+    height: 50px;
+    border-radius: 25px;
+    background-color: rgba(254, 151, 77, 0.15);
+    position: fixed;
+}
+.orange-circle{
+    width:8px;
+    height: 8px;
+    border-radius: 4px;
+    background-color: rgba(254, 151, 77, 1);
+}
+.geopoint{
+    position: fixed;
+    width:48px;
+    height:54px;
+    background: url("../../ui-kit/svg/GeoPOINT.svg");
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size:48px;
+}
+.dog-img{
+    width:30px;
+    height:30px;
+    background: url("../../ui-kit/img/dog.png");
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size:35px;
+    border-radius: 40px;
+}
+.geopoint-photo{
+    border-radius: 12px;
+    background: url("../../ui-kit/img/geopoint.jpg");
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size:100%;
+    border-radius: 12px;
+    height: 100%;
+    width: 100%;
+}
+.reviews{
+    background-color: white;
+    width: 100%;
+}
+.rate-icon{
+    width: 18px;
+    height: 20px;
+    background: url("../../ui-kit/svg/orange_star.svg");
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size:15px;
+}
+h3.text-attention{
+    font-weight: 700;
+    font-size: 36px;
+    color:rgba(86,86,86,1);
+    margin-bottom: 0;
+}
+p.text-common{
+    font-family: gilroy;
+    text-align: left;
+    font-weight: 400;
+    font-size: 12px;
+    color: rgba(52, 52, 52, 1);
+    margin:0;
+}
+button.btn.btn-filled{
+    width:100%;
+    padding: 3px 20px 3px 20px;
 }
