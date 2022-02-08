@@ -55,7 +55,7 @@ h3.text-description{
 }
 .search-bar-wrapper{
     position: fixed;
-    top:28px;
+    top:60px;
     padding: 0 40px 0 40px;
     width: 100%;
 }
@@ -329,4 +329,26 @@ button.btn.btn-filled{
 .near-popup > div > div > div > h3.text-description{
     font-size: 14px;
     white-space: break-spaces;
+}
+.search-history{
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    height:calc(100% - 40px);
+    z-index: 4;
+    background-color: white;
+    border-radius: 12px;
+    background: #F6F6F6;
+    box-shadow: 0px -2px 8px rgba(0, 0, 0, 0.08);
+}
+.time-icon{
+    width:24px;
+    height:24px;
+    background: url("../../ui-kit/svg/time_icon.svg");
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size:24px;
+}
+h3.text-common{
+    margin:0;
 }

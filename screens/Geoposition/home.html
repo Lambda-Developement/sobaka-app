@@ -39,7 +39,7 @@
             <div class="nav-bar__element__title">Маршруты</div>
         </button>
     </footer>
-    <div class="search-bar-wrapper" style="z-index: 2;">
+    <div class="search-bar-wrapper" style="z-index: 10;">
         <div class="search-bar d-inline-flex justify-content-between align-items-center container-fluid">
             <div class="grey-search-icon"></div>
             <div class="w-100"><input type="email" class="form-control" id="line-edit" placeholder="Поиск..."></div>
@@ -114,8 +114,34 @@
             </div>
         </div>
     </div>
+    <div id="search-history">
+        <div class="search-history">
+            <div class="d-flex flex-column pb-3 px-2">
+                <div><a href="#">
+                    <div class="bg-white w-100 d-inline-flex align-items-center p-2" style="margin-top: 100px;">
+                        <div class="time-icon me-3"></div>
+                        <div><h3 class="text-common">Свободы</h3></div>
+                    </div>
+                </a></div>
+                <div><a href="#">
+                    <div class="bg-white w-100 d-inline-flex p-2">
+                        <div class="time-icon me-3"></div>
+                        <div><h3 class="text-common">Миллениум</h3></div>
+                    </div>
+                </a></div>
+            </div>
+        </div>
+    </div>
 <script>
     var opened = false;
+    document.getElementById("line-edit").addEventListener('focus',search_history_open);
+    document.getElementById('line-edit').addEventListener('focusout',search_history_close);
+    function search_history_open(){
+        document.getElementById('search-history').style.display = 'block';
+    }
+    function search_history_close(){
+        document.getElementById('search-history').style.display = 'none';
+    }
     function collapse_open(){
         document.getElementById("info").style.display = 'block';
     }
