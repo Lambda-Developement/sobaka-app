@@ -161,22 +161,6 @@ a {
     background-position: center center;
     background-size:14px;
 }
-.download-icon{
-    width:15px;
-    height:13px;
-    background: url("../../ui-kit/svg/download.svg");
-    background-repeat: no-repeat;
-    background-position: center center;
-    background-size:8px;
-}
-.bookmark2-icon{
-    width:15px;
-    height:13px;
-    background: url("../../ui-kit/svg/bookmark.svg");
-    background-repeat: no-repeat;
-    background-position: center center;
-    background-size:8px;
-}
 .close-icon > div > a {
     font-family: monospace;
     color:white;
@@ -321,4 +305,29 @@ p.text-common{
 button.btn.btn-filled{
     width:100%;
     padding: 3px 20px 3px 20px;
+}
+.glow{
+    filter: drop-shadow(0 0 2px white) drop-shadow(0 0 24px #FC913B);
+}
+.dog-img-big{
+    width:140px;
+    height:140px;
+    background: url("../../ui-kit/img/dog.png");
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size:130px;
+    border-radius: 200px;
+}
+.near-popup{
+    background: #FFFFFF;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.17);
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
+    width: 100%;
+    border-bottom: 2px solid rgba(243, 243, 243, 1);
+    font-size: 18px;
+}
+.near-popup > div > div > div > h3.text-description{
+    font-size: 14px;
+    white-space: break-spaces;
 }

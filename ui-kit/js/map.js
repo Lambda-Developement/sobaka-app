@@ -4,6 +4,8 @@ var scale = 15;
 var locs = [[57.620188, 39.898177],
             [57.619867, 39.879848]];
 
+var minDistance = 200; // metres
+
 document.getElementById("map").style.height = HEIGHT;
 
 var map = L.map('map', {
@@ -44,14 +46,20 @@ function redraw(){
         let x = map.latLngToContainerPoint(L.latLng(a[0],a[1])).x;
         let y = map.latLngToContainerPoint(L.latLng(a[0],a[1])).y;
         if(0 <= x && x <= window.innerWidth && 0 <= y && y <= window.innerHeight){
+            glow = map.distance(L.latLng(pos),L.latLng(a))  <= minDistance ? "glow" : "";
             document.getElementById('icons-here').innerHTML+="" +
                 "<div style=\"top:"+y+"px;left:"+x+"px;\" class=\"position-fixed\">\n" +
                 "            <a href=\"#\" onclick=\"collapse_toggle()\">\n" +
-                "                <div class=\"geopoint d-flex justify-content-center align-items-center pb-2 \">\n" +
+                "                <div class=\"geopoint d-flex justify-content-center align-items-center "+glow+" pb-2 \">\n" +
                 "                    <div class=\"dog-img\"></div>\n" +
                 "                </div>\n" +
                 "            </a>\n" +
                 "        </div>"
+            if(glow){
+                document.getElementById("info2").style.display = "block";
+            }else{
+                document.getElementById("info2").style.display = "none";
+            }
         }
     })
 }
