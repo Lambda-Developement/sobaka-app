@@ -1,0 +1,55 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    display:flex;
+    justify-content: center;
+    height: 100vh;
+}
+
+.login-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: fit-content;
+    padding: 3rem;
+}
+
+.login-container input {
+    outline: 2px solid lightgray;
+}
+
+.login-container__forget-password {
+    text-decoration: none;
+    color: #2C7CDA;
+    align-self: flex-end;
+    margin-bottom: 2rem;
+}
+
+.arrow-back {
+    width: 50px;
+    left:0;
+    position: absolute;
+    margin: 1rem
+}
+
+#checkbox-password {
+    margin-bottom: 4rem;
+}
+
+.spacer {
+    flex-grow:0.1;
+}
+
+#city {
+    background: #F0F0F0;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+    border-radius: 12px;
+    font-family: gilroy;
+    font-weight: 400;
+    font-size: 18px;
+    border: 1.75px solid #F0F0F0;
+}
