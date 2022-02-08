@@ -462,3 +462,46 @@ h3.text-common{
 .trip-card__footer__time { 
     margin-left: 0.5rem;
 }
+
+
+/* Я попытался сделать красивый */
+.dropdown-icon {
+    position:absolute;
+    height: 42px;
+    width: 42px;
+    z-index: 10;
+    padding: 0.6rem;
+}
+.dropdown {
+    display:flex;
+    align-items: stretch;
+    justify-content: stretch;
+    width: 100%;
+    border: 0;
+    border-radius: 0;
+    background-color: white;
+}
+.form-select-updated{ 
+    height:100%;
+    width: 100%;
+    border: 0;
+    border-radius: 0;
+    background-color: transparent;
+    text-align: right;
+    font-size: 14px;
+    z-index: 1;
+}
+.dropdown-title {
+    position: absolute;
+    align-self: center;
+    padding-left: 60px;
+    font-family: gilroy;
+    font-weight: 400;
+    font-size: 18px;
+}
+.dropdown option {
+    position:relative;
+    font-family: gilroy, sans-serif;
+    font-weight: 400;
+    font-size: 18px;
+}
