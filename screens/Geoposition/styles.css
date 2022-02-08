@@ -256,6 +256,7 @@ img{
     border-radius: 25px;
     background-color: rgba(254, 151, 77, 0.15);
     position: fixed;
+    z-index: 2;
 }
 .orange-circle{
     width:8px;
