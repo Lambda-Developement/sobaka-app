@@ -10,8 +10,8 @@
 
     <title>Registration</title>
 </head>
-<body style="background:url(/www/ui-kit/svg/orange_background.svg); background-repeat: no-repeat; background-position: center;">
-    <div class="login-container">
+<body style="background:url(/www/ui-kit/svg/orange_background.svg); background-repeat: repeat; background-position: center;">
+    <div class="login-container" style="display:flex; flex-direction: column; align-items:center; justify-content:center;">
         <div class="mb-3">
             <h3 class="text-bold" style="color:white">
                 Регистрация
@@ -25,7 +25,7 @@
             <input type="email" class="form-control line-success" id="exampleFormControlInput1" placeholder="name@gmail.com">
         </div>
 
-            <div class="mb-3 nav-item dropdown input-field" id="city" style="background-color: transparent; border:0;">
+            <div class="mb-3 nav-item dropdown input-field" id="city" style="background-color: transparent; border:0; max-width: 286px;">
                 
                 <div style="height: 42px; border:0; width:0; background-color: transparent;" id="city">
                     <select class="form-select" style="padding-left:2.5rem;" id="city">
@@ -56,7 +56,19 @@
         <button class="btn btn-filled2 mb-3" onclick="location.href='../loginka/loginka.html'"><p class="btn-text">Зарегистрироваться</p></button>
         <button class="btn btn-hollow" onclick="location.href='../loginka/loginka.html'"><p class="btn-text">Отменить</p></button>
 
+        
         </div>
+        <p style="max-width: fit-content; 
+        width: 264px;
+        height: 22px;
+        margin-top: 1rem;
+        font-family: gilroy;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 12px;
+        line-height: 12px;
+        
+        color: rgba(255, 255, 255, 0.55);">Регистрируясь вы соглашаетесь с условиями использования и передачей данных</p>
     </div>
     
     
