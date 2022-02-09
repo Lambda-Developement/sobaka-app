@@ -8,6 +8,12 @@ body {
     width: 100%;
     padding: 0;
     margin: 0;
+
+}
+
+@keyframes load {
+    0% { position: absolute; bottom: 100%; }
+    100% {position: absolute; bottom: 0;}
 }
 
 .container{
@@ -18,6 +24,8 @@ body {
     background-repeat: no-repeat;
     background-position: center center;
     padding: 0;
+    /* Порофлить (нет)*/
+    animation: load 4s normal forwards;
 }
 .container p{
     display: block;
@@ -31,4 +39,3 @@ body {
     color: #FFFFFF;
     font-family: gilroy;
 }
-
