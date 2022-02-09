@@ -4,6 +4,13 @@ var scale = 15;
 var locs = [[57.620188, 39.898177],
             [57.619867, 39.879848]];
 
+var route = [[57.620213, 39.898240],
+[57.622408, 39.896553],
+[57.621695, 39.891786],
+[57.622732, 39.888774],
+[57.622095, 39.879967],
+[57.619718, 39.880038]]
+
 var minDistance = 200; // metres
 
 document.getElementById("map").style.height = HEIGHT;
@@ -22,6 +29,7 @@ L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_toke
     zoomOffset: -1,
     accessToken: 'pk.eyJ1IjoiaHVzY2tlciIsImEiOiJja3pkMTZ0cmUwNGYzMm9tcW5pa200dDJkIn0.-NLqcskaelmtyL5zpaBLzQ'
 }).addTo(map);
+L.polyline(route,{color:'orange',dashArray:'5,10'}).addTo(map);
 map.on('move',redraw);
 map.on('scale',redraw);
 
