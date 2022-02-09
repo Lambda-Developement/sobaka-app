@@ -240,6 +240,7 @@ p.text-common{
     overflow: hidden;
 }
 .dropdown-icon{
+    position: relative;
     width: 9px;
     height: 15px;
     background-image: url("../../ui-kit/svg/dropdown_up.svg");
