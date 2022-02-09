@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../../ui-kit/css/bootstrap.css">
+    <link rel="stylesheet" href="../../ui-kit/css/styles.css">
+    <link rel="stylesheet" href="style.css">
+
+    <title>Registration</title>
+</head>
+<body style="background:url(/www/ui-kit/svg/orange_background.svg); background-repeat: no-repeat; background-position: center;">
+    <div class="login-container">
+        <div class="mb-3">
+            <h3 class="text-bold" style="color:white">
+                Регистрация
+            </h3>
+        </div>
+        <div class="mb-3 input-field">
+            <input type="email" class="form-control line-success" id="exampleFormControlInput1" placeholder="Имя Фамилия">
+        </div>
+
+        <div class="mb-3 input-field">
+            <input type="email" class="form-control line-success" id="exampleFormControlInput1" placeholder="name@gmail.com">
+        </div>
+
+            <div class="mb-3 nav-item dropdown input-field" id="city" style="background-color: transparent; border:0;">
+                
+                <div style="height: 42px; border:0; width:0; background-color: transparent;" id="city">
+                    <select class="form-select" style="padding-left:2.5rem;" id="city">
+                        <option value="0">Ярославль</option>
+                        <option value="1">Екатеринбург</option>
+                        <option value="2">Москва</option>
+                        <option value="3">Нижний Новгород</option>
+                    </select>
+                </div>
+                
+            </div>
+
+        <div class="mb-3 input-field">
+            <input type="password" class="form-control" id="exampleFormControlInput2" placeholder="Пароль">
+        </div>
+
+        <div class="mb-3 input-field">
+            <input type="password" class="form-control" id="exampleFormControlInput2" placeholder="Повторите пароль">
+        </div>
+
+        <div class="form-check form-check-inline" style="align-self: flex-start;" id="checkbox-password">
+            <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
+            <label class="form-check-label" for="inlineCheckbox1" style="color:white" >Показать пароль</label>
+        </div>
+        <div class="spacer"></div>
+        <div class="button-footer" style="display:flex; flex-direction: column; align-content: center;">
+            
+        <button class="btn btn-filled2 mb-3" onclick="location.href='../loginka/loginka.html'"><p class="btn-text">Зарегистрироваться</p></button>
+        <button class="btn btn-hollow" onclick="location.href='../loginka/loginka.html'"><p class="btn-text">Отменить</p></button>
+
+        </div>
+    </div>
+    
+    
+</body>
+</html>
