@@ -127,7 +127,7 @@ a {
     text-decoration: none;
 }
 .geopoint-info{
-    height: 124px;
+    height: 150px;
     background: #FFFFFF;
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.17);
     border-top-left-radius: 12px;
@@ -151,6 +151,9 @@ a {
 }
 .btn-hollow.new{
     color:rgba(52, 134, 244, 1);
+}
+p.btn-text{
+    font-size: 14px;
 }
 .btn-hollow2.new{
     color:white;
@@ -271,7 +274,7 @@ img{
     background: url("../../ui-kit/img/geopoint.jpg");
     background-repeat: no-repeat;
     background-position: center center;
-    background-size:100%;
+    background-size:200%;
     border-radius: 12px;
     height: 100%;
     width: 100%;
@@ -304,7 +307,7 @@ p.text-common{
 }
 button.btn.btn-filled{
     width:100%;
-    padding: 3px 20px 3px 20px;
+    padding: 10px 20px 10px 20px;
 }
 .glow{
     filter: drop-shadow(0 0 2px white) drop-shadow(0 0 24px #FC913B);
@@ -325,6 +328,9 @@ button.btn.btn-filled{
     width: 100%;
     border-bottom: 2px solid rgba(243, 243, 243, 1);
     font-size: 18px;
+}
+h3.text-description{
+    white-space: break-spaces;
 }
 .near-popup > div > div > div > h3.text-description{
     font-size: 14px;
