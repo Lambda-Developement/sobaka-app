@@ -92,10 +92,10 @@ h3.text-bold{
     font-weight: 500;
     font-size: 24px;
 }
-h3.text-attention{
+h3.text-attention.in-circle{
     font-weight: 700;
-    font-size: 36px;
-    color:rgba(86,86,86,1);
+    font-size: 18px;
+    color:white;
     margin-bottom: 0;
 }
 p.text-common{
