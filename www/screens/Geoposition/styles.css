@@ -55,7 +55,7 @@ h3.text-description{
 }
 .search-bar-wrapper{
     position: fixed;
-    top:60px;
+    top:30px;
     padding: 0 40px 0 40px;
     width: 100%;
 }
@@ -340,7 +340,7 @@ h3.text-description{
     position: fixed;
     bottom: 0;
     width: 100%;
-    height:calc(100% - 40px);
+    height:calc(100% - 10px);
     z-index: 4;
     background-color: white;
     border-radius: 12px;

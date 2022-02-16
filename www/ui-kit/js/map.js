@@ -110,8 +110,8 @@ function redraw(){
     locs.forEach((a)=>{
         let x = map.latLngToContainerPoint(L.latLng(a[0],a[1])).x;
         let y = map.latLngToContainerPoint(L.latLng(a[0],a[1])).y;
+        glow = map.distance(L.latLng(pos),L.latLng(a))  <= minDistance ? "glow" : "";
         if(0 <= x && x <= window.innerWidth && 0 <= y && y <= window.innerHeight){
-            glow = map.distance(L.latLng(pos),L.latLng(a))  <= minDistance ? "glow" : "";
             document.getElementById('icons-here').innerHTML+="" +
                 "<div style=\"top:"+y+"px;left:"+x+"px;\" class=\"position-fixed\">\n" +
                 "            <a href=\"#\" onclick=\"collapse_toggle()\">\n" +
@@ -120,11 +120,11 @@ function redraw(){
                 "                </div>\n" +
                 "            </a>\n" +
                 "        </div>"
-            if(glow){
-                document.getElementById("info2").style.display = "block";
-            }else{
-                document.getElementById("info2").style.display = "none";
-            }
+        }
+        if(glow){
+            document.getElementById("info2").style.display = "block";
+        }else{
+            document.getElementById("info2").style.display = "none";
         }
     })
 }
