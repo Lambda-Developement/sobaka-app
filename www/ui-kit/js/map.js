@@ -1,5 +1,5 @@
 var HEIGHT = window.innerHeight+'px';
-const pos = [57.621398, 39.880228];
+var pos = [57.621398, 39.880228];
 var scale = 15;
 var locs = [[57.620188, 39.898177],
             [57.619867, 39.879848]];
@@ -10,6 +10,60 @@ var route = [[57.620213, 39.898240],
 [57.622732, 39.888774],
 [57.622095, 39.879967],
 [57.619718, 39.880038]]
+
+var permissions;
+
+var onSuccess = function(position) {
+    pos = [position.coords.latitude,position.coords.longitude];
+    console.log('Latitude: '          + position.coords.latitude          + '\n' +
+        'Longitude: '         + position.coords.longitude         + '\n' +
+        'Altitude: '          + position.coords.altitude          + '\n' +
+        'Accuracy: '          + position.coords.accuracy          + '\n' +
+        'Altitude Accuracy: ' + position.coords.altitudeAccuracy  + '\n' +
+        'Heading: '           + position.coords.heading           + '\n' +
+        'Speed: '             + position.coords.speed             + '\n' +
+        'Timestamp: '         + position.timestamp                + '\n');
+};
+
+// onError Callback receives a PositionError object
+//
+function onError(error) {
+    alert('code: '    + error.code    + '\n' +
+        'message: ' + error.message + '\n');
+}
+
+setTimeout(()=>{
+    permissions = cordova.plugins.permissions;
+    var list = [
+        permissions.CAMERA,
+        permissions.ACCESS_FINE_LOCATION
+    ];
+
+    permissions.checkPermission(list, success, null);
+
+    function error() {
+        console.warn('Camera or Accounts permission is not turned on');
+    }
+
+    function success( status ) {
+        if( !status.hasPermission ) {
+
+            permissions.requestPermissions(
+                list,
+                function(status) {
+                    if( !status.hasPermission ) error();
+                },
+                error);
+        }
+    }
+    // setTimeout(()=>{
+    //     navigator.geolocation.getCurrentPosition(onSuccess, onError);
+    // },1000);
+},2000);
+
+function get_location(){
+    navigator.geolocation.getCurrentPosition(onSuccess, onError);
+}
 
 var minDistance = 200; // metres
 
