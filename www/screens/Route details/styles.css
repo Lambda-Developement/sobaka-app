@@ -255,6 +255,7 @@ p.text-common{
 .dropdown-icon{
     width: 9px;
     height: 15px;
+    position: relative;
     background-image: url("../../ui-kit/svg/dropdown_up.svg");
     background-size: 15px;
     background-repeat: no-repeat;
