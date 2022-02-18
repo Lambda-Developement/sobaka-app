@@ -33,7 +33,9 @@ h3.text-header {
 }
 
 .screen-hat {
-    position:sticky;
+    width: 100%;
+    position: fixed;
+    overflow: hidden;
     top: 0;
     z-index: 3;
 }
