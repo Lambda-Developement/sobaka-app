@@ -92,6 +92,7 @@ input[type="email"].form-control{
 input[type="email"].form-control:focus{
     border:0;
     box-shadow: none;
+    padding-left: 15px;
     background: #FFFFFF;
 }
 .buttons-bar{
