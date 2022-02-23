@@ -10,7 +10,7 @@
 
     <title>Profile+avatar</title>
 </head>
-<body>
+<body onload="check_credentials()">
     <div class="screen-hat">
         <button class="btn arrow-back">
             <a href="../Geoposition/home.html">
@@ -27,8 +27,8 @@
     <div class="profile-screen">
         <div class="avatar-area">
             <img src="../../ui-kit/img/avatar.png" alt="gregory" class="avatar-area__image">
-            <h3 class="text-bold" style="margin-top: 1rem;">
-                Григорий Великлоепный
+            <h3 id="header-name" class="text-bold" style="margin-top: 1rem;">
+                Григорий
             </h3>    
             <div>
                 <a href="../ProfileIzmenit/profile_main.html" class = "link-orange"><img src = "../../ui-kit/svg/icon_orange.svg"> Изменить</a>
@@ -101,7 +101,15 @@
         
 
     </div>
-    
 
+    <script>
+        function check_credentials(){
+            if(localStorage != undefined){
+                if (localStorage.getItem('name') != null && localStorage.getItem('name').length > 0){
+                    document.getElementById('header-name').innerHTML = localStorage.getItem('name');
+                }
+            }
+        }
+    </script>
 </body>
 </html>
