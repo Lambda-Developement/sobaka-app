@@ -107,8 +107,47 @@ L.polyline(route,{color:'orange',dashArray:'5,10'}).addTo(map);
 map.on('move',redraw);
 map.on('scale',redraw);
 
+var routing_control = L.Routing.control({
+    waypoints: [
+        null
+    ],
+    createMarker: function() { return null; },
+    show: false,
+    showAlternatives: false,
+    addWaypoints:false,
+    draggableWaypoints: false,
+    lineOptions : {
+        addWaypoints:false,
+        draggableWaypoints: false,
+    },
+    router: L.Routing.mapbox('pk.eyJ1IjoiaHVzY2tlciIsImEiOiJja3pkMTZ0cmUwNGYzMm9tcW5pa200dDJkIn0.-NLqcskaelmtyL5zpaBLzQ')
+});
+routing_control.addTo(map);
+make_route(
+    L.latLng(57.59918048960674, 39.845160556393985),
+    L.latLng(57.626237457771296, 39.86840435639479));
+redraw();
 
-redraw()
+function make_route(start, end){
+    map.removeControl(routing_control);
+    routing_control = L.Routing.control({
+        waypoints: [
+            start,
+            end
+        ],
+        createMarker: function() { return null; },
+        show: false,
+        showAlternatives: false,
+        addWaypoints:false,
+        draggableWaypoints: false,
+        lineOptions : {
+            addWaypoints:false,
+            draggableWaypoints: false,
+        },
+        router: L.Routing.mapbox('pk.eyJ1IjoiaHVzY2tlciIsImEiOiJja3pkMTZ0cmUwNGYzMm9tcW5pa200dDJkIn0.-NLqcskaelmtyL5zpaBLzQ')
+    });
+    routing_control.addTo(map);
+}
 
 function zoomin(){
     map.zoomIn(1);
