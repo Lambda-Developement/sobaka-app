@@ -11,10 +11,10 @@ body {
 
 }
 
-@keyframes load {
+/* @keyframes load {
     from { position: absolute; bottom: 100%; }
     to { position: absolute; bottom: 0; }
-}
+} */
 
 .container{
     background: url(png/logo.png);
@@ -25,13 +25,16 @@ body {
     background-position: center center;
     padding: 0;
     /* Порофлить (нет)*/
+    position: absolute;
+    bottom: 0;
+    max-width: 100% !important;
     animation: load 4s ease-in-out forwards;
 }
 .container p{
     display: block;
     position: absolute;
     text-align: center;
-    width: 100%; 
+    width: 100%;
     top: calc(50% + 90px);
     margin: auto;
     font-weight: 700;
