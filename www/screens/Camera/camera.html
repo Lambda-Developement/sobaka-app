@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="../../ui-kit/css/bootstrap.css">
     <link rel="stylesheet" href="../../ui-kit/css/styles.css">
     <link rel="stylesheet" href="style.css">
-    <title>ExcursionStart</title>
+    <title>Camera</title>
 </head>
 <body style="background: transparent;">
     <div class="screen-hat">
@@ -29,26 +29,6 @@
     </footer>
 <script src="../../cordova.js"></script>
 <script src="../../CameraPreview.js"></script>
-<script>
-    setTimeout(()=>{
-        let options = {
-            x: 0,
-            y: 0,
-            width: window.screen.width,
-            height: window.screen.height,
-            camera: CameraPreview.CAMERA_DIRECTION.BACK,
-            toBack: true,
-            tapPhoto: false,
-            tapFocus: true,
-            previewDrag: false,
-            storeToFile: false,
-            disableExifHeaderStripping: false
-        };
-
-        CameraPreview.startCamera(options);
-        CameraPreview.show();
-    },2000);
-
-</script>
+<script src="../../ui-kit/js/camera.js"></script>
 </body>
 </html>

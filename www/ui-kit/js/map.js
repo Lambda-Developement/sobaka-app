@@ -1,5 +1,5 @@
 var HEIGHT = window.innerHeight+'px';
-var pos = [57.621398, 39.880228];
+var pos = [57.621166, 39.888228];
 var scale = 15;
 var locs = [
     [57.621166,39.888549,"Ярославский музей-заповедник"],
@@ -66,24 +66,12 @@ function onError(error) {
 
 setTimeout(()=>{
     permissions = cordova.plugins.permissions;
-
-    permissions.checkPermission(permissions.CAMERA, (status)=>{
-        if(!status.hasPermission){
-            permissions.requestPermission(permissions.CAMERA,success,error);
-            function error() {
-                console.warn('Camera permission is not turned on');
-            }
-
-            function success( status ) {
-                if( !status.hasPermission ) error();
-            }
-        }
-    }, null);
     permissions.checkPermission(permissions.ACCESS_FINE_LOCATION, (status)=>{
         if(!status.hasPermission){
             permissions.requestPermission(permissions.ACCESS_FINE_LOCATION,success,error);
             function error() {
                 console.warn('Geolocation permission is not turned on');
+                document.location.href = "../../screens/loginka/loginka.html"; // Должно редиректить на страницу где мы прссим пользователя передумать
             }
 
             function success( status ) {
@@ -91,9 +79,6 @@ setTimeout(()=>{
             }
         }
     }, null);
-    // setTimeout(()=>{
-    //     navigator.geolocation.getCurrentPosition(onSuccess, onError);
-    // },1000);
 },2000);
 
 function get_location(){
@@ -136,6 +121,7 @@ function redraw(){
     //console.log(map.getBounds());
     let pos_x = map.latLngToContainerPoint(L.latLng(pos[0],pos[1])).x;
     let pos_y = map.latLngToContainerPoint(L.latLng(pos[0],pos[1])).y;
+    let info2_appear = false;
     document.getElementById('icons-here').innerHTML = "" +
         "<div style=\"top: "+pos_y+"px;left: "+pos_x+"px\" class=\"my-position d-flex justify-content-center align-items-center\">\n" +
         "            <div class=\"orange-circle\"></div>\n" +
@@ -155,11 +141,14 @@ function redraw(){
                 "        </div>"
         }
         if(glow){
-            document.getElementById("info2").style.display = "block";
-        }else{
-            document.getElementById("info2").style.display = "none";
+            info2_appear = true;
         }
     })
+    if(info2_appear){
+        document.getElementById("info2").style.display = "block";
+    }else{
+        document.getElementById("info2").style.display = "none";
+    }
 }
 
 let searchInArray=(searchQuery, array)=>{
