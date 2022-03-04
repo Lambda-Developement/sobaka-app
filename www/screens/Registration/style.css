@@ -69,9 +69,9 @@ body {
     visibility: hidden !important;
 }
 
-.form-control.line-success, .form-control.line-danger{ 
-    border-width: 2px !important;
-    box-shadow:inherit !important; 
+.form-control.line-success, .form-control.line-danger{
+    border-width: 3px !important;
+    box-shadow:inherit !important;
 }
 
 
@@ -87,6 +87,10 @@ body {
 }
 
 #city-block.line-success .form-select{
-    border-color: #74CA65 !important; 
+    border-color: #74CA65 !important;
     border-width: 2px !important;
+}
+#city-block::before{
+    background-image: url("../../ui-kit/svg/arrow_gray_right.svg");
+    background-size: 9px;
 }
