@@ -520,3 +520,8 @@ h3.text-common{
     font-weight: 400;
     font-size: 18px;
 }
+
+/* sorry */
+#success div {
+    font-family: gilroy;
+}
