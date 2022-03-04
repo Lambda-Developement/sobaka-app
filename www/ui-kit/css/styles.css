@@ -279,14 +279,14 @@ h3.text-attention{
 h3.text-header{
     font-family: gilroy;
     font-weight: 500;
-    font-size:18px;
+    font-size:24px;
     text-align: center;
     color:rgba(65, 65, 65, 1);
 }
 h3.text-bold{
     font-family: gilroy;
     font-weight: 700;
-    font-size:24px;
+    font-size:20px;
     text-align: center;
     color:rgba(65, 65, 65, 1);
 }
@@ -495,6 +495,7 @@ h3.text-common{
     border: 0;
     border-radius: 0;
     background-color: white;
+    padding-right: 0.75rem;
 }
 .form-select-updated{
     height:100%;
@@ -505,6 +506,7 @@ h3.text-common{
     text-align: right;
     font-size: 14px;
     z-index: 1;
+    padding-right:20px;
 }
 .dropdown-title {
     position: absolute;
@@ -519,4 +521,9 @@ h3.text-common{
     font-family: gilroy, sans-serif;
     font-weight: 400;
     font-size: 18px;
+}
+
+/* sorry */
+#success div {
+    font-family: gilroy;
 }
