@@ -25,7 +25,7 @@
             <input type="email" class="form-control line-success" id="email_input" placeholder="name@gmail.com">
         </div>
 
-            <div class="mb-3 nav-item dropdown input-field line-success" id="city-block" style="background-color: transparent; max-width: 286px; display:block;">
+            <div class="mb-3 nav-item dropdown input-field" id="city-block" style="background-color: transparent; max-width: 286px; display:block;">
                 <div style="height: 42px; border:0; width:100%; background-color: transparent;" >
                     <select class="form-select" style="padding-left:2.5rem;" id="city">
                         <option value="0">Ярославль</option>
@@ -34,7 +34,7 @@
                         <option value="3">Нижний Новгород</option>
                     </select>
                 </div>
-                
+
             </div>
 
         <div class="mb-3 input-field">
@@ -51,13 +51,13 @@
         </div>
         <div class="spacer"></div>
         <div class="button-footer" style="display:flex; flex-direction: column; align-content: center;">
-            
+
         <button class="btn btn-filled2 mb-3" onclick="location.href='../loginka/loginka.html'"><p class="btn-text">Зарегистрироваться</p></button>
         <button class="btn btn-hollow" onclick="location.href='../loginka/loginka.html'"><p class="btn-text">Отменить</p></button>
 
-        
+
         </div>
-        <p style="max-width: fit-content; 
+        <p style="max-width: fit-content;
         width: 264px;
         height: 22px;
         margin-top: 1rem;
@@ -66,7 +66,7 @@
         font-weight: normal;
         font-size: 12px;
         line-height: 12px;
-        
+
         color: rgba(255, 255, 255, 0.55);">Регистрируясь вы соглашаетесь с условиями использования и передачей данных</p>
     </div>
     <script>
@@ -81,7 +81,7 @@
         emailField = document.getElementById("email_input");
         passwordField = document.getElementById("password_field_1");
         passwordFieldRepeat = document.getElementById("password_field_2");
-        cityDropdown = document.getElementById("cityDropdown");
+        // cityDropdown = document.getElementById("cityDropdown");
         const callbackFunction = function() {
             emailField.classList.remove("line-success");
             emailField.classList.remove("line-danger");
@@ -93,7 +93,7 @@
             emailField.closest(".input-field").classList.add("hide-before");
             passwordField.closest(".input-field").classList.add("hide-before");
             passwordFieldRepeat.closest(".input-field").classList.add("hide-before");
-            
+
 
 
             console.log(emailField.value);
@@ -110,7 +110,7 @@
             if ( validateEmail(emailField.value)) {
                 emailField.closest(".input-field").classList.remove("hide-before");
                 emailField.classList.add("line-success");
-                
+
             } else if(emailField.value) {
                 emailField.classList.add("line-danger");
             };
@@ -142,6 +142,6 @@
 
         callbackFunction();
         </script>
-    
+
 </body>
 </html>
