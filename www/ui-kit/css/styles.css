@@ -137,7 +137,7 @@ label.form-check-label{
     color:rgba(128, 128, 128, 1); /* несостыковка */
 }
 .link-white img{
-    margin-right : 8px; 
+    margin-right : 8px;
     }
 a.link-white {
     color: #FFFFFF;
@@ -160,19 +160,23 @@ input[type="email"].form-control,input[type="password"].form-control{
     border: 1.75px solid #F0F0F0;
 }
 input[type="email"].form-control.line-danger{
-    border-color: #DD3A3A;
+     border-width: 2px !important;
+    border-color: #DD3A3A !important;
     box-shadow: none;
 }
 input[type="email"].form-control.line-success{
-    border-color: #74CA65;
+    border-color: #74CA65 !important;
+     border-width: 2px !important;
     box-shadow: none;
 }
 input[type="password"].form-control.line-danger{
-    border-color: #DD3A3A;
+     border-width: 2px !important;
+    border-color: #DD3A3A !important;
     box-shadow: none;
 }
 input[type="password"].form-control.line-success{
-    border-color: #74CA65;
+     border-width: 2px !important;
+    border-color: #74CA65 !important;
     box-shadow: none;
 }
 
@@ -322,7 +326,7 @@ h3.text-common{
     margin: 1rem;
 }
 
-.screen-hat { 
+.screen-hat {
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -337,8 +341,8 @@ h3.text-common{
     padding: 2rem 0;
 }
 
-.screen-hat .mb-3, .screen-hat h3 { 
-    margin-bottom: 0 !important; 
+.screen-hat .mb-3, .screen-hat h3 {
+    margin-bottom: 0 !important;
 }
 
 .arrow-forward {
@@ -362,7 +366,7 @@ h3.text-common{
 }
 
 .trip-card__background {
-    
+
     position:absolute;
     z-index: -6;
     width: 100%;
@@ -470,7 +474,7 @@ h3.text-common{
     margin-right: 0.25rem;
 }
 
-.trip-card__footer__time { 
+.trip-card__footer__time {
     margin-left: 0.5rem;
 }
 
@@ -492,7 +496,7 @@ h3.text-common{
     border-radius: 0;
     background-color: white;
 }
-.form-select-updated{ 
+.form-select-updated{
     height:100%;
     width: 100%;
     border: 0;
