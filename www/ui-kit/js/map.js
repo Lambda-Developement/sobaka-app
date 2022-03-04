@@ -36,13 +36,6 @@ var locs = [
    [57.58916057592463, 39.84809362755754,"УКРК \"Арена 2000\""]
 ];
 
-var route = [[57.620213, 39.898240],
-[57.622408, 39.896553],
-[57.621695, 39.891786],
-[57.622732, 39.888774],
-[57.622095, 39.879967],
-[57.619718, 39.880038]]
-
 var permissions;
 
 var onSuccess = function(position) {
@@ -83,6 +76,8 @@ setTimeout(()=>{
 
 function get_location(){
     navigator.geolocation.getCurrentPosition(onSuccess, onError);
+    update_markers();
+    map.flyTo(pos,18);
 }
 
 var minDistance = 200; // metres
@@ -103,9 +98,16 @@ L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_toke
     zoomOffset: -1,
     accessToken: 'pk.eyJ1IjoiaHVzY2tlciIsImEiOiJja3pkMTZ0cmUwNGYzMm9tcW5pa200dDJkIn0.-NLqcskaelmtyL5zpaBLzQ'
 }).addTo(map);
-L.polyline(route,{color:'orange',dashArray:'5,10'}).addTo(map);
 map.on('move',redraw);
 map.on('scale',redraw);
+var markers = L.markerClusterGroup({
+    showCoverageOnHover: false,
+    maxClusterRadius: 80
+    // iconCreateFunction: function(cluster) {
+    //     return L.divIcon({ html: '<b>' + cluster.getChildCount() + '</b>' });
+    // }
+});
+update_markers();
 
 var routing_control = L.Routing.control({
     waypoints: [
@@ -148,7 +150,39 @@ function make_route(start, end){
     });
     routing_control.addTo(map);
 }
-
+function update_markers(){
+    map.removeLayer(markers);
+    info2_appear = false;
+    locs.forEach((el)=>{
+        var title = el[2];
+        //glow = map.distance(L.latLng(pos),L.latLng(el[0],el[1]))  <= minDistance ? "glow" : "";
+        glow = "";
+        icon = L.divIcon({
+            className: 'custom-div-icon',
+            html: "<div>\n" +
+                "            <a href=\"#\" onclick=\"collapse_toggle()\">\n" +
+                "                <div class=\"geopoint d-flex justify-content-center align-items-center "+glow+" pb-2 \">\n" +
+                "                    <div class=\"dog-img\"></div>\n" +
+                "                </div>\n" +
+                "            </a>\n" +
+                "        </div>",
+            iconSize: [30, 42],
+            iconAnchor: [15, 42]
+        });
+        var marker = L.marker(new L.LatLng(el[0], el[1]), { title: title ,icon: icon});
+        // marker.bindPopup(title);
+        markers.addLayer(marker);
+    });
+    if(glow){
+        info2_appear = true;
+    }
+    if(info2_appear){
+        document.getElementById("info2").style.display = "block";
+    }else{
+        document.getElementById("info2").style.display = "none";
+    }
+    map.addLayer(markers)
+}
 function zoomin(){
     map.zoomIn(1);
 }
@@ -156,38 +190,12 @@ function zoomout(){
     map.zoomOut(1);
 }
 function redraw(){
-    // console.log(map.getCenter());
-    //console.log(map.getBounds());
     let pos_x = map.latLngToContainerPoint(L.latLng(pos[0],pos[1])).x;
     let pos_y = map.latLngToContainerPoint(L.latLng(pos[0],pos[1])).y;
-    let info2_appear = false;
     document.getElementById('icons-here').innerHTML = "" +
         "<div style=\"top: "+pos_y+"px;left: "+pos_x+"px\" class=\"my-position d-flex justify-content-center align-items-center\">\n" +
         "            <div class=\"orange-circle\"></div>\n" +
         "        </div>";
-    locs.forEach((a)=>{
-        let x = map.latLngToContainerPoint(L.latLng(a[0],a[1])).x;
-        let y = map.latLngToContainerPoint(L.latLng(a[0],a[1])).y;
-        glow = map.distance(L.latLng(pos),L.latLng(a))  <= minDistance ? "glow" : "";
-        if(0 <= x && x <= window.innerWidth && 0 <= y && y <= window.innerHeight){
-            document.getElementById('icons-here').innerHTML+="" +
-                "<div style=\"top:"+y+"px;left:"+x+"px;\" class=\"position-fixed\">\n" +
-                "            <a href=\"#\" onclick=\"collapse_toggle()\">\n" +
-                "                <div class=\"geopoint d-flex justify-content-center align-items-center "+glow+" pb-2 \">\n" +
-                "                    <div class=\"dog-img\"></div>\n" +
-                "                </div>\n" +
-                "            </a>\n" +
-                "        </div>"
-        }
-        if(glow){
-            info2_appear = true;
-        }
-    })
-    if(info2_appear){
-        document.getElementById("info2").style.display = "block";
-    }else{
-        document.getElementById("info2").style.display = "none";
-    }
 }
 
 let searchInArray=(searchQuery, array)=>{
