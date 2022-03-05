@@ -288,3 +288,17 @@ h3.text-link > a {
 .review{
     display: none;
 }
+input[type='text'].form-control{
+    background: #ffffff;
+    box-shadow: none;
+    border:0;
+    padding-left: 10px;
+    border-bottom:2px solid rgba(196, 196, 196, 1);
+    border-radius: 0;
+}
+input[type='text'].form-control:focus{
+    background: #ffffff;
+    box-shadow: none;
+    border: 0;
+    border-bottom:2px solid rgba(196, 196, 196, 1);
+}
