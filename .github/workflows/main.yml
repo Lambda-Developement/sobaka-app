@@ -23,10 +23,13 @@ jobs:
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/checkout@v2
+      #- uses: actions/checkout@v2
       
       - name: Check script running
         run: echo OK
+        
+      #- name: Step 1 - Create a temporary artifact downloads folder
+      #  run: mkdir builds  
       
       - name: Cordova
         uses: oxr463/setup-cordova@0.0.3
@@ -35,3 +38,17 @@ jobs:
             cordova platform add android && \
             cordova build --no-telemetry && \
             cp "$(find . -name '*.apk')" .
+        
+      #- name: Step 2 - Add artifacts to publish to the temp folder
+      #  run: |
+      #    cd downloads
+      #    echo 'alpha'    > alpha.html
+      #    echo 'bravo'    > bravo.html
+      #    echo 'charlie'  > charlie.html
+      #    cd ..
+    
+      #- name: Step 3 - Use the Upload Artifact GitHub Action
+      #  uses: actions/upload-artifact@v2
+      #  with: 
+      #    name: assets-for-download
+      #    path: downloads       
