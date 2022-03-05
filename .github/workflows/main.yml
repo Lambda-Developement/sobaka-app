@@ -28,9 +28,10 @@ jobs:
       - name: Check script running
         run: echo OK
       
-      - name: Setup Cordova
+      - name: Cordova
+        uses: oxr463/setup-cordova@0.0.3
         with:
-        # Apache Cordova command to execute
           exec: |
-            cordova platform add android
-            cordova build android
+            cordova platform add android && \
+            cordova build --no-telemetry && \
+            cp "$(find . -name '*.apk')" .
