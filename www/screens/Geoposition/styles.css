@@ -352,6 +352,7 @@ h3.text-description{
     bottom: 0;
     width: 100%;
     height:calc(100% - 10px);
+    padding-top:100px;
     z-index: 4;
     background-color: white;
     border-radius: 12px;
@@ -371,9 +372,6 @@ h3.text-common{
 }
 #search-history{
     display: none;
-}
-#search-results1{
-    padding-top: 100px;
 }
 .leaflet-routing-container-hide{
     display: none;
