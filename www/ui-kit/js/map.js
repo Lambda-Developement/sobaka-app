@@ -103,9 +103,6 @@ map.on('scale',redraw);
 var markers = L.markerClusterGroup({
     showCoverageOnHover: false,
     maxClusterRadius: 80
-    // iconCreateFunction: function(cluster) {
-    //     return L.divIcon({ html: '<b>' + cluster.getChildCount() + '</b>' });
-    // }
 });
 update_markers();
 
@@ -152,6 +149,10 @@ function make_route(start, end){
 }
 function update_markers(){
     map.removeLayer(markers);
+    markers = L.markerClusterGroup({
+        showCoverageOnHover: false,
+        maxClusterRadius: 80
+    });
     info2_appear = false;
     locs.forEach((el)=>{
         var title = el[2];
