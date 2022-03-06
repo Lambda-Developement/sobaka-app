@@ -156,8 +156,8 @@ function update_markers(){
     info2_appear = false;
     locs.forEach((el)=>{
         var title = el[2];
-        //glow = map.distance(L.latLng(pos),L.latLng(el[0],el[1]))  <= minDistance ? "glow" : "";
-        glow = "";
+        glow = map.distance(L.latLng(pos),L.latLng(el[0],el[1]))  <= minDistance ? "glow" : "";
+        // glow = "";
         icon = L.divIcon({
             className: 'custom-div-icon',
             html: "<div>\n" +
@@ -170,13 +170,14 @@ function update_markers(){
             iconSize: [30, 42],
             iconAnchor: [15, 42]
         });
+        if(glow){
+            info2_appear = true;
+        }
         var marker = L.marker(new L.LatLng(el[0], el[1]), { title: title ,icon: icon});
-        // marker.bindPopup(title);
+
+        //marker.bindPopup(title);
         markers.addLayer(marker);
     });
-    if(glow){
-        info2_appear = true;
-    }
     if(info2_appear){
         document.getElementById("info2").style.display = "block";
     }else{
