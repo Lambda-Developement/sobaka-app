@@ -183,7 +183,18 @@ function update_markers(){
     }else{
         document.getElementById("info2").style.display = "none";
     }
-    map.addLayer(markers)
+    icon = L.divIcon({
+        className: 'custom-div-icon',
+        html: "<div class=\"my-position d-flex justify-content-center align-items-center\">\n" +
+            "            <div class=\"orange-circle\"></div>\n" +
+            "        </div>",
+        iconSize: [30, 42],
+        iconAnchor: [15, 42]
+    });
+
+    let marker = L.marker(new L.LatLng(pos[0], pos[1]), { icon: icon});
+    map.addLayer(markers);
+    map.addLayer(marker);
 }
 function zoomin(){
     map.zoomIn(1);
@@ -192,12 +203,7 @@ function zoomout(){
     map.zoomOut(1);
 }
 function redraw(){
-    let pos_x = map.latLngToContainerPoint(L.latLng(pos[0],pos[1])).x;
-    let pos_y = map.latLngToContainerPoint(L.latLng(pos[0],pos[1])).y;
-    document.getElementById('icons-here').innerHTML = "" +
-        "<div style=\"top: "+pos_y+"px;left: "+pos_x+"px\" class=\"my-position d-flex justify-content-center align-items-center\">\n" +
-        "            <div class=\"orange-circle\"></div>\n" +
-        "        </div>";
+
 }
 
 var index = elasticlunr(function () {
