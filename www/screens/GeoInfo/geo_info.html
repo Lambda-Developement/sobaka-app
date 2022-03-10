@@ -155,6 +155,7 @@
 </div>
 <script>
     var opened = false;
+    var rate = 5;
     var review_btn_state = true;
     var review_count = 0;
     function collapse_open(){
@@ -211,11 +212,11 @@
                 "                    </div>\n" +
                 "                    <div class=\"d-inline-flex align-items-center mb-2\">\n" +
                 "                        <div class=\"d-inline-flex justify-content-center align-items-center me-3\">\n" +
-                "                            <div class=\"rate-icon small\"></div>\n" +
-                "                            <div class=\"rate-icon small\"></div>\n" +
-                "                            <div class=\"rate-icon small\"></div>\n" +
-                "                            <div class=\"rate-icon small\"></div>\n" +
-                "                            <div class=\"rate-icon small\"></div>\n" +
+                "                            <div class=\"rate-icon small\" id='rate-1' onclick='rate_clicked(this)'></div>\n" +
+                "                            <div class=\"rate-icon small\" id='rate-2' onclick='rate_clicked(this)'></div>\n" +
+                "                            <div class=\"rate-icon small\" id='rate-3' onclick='rate_clicked(this)'></div>\n" +
+                "                            <div class=\"rate-icon small\" id='rate-4' onclick='rate_clicked(this)'></div>\n" +
+                "                            <div class=\"rate-icon small\" id='rate-5' onclick='rate_clicked(this)'></div>\n" +
                 "                        </div>\n" +
                 "                    </div>\n" +
                 "                    <div class=\"new-review-input\">\n" +
@@ -234,11 +235,11 @@
                 "                    </div>\n" +
                 "                    <div class=\"d-inline-flex align-items-center mb-2\">\n" +
                 "                        <div class=\"d-inline-flex justify-content-center align-items-center me-3\">\n" +
-                "                            <div class=\"rate-icon small\"></div>\n" +
-                "                            <div class=\"rate-icon small\"></div>\n" +
-                "                            <div class=\"rate-icon small\"></div>\n" +
-                "                            <div class=\"rate-icon small\"></div>\n" +
-                "                            <div class=\"rate-icon small\"></div>\n" +
+                "                            <div class=\""+(rate >= 1 ? "rate-icon" : "star-icon-rate")+" small\"></div>\n" +
+                "                            <div class=\""+(rate >= 2 ? "rate-icon" : "star-icon-rate")+" small\"></div>\n" +
+                "                            <div class=\""+(rate >= 3 ? "rate-icon" : "star-icon-rate")+" small\"></div>\n" +
+                "                            <div class=\""+(rate >= 4 ? "rate-icon" : "star-icon-rate")+" small\"></div>\n" +
+                "                            <div class=\""+(rate >= 5 ? "rate-icon" : "star-icon-rate")+" small\"></div>\n" +
                 "                        </div>\n" +
                 "                        <div><h3 class=\"text-description\">Только что</h3></div>\n" +
                 "                    </div>\n" +
@@ -253,6 +254,22 @@
             document.getElementById('reviews-count').innerHTML = "Отзывов: " + (review_count+2) ;
         }
         review_btn_state = !review_btn_state;
+    }
+    function rate_clicked(el){
+        ['1','2','3','4','5'].forEach(b=>{
+            if(el.id == 'rate-'+b){
+                rate = parseInt(b);
+            }
+        })
+        for(i = 1;i<=5;i++){
+            if(i <= rate){
+                document.getElementById('rate-'+i).classList.remove('star-icon-rate');
+                document.getElementById('rate-'+i).classList.add('rate-icon')
+            }else{
+                document.getElementById('rate-'+i).classList.remove('rate-icon');
+                document.getElementById('rate-'+i).classList.add('star-icon-rate');
+            }
+        }
     }
 </script>
 </body>
