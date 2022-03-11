@@ -59,19 +59,28 @@ function onError(error) {
 
 setTimeout(()=>{
     permissions = cordova.plugins.permissions;
-    permissions.checkPermission(permissions.ACCESS_FINE_LOCATION, (status)=>{
-        if(!status.hasPermission){
-            permissions.requestPermission(permissions.ACCESS_FINE_LOCATION,success,error);
-            function error() {
-                console.warn('Geolocation permission is not turned on');
-                document.location.href = "../../screens/loginka/loginka.html"; // Должно редиректить на страницу где мы прссим пользователя передумать
-            }
+    var list = [
+        permissions.ACCESS_FINE_LOCATION
+    ];
 
-            function success( status ) {
-                if( !status.hasPermission ) error();
-            }
+    permissions.checkPermission(list, success, null);
+
+    function error() {
+        console.warn('Camera or Accounts permission is not turned on');
+        document.location.href = "../../screens/AccessError/accessError.html";
+    }
+
+    function success( status ) {
+        if( !status.hasPermission ) {
+
+            permissions.requestPermissions(
+                list,
+                function(status) {
+                    if( !status.hasPermission ) error();
+                },
+                error);
         }
-    }, null);
+    }
 },2000);
 
 function get_location(){

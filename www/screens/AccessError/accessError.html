@@ -12,7 +12,7 @@
 <body style="background: #F0F0F0">
     <div class="screen-hat">
         <button class="btn arrow-back">
-            <a href="../Geoposition/home.html">
+            <a onclick="go_back()">
                 <img src="../../ui-kit/svg/arrow_back.svg" alt="arrow-back">
             </a>
         </button>
@@ -33,6 +33,17 @@
     </div>
 </div>
     <script src="../../cordova.js"></script>
-    <script src="../../ui-kit/js/excursion.js"></script>
+    <script>
+        function go_back(){
+            if(localStorage != undefined){
+                prev = localStorage.getItem('prev_page');
+                if(prev != null){
+                    document.location.href = prev;
+                }else{
+                    document.location.href = '../../screens/Geoposition/home.html';
+                }
+            }
+        }
+    </script>
 </body>
 </html>
