@@ -29,5 +29,6 @@ function next_text(){
         });
     }else{
         console.log('Text succesfully spoken');
+        document.getElementById('subtitles').style.display = 'none';
     }
 }
