@@ -176,6 +176,25 @@
     if(localStorage != undefined){
         localStorage.setItem('prev_page','../../screens/Geoposition/home.html');
     }
+    function make_request(){
+        cordovaHTTP.post("https://park.backend.xredday.ru/",
+            {'request':{"action":"login",  "data":{"login":"l","pass":"l"}}},
+            {  }, function(response) {
+                // prints 200
+                console.log(response.status);
+                try {
+                    console.log(response.data);
+                } catch(e) {
+                    console.error("JSON parsing error");
+                }
+            }, function(response) {
+                // prints 403
+                console.log(response.status);
+
+                //prints Permission denied
+                console.log(response.data);
+            });
+    }
 </script>
     <script src="../../cordova.js"></script>
     <script src="../../ui-kit/js/map.js"></script>
