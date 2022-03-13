@@ -249,11 +249,13 @@ img{
     flex-direction: row;
 }
 .my-position{
+    top: 12.5px;
+    left: -12.5px;
     width:50px;
     height: 50px;
     border-radius: 25px;
     background-color: rgba(254, 151, 77, 0.15);
-    position: fixed;
+    position: relative;
     z-index: 2;
 }
 .orange-circle{
