@@ -132,11 +132,17 @@ var routing_control = L.Routing.control({
     router: L.Routing.mapbox('pk.eyJ1IjoiaHVzY2tlciIsImEiOiJja3pkMTZ0cmUwNGYzMm9tcW5pa200dDJkIn0.-NLqcskaelmtyL5zpaBLzQ')
 });
 routing_control.addTo(map);
-make_route(
-    L.latLng(57.59918048960674, 39.845160556393985),
-    L.latLng(57.626237457771296, 39.86840435639479));
+// make_route(
+//     L.latLng(57.59918048960674, 39.845160556393985),
+//     L.latLng(57.626237457771296, 39.86840435639479));
 redraw();
-
+if(localStorage != undefined){
+    if(localStorage.getItem('prev_place') != null){
+        idx = localStorage.getItem('prev_place');
+        map.flyTo([locs[idx][0],locs[idx][1]],18);
+        collapse_toggle(parseInt(idx));
+    }
+}
 function make_route(start, end){
     map.removeControl(routing_control);
     routing_control = L.Routing.control({
@@ -164,6 +170,7 @@ function update_markers(){
         maxClusterRadius: 80
     });
     info2_appear = false;
+    let idx = 0;
     locs.forEach((el)=>{
         var title = el[2];
         glow = map.distance(L.latLng(pos),L.latLng(el[0],el[1]))  <= minDistance ? "glow" : "";
@@ -171,7 +178,7 @@ function update_markers(){
         icon = L.divIcon({
             className: 'custom-div-icon',
             html: "<div>\n" +
-                "            <a href=\"#\" onclick=\"collapse_toggle()\">\n" +
+                "            <a href=\"#\" onclick=\"collapse_toggle("+idx+")\">\n" +
                 "                <div class=\"geopoint d-flex justify-content-center align-items-center "+glow+" pb-2 \">\n" +
                 "                    <div class=\"dog-img\"></div>\n" +
                 "                </div>\n" +
@@ -187,6 +194,7 @@ function update_markers(){
 
         //marker.bindPopup(title);
         markers.addLayer(marker);
+        idx++;
     });
     if(info2_appear){
         document.getElementById("info2").style.display = "block";
