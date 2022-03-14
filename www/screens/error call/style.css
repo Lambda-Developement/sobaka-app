@@ -1,32 +1,32 @@
 * {
-    box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 body {
-    background-color: #F6F6F6;
-    height: 100vh;
+  background-color: #f6f6f6;
+  height: 100vh;
 }
 
 .error-text-container {
-    flex-grow:0.3 ;
+  flex-grow: 0.3;
 }
 
 textarea.error-text {
-    height: 100%;
-    text-align: left;
-    width: fit-content;
-    padding: 0.5rem;
-    resize: none;
-    word-wrap: break-word;
-  }
+  height: 100%;
+  text-align: left;
+  width: fit-content;
+  padding: 0.5rem;
+  resize: none;
+  word-wrap: break-word;
+}
 
-  textarea {
-    background: #F0F0F0;
-    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
-    border-radius: 12px;
-    font-family: gilroy;
-    font-weight: 400;
-    font-size: 18px;
-    padding-left: 43px;
-    border: 1.5px solid #C7C7C7;
-  }
+textarea {
+  background: #f0f0f0;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+  border-radius: 12px;
+  font-family: gilroy;
+  font-weight: 400;
+  font-size: 18px;
+  padding-left: 43px;
+  border: 1.5px solid #c7c7c7;
+}
