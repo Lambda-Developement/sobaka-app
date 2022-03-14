@@ -22,13 +22,18 @@
         <h1 class="text-attention"
             style="text-align: center; font-family: gilroy; font-weight: 700; color:rgba(255, 255, 255, 1); max-width: 470px;">
             Войдите
-            или зарегистрируйтесь </h1>
-
+            или зарегистрируйтесь 
+        </h1>
+        <div class="d-inline-flex align-items-center" id="error-msg">
+            <div class="danger-icon"></div>
+            <div id="error-msg-text" style="color:white">Неправильный логин или пароль</div>
+        </div>
         <div class="mb-3">
             <label for="exampleFormControlInput1" class="form-label"></label>
             <input type="email" class="form-control" style="border: 1.5px solid #C7C7C7;
         height: 50px; " id="email_input" placeholder="name@example.com">
         </div>
+
         <div class="mb-3">
             <label for="exampleFormControlInput2" class="form-label"></label>
             <input type="password" class="form-control" style="border: 1.5px solid #C7C7C7; height: 50px;"
@@ -39,6 +44,7 @@
             style="color:rgba(57, 57, 57, 1); text-decoration: none; position:relative; left: 5rem;">Забыли пароль?</a>
 
         <!-- <button class="btn btn-hollow mb-3" id="login_button" onclick="location.href='../Geoposition/home.html'" style="border-radius:12px; margin-top: 4rem;"> -->
+
         <button class="btn btn-hollow mb-3" id="login_button" onclick="login()"
             style="border-radius:12px; margin-top: 4rem;" disabled>
             <p class="btn-text">Войти</p>
@@ -54,11 +60,12 @@
 <script>
     const validateEmail = (email) => {
         var re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        // return re.test(email);
-        return true;
+        return re.test(email);
+        // return true;
     };
 
-
+    errorMessage = document.getElementById("error-msg");
+    errorMessage.style.visibility = "hidden";
     loginButton = document.getElementById("login_button");
     emailField = document.getElementById("email_input");
     passwordField = document.getElementById("password_field");
@@ -99,6 +106,8 @@
 <script src="../../cordova.js"></script>
 <script>
     function login(email, password) {
+        errorMessage.style.visibility = "hidden";
+
         if (!email) email = emailField.value;
         if (!password) password = passwordField.value;
         api_authorize(email, password);
@@ -137,7 +146,7 @@
             function (response) {
                 // prints 403
                 console.log(response.status);
-
+                errorMessage.style.visibility = "visible";
                 //prints Permission denied
                 console.log(response.data);
 
