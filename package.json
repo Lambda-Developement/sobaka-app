@@ -21,6 +21,7 @@
     "cordova-plugin-geolocation": "^4.1.0",
     "cordova-plugin-http": "^1.2.0",
     "cordova-plugin-tts": "^0.2.3",
+    "cordova-plugin-webxr": "^1.17.5",
     "http": "^0.0.1-security"
   },
   "cordova": {
@@ -35,7 +36,8 @@
       },
       "cordova-plugin-camera-preview": {},
       "cordova-plugin-tts": {},
-      "cordova-plugin-http": {}
+      "cordova-plugin-http": {},
+      "cordova-plugin-webxr": {}
     }
   }
 }
