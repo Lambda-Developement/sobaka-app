@@ -11,7 +11,7 @@ setTimeout(()=>{
     TTS["stop"] = function(){
         TTS.speak({text: ''})
     };
-},500);
+},2000);
 
 function next_text(){
     if(idx < subtitles.length){
