@@ -186,6 +186,7 @@
             opened = !opened;
             opened ? collapse_open() : collapse_close();
             park_id = park;
+            console.log(park);
             if (localStorage != undefined) {
                 localStorage.setItem('prev_place', park_id);
             }
@@ -223,6 +224,7 @@
         }
     </script>
     <script src="../../cordova.js"></script>
+    <script src="../../ui-kit/js/geopoints.js"></script>
     <script src="../../ui-kit/js/map.js"></script>
 </body>
 

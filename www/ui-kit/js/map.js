@@ -1,40 +1,10 @@
+// TODO: убрать изменение местоположения по клику
+
 var HEIGHT = window.innerHeight+'px';
 var pos = [57.621166, 39.888228];
 var scale = 15;
-var locs = [
-    [57.621166,39.888549,"Ярославский музей-заповедник"],
-   [57.633281,39.892843,"Волжская набережная"],
-   [57.619512222320715,39.90440348706052,"],Парк Стрелка"],
-   [57.626019,39.889295,"Улица Кирова (Ярославский Арбат)"],
-   [57.621196,39.889381,"Спасо-Преображенский собор"],
-   [57.626706,39.893939,"Храм Ильи Проока"],
-   [57.610874,39.856875,"Церковь Иоанна Предтечи"],
-   [57.622405,39.902159,"Большой Успенский Собор"],
-   [57.621258,39.869909,"Планетарий им. Терешковой"],
-   [57.700785,39.827149,"Толгский монастырь"],
-   [57.628284,39.887292,"Казанский женский монастырь"],
-   [57.61143423326224,39.905934679926794,"Храмовый Ансамбль в Коровниках"],
-   [57.62252718100328, 39.898004964328734,"Церковь Николы Рубленого"],
-   [57.6226662070831, 39.89554865454208,"Церковь Спаса-на-Городу"],
-   [57.6216840088054, 39.88631012570596,"Церковь Богоявления"],
-   [57.626237457771296, 39.86840435639479,"Бывшие Вознесенские казармы"],
-   [57.62528460201987, 39.88489386392699,"Знаменская Церковь"],
-   [57.62330200055836, 39.90213527173909,"Митрополичьи Палаты"],
-   [57.63157279920508, 39.88571462755887,"Пожарная каланча"],
-   [57.62498351193726, 39.90178972755868,"Волжская Башня"],
-   [57.62827749235443, 39.897302658247455,"Ярославский художественный музей"],
-   [57.62792708676228, 39.896111757442725,"Губернаторский сад"],
-   [57.50912239683766, 39.75687149871926,"Музей-заповедник Н.А. Некрасова \"Карабиха\""],
-   [57.62702493722861, 39.89873106009985,"Музей истолрии города Ярославля"],
-   [57.63009489292983, 39.895129914067006,"Музей \"Музыка и время\""],
-   [57.626756923501354, 39.884696627558654,"Драматический театр им. Ф.Г. Волкова"],
-   [57.62244932856903, 39.88699142755854,"Памятник Ярославу Мудрому"],
-   [57.62206225446864, 39.9028476698865,"Скульптурная композиция \"Троица\""],
-   [57.617629504957115, 39.90481052755841,"Памятник 1000-летию Ярославля"],
-   [57.59918048960674, 39.845160556393985,"Петропавловский Парк"],
-   [57.61477721643426, 39.86686034290263,"Колесо обозрения \"Золотое кольцо\""],
-   [57.58916057592463, 39.84809362755754,"УКРК \"Арена 2000\""]
-];
+var cur_route_id = -1;
+var cur_route_place = -1;
 
 var permissions;
 
@@ -89,7 +59,7 @@ function get_location(){
     map.flyTo(pos,18);
 }
 
-var minDistance = 200; // metres
+var minDistance = 100; // metres
 
 document.getElementById("map").style.height = HEIGHT;
 
@@ -114,7 +84,25 @@ var markers = L.markerClusterGroup({
     maxClusterRadius: 80
 });
 var pos_marker = L.marker(new L.LatLng(pos[0], pos[1]), );
-update_markers();
+
+if(localStorage != undefined){
+    if(localStorage.getItem('prev_place') != null){
+        idx = localStorage.getItem('prev_place');
+        map.flyTo([locs[idx][0],locs[idx][1]],18);
+        collapse_toggle(parseInt(idx));
+
+    }
+    if(localStorage.getItem('route_id') != null){
+        cur_route_id = parseInt(localStorage.getItem('route_id'));
+    }else{
+        cur_route_id = -1;
+    }
+    if(localStorage.getItem('route_place') != null){
+        cur_route_place = parseInt(localStorage.getItem('route_place'));
+    }else{
+        cur_route_place = -1;
+    }
+}
 
 var routing_control = L.Routing.control({
     waypoints: [
@@ -136,13 +124,6 @@ routing_control.addTo(map);
 //     L.latLng(57.59918048960674, 39.845160556393985),
 //     L.latLng(57.626237457771296, 39.86840435639479));
 redraw();
-if(localStorage != undefined){
-    if(localStorage.getItem('prev_place') != null){
-        idx = localStorage.getItem('prev_place');
-        map.flyTo([locs[idx][0],locs[idx][1]],18);
-        collapse_toggle(parseInt(idx));
-    }
-}
 function make_route(start, end){
     map.removeControl(routing_control);
     routing_control = L.Routing.control({
@@ -174,7 +155,10 @@ function update_markers(){
     locs.forEach((el)=>{
         var title = el[2];
         glow = map.distance(L.latLng(pos),L.latLng(el[0],el[1]))  <= minDistance ? "glow" : "";
-        // glow = "";
+        let route_near = false;
+        if(cur_route_id != -1){
+            route_near = map.distance(L.latLng(pos),L.latLng(locs[routes[cur_route_id][cur_route_place]][0],locs[routes[cur_route_id][cur_route_place]][1]))  <= minDistance ? true : false;
+        }
         icon = L.divIcon({
             className: 'custom-div-icon',
             html: "<div>\n" +
@@ -190,12 +174,32 @@ function update_markers(){
         if(glow){
             info2_appear = true;
         }
+        if(route_near){
+            cur_route_place += 1;
+            if(cur_route_place >= routes[cur_route_id].length){
+                cur_route_id = -1;
+                cur_route_place = -1;
+                if(localStorage != undefined){
+                    localStorage.removeItem('route_place');
+                    localStorage.removeItem('route_id');
+                }
+            }else{
+                if(localStorage != undefined) {
+                    localStorage.setItem('route_place', cur_route_place);
+                }
+            }
+        }
         var marker = L.marker(new L.LatLng(el[0], el[1]), { title: title ,icon: icon});
 
         //marker.bindPopup(title);
         markers.addLayer(marker);
         idx++;
     });
+    if(cur_route_id != -1){
+        make_route(L.latLng(pos),L.latLng(locs[routes[cur_route_id][cur_route_place]][0],locs[routes[cur_route_id][cur_route_place]][1]));
+    }else{
+        make_route(null,null);
+    }
     if(info2_appear){
         document.getElementById("info2").style.display = "block";
     }else{
@@ -225,7 +229,10 @@ function zoomout(){
 function redraw(){
 
 }
-
+map.on("click", function(e){
+    pos = [e.latlng.lat, e.latlng.lng];
+    update_markers();
+})
 var index = elasticlunr(function () {
     this.use(elasticlunr.ru);
     this.addField('latitude');
@@ -261,3 +268,4 @@ function search_clicked(coords){
 setInterval(()=>{
     search(document.getElementById('line-edit').value);
 },1000);
+update_markers();
