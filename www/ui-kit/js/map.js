@@ -1,5 +1,3 @@
-// TODO: убрать изменение местоположения по клику
-
 var HEIGHT = window.innerHeight+'px';
 var pos = [57.621166, 39.888228];
 var scale = 15;
@@ -59,7 +57,7 @@ function get_location(){
     map.flyTo(pos,18);
 }
 
-var minDistance = 100; // metres
+var minDistance = 50; // metres
 
 document.getElementById("map").style.height = HEIGHT;
 
@@ -229,10 +227,10 @@ function zoomout(){
 function redraw(){
 
 }
-map.on("click", function(e){
-    pos = [e.latlng.lat, e.latlng.lng];
-    update_markers();
-})
+// map.on("click", function(e){
+//     pos = [e.latlng.lat, e.latlng.lng];
+//     update_markers();
+// })
 var index = elasticlunr(function () {
     this.use(elasticlunr.ru);
     this.addField('latitude');
