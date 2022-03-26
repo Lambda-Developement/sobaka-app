@@ -1,0 +1,60 @@
+{
+  "cordova-plugin-android-permissions": {
+    "source": {
+      "type": "registry",
+      "id": "cordova-plugin-android-permissions@^1.1.3"
+    },
+    "is_top_level": true,
+    "variables": {}
+  },
+  "cordova-plugin-geolocation": {
+    "source": {
+      "type": "registry",
+      "id": "cordova-plugin-geolocation@^4.1.0"
+    },
+    "is_top_level": true,
+    "variables": {
+      "GPS_REQUIRED": "true"
+    }
+  },
+  "cordova-plugin-camera-preview": {
+    "source": {
+      "type": "registry",
+      "id": "cordova-plugin-camera-preview@^0.12.3"
+    },
+    "is_top_level": true,
+    "variables": {}
+  },
+  "cordova-plugin-tts": {
+    "source": {
+      "type": "registry",
+      "id": "cordova-plugin-tts@^0.2.3"
+    },
+    "is_top_level": true,
+    "variables": {}
+  },
+  "cordova-plugin-http": {
+    "source": {
+      "type": "registry",
+      "id": "cordova-plugin-http@^1.2.0"
+    },
+    "is_top_level": true,
+    "variables": {}
+  },
+  "cordova-plugin-file": {
+    "source": {
+      "type": "registry",
+      "id": "cordova-plugin-file@>=2.0.0"
+    },
+    "is_top_level": false,
+    "variables": {}
+  },
+  "cordova-plugin-hello": {
+    "source": {
+      "type": "local",
+      "path": "/home/quakumei/Development/Digit/sobaka-experiments/sobaka-plugined/sobaka-app/node_modules/cordova-plugin-hello"
+    },
+    "is_top_level": true,
+    "variables": {}
+  }
+}

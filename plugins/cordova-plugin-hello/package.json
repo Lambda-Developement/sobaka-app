@@ -1,0 +1,14 @@
+{
+  "name": "cordova-plugin-hello",
+  "version": "0.0.1",
+  "description": "Hello world plugin to demonstrate principles of a cordova plugin",
+  "cordova": {
+    "id": "cordova-plugin-hello",
+    "platforms": []
+  },
+  "keywords": [
+    "ecosystem:cordova"
+  ],
+  "author": "Ilya Tampio",
+  "license": "ISC"
+}

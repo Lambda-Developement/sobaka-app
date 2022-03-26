@@ -1,0 +1,61 @@
+<?xml version='1.0' encoding='utf-8'?>
+<plugin id="cordova-plugin-hello" version="0.0.1"
+    xmlns="http://apache.org/cordova/ns/plugins/1.0"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <name>hello</name>
+    <js-module name="hello" src="www/hello.js">
+        <clobbers target="cordova.plugins" />
+    </js-module>
+    <platform name="android">
+        <config-file parent="/*" target="res/xml/config.xml">
+            <feature name="hello">
+                <param name="android-package" value="cordova.plugin.hello.hello" />
+            </feature>
+        </config-file>
+        <!-- <config-file parent="/*" target="AndroidManifest.xml"></config-file> -->
+
+
+
+        <!-- <resource-file src="src/android/res/values/strings.xml" target-dir="src/res/values" /> -->
+
+        <resource-file src="src/android/com/google/ar/core/examples/java/helloar/res/drawable-xxhdpi/ic_launcher.png" target="src/cordova/plugin/com/google/ar/core/examples/java/helloar/res/drawable-xxhdpi" />
+        <resource-file src="src/android/com/google/ar/core/examples/java/helloar/res/drawable-xxhdpi/ic_settings.png" target="src/cordova/plugin/com/google/ar/core/examples/java/helloar/res/drawable-xxhdpi" />
+
+        <resource-file src="src/android/com/google/ar/core/examples/java/helloar/res/layout/activity_main.xml" target="src/cordova/plugin/com/google/ar/core/examples/java/helloar/res/layout" />
+
+        <resource-file src="src/android/com/google/ar/core/examples/java/helloar/res/menu/settings_menu.xml" target="src/cordova/plugin/com/google/ar/core/examples/java/helloar/res/menu" />
+
+        <resource-file src="src/android/com/google/ar/core/examples/java/helloar/res/values/strings.xml" target="src/cordova/plugin/com/google/ar/core/examples/java/helloar/res/values" />
+        <resource-file src="src/android/com/google/ar/core/examples/java/helloar/res/values/styles.xml" target="src/cordova/plugin/com/google/ar/core/examples/java/helloar/res/values" />
+
+        <source-file src="src/android/hello.java" target-dir="src/cordova/plugin/hello/hello" />
+
+        <source-file src="src/android/com/google/ar/core/examples/java/helloar/HelloArActivity.java" target-dir="src/cordova/plugin/com/google/ar/core/examples/java/helloar" />
+        <source-file src="src//android/com/google/ar/core/examples/java/common/helpers/CameraPermissionHelper.java" target-dir="src/cordova/plugin/com/google/ar/core/examples/java/common/helpers" />
+        <source-file src="src//android/com/google/ar/core/examples/java/common/helpers/DepthSettings.java" target-dir="src/cordova/plugin/com/google/ar/core/examples/java/common/helpers" />
+        <source-file src="src//android/com/google/ar/core/examples/java/common/helpers/DisplayRotationHelper.java" target-dir="src/cordova/plugin/com/google/ar/core/examples/java/common/helpers" />
+        <source-file src="src//android/com/google/ar/core/examples/java/common/helpers/FullScreenHelper.java" target-dir="src/cordova/plugin/com/google/ar/core/examples/java/common/helpers" />
+        <source-file src="src//android/com/google/ar/core/examples/java/common/helpers/InstantPlacementSettings.java" target-dir="src/cordova/plugin/com/google/ar/core/examples/java/common/helpers" />
+        <source-file src="src//android/com/google/ar/core/examples/java/common/helpers/SnackbarHelper.java" target-dir="src/cordova/plugin/com/google/ar/core/examples/java/common/helpers" />
+        <source-file src="src//android/com/google/ar/core/examples/java/common/helpers/TapHelper.java" target-dir="src/cordova/plugin/com/google/ar/core/examples/java/common/helpers" />
+        <source-file src="src//android/com/google/ar/core/examples/java/common/helpers/TrackingStateHelper.java" target-dir="src/cordova/plugin/com/google/ar/core/examples/java/common/helpers" />
+
+        <source-file src="src//android/com/google/ar/core/examples/java/common/samplerender/Framebuffer.java" target-dir="src/cordova/plugin/com/google/ar/core/examples/java/common/samplerender" />
+        <source-file src="src//android/com/google/ar/core/examples/java/common/samplerender/GLError.java" target-dir="src/cordova/plugin/com/google/ar/core/examples/java/common/samplerender" />
+        <source-file src="src//android/com/google/ar/core/examples/java/common/samplerender/GpuBuffer.java" target-dir="src/cordova/plugin/com/google/ar/core/examples/java/common/samplerender" />
+        <source-file src="src//android/com/google/ar/core/examples/java/common/samplerender/IndexBuffer.java" target-dir="src/cordova/plugin/com/google/ar/core/examples/java/common/samplerender" />
+        <source-file src="src//android/com/google/ar/core/examples/java/common/samplerender/Mesh.java" target-dir="src/cordova/plugin/com/google/ar/core/examples/java/common/samplerender" />
+        <source-file src="src//android/com/google/ar/core/examples/java/common/samplerender/SampleRender.java" target-dir="src/cordova/plugin/com/google/ar/core/examples/java/common/samplerender" />
+        <source-file src="src//android/com/google/ar/core/examples/java/common/samplerender/Shader.java" target-dir="src/cordova/plugin/com/google/ar/core/examples/java/common/samplerender" />
+        <source-file src="src//android/com/google/ar/core/examples/java/common/samplerender/Texture.java" target-dir="src/cordova/plugin/com/google/ar/core/examples/java/common/samplerender" />
+        <source-file src="src//android/com/google/ar/core/examples/java/common/samplerender/VertexBuffer.java" target-dir="src/cordova/plugin/com/google/ar/core/examples/java/common/samplerender" />
+
+        <source-file src="src//android/com/google/ar/core/examples/java/common/samplerender/arcore/BackgroundRenderer.java" target-dir="src/cordova/plugin/com/google/ar/core/examples/java/common/samplerender/arcore" />
+        <source-file src="src//android/com/google/ar/core/examples/java/common/samplerender/arcore/PlaneRenderer.java" target-dir="src/cordova/plugin/com/google/ar/core/examples/java/common/samplerender/arcore" />
+        <source-file src="src//android/com/google/ar/core/examples/java/common/samplerender/arcore/SpecularCubemapFilter.java" target-dir="src/cordova/plugin/com/google/ar/core/examples/java/common/samplerender/arcore" />
+
+        <framework src="src/android/build.gradle" custom="true" type="gradleReference" />
+        
+        
+    </platform>
+</plugin>

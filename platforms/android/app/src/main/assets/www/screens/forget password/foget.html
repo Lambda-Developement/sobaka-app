@@ -1,0 +1,111 @@
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no" />
+    <title>loginka</title>
+    <style>
+        body {
+            background: url("../../ui-kit/svg/background_orange.svg");
+            background-size: cover;
+        }
+    </style>
+    <link rel="stylesheet" href="../../ui-kit/css/styles.css">
+    <link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+    <div style="display:flex; flex-direction: column; justify-content: center; align-items: center; height: 100%;">
+        <a href="../loginka/loginka.html" style="align-self: flex-start; position: absolute; top:1rem;">
+            <button class="btn arrow-back"
+                style="width: 100%; height: 100%; padding: 1.5rem; align-self: flex-start; background: transparent; color: white; cursor: pointer;">
+
+                <img src="../../ui-kit/svg/arrow_back_wlm.svg" alt="arrow-back">
+
+            </button>
+        </a>
+
+
+
+        <h1 class="text-attention"
+            style=" width: 100%;  color:rgba(255, 255, 255, 1); width: 155px; height: 48px; font-size: 48px; font-weight: bold; font-family: gilroy;">
+            TripAR </h1>
+
+        <h3 class="text-attention"
+            style="text-align: center;  color:rgba(255, 255, 255, 1); width: 347px;height: 116px; font-size: 28px;">Для
+            восстановления
+            доступа к вашей учётной
+            записи, укажите свою
+            электронную почту
+        </h3>
+
+        <div class="mb-3">
+            <label for="exampleFormControlInput1" class="form-label"></label>
+            <input type="email" class="form-control" style="
+        height: 50px; margin-top: 3rem;" id="email_input" placeholder="name@gmail.com">
+        </div>
+        <div class="align-items-center mb-3" style="display:none;" id="success">
+            <div class="success-icon" style="height:1.5rem;width:1.5rem;"></div>
+            <div class="" style="font-size:1.5rem;">Отправлено!</div>
+        </div>
+        <div class="mb-3" style="width: 278px;">
+            <button class="btn btn-filled2" id="login_button" onclick="location.href='../loginka/loginka.html'"
+                style="margin-top: 16px;">
+                <p class="btn-text">Восстановить</p>
+            </button>
+            <button class="btn btn-hollow" onclick="location.href='../loginka/loginka.html'" style="margin-top: 8px;"
+                id="return-button">
+                <p class="btn-text">Назад</p>
+            </button>
+        </div>
+    </div>
+</body>
+<script>
+    const validateEmail = (email) => {
+        var re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return re.test(email);
+    };
+
+
+    loginButton = document.getElementById("login_button");
+    emailField = document.getElementById("email_input");
+    textAttention = document.getElementsByClassName("text-attention");
+    successText = document.getElementById("success");
+    //passwordField = document.getElementById("password_field");
+    const callbackFunction = function () {
+        emailField.classList.remove("line-success");
+        emailField.classList.remove("line-danger");
+        //passwordField.classList.remove("line-success");
+        loginButton.classList.remove("btn-highlight");
+
+
+        console.log(emailField.value);
+        //if (passwordField.value.length > 3){
+        //passwordField.classList.add("line-success");
+        //}
+        if (validateEmail(emailField.value)) {
+            emailField.classList.add("line-success");
+
+        } else if (emailField.value) {
+            emailField.classList.add("line-danger");
+        };
+    };
+    emailField.onchange = callbackFunction;
+    //passwordField.onchange = callbackFunction;
+    loginButton.onclick = function () {
+        loginButton.style.display = "None";
+        textAttention[0].style.display = "None";
+        textAttention[1].style.display = "None";
+        emailField.style.display = "None";
+        successText.style.display = "inline-flex";
+        returnBtn = document.getElementById("return-button")
+        returnBtn.classList.remove("btn-hollow")
+        returnBtn.classList.add("btn-filled2")
+
+    };
+
+    callbackFunction();
+</script>
+
+</html>

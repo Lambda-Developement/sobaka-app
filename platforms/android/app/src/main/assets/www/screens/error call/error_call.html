@@ -1,0 +1,107 @@
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no" />
+    <title>Bug Report</title>
+
+    <link rel="stylesheet" href="../../ui-kit/css/bootstrap.css">
+    <link rel="stylesheet" href="../../ui-kit/css/styles.css">
+    <link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+    <div class="screen-hat">
+        <button class="btn arrow-back">
+            <a href="../Profile-main/profile-main.html">
+
+                <img src="../../ui-kit/svg/arrow_back.svg" alt="arrow-back">
+            </a>
+        </button>
+        <div class="mb-3 " style="margin-top: 0rem">
+            <h3 class="text-header">
+                Сообщить об ошибке
+            </h3>
+        </div>
+    </div>
+    <div
+        style="color: #C0C0C0; display:flex; align-items: center; flex-direction: column; height: 85%; overflow:hidden; padding-top: 3rem;">
+
+        <div class="mb-3">
+            <label for="exampleFormControlInput1" class="form-label"></label>
+            <input type="email" class="form-control" id="email_input" placeholder="name@gmail.com"
+                style=" height: 48px; border: 1.5px solid #C7C7C7;">
+        </div>
+        <div class="mb-3 error-text-container">
+            <textarea cols="24" rows="10" class="error-text" required="required" wrap="soft" id="error_text"
+                placeholder="Опишите ошибку, с которой вы столкнулись"></textarea>
+        </div>
+        <div class="align-items-center mb-3" style="display:none;" id="success">
+            <div class="success-icon" style="height:1.5rem;width:1.5rem;"></div>
+            <div class="line-success" style="font-size:1.5rem;">Отправлено!</div>
+        </div>
+
+        <div class="mb-3" style="display:flex; flex-direction: column;">
+            <button class="btn btn-hollow mb-3" id="login_button">
+                <p class="btn-text">Отправить</p>
+            </button>
+            <button class="btn btn-hollow2" onclick="location.href='../Profile-main/profile-main.html'">
+                <p class="btn-text">Назад</p>
+            </button>
+        </div>
+    </div>
+</body>
+<script>
+    const validateEmail = (email) => {
+        var re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return re.test(email);
+    };
+
+    errorField = document.getElementById("error_text");
+    loginButton = document.getElementById("login_button");
+    emailField = document.getElementById("email_input");
+    successMessage = document.getElementById("success");
+    //passwordField = document.getElementById("password_field");
+    const callbackFunction = function () {
+        emailField.classList.remove("line-success");
+        emailField.classList.remove("line-danger");
+        //passwordField.classList.remove("line-success");
+        loginButton.classList.remove("btn-highlight");
+        loginButton.classList.remove("btn-filled");
+        loginButton.classList.add("btn-hollow");
+
+
+        console.log(emailField.value);
+        // if (passwordField.value.length > 3){
+        // passwordField.classList.add("line-success");
+        // }
+        if (validateEmail(emailField.value)) {
+            emailField.classList.add("line-success");
+            if (errorField.value.length >= 3) {
+                loginButton.classList.add("btn-highlight");
+                loginButton.classList.add("btn-filled");
+                loginButton.classList.remove("btn-hollow");
+            }
+        } else if (emailField.value) {
+            emailField.classList.add("line-danger");
+        }
+    };
+    loginButton.onclick = function () {
+        loginButton.style.display = "None";
+        errorField.style.display = "None";
+        emailField.style.display = "None";
+        successMessage.style.display = "inline-flex";
+    };
+    emailField.onchange = callbackFunction;
+    errorField.onchange = callbackFunction;
+    //passwordField.onchange = callbackFunction;
+
+
+
+    callbackFunction();
+</script>
+
+</html>
+
+</html>
