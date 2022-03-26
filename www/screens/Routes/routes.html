@@ -24,7 +24,7 @@
             </div>
         </div>
             <div class="card-container" style="padding-top: calc(88px + 2em);">
-                <div class="trip-card" onclick="location.href='../Route details/route_details.html'">
+                <div class="trip-card" onclick="start_route(0)">
                     <a href="#" style="text-decoration:none; display:block; height: 100%; width: 100%;">
 
                     <img src="../../ui-kit/img/icg4y3j7.bmp" alt="place_photo.jpg" class="trip-card__background">
@@ -59,7 +59,7 @@
                 </div>
 
 
-                <div class="trip-card" onclick="location.href='../Route details/route_details.html'">
+                <div class="trip-card" onclick="start_route(2)">
                     <img src="../../ui-kit/img/zsmhme2t.bmp" alt="place_photo.jpg" class="trip-card__background">
                     <a href="#" style="text-decoration:none; display:block; height: 100%; width: 100%;">
                     <div class="trip-card__content">
@@ -91,7 +91,7 @@
                
                 </div>
 
-                <div class="trip-card" onclick="location.href='../Route details/route_details.html'">
+                <div class="trip-card" onclick="start_route(1)">
                     <img src="../../ui-kit/img/lvsls0y5.bmp" alt="place_photo.jpg" class="trip-card__background">
                     <a href="#" style="text-decoration:none; display:block; height: 100%; width: 100%;">
                     
@@ -138,7 +138,15 @@
             </button>
         </footer>
     </main>
-
+    <script>
+        function start_route(route_id){
+            if(localStorage != undefined){
+                localStorage.setItem('route_id',route_id);
+                localStorage.setItem('route_place',0);
+                location.href='../Route details/route_details.html';
+            }
+        }
+    </script>
 
     
 
