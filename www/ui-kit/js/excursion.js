@@ -28,18 +28,18 @@ setTimeout(()=>{
     document.getElementById('museum').play();
     timer_start = new Date().getTime();
     s = subtitles[idx][0];
-    document.getElementById('subtitle').innerHTML = s;
+    // document.getElementById('subtitle').innerHTML = s;
     // next_text();
 },2000);
 
-setInterval(()=>{
-    while(new Date().getTime() - timer_start >= subtitles[idx][1]*1000){
-        idx++;
-        if(idx >= subtitles.length){
-            idx = subtitles.length;
-            document.getElementById('subtitles').style.display = 'none';
-        }
-        s = subtitles[idx][0];
-        document.getElementById('subtitle').innerHTML = s;
-    }
-},200);
+// setInterval(()=>{
+//     while(new Date().getTime() - timer_start >= subtitles[idx][1]*1000){
+//         idx++;
+//         if(idx >= subtitles.length){
+//             idx = subtitles.length;
+//             document.getElementById('subtitles').style.display = 'none';
+//         }
+//         s = subtitles[idx][0];
+//         document.getElementById('subtitle').innerHTML = s;
+//     }
+// },200);
