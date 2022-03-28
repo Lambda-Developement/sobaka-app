@@ -9,14 +9,68 @@
     <link rel="stylesheet" href="../../ui-kit/css/styles.css">
     <link rel="stylesheet" href="style.css">
     <title>Cordova PlugTest</title>
+
+    <style>
+        /* Loader css */
+        .lds-facebook {
+            display: inline-block;
+            position: relative;
+            width: 80px;
+            height: 80px;
+        }
+
+        .lds-facebook div {
+            display: inline-block;
+            position: absolute;
+            left: 8px;
+            width: 16px;
+            background: rgb(255, 153, 0);
+            animation: lds-facebook 1.2s cubic-bezier(0, 0.5, 0.5, 1) infinite;
+        }
+
+        .lds-facebook div:nth-child(1) {
+            left: 8px;
+            animation-delay: -0.24s;
+        }
+
+        .lds-facebook div:nth-child(2) {
+            left: 32px;
+            animation-delay: -0.12s;
+        }
+
+        .lds-facebook div:nth-child(3) {
+            left: 56px;
+            animation-delay: 0;
+        }
+
+        @keyframes lds-facebook {
+            0% {
+                top: 8px;
+                height: 64px;
+            }
+
+            50%,
+            100% {
+                top: 24px;
+                height: 32px;
+            }
+        }
+    </style>
 </head>
 
 
-<body style="margin: 0; overflow: hidden;" ">
-    <h1>Cordova plugin test page</h1>
+<body
+    style="margin: 0; overflow: hidden; display:flex; flex-direction: column; justify-content: center; align-items: center; height: 99vh;" ">
+
     <audio id="museum">
-        <source  src="museum.mp3" type="audio/mpeg">
+    <source src="museum.mp3" type="audio/mpeg">
     </audio>
+
+    <div class="lds-facebook">
+        <div></div>
+        <div></div>
+        <div></div>
+    </div>
 
 
     <script>
@@ -32,38 +86,37 @@
         function onDeviceReady() {
             console.log("onDeviceReady()");
 
-            alert(" It's loaded! (JavaScript)"); 
-            cordova.plugins.showConsole(
-                "Success (Java Native)", 
-            function (res) {
-                alert(`Success (Javascript positive callback); ${res}`);
-            }, function (res) {
-                alert(`Fail (Javascript negative callback); ${res}`);
-            });
+            // alert(" It's loaded! (JavaScript)");
+            // cordova.plugins.showConsole(
+            //     "Success (Java Native)",
+            //     function (res) {
+            //         alert(`Success (Javascript positive callback); ${res}`);
+            //     }, function (res) {
+            //         alert(`Fail (Javascript negative callback); ${res}`);
+            //     });
 
             cordova.plugins.startActivity(
-                
-            function (res) {
-                console.log(`yes: ${res}`);
-            }, function (res) {
-                console.log(`nononononononono: ${res}`);
-            });
-        } 
-        
+
+                function (res) {
+                    console.log(`yes: ${res}`);
+                }, function (res) {
+                    console.log(`nononononononono: ${res}`);
+                });
+        }
+
         window.addEventListener("cordovacallbackerror", function (event) {
             alert(event.error);
-        }); 
+        });
 
-        
+
         console.log("load functions end, load cordova.js");
     </script>
     <script src=" ../../cordova.js"></script>
+    <script src="../../ui-kit/js/excursion.js"></script>
     <script>
         console.log("load functions end, setTimeout");
-        window.setTimeout(onLoad, 5000); 
-
+        window.setTimeout(onLoad, 1000);
     </script>
-<script src="../../ui-kit/js/excursion.js"></script>
 
 
 

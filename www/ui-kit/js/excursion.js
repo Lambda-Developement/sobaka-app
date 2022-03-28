@@ -30,7 +30,7 @@ setTimeout(()=>{
     s = subtitles[idx][0];
     // document.getElementById('subtitle').innerHTML = s;
     // next_text();
-},2000);
+},1000);
 
 // setInterval(()=>{
 //     while(new Date().getTime() - timer_start >= subtitles[idx][1]*1000){
