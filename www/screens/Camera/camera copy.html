@@ -4,13 +4,8 @@
 <head>
 
     <!-- <link rel="stylesheet" href="../../ui-kit/css/bootstrap.css"> -->
-    <style>
-        @font-face {
-            font-family: 'gilroy';
-            src: url("../fonts/MullerRegular.ttf");
-            font-style: normal;
-        }
 
+    <style>
         /* отключение бутстраповской мешанины */
         input[type="checkbox"]:focus,
         input[type="radio"]:focus,
@@ -685,15 +680,28 @@
             width: 100%;
         }
     </style>
+    <style>
+        @import url('http://fonts.cdnfonts.com/css/muller-narrow');
+
+        .text-header,
+        #subtitle {
+            font-family: 'Muller', sans-serif !important;
+        }
+    </style>
+
 
 </head>
 
-<body style="margin: 0; overflow: hidden; background-color: transparent;">
+<body style="margin: 0; overflow: hidden; background-color: transparent; width: 100%;">
 
     <div class="screen-hat">
         <button class="btn arrow-back">
-        </button>
-        <div style="margin-bottom:3rem;">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left"
+                viewBox="0 0 16 16">
+                <path fill-rule="evenodd"
+                    d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z" />
+            </svg></button>
+        <div style="margin-bottom:2rem; width: 100%; display:flex; align-items: center; justify-content: center;">
             <h3 class="text-header">
                 Парк 1000 летия
             </h3>
@@ -704,13 +712,16 @@
             <div class="double-circle" onclick="location.href='#'"></div>
         </div>
     </footer>
-    <div style="display:flex; justify-content: center; align-items: center; width: 100%; padding: 0 4rem;"
-        class="subtitles-wrapper">
+
+
+    <div style="display:flex; width: 100%; padding: 0 0.75rem; justify-content: center;" class="subtitles-wrapper">
+
         <div id="subtitles">
-            <div style="padding: 3rem; display:flex;" class="subtitles">
-                <p id="subtitle"></p>
+            <div style="padding: 1rem; display:flex; width: calc(100% - 4rem);" class="subtitles">
+                <p id="subtitle" style="text-align:left;"></p>
             </div>
         </div>
+
     </div>
 
     <script>
