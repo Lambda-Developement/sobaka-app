@@ -12,7 +12,7 @@
                 <param name="android-package" value="cordova.plugin.hello.hello" />
             </feature>
         </config-file>
-        <!-- <config-file parent="/*" target="AndroidManifest.xml"></config-file> -->
+        <config-file parent="/*" target="AndroidManifest.xml"></config-file>
 
 
 
@@ -55,7 +55,7 @@
         <source-file src="src//android/com/google/ar/core/examples/java/common/samplerender/arcore/SpecularCubemapFilter.java" target-dir="src/cordova/plugin/com/google/ar/core/examples/java/common/samplerender/arcore" />
 
         <framework src="src/android/build.gradle" custom="true" type="gradleReference" />
-        
-        
+
+
     </platform>
 </plugin>
