@@ -383,12 +383,12 @@ public class HelloArActivity extends AppCompatActivity implements SampleRender.R
           new SpecularCubemapFilter(
               render, CUBEMAP_RESOLUTION, CUBEMAP_NUMBER_OF_IMPORTANCE_SAMPLES);
       // Load DFG lookup table for environmental lighting
-      dfgTexture =
+      /*dfgTexture =
           new Texture(
               render,
               Texture.Target.TEXTURE_2D,
               Texture.WrapMode.CLAMP_TO_EDGE,
-              /*useMipmaps=*/ false);
+              /*useMipmaps=*//* false);
       // The dfg.raw file is a raw half-float texture with two channels.
       final int dfgResolution = 64;
       final int dfgChannels = 2;
@@ -404,16 +404,16 @@ public class HelloArActivity extends AppCompatActivity implements SampleRender.R
       GLError.maybeThrowGLException("Failed to bind DFG texture", "glBindTexture");
       GLES30.glTexImage2D(
           GLES30.GL_TEXTURE_2D,
-          /*level=*/ 0,
+          /*level=*//* 0,
           GLES30.GL_RG16F,
-          /*width=*/ dfgResolution,
-          /*height=*/ dfgResolution,
-          /*border=*/ 0,
+          /*width=*//* dfgResolution,
+          /*height=*//* dfgResolution,
+          /*border=*//* 0,
           GLES30.GL_RG,
           GLES30.GL_HALF_FLOAT,
           buffer);
       GLError.maybeThrowGLException("Failed to populate DFG texture", "glTexImage2D");
-
+      */
       // Point cloud
       pointCloudShader =
           Shader.createFromAssets(
@@ -465,7 +465,7 @@ public class HelloArActivity extends AppCompatActivity implements SampleRender.R
               .setTexture("u_AlbedoTexture", virtualObjectAlbedoTexture)
               .setTexture("u_RoughnessMetallicAmbientOcclusionTexture", virtualObjectPbrTexture)
               .setTexture("u_Cubemap", cubemapFilter.getFilteredCubemapTexture())
-              .setTexture("u_DfgTexture", dfgTexture);
+              //.setTexture("u_DfgTexture", dfgTexture);
     } catch (IOException e) {
       Log.e(TAG, "Failed to read a required asset file", e);
       messageSnackbarHelper.showError(this, "Failed to read a required asset file: " + e);
