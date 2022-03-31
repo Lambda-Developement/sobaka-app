@@ -22,6 +22,30 @@
 
 
         <!-- <resource-file src="src/android/res/values/strings.xml" target-dir="src/res/values" /> -->
+        <resource-file src="src/android/assets/models/dfg.raw" target="assets/models/dfg.raw" />
+        <resource-file src="src/android/assets/models/pawn.obj" target="assets/models/pawn.obj" />
+        <resource-file src="src/android/assets/models/pawn_albedo.png" target="assets/models/pawn_albedo.png" />
+        <resource-file src="src/android/assets/models/pawn_albedo_instant_placement.png" target="assets/models/pawn_albedo_instant_placement.png" />
+        <resource-file src="src/android/assets/models/pawn_legacy.obj" target="assets/models/pawn_legacy.obj" />
+        <resource-file src="src/android/assets/models/pawn_roughness_metallic_ao.png" target="assets/models/pawn_roughness_metallic_ao.png" />
+        <resource-file src="src/android/assets/models/trigrid.png" target="assets/models/trigrid.png" />
+
+        <resource-file src="src/android/assets/shaders/background_show_camera.frag" target="assets/shaders/background_show_camera.frag" />
+        <resource-file src="src/android/assets/shaders/background_show_camera.vert" target="assets/shaders/background_show_camera.vert" />
+        <resource-file src="src/android/assets/shaders/background_show_depth_color_visualization.frag" target="assets/shaders/background_show_depth_color_visualization.frag" />
+        <resource-file src="src/android/assets/shaders/background_show_depth_color_visualization.vert" target="assets/shaders/background_show_depth_color_visualization.vert" />
+        <resource-file src="src/android/assets/shaders/cubemap_filter.frag" target="assets/shaders/cubemap_filter.frag" />
+        <resource-file src="src/android/assets/shaders/cubemap_filter.vert" target="assets/shaders/cubemap_filter.vert" />
+        <resource-file src="src/android/assets/shaders/environmental_hdr.frag" target="assets/shaders/environmental_hdr.frag" />
+        <resource-file src="src/android/assets/shaders/environmental_hdr.vert" target="assets/shaders/environmental_hdr.vert" />
+        <resource-file src="src/android/assets/shaders/occlusion.frag" target="assets/shaders/occlusion.frag" />
+        <resource-file src="src/android/assets/shaders/occlusion.vert" target="assets/shaders/occlusion.vert" />
+        <resource-file src="src/android/assets/shaders/plane.frag" target="assets/shaders/plane.frag" />
+        <resource-file src="src/android/assets/shaders/plane.vert" target="assets/shaders/plane.vert" />
+        <resource-file src="src/android/assets/shaders/point_cloud.frag" target="assets/shaders/point_cloud.frag" />
+        <resource-file src="src/android/assets/shaders/point_cloud.vert" target="assets/shaders/point_cloud.vert" />
+
+
 
         <resource-file src="src/android/com/google/ar/core/examples/java/helloar/res/drawable-xxhdpi/ic_launcher.png" target="res/drawable-xxhdpi/ic_launcher.png" />
         <resource-file src="src/android/com/google/ar/core/examples/java/helloar/res/drawable-xxhdpi/ic_settings.png" target="res/drawable-xxhdpi/ic_settings.png" />
