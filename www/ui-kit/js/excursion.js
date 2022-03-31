@@ -26,10 +26,6 @@ var media;
 var timer_start;
 setTimeout(()=>{
     document.getElementById('museum').play();
-    timer_start = new Date().getTime();
-    s = subtitles[idx][0];
-    // document.getElementById('subtitle').innerHTML = s;
-    // next_text();
 },1000);
 
 // setInterval(()=>{
