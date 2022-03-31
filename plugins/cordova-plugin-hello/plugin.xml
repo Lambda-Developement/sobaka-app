@@ -21,15 +21,15 @@
 
         <!-- <resource-file src="src/android/res/values/strings.xml" target-dir="src/res/values" /> -->
 
-        <resource-file src="src/android/com/google/ar/core/examples/java/helloar/res/drawable-xxhdpi/ic_launcher.png" target="res/drawable-xxhdpi" />
-        <resource-file src="src/android/com/google/ar/core/examples/java/helloar/res/drawable-xxhdpi/ic_settings.png" target="res/drawable-xxhdpi" />
+        <resource-file src="src/android/com/google/ar/core/examples/java/helloar/res/drawable-xxhdpi/ic_launcher.png" target="res/drawable-xxhdpi/ic_launcher.png" />
+        <resource-file src="src/android/com/google/ar/core/examples/java/helloar/res/drawable-xxhdpi/ic_settings.png" target="res/drawable-xxhdpi/ic_settings.png" />
 
-        <resource-file src="src/android/com/google/ar/core/examples/java/helloar/res/layout/activity_main.xml" target="res/layout" />
+        <resource-file src="src/android/com/google/ar/core/examples/java/helloar/res/layout/activity_main.xml" target="res/layout/activity_main.xml" />
 
-        <resource-file src="src/android/com/google/ar/core/examples/java/helloar/res/menu/settings_menu.xml" target="res/menu" />
+        <resource-file src="src/android/com/google/ar/core/examples/java/helloar/res/menu/settings_menu.xml" target="res/menu/settings_menu.xml" />
 
-        <resource-file src="src/android/com/google/ar/core/examples/java/helloar/res/values/strings.xml" target="res/values" />
-        <resource-file src="src/android/com/google/ar/core/examples/java/helloar/res/values/styles.xml" target="res/values" />
+        <resource-file src="src/android/com/google/ar/core/examples/java/helloar/res/values/strings.xml" target="res/values/strings.xml" />
+        <resource-file src="src/android/com/google/ar/core/examples/java/helloar/res/values/styles.xml" target="res/values/styles.xml" />
 
         <source-file src="src/android/hello.java" target-dir="src/cordova/plugin/hello/hello" />
 
