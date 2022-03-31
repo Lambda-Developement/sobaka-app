@@ -40,10 +40,10 @@ public class HelloArActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(HelloArActivity.this.R.getIdentifier("activity_main", "layout", getApplicationContext().getPackageName());
+        setContentView(HelloArActivity.this.R.getIdentifier("activity_main", "layout", getApplicationContext().getPackageName()));
 
         arFragment = (ArFragment)getSupportFragmentManager()
-                .findFragmentById(HelloArActivity.this.R.getIdentifier("sceneform_fragment", "id", getApplicationContext().getPackageName());
+                .findFragmentById(HelloArActivity.this.R.getIdentifier("sceneform_fragment", "id", getApplicationContext().getPackageName()));
         //Tap on plane event
         arFragment.setOnTapArPlaneListener(new BaseArFragment.OnTapArPlaneListener() {
             @Override
@@ -89,7 +89,7 @@ public class HelloArActivity extends AppCompatActivity {
                         }
                     }
                 });
-        btn_anim = (FloatingActionButton)findViewById(HelloArActivity.this.R.getIdentifier("btn_anim","id",getApplicationContext().getPackageName());
+        btn_anim = (FloatingActionButton)findViewById(HelloArActivity.this.R.getIdentifier("btn_anim","id",getApplicationContext().getPackageName()));
         btn_anim.setEnabled(false);
         btn_anim.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -109,7 +109,7 @@ public class HelloArActivity extends AppCompatActivity {
 
     private void setupModel() {
         ModelRenderable.builder()
-                .setSource(this, HelloArActivity.this.R.getIdentifier("cangrejo","raw",getApplicationContext().getPackageName())
+                .setSource(this, HelloArActivity.this.R.getIdentifier("cangrejo","raw",getApplicationContext().getPackageName()))
                 .build()
                 .thenAccept(renderable -> animationCrab = renderable)
                 .exceptionally(throwable -> {
