@@ -83,7 +83,7 @@ public class HelloArActivity extends AppCompatActivity {
                         {
                             if (!btn_anim.isEnabled())
                             {
-                                btn_anim.setBackgroundTintList(ContextCompat.getColorStateList(HelloArActivity.this,HelloArActivity.this.R.getIdentifier("colorAccent","color", getApplicationContext().getPackageName()));
+                                btn_anim.setBackgroundTintList(ContextCompat.getColorStateList(HelloArActivity.this,HelloArActivity.this.R.getIdentifier("colorAccent","color", getApplicationContext().getPackageName())));
                                 btn_anim.setEnabled(true);
                             }
                         }
