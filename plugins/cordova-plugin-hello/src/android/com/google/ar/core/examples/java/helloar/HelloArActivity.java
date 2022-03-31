@@ -195,9 +195,9 @@ public class HelloArActivity extends AppCompatActivity implements SampleRender.R
     
     this.R = getResources();
     
-    setContentView(this.R.getIdentifier("activity_main", "layout", pkg));
+    setContentView(this.R.getIdentifier("activity_main", "layout", getApplicationContext().getPackageName()));
     
-    WebView mywebview = (WebView) findViewById(this.R.getIdentifier("webview-ui", "id", pkg));
+    WebView mywebview = (WebView) findViewById(this.R.getIdentifier("webview-ui", "id", getApplicationContext().getPackageName()));
     if (mywebview != null) {
       WebSettings webs = mywebview.getSettings();
       webs.setJavaScriptEnabled(true);
@@ -213,7 +213,7 @@ public class HelloArActivity extends AppCompatActivity implements SampleRender.R
     }
 
 
-    surfaceView = findViewById(this.R.getIdentifier("surfaceview", "id", pkg));
+    surfaceView = findViewById(this.R.getIdentifier("surfaceview", "id", getApplicationContext().getPackageName()));
     displayRotationHelper = new DisplayRotationHelper(/*context=*/ this); 
 
     // Set up touch listener.
@@ -227,14 +227,14 @@ public class HelloArActivity extends AppCompatActivity implements SampleRender.R
 
     depthSettings.onCreate(this);
     instantPlacementSettings.onCreate(this);
-    ImageButton settingsButton = findViewById(this.R.getIdentifier("settings_button", "id",  pkg));
+    ImageButton settingsButton = findViewById(this.R.getIdentifier("settings_button", "id",  getApplicationContext().getPackageName()));
     settingsButton.setOnClickListener(
         new View.OnClickListener() {
           @Override
           public void onClick(View v) {
             PopupMenu popup = new PopupMenu(HelloArActivity.this, v);
             popup.setOnMenuItemClickListener(HelloArActivity.this::settingsMenuClick);
-            popup.inflate(HelloArActivity.this.R.getIdentifier("settings_menu", "menu", pkg));
+            popup.inflate(HelloArActivity.this.R.getIdentifier("settings_menu", "menu", getApplicationContext().getPackageName()));
             popup.show();
           }
         });
@@ -242,10 +242,10 @@ public class HelloArActivity extends AppCompatActivity implements SampleRender.R
 
   /** Menu button to launch feature specific settings. */
   protected boolean settingsMenuClick(MenuItem item) {
-    if (item.getItemId() == this.R.getIdentifier("depth_settings", "id", pkg)) {
+    if (item.getItemId() == this.R.getIdentifier("depth_settings", "id", getApplicationContext().getPackageName())) {
       launchDepthSettingsMenuDialog();
       return true;
-    } else if (item.getItemId() == this.R.getIdentifier("instant_placement_settings", "id", pkg)) {
+    } else if (item.getItemId() == this.R.getIdentifier("instant_placement_settings", "id", getApplicationContext().getPackageName())) {
       launchInstantPlacementSettingsMenuDialog();
       return true;
     }
@@ -708,15 +708,15 @@ public class HelloArActivity extends AppCompatActivity implements SampleRender.R
 
     // Asks the user whether they want to use depth-based occlusion.
     new AlertDialog.Builder(this)
-        .setTitle(HelloArActivity.this.R.getIdentifier("options_title_with_depth", "string", pkg))
-        .setMessage(HelloArActivity.this.R.getIdentifier("depth_use_explanation", "string", pkg))
+        .setTitle(HelloArActivity.this.R.getIdentifier("options_title_with_depth", "string", getApplicationContext().getPackageName()))
+        .setMessage(HelloArActivity.this.R.getIdentifier("depth_use_explanation", "string", getApplicationContext().getPackageName()))
         .setPositiveButton(
-            HelloArActivity.this.R.getIdentifier("button_text_enable_depth", "string", pkg),
+            HelloArActivity.this.R.getIdentifier("button_text_enable_depth", "string", getApplicationContext().getPackageName()),
             (DialogInterface dialog, int which) -> {
               depthSettings.setUseDepthForOcclusion(true);
             })
         .setNegativeButton(
-            HelloArActivity.this.R.getIdentifier("button_text_disable_depth", "string", pkg),
+            HelloArActivity.this.R.getIdentifier("button_text_disable_depth", "string", getApplicationContext().getPackageName()),
             (DialogInterface dialog, int which) -> {
               depthSettings.setUseDepthForOcclusion(false);
             })
@@ -728,14 +728,14 @@ public class HelloArActivity extends AppCompatActivity implements SampleRender.R
     Resources resources = getResources();
     
     new AlertDialog.Builder(this)
-        .setTitle(HelloArActivity.this.R.getIdentifier("options_title_instant_placement", "string", pkg))
+        .setTitle(HelloArActivity.this.R.getIdentifier("options_title_instant_placement", "string", getApplicationContext().getPackageName()))
         .setMultiChoiceItems(
-            resources.getStringArray(HelloArActivity.this.R.getIdentifier("instant_placement_options_array", "array", pkg)),
+            resources.getStringArray(HelloArActivity.this.R.getIdentifier("instant_placement_options_array", "array", getApplicationContext().getPackageName())),
             instantPlacementSettingsMenuDialogCheckboxes,
             (DialogInterface dialog, int which, boolean isChecked) ->
                 instantPlacementSettingsMenuDialogCheckboxes[which] = isChecked)
         .setPositiveButton(
-            HelloArActivity.this.R.getIdentifier("done", "string", pkg),
+            HelloArActivity.this.R.getIdentifier("done", "string", getApplicationContext().getPackageName()),
             (DialogInterface dialogInterface, int which) -> applySettingsMenuDialogCheckboxes())
         .setNegativeButton(
             android.R.string.cancel,
@@ -753,14 +753,14 @@ public class HelloArActivity extends AppCompatActivity implements SampleRender.R
     if (session.isDepthModeSupported(Config.DepthMode.AUTOMATIC)) {
       // With depth support, the user can select visualization options.
       new AlertDialog.Builder(this)
-          .setTitle(HelloArActivity.this.R.getIdentifier("options_title_with_depth", "string", pkg))
+          .setTitle(HelloArActivity.this.R.getIdentifier("options_title_with_depth", "string", getApplicationContext().getPackageName()))
           .setMultiChoiceItems(
-              resources.getStringArray(HelloArActivity.this.R.getIdentifier("depth_options_array", "array", pkg)),
+              resources.getStringArray(HelloArActivity.this.R.getIdentifier("depth_options_array", "array", getApplicationContext().getPackageName())),
               depthSettingsMenuDialogCheckboxes,
               (DialogInterface dialog, int which, boolean isChecked) ->
                   depthSettingsMenuDialogCheckboxes[which] = isChecked)
           .setPositiveButton(
-              HelloArActivity.this.R.getIdentifier("done", "string", pkg),
+              HelloArActivity.this.R.getIdentifier("done", "string", getApplicationContext().getPackageName()),
               (DialogInterface dialogInterface, int which) -> applySettingsMenuDialogCheckboxes())
           .setNegativeButton(
               android.R.string.cancel,
@@ -769,9 +769,9 @@ public class HelloArActivity extends AppCompatActivity implements SampleRender.R
     } else {
       // Without depth support, no settings are available.
       new AlertDialog.Builder(this)
-          .setTitle(HelloArActivity.this.R.getIdentifier("options_title_without_depth", "string", pkg))
+          .setTitle(HelloArActivity.this.R.getIdentifier("options_title_without_depth", "string", getApplicationContext().getPackageName()))
           .setPositiveButton(
-              HelloArActivity.this.R.getIdentifier("done", "string", pkg),
+              HelloArActivity.this.R.getIdentifier("done", "string", getApplicationContext().getPackageName()),
               (DialogInterface dialogInterface, int which) -> applySettingsMenuDialogCheckboxes())
           .show();
     }
