@@ -22,7 +22,7 @@
         </config-file>
 
 
-        <source-file src="src/android/com/google/dennis/sceneformanim/HelloArActivity.java" target-dir="src/cordova/plugin/com/google/dennis/sceneformanim/" />
+        <source-file src="src/android/com/dennis/sceneformanim/HelloArActivity.java" target-dir="src/cordova/plugin/com/google/dennis/sceneformanim/" />
 
 
         <!-- <resource-file src="src/android/res/values/strings.xml" target-dir="src/res/values" /> -->
