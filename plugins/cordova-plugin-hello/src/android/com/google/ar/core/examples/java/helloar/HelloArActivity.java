@@ -464,7 +464,7 @@ public class HelloArActivity extends AppCompatActivity implements SampleRender.R
                   })
               .setTexture("u_AlbedoTexture", virtualObjectAlbedoTexture)
               .setTexture("u_RoughnessMetallicAmbientOcclusionTexture", virtualObjectPbrTexture)
-              .setTexture("u_Cubemap", cubemapFilter.getFilteredCubemapTexture())
+              .setTexture("u_Cubemap", cubemapFilter.getFilteredCubemapTexture());
               //.setTexture("u_DfgTexture", dfgTexture);
     } catch (IOException e) {
       Log.e(TAG, "Failed to read a required asset file", e);
