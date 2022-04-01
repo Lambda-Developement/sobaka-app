@@ -8,7 +8,7 @@ on:
   #push:
   #  branches: [ cordova ]
   release:
-    type: [ released ]
+    type: [ created ]
     # branches: [ cordova ]
 
   # Allows you to run this workflow manually from the Actions tab
