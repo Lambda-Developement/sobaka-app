@@ -1,3 +1,20 @@
+/* @keyframes collapse-popup{ */
+	/* from {width:100%;} */
+	/* to{width:200px;} */
+/* } */
+/* @keyframes expand-popup{ */
+	/* from{width:200px;} */
+	/* to{width:100%;} */
+/* } */
+/* @keyframes collapse-text{ */
+	/* from{width:auto;} */
+	/* to{width:0;} */
+/* } */
+/* @keyframes expand-text{ */
+	/* from{width:0;} */
+	/* to{width:auto;} */
+/* } */
+
 #map{
     background-color: lightblue;
 }
@@ -7,6 +24,13 @@ body{
 }
 html{
     height: 100%;
+}
+#popup-wrapper{
+	transition: width 1s ease-in-out;
+}
+#inner-reviews{
+	transition: height 1s ease-in-out;
+	overflow-y: clip;
 }
 .navbar{
     position: fixed;
@@ -341,6 +365,11 @@ button.btn.btn-filled{
     width: 100%;
     border-bottom: 2px solid rgba(243, 243, 243, 1);
     font-size: 18px;
+    transition: width 1s ease-in-out;
+}
+#near-popup-text{
+	overflow:clip;
+	transition: display 1s ease-in-out;
 }
 h3.text-description{
     white-space: break-spaces;
@@ -368,7 +397,7 @@ h3.text-description{
     background-repeat: no-repeat;
     background-position: center center;
     background-size:24px;
-}
+} 
 h3.text-common{
     margin:0;
 }
