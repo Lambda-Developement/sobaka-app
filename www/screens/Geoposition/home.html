@@ -168,14 +168,14 @@
         var park_id = 0;
         function toggle_collapse(){
         	if(popup_collapsed){
-        		//document.getElementsByClassName('near-popup')[0].style.width = '100%';
+        		document.getElementsByClassName('near-popup')[0].style.borderBottom = '2px solid rgba(243, 243, 243, 1)';
 				setTimeout(()=>{
 	        		document.getElementById('near-popup-text').style.display = 'flex';
 					document.getElementById('excursion-btn').style.display = 'block';
 				},300);
 				document.getElementById('popup-wrapper').style.width = '100%';
         	}else{
-        		//document.getElementsByClassName('near-popup')[0].style.width = '100px';
+        		document.getElementsByClassName('near-popup')[0].style.borderBottom = '0'; 
 				setTimeout(()=>{
 	        		document.getElementById('near-popup-text').style.display = 'none';
 					document.getElementById('excursion-btn').style.display = 'none';
