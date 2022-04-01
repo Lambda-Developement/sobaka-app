@@ -35,7 +35,7 @@ public class HelloArActivity extends AppCompatActivity {
     private AnchorNode anchorNode;
     private ModelAnimator animator;
     private int nextAnimation;
-    private FloatingActionButton btn_anim;
+    // тут если что был другой тип у кнопочки private Button btn_anim;
     private ModelRenderable animationCrab;
     private TransformableNode transformableNode;
     private Resources R;
@@ -72,41 +72,41 @@ public class HelloArActivity extends AppCompatActivity {
         });
 
         //Add frame update to control state of button
-        arFragment.getArSceneView().getScene()
-                .addOnUpdateListener(new Scene.OnUpdateListener(){
-                    public void onUpdate(FrameTime frameTime){
-                        if (anchorNode == null)
-                        {
-                            if (btn_anim.isEnabled())
-                            {
-                                btn_anim.setBackgroundTintList(ColorStateList.valueOf(Color.GRAY));
-                                btn_anim.setEnabled(false);
-                            }
-                        }
-                        else
-                        {
-                            if (!btn_anim.isEnabled())
-                            {
-                                btn_anim.setBackgroundTintList(ContextCompat.getColorStateList(HelloArActivity.this,HelloArActivity.this.R.getIdentifier("colorAccent","color", getApplicationContext().getPackageName())));
-                                btn_anim.setEnabled(true);
-                            }
-                        }
-                    }
-                });
-        btn_anim = (FloatingActionButton)findViewById(HelloArActivity.this.R.getIdentifier("btn_anim","id",getApplicationContext().getPackageName()));
-        btn_anim.setEnabled(false);
-        btn_anim.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if(animator == null || !animator.isRunning())
-                {
-                    AnimationData data = animationCrab.getAnimationData(nextAnimation);
-                    nextAnimation = (nextAnimation+1)%animationCrab.getAnimationDataCount();
-                    animator = new ModelAnimator(data,animationCrab);
-                    animator.start();
-                }
-            }
-        });
+       // arFragment.getArSceneView().getScene()
+        //        .addOnUpdateListener(new Scene.OnUpdateListener(){
+         //           public void onUpdate(FrameTime frameTime){
+                    //    if (anchorNode == null)
+                   //     {
+                         //   if (btn_anim.isEnabled())
+                       //     {
+                      //          btn_anim.setBackgroundTintList(ColorStateList.valueOf(Color.GRAY));
+                     //           btn_anim.setEnabled(false);
+                    //        }
+                   //     }
+                   //     else
+                   //     {
+                       //     if (!btn_anim.isEnabled())
+                     //       {
+                      //          btn_anim.setBackgroundTintList(ContextCompat.getColorStateList(HelloArActivity.this,HelloArActivity.this.R.getIdentifier("colorAccent","color", getApplicationContext().getPackageName())));
+                      //          btn_anim.setEnabled(true);
+                       //     }
+                      //  }
+                 //   }
+           //     });
+        //btn_anim = (Button)findViewById(HelloArActivity.this.R.getIdentifier("btn_anim","id",getApplicationContext().getPackageName()));
+        //btn_anim.setEnabled(false);
+        //btn_anim.setOnClickListener(new View.OnClickListener() {
+        //    @Override
+        //    public void onClick(View view) {
+        //        if(animator == null || !animator.isRunning())
+        //        {
+        //            AnimationData data = animationCrab.getAnimationData(nextAnimation);
+        //            nextAnimation = (nextAnimation+1)%animationCrab.getAnimationDataCount();
+       //             animator = new ModelAnimator(data,animationCrab);
+       //             animator.start();
+       //         }
+       //     }
+        //});
         
         setupModel();
     }
