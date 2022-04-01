@@ -14,14 +14,13 @@
         </config-file>
         <config-file parent="/manifest/application" target="AndroidManifest.xml">
             <meta-data android:name="com.google.ar.core" android:value="required" />
-            <!-- 
-            <activity android:name="com.google.ar.core.examples.java.helloar.HelloArActivity" android:label="@string/app_name" android:theme="@style/Theme.AppCompat">
-            </activity> -->
-            <activity android:name="com.google.dennis.sceneformanim.HelloArActivity" android:label="@string/app_name" android:theme="@style/Theme.AppCompat">
+
+            <activity android:name="com.dennis.sceneformanim.HelloArActivity" android:label="@string/app_name" android:theme="@style/Theme.AppCompat">
             </activity>
         </config-file>
-
-
+        <!--
+                   <activity android:name="com.google.ar.core.examples.java.helloar.HelloArActivity" android:label="@string/app_name" android:theme="@style/Theme.AppCompat">
+                   </activity> -->
         <source-file src="src/android/com/dennis/sceneformanim/HelloArActivity.java" target-dir="src/cordova/plugin/com/google/dennis/sceneformanim/" />
 
         <resource-file src="src/android/com/dennis/sceneformanim/res/mipmap-hdpi/ic_launcher_round.png" target="res/mipmap-hdpi/ic_launcher_round.png" />

@@ -38,11 +38,12 @@ public class HelloArActivity extends AppCompatActivity {
     private FloatingActionButton btn_anim;
     private ModelRenderable animationCrab;
     private TransformableNode transformableNode;
-    private Resources R = getResources();
+    private Resources R;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        this.R = getResources();
         setContentView(HelloArActivity.this.R.getIdentifier("activity_main", "layout", getApplicationContext().getPackageName()));
 
         arFragment = (ArFragment)getSupportFragmentManager()

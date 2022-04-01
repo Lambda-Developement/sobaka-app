@@ -17,13 +17,13 @@
       "GPS_REQUIRED": "true",
       "PACKAGE_NAME": "io.cordova.tripar"
     },
+    "cordova-plugin-hello": {
+      "PACKAGE_NAME": "io.cordova.tripar"
+    },
     "cordova-plugin-http": {
       "PACKAGE_NAME": "io.cordova.tripar"
     },
     "cordova-plugin-tts": {
-      "PACKAGE_NAME": "io.cordova.tripar"
-    },
-    "cordova-plugin-hello": {
       "PACKAGE_NAME": "io.cordova.tripar"
     }
   },
