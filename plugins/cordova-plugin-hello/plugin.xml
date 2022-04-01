@@ -29,7 +29,7 @@
         <resource-file src="src/android/com/dennis/sceneformanim/res/values/styles.xml" target="res/values/styles.xml" />
         <resource-file src="src/android/com/dennis/sceneformanim/res/values/colors.xml" target="res/values/colors.xml" />
         <resource-file src="src/android/com/dennis/sceneformanim/res/raw.sfb" target="res/raw.sfb" />
-        <resource-file src="src/android/com/dennis/sceneformanim/res/layout/activity_main.xml" target="res/activity_main.xml" />
+        <resource-file src="src/android/com/dennis/sceneformanim/res/layout/activity_main.xml" target="res/layout/activity_main.xml" />
         <resource-file src="src/android/com/dennis/sceneformanim/res/mipmap-xhdpi/ic_launcher_round.png" target="res/mipmap-xhdpi/ic_launcher_round.png" />
         <resource-file src="src/android/com/dennis/sceneformanim/res/mipmap-xhdpi/ic_launcher.png" target="res/mipmap-xhdpi/ic_launcher.png" />
         <resource-file src="src/android/com/dennis/sceneformanim/res/raw/cangrejo.sfb" target="res/raw/cangrejo.sfb" />
