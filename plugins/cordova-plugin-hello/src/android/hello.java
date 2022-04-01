@@ -16,7 +16,7 @@ import android.content.Context;
 
 //My imports
 //import com.google.ar.core;
-import com.dennis.sceneformanim;
+import com.dennis.sceneformanim.HelloArActivity;
 
 
 /**
