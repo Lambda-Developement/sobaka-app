@@ -25,6 +25,9 @@ import com.google.ar.sceneform.ux.ArFragment;
 import com.google.ar.sceneform.ux.BaseArFragment;
 import com.google.ar.sceneform.ux.TransformableNode;
 
+import android.content.res.Resources;
+
+
 public class HelloArActivity extends AppCompatActivity {
 
     //Variable
