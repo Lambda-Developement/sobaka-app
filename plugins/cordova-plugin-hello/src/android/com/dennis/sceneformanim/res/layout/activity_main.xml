@@ -5,6 +5,6 @@
     <fragment android:id="@+id/sceneform_fragment" class="com.google.ar.sceneform.ux.ArFragment" android:layout_width="match_parent" android:layout_height="match_parent"/>
 
     <Button  xmlns:android="http://schemas.android.com/apk/res/android"
-        android:id="@+id/btn_anim" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginBottom="336dp"  android:text="Animate" />
+        android:id="@+id/btn_anim" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginBottom="336dp"  android:text="Старт" />
 
 </RelativeLayout>

@@ -28,6 +28,10 @@ import com.google.ar.sceneform.ux.TransformableNode;
 import android.content.res.Resources;
 import android.widget.Button;
 
+import com.google.ar.sceneform.math.Vector3;
+import com.google.ar.sceneform.math.Quaternion;
+
+
 
 public class HelloArActivity extends AppCompatActivity {
 
@@ -40,6 +44,9 @@ public class HelloArActivity extends AppCompatActivity {
     private ModelRenderable animationCrab;
     private TransformableNode transformableNode;
     private Resources R;
+    private boolean walkForward = false;
+    private int walkCount = 4;
+    private boolean positioned = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,8 +71,9 @@ public class HelloArActivity extends AppCompatActivity {
 
                     transformableNode = new TransformableNode(arFragment.getTransformationSystem());
                     //Scale model
-                    transformableNode.getScaleController().setMinScale(0.09f);
-                    transformableNode.getScaleController().setMaxScale(0.1f);
+                    transformableNode.getScaleController().setMinScale(0.25f);
+                    transformableNode.getScaleController().setMaxScale(0.75f);
+
                     transformableNode.setParent(anchorNode);
                     transformableNode.setRenderable(animationCrab);
                 }
@@ -82,6 +90,7 @@ public class HelloArActivity extends AppCompatActivity {
                             {
                                 btn_anim.setBackgroundTintList(ColorStateList.valueOf(Color.GRAY));
                                 btn_anim.setEnabled(false);
+
                             }
                         }
                         else
@@ -92,7 +101,41 @@ public class HelloArActivity extends AppCompatActivity {
                                 btn_anim.setEnabled(true);
                             }
                         }
+                        if (walkForward && animator.isRunning()){
+                            float delta = frameTime.getDeltaSeconds();
+                            Vector3 dogPosition = Vector3.add(Quaternion.rotateVector(transformableNode.getWorldRotation(), new Vector3(0.0f, 0.0f, -1 * delta * 0.085f)),  transformableNode.getWorldPosition());
+                            transformableNode.setWorldPosition(dogPosition);
+                        } else {
+                            if (animator != null && walkCount <= 4){
+                                // Продолжить ту же анимацию
+                                AnimationData data = animationCrab.getAnimationData(nextAnimation);
+                                nextAnimation = nextAnimation % animationCrab.getAnimationDataCount();
+                                animator = new ModelAnimator(data,animationCrab);
+                                animator.start();
+
+                                walkCount += 1;
+                            }
+                            else if (animator == null || walkCount >4) {
+                                walkForward = false;
+
+                                if (transformableNode != null && positioned == false){
+                                    Vector3 cameraPosition = transformableNode.getScene().getCamera().getWorldPosition();
+                                    Vector3 cardPosition = transformableNode.getWorldPosition();
+
+                                    Vector3 direction = Vector3.subtract(cameraPosition, cardPosition);
+                                    direction = new Vector3(direction.x, 0, direction.z);
+                                    transformableNode.setWorldRotation(Quaternion.lookRotation(direction, Vector3.up() ));
+                                    positioned = true;
+                                }
+                            }
+                        }
+
                     }
+
+
+
+
+
                 });
         btn_anim = (Button)findViewById(HelloArActivity.this.R.getIdentifier("btn_anim","id",getApplicationContext().getPackageName()));
         btn_anim.setEnabled(false);
@@ -102,9 +145,12 @@ public class HelloArActivity extends AppCompatActivity {
                 if(animator == null || !animator.isRunning())
                 {
                     AnimationData data = animationCrab.getAnimationData(nextAnimation);
-                    nextAnimation = (nextAnimation+1)%animationCrab.getAnimationDataCount();
+                    nextAnimation = (nextAnimation+1) % animationCrab.getAnimationDataCount();
                     animator = new ModelAnimator(data,animationCrab);
                     animator.start();
+                    walkForward = true;
+                    walkCount = 0;
+                    positioned = false;
                 }
             }
         });
