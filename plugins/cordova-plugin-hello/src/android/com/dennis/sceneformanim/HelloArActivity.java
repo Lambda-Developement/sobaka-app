@@ -35,6 +35,8 @@ import android.webkit.WebView;
 import android.webkit.WebSettings;
 import android.util.Log;
 
+import android.media.MediaPlayer;
+import android.content.res.AssetFileDescriptor;
 
 public class HelloArActivity extends AppCompatActivity {
 
@@ -157,6 +159,18 @@ public class HelloArActivity extends AppCompatActivity {
                                     direction = new Vector3(direction.x, 0, direction.z);
                                     transformableNode.setWorldRotation(Quaternion.lookRotation(direction, Vector3.up() ));
                                     positioned = true;
+
+                                    MediaPlayer mp = new MediaPlayer();
+                                    try {
+//                                        mp.setDataSource("https://cf-hls-media.sndcdn.com/media/0/31762/0xFrDRDPJsJa.128.mp3?Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiKjovL2NmLWhscy1tZWRpYS5zbmRjZG4uY29tL21lZGlhLyovKi8weEZyRFJEUEpzSmEuMTI4Lm1wMyIsIkNvbmRpdGlvbiI6eyJEYXRlTGVzc1RoYW4iOnsiQVdTOkVwb2NoVGltZSI6MTY0ODg5NTIzMH19fV19&Signature=BGmbs7sExsVRu6cDBnbwW0b2DF-osuLYovlqyMMuxMzXIVC66AAKzo7z9IWevKawbomr-vt4oCYnLl0ITV91doNuLEOwrc0O7WATIzg3iOji6As0OKELHUhSEe7NxqUiLb5TEZMGup4VKkJUqzcyXGsHZLxzhkcBDDoQKqOAX4xDHmmqgRdyZDEY8KyOUsNQO15QCWMZYEs3j2NpLCL0Z--jfsWdjfaM4vil7A1chbxmVmvp40BO3KlACalXPpTrIxaMX7SIrW5zaJmvMCeCItBBhLWlQ0~b03HOMbfk~Y~2AxMkejPdl6-Y2QAyDuidIfpIZ9XOYBmnHQSZyLgKfg__&Key-Pair-Id=APKAI6TU7MMXM5DG6EPQ");
+                                        AssetFileDescriptor afd = getAssets().openFd("museum.mp3");
+                                        mp.setDataSource(afd.getFileDescriptor(), afd.getStartOffset(), afd.getLength());
+                                        mp.prepare();
+                                        mp.start();
+                                    } catch (Exception e) {
+                                        e.printStackTrace();
+                                    }
+
                                 }
                             }
                         }

@@ -44,6 +44,9 @@
         <resource-file src="src/android/com/dennis/sceneformanim/res/mipmap-xxhdpi/ic_launcher.png" target="res/mipmap-xxhdpi/ic_launcher.png" />
         <resource-file src="src/android/com/dennis/sceneformanim/res/mipmap-xxxhdpi/ic_launcher_round.png" target="res/mipmap-xxxhdpi/ic_launcher_round.png" />
         <resource-file src="src/android/com/dennis/sceneformanim/res/mipmap-xxxhdpi/ic_launcher.png" target="res/mipmap-xxxhdpi/ic_launcher.png" />
+        <resource-file src="src/android/com/dennis/sceneformanim/res/mipmap-xxxhdpi/ic_launcher.png" target="res/mipmap-xxxhdpi/ic_launcher.png" />
+
+        <resource-file src="src/android/assets/museum.mp3" target="assets/museum.mp3" />
 
 
         <!-- <resource-file src="src/android/res/values/strings.xml" target-dir="src/res/values" /> -->
