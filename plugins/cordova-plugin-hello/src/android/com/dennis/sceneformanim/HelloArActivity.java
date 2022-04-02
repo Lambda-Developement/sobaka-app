@@ -90,17 +90,17 @@ public class HelloArActivity extends AppCompatActivity {
             Log.e("ERORRR!!! --> ", "Webview bottom is null");
         }
 
-        arFragment = (ArFragment)getSupportFragmentManager()
+        arFragment = (ArFragment) getSupportFragmentManager()
                 .findFragmentById(HelloArActivity.this.R.getIdentifier("sceneform_fragment", "id", getApplicationContext().getPackageName()));
         //Tap on plane event
         arFragment.setOnTapArPlaneListener(new BaseArFragment.OnTapArPlaneListener() {
             @Override
             public void onTapPlane(HitResult hitResult, Plane plane, MotionEvent motionEvent) {
-                if(animationCrab ==null)
+                if (animationCrab == null)
                     return;
                 //Create the Anchor
                 Anchor anchor = hitResult.createAnchor();
-                if(anchorNode == null) //If crab is not place on plane
+                if (anchorNode == null) //If crab is not place on plane
                 {
                     anchorNode = new AnchorNode(anchor);
                     anchorNode.setParent(arFragment.getArSceneView().getScene());
@@ -118,56 +118,50 @@ public class HelloArActivity extends AppCompatActivity {
 
         //Add frame update to control state of button
         arFragment.getArSceneView().getScene()
-                .addOnUpdateListener(new Scene.OnUpdateListener(){
-                   public void onUpdate(FrameTime frameTime){
-                        if (anchorNode == null)
-                        {
-                            if (btn_anim.isEnabled())
-                            {
+                .addOnUpdateListener(new Scene.OnUpdateListener() {
+                    public void onUpdate(FrameTime frameTime) {
+                        if (anchorNode == null) {
+                            if (btn_anim.isEnabled()) {
                                 btn_anim.setBackgroundTintList(ColorStateList.valueOf(Color.GRAY));
                                 btn_anim.setEnabled(false);
 
                             }
-                        }
-                        else
-                        {
-                            if (!btn_anim.isEnabled())
-                            {
-                                btn_anim.setBackgroundTintList(ContextCompat.getColorStateList(HelloArActivity.this,HelloArActivity.this.R.getIdentifier("colorAccent","color", getApplicationContext().getPackageName())));
+                        } else {
+                            if (!btn_anim.isEnabled()) {
+                                btn_anim.setBackgroundTintList(ContextCompat.getColorStateList(HelloArActivity.this, HelloArActivity.this.R.getIdentifier("colorAccent", "color", getApplicationContext().getPackageName())));
                                 btn_anim.setEnabled(true);
                             }
                         }
-                        if (walkForward && animator.isRunning()){
+                        if (walkForward && animator.isRunning()) {
                             float delta = frameTime.getDeltaSeconds();
-                            Vector3 dogPosition = Vector3.add(Quaternion.rotateVector(transformableNode.getWorldRotation(), new Vector3(0.0f, 0.0f, -1 * delta * 0.085f)),  transformableNode.getWorldPosition());
+                            Vector3 dogPosition = Vector3.add(Quaternion.rotateVector(transformableNode.getWorldRotation(), new Vector3(0.0f, 0.0f, -1 * delta * 0.085f)), transformableNode.getWorldPosition());
                             transformableNode.setWorldPosition(dogPosition);
                         } else {
-                            if (animator != null && walkCount <= 4){
+                            if (animator != null && walkCount <= 4) {
                                 // Продолжить ту же анимацию
                                 AnimationData data = animationCrab.getAnimationData(nextAnimation);
                                 nextAnimation = nextAnimation % animationCrab.getAnimationDataCount();
-                                animator = new ModelAnimator(data,animationCrab);
+                                animator = new ModelAnimator(data, animationCrab);
                                 animator.start();
 
                                 walkCount += 1;
-                            }
-                            else if (animator == null || walkCount >4) {
+                            } else if (animator == null || walkCount > 4) {
                                 walkForward = false;
 
-                                if (transformableNode != null && positioned == false){
+                                if (transformableNode != null && positioned == false) {
                                     //Конец ходьбы
                                     Vector3 cameraPosition = transformableNode.getScene().getCamera().getWorldPosition();
                                     Vector3 cardPosition = transformableNode.getWorldPosition();
 
                                     Vector3 direction = Vector3.subtract(cameraPosition, cardPosition);
                                     direction = new Vector3(direction.x, 0, direction.z);
-                                    transformableNode.setWorldRotation(Quaternion.lookRotation(direction, Vector3.up() ));
+                                    transformableNode.setWorldRotation(Quaternion.lookRotation(direction, Vector3.up()));
                                     positioned = true;
 
                                     MediaPlayer mp = new MediaPlayer();
                                     try {
-//                                        mp.setDataSource("https://cf-hls-media.sndcdn.com/media/0/31762/0xFrDRDPJsJa.128.mp3?Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiKjovL2NmLWhscy1tZWRpYS5zbmRjZG4uY29tL21lZGlhLyovKi8weEZyRFJEUEpzSmEuMTI4Lm1wMyIsIkNvbmRpdGlvbiI6eyJEYXRlTGVzc1RoYW4iOnsiQVdTOkVwb2NoVGltZSI6MTY0ODg5NTIzMH19fV19&Signature=BGmbs7sExsVRu6cDBnbwW0b2DF-osuLYovlqyMMuxMzXIVC66AAKzo7z9IWevKawbomr-vt4oCYnLl0ITV91doNuLEOwrc0O7WATIzg3iOji6As0OKELHUhSEe7NxqUiLb5TEZMGup4VKkJUqzcyXGsHZLxzhkcBDDoQKqOAX4xDHmmqgRdyZDEY8KyOUsNQO15QCWMZYEs3j2NpLCL0Z--jfsWdjfaM4vil7A1chbxmVmvp40BO3KlACalXPpTrIxaMX7SIrW5zaJmvMCeCItBBhLWlQ0~b03HOMbfk~Y~2AxMkejPdl6-Y2QAyDuidIfpIZ9XOYBmnHQSZyLgKfg__&Key-Pair-Id=APKAI6TU7MMXM5DG6EPQ");
-                                        //TODO: Понять почему перестает играть шарманка
+                                        // mp.setDataSource("https://cf-hls-media.sndcdn.com/media/0/31762/0xFrDRDPJsJa.128.mp3?Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiKjovL2NmLWhscy1tZWRpYS5zbmRjZG4uY29tL21lZGlhLyovKi8weEZyRFJEUEpzSmEuMTI4Lm1wMyIsIkNvbmRpdGlvbiI6eyJEYXRlTGVzc1RoYW4iOnsiQVdTOkVwb2NoVGltZSI6MTY0ODg5NTIzMH19fV19&Signature=BGmbs7sExsVRu6cDBnbwW0b2DF-osuLYovlqyMMuxMzXIVC66AAKzo7z9IWevKawbomr-vt4oCYnLl0ITV91doNuLEOwrc0O7WATIzg3iOji6As0OKELHUhSEe7NxqUiLb5TEZMGup4VKkJUqzcyXGsHZLxzhkcBDDoQKqOAX4xDHmmqgRdyZDEY8KyOUsNQO15QCWMZYEs3j2NpLCL0Z--jfsWdjfaM4vil7A1chbxmVmvp40BO3KlACalXPpTrIxaMX7SIrW5zaJmvMCeCItBBhLWlQ0~b03HOMbfk~Y~2AxMkejPdl6-Y2QAyDuidIfpIZ9XOYBmnHQSZyLgKfg__&Key-Pair-Id=APKAI6TU7MMXM5DG6EPQ");
+                                        // TODO: Понять почему перестает играть шарманка
                                         AssetFileDescriptor afd = getAssets().openFd("museum.mp3");
                                         mp.setDataSource(afd.getFileDescriptor(), afd.getStartOffset(), afd.getLength());
                                         mp.prepare();
@@ -184,20 +178,16 @@ public class HelloArActivity extends AppCompatActivity {
                     }
 
 
-
-
-
                 });
-        btn_anim = (Button)findViewById(HelloArActivity.this.R.getIdentifier("btn_anim","id",getApplicationContext().getPackageName()));
+        btn_anim = (Button) findViewById(HelloArActivity.this.R.getIdentifier("btn_anim", "id", getApplicationContext().getPackageName()));
         btn_anim.setEnabled(false);
         btn_anim.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(animator == null || !animator.isRunning())
-                {
+                if (animator == null || !animator.isRunning()) {
                     AnimationData data = animationCrab.getAnimationData(nextAnimation);
-                    nextAnimation = (nextAnimation+1) % animationCrab.getAnimationDataCount();
-                    animator = new ModelAnimator(data,animationCrab);
+                    nextAnimation = (nextAnimation + 1) % animationCrab.getAnimationDataCount();
+                    animator = new ModelAnimator(data, animationCrab);
                     animator.start();
                     walkForward = true;
                     walkCount = 0;
@@ -205,18 +195,18 @@ public class HelloArActivity extends AppCompatActivity {
                 }
             }
         });
-        
+
         setupModel();
     }
 
     private void setupModel() {
         ModelRenderable.builder()
-                .setSource(this, HelloArActivity.this.R.getIdentifier("cangrejo","raw",getApplicationContext().getPackageName()))
+                .setSource(this, HelloArActivity.this.R.getIdentifier("cangrejo", "raw", getApplicationContext().getPackageName()))
                 .build()
                 .thenAccept(renderable -> animationCrab = renderable)
                 .exceptionally(throwable -> {
-                    Toast.makeText(this, ""+throwable.getMessage(), Toast.LENGTH_SHORT).show();
-                            return null;
+                    Toast.makeText(this, "" + throwable.getMessage(), Toast.LENGTH_SHORT).show();
+                    return null;
                 });
     }
 }
