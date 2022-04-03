@@ -18,11 +18,8 @@
             <activity android:name="com.dennis.sceneformanim.HelloArActivity" android:label="@string/app_name" android:theme="@style/Theme.AppCompat">
             </activity>
         </config-file>
-        <!--
-                   <activity android:name="com.google.ar.core.examples.java.helloar.HelloArActivity" android:label="@string/app_name" android:theme="@style/Theme.AppCompat">
-                   </activity> -->
-        <source-file src="src/android/com/dennis/sceneformanim/HelloArActivity.java" target-dir="src/cordova/plugin/com/google/dennis/sceneformanim/" />
 
+        <source-file src="src/android/com/dennis/sceneformanim/HelloArActivity.java" target-dir="src/cordova/plugin/com/google/dennis/sceneformanim/" />
         <resource-file src="src/android/com/dennis/sceneformanim/res/mipmap-hdpi/ic_launcher_round.png" target="res/mipmap-hdpi/ic_launcher_round.png" />
         <resource-file src="src/android/com/dennis/sceneformanim/res/mipmap-hdpi/ic_launcher.png" target="res/mipmap-hdpi/ic_launcher.png" />
         <resource-file src="src/android/com/dennis/sceneformanim/res/values/strings.xml" target="res/values/strings.xml" />
@@ -45,76 +42,11 @@
         <resource-file src="src/android/com/dennis/sceneformanim/res/mipmap-xxxhdpi/ic_launcher_round.png" target="res/mipmap-xxxhdpi/ic_launcher_round.png" />
         <resource-file src="src/android/com/dennis/sceneformanim/res/mipmap-xxxhdpi/ic_launcher.png" target="res/mipmap-xxxhdpi/ic_launcher.png" />
         <resource-file src="src/android/com/dennis/sceneformanim/res/mipmap-xxxhdpi/ic_launcher.png" target="res/mipmap-xxxhdpi/ic_launcher.png" />
-
         <resource-file src="src/android/assets/museum.mp3" target="assets/museum.mp3" />
         <resource-file src="src/android/assets/top.html" target="assets/top.html" />
         <resource-file src="src/android/assets/bottom.html" target="assets/bottom.html" />
 
-
-        <!-- <resource-file src="src/android/res/values/strings.xml" target-dir="src/res/values" /> -->
-        <!-- <resource-file src="src/android/assets/models/dfg.raw" target="assets/models/dfg.raw" />
-        <resource-file src="src/android/assets/models/pawn.obj" target="assets/models/pawn.obj" />
-        <resource-file src="src/android/assets/models/pawn_albedo.png" target="assets/models/pawn_albedo.png" />
-        <resource-file src="src/android/assets/models/pawn_albedo_instant_placement.png" target="assets/models/pawn_albedo_instant_placement.png" />
-        <resource-file src="src/android/assets/models/pawn_legacy.obj" target="assets/models/pawn_legacy.obj" />
-        <resource-file src="src/android/assets/models/pawn_roughness_metallic_ao.png" target="assets/models/pawn_roughness_metallic_ao.png" />
-        <resource-file src="src/android/assets/models/trigrid.png" target="assets/models/trigrid.png" />
-
-        <resource-file src="src/android/assets/shaders/background_show_camera.frag" target="assets/shaders/background_show_camera.frag" />
-        <resource-file src="src/android/assets/shaders/background_show_camera.vert" target="assets/shaders/background_show_camera.vert" />
-        <resource-file src="src/android/assets/shaders/background_show_depth_color_visualization.frag" target="assets/shaders/background_show_depth_color_visualization.frag" />
-        <resource-file src="src/android/assets/shaders/background_show_depth_color_visualization.vert" target="assets/shaders/background_show_depth_color_visualization.vert" />
-        <resource-file src="src/android/assets/shaders/cubemap_filter.frag" target="assets/shaders/cubemap_filter.frag" />
-        <resource-file src="src/android/assets/shaders/cubemap_filter.vert" target="assets/shaders/cubemap_filter.vert" />
-        <resource-file src="src/android/assets/shaders/environmental_hdr.frag" target="assets/shaders/environmental_hdr.frag" />
-        <resource-file src="src/android/assets/shaders/environmental_hdr.vert" target="assets/shaders/environmental_hdr.vert" />
-        <resource-file src="src/android/assets/shaders/occlusion.frag" target="assets/shaders/occlusion.frag" />
-        <resource-file src="src/android/assets/shaders/occlusion.vert" target="assets/shaders/occlusion.vert" />
-        <resource-file src="src/android/assets/shaders/plane.frag" target="assets/shaders/plane.frag" />
-        <resource-file src="src/android/assets/shaders/plane.vert" target="assets/shaders/plane.vert" />
-        <resource-file src="src/android/assets/shaders/point_cloud.frag" target="assets/shaders/point_cloud.frag" />
-        <resource-file src="src/android/assets/shaders/point_cloud.vert" target="assets/shaders/point_cloud.vert" />
-
-
-
-        <resource-file src="src/android/com/google/ar/core/examples/java/helloar/res/drawable-xxhdpi/ic_launcher.png" target="res/drawable-xxhdpi/ic_launcher.png" />
-        <resource-file src="src/android/com/google/ar/core/examples/java/helloar/res/drawable-xxhdpi/ic_settings.png" target="res/drawable-xxhdpi/ic_settings.png" />
-
-        <resource-file src="src/android/com/google/ar/core/examples/java/helloar/res/layout/activity_main.xml" target="res/layout/activity_main.xml" />
-
-        <resource-file src="src/android/com/google/ar/core/examples/java/helloar/res/menu/settings_menu.xml" target="res/menu/settings_menu.xml" />
-
-        <resource-file src="src/android/com/google/ar/core/examples/java/helloar/res/values/strings.xml" target="res/values/stringss.xml" />
-        <resource-file src="src/android/com/google/ar/core/examples/java/helloar/res/values/styles.xml" target="res/values/styles.xml" /> -->
-
         <source-file src="src/android/hello.java" target-dir="src/cordova/plugin/hello/hello" />
-
-        <!-- <source-file src="src/android/com/google/ar/core/examples/java/helloar/HelloArActivity.java" target-dir="src/cordova/plugin/com/google/ar/core/examples/java/helloar" />
-        <source-file src="src//android/com/google/ar/core/examples/java/common/helpers/CameraPermissionHelper.java" target-dir="src/cordova/plugin/com/google/ar/core/examples/java/common/helpers" />
-        <source-file src="src//android/com/google/ar/core/examples/java/common/helpers/DepthSettings.java" target-dir="src/cordova/plugin/com/google/ar/core/examples/java/common/helpers" />
-        <source-file src="src//android/com/google/ar/core/examples/java/common/helpers/DisplayRotationHelper.java" target-dir="src/cordova/plugin/com/google/ar/core/examples/java/common/helpers" />
-        <source-file src="src//android/com/google/ar/core/examples/java/common/helpers/FullScreenHelper.java" target-dir="src/cordova/plugin/com/google/ar/core/examples/java/common/helpers" />
-        <source-file src="src//android/com/google/ar/core/examples/java/common/helpers/InstantPlacementSettings.java" target-dir="src/cordova/plugin/com/google/ar/core/examples/java/common/helpers" />
-        <source-file src="src//android/com/google/ar/core/examples/java/common/helpers/SnackbarHelper.java" target-dir="src/cordova/plugin/com/google/ar/core/examples/java/common/helpers" />
-        <source-file src="src//android/com/google/ar/core/examples/java/common/helpers/TapHelper.java" target-dir="src/cordova/plugin/com/google/ar/core/examples/java/common/helpers" />
-        <source-file src="src//android/com/google/ar/core/examples/java/common/helpers/TrackingStateHelper.java" target-dir="src/cordova/plugin/com/google/ar/core/examples/java/common/helpers" />
-
-        <source-file src="src//android/com/google/ar/core/examples/java/common/samplerender/Framebuffer.java" target-dir="src/cordova/plugin/com/google/ar/core/examples/java/common/samplerender" />
-        <source-file src="src//android/com/google/ar/core/examples/java/common/samplerender/GLError.java" target-dir="src/cordova/plugin/com/google/ar/core/examples/java/common/samplerender" />
-        <source-file src="src//android/com/google/ar/core/examples/java/common/samplerender/GpuBuffer.java" target-dir="src/cordova/plugin/com/google/ar/core/examples/java/common/samplerender" />
-        <source-file src="src//android/com/google/ar/core/examples/java/common/samplerender/IndexBuffer.java" target-dir="src/cordova/plugin/com/google/ar/core/examples/java/common/samplerender" />
-        <source-file src="src//android/com/google/ar/core/examples/java/common/samplerender/Mesh.java" target-dir="src/cordova/plugin/com/google/ar/core/examples/java/common/samplerender" />
-        <source-file src="src//android/com/google/ar/core/examples/java/common/samplerender/SampleRender.java" target-dir="src/cordova/plugin/com/google/ar/core/examples/java/common/samplerender" />
-        <source-file src="src//android/com/google/ar/core/examples/java/common/samplerender/Shader.java" target-dir="src/cordova/plugin/com/google/ar/core/examples/java/common/samplerender" />
-        <source-file src="src//android/com/google/ar/core/examples/java/common/samplerender/Texture.java" target-dir="src/cordova/plugin/com/google/ar/core/examples/java/common/samplerender" />
-        <source-file src="src//android/com/google/ar/core/examples/java/common/samplerender/VertexBuffer.java" target-dir="src/cordova/plugin/com/google/ar/core/examples/java/common/samplerender" />
-
-        <source-file src="src//android/com/google/ar/core/examples/java/common/samplerender/arcore/BackgroundRenderer.java" target-dir="src/cordova/plugin/com/google/ar/core/examples/java/common/samplerender/arcore" />
-        <source-file src="src//android/com/google/ar/core/examples/java/common/samplerender/arcore/PlaneRenderer.java" target-dir="src/cordova/plugin/com/google/ar/core/examples/java/common/samplerender/arcore" />
-        <source-file src="src//android/com/google/ar/core/examples/java/common/samplerender/arcore/SpecularCubemapFilter.java" target-dir="src/cordova/plugin/com/google/ar/core/examples/java/common/samplerender/arcore" /> -->
-
         <framework src="src/android/build.gradle" custom="true" type="gradleReference" />
-
-
     </platform>
 </plugin>
