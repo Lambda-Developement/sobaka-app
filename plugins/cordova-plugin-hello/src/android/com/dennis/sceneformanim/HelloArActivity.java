@@ -114,6 +114,8 @@ public class HelloArActivity extends AppCompatActivity {
 
                     transformableNode.setParent(anchorNode);
                     transformableNode.setRenderable(animationCrab);
+
+                    arFragment.getArSceneView().getPlaneRenderer().setEnabled(false);
                 }
             }
         });
@@ -161,12 +163,8 @@ public class HelloArActivity extends AppCompatActivity {
                                     positioned = true;
 
                                     HelloArActivity.this.mp = new MediaPlayer();
-                                    //MediaPlayer mp = new MediaPlayer();
                                     try {
-                                        // mp.setDataSource("https://cf-hls-media.sndcdn.com/media/0/31762/0xFrDRDPJsJa.128.mp3?Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiKjovL2NmLWhscy1tZWRpYS5zbmRjZG4uY29tL21lZGlhLyovKi8weEZyRFJEUEpzSmEuMTI4Lm1wMyIsIkNvbmRpdGlvbiI6eyJEYXRlTGVzc1RoYW4iOnsiQVdTOkVwb2NoVGltZSI6MTY0ODg5NTIzMH19fV19&Signature=BGmbs7sExsVRu6cDBnbwW0b2DF-osuLYovlqyMMuxMzXIVC66AAKzo7z9IWevKawbomr-vt4oCYnLl0ITV91doNuLEOwrc0O7WATIzg3iOji6As0OKELHUhSEe7NxqUiLb5TEZMGup4VKkJUqzcyXGsHZLxzhkcBDDoQKqOAX4xDHmmqgRdyZDEY8KyOUsNQO15QCWMZYEs3j2NpLCL0Z--jfsWdjfaM4vil7A1chbxmVmvp40BO3KlACalXPpTrIxaMX7SIrW5zaJmvMCeCItBBhLWlQ0~b03HOMbfk~Y~2AxMkejPdl6-Y2QAyDuidIfpIZ9XOYBmnHQSZyLgKfg__&Key-Pair-Id=APKAI6TU7MMXM5DG6EPQ");
-                                        // TODO: Понять почему перестает играть шарманка
                                         HelloArActivity.this.afd = getAssets().openFd("museum.mp3");
-                                        //AssetFileDescriptor afd = getAssets().openFd("museum.mp3");
                                         HelloArActivity.this.mp.setDataSource(HelloArActivity.this.afd.getFileDescriptor(), HelloArActivity.this.afd.getStartOffset(), HelloArActivity.this.afd.getLength());
                                         HelloArActivity.this.mp.prepare();
                                         HelloArActivity.this.mp.start();
@@ -189,6 +187,7 @@ public class HelloArActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if (animator == null || !animator.isRunning()) {
+
                     AnimationData data = animationCrab.getAnimationData(nextAnimation);
                     nextAnimation = (nextAnimation + 1) % animationCrab.getAnimationDataCount();
                     animator = new ModelAnimator(data, animationCrab);
@@ -196,6 +195,10 @@ public class HelloArActivity extends AppCompatActivity {
                     walkForward = true;
                     walkCount = 0;
                     positioned = false;
+
+
+
+
                 }
             }
         });
