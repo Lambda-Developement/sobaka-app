@@ -191,7 +191,9 @@
 
         var a = create_user(name, email, password);
         if (a) {
-            api_authorize(email, password, '../Profile-main/profile-main.html');
+            setTimeout(()=>{
+                api_authorize(email, password, '../Profile-main/profile-main.html');
+            },1000);
         } else {
             errorMessage.style.visibility = "visible";
 

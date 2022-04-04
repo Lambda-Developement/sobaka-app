@@ -1,5 +1,7 @@
 <html lang="en">
 
+<!-- TODO: добавить валидацию ключа -->
+
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no" />
@@ -113,7 +115,6 @@
         if (!password) password = passwordField.value;
         api_authorize(email, password);
     }
-
 
     function api_authorize(email, password) {
         // Recieves email and password in plain.
