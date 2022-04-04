@@ -42,6 +42,7 @@ import java.io.InputStream;
 import java.io.IOException;
 import java.util.Scanner;
 import android.util.Base64;
+import android.content.Intent;
 
 public class HelloArActivity extends AppCompatActivity {
 
@@ -65,7 +66,9 @@ public class HelloArActivity extends AppCompatActivity {
     	// Log.d(asa);
         super.onCreate(savedInstanceState);
         this.R = getResources();
-        Log.d("aboba","asdas");
+        Intent intent = getIntent();
+        String message = intent.getStringExtra("message");
+        Log.d("aboba",message+"!");
         String result = "";
         setContentView(HelloArActivity.this.R.getIdentifier("activity_main", "layout", getApplicationContext().getPackageName()));
 		WebView mywebview = (WebView) findViewById(this.R.getIdentifier("webview-ui", "id", getApplicationContext().getPackageName()));

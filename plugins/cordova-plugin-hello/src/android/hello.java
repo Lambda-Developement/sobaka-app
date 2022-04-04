@@ -12,7 +12,7 @@ import org.json.JSONObject;
 import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.content.Context;
-
+import android.util.Log;
 
 //My imports
 //import com.google.ar.core;
@@ -35,8 +35,10 @@ public class hello extends CordovaPlugin {
         // Suggestion one - cordova is an activity and we can switch it
         //    callbackContext.success("BEFORE INTENT");
             Context context = this.cordova.getActivity().getApplicationContext();
+            String message = args.getString(0);
             Intent intent = new Intent(context, HelloArActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            intent.putExtra("message",message);
             context.startActivity(intent);
             callbackContext.success("AFTER INTENT");
             return true;
