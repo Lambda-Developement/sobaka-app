@@ -83,25 +83,6 @@ var markers = L.markerClusterGroup({
 });
 var pos_marker = L.marker(new L.LatLng(pos[0], pos[1]), );
 
-if(localStorage != undefined){
-    if(localStorage.getItem('prev_place') != null){
-        idx = localStorage.getItem('prev_place');
-        map.flyTo([locs[idx][0],locs[idx][1]],18);
-        collapse_toggle(parseInt(idx));
-
-    }
-    if(localStorage.getItem('route_id') != null){
-        cur_route_id = parseInt(localStorage.getItem('route_id'));
-    }else{
-        cur_route_id = -1;
-    }
-    if(localStorage.getItem('route_place') != null){
-        cur_route_place = parseInt(localStorage.getItem('route_place'));
-    }else{
-        cur_route_place = -1;
-    }
-}
-
 var routing_control = L.Routing.control({
     waypoints: [
         null
@@ -286,6 +267,26 @@ setTimeout(()=>{
             console.log(response.status);
             try {
                 locs = JSON.parse(response.data);
+                if(localStorage != undefined){
+                    if(localStorage.getItem('prev_place') != null){
+                        idx = localStorage.getItem('prev_place');
+                        map.flyTo([locs[idx][0],locs[idx][1]],18);
+                        collapse_toggle(parseInt(idx));
+
+                    }
+                    if(localStorage.getItem('route_id') != null){
+                        cur_route_id = parseInt(localStorage.getItem('route_id'));
+                        localStorage.removeItem('route_id');
+                    }else{
+                        cur_route_id = -1;
+                    }
+                    if(localStorage.getItem('route_place') != null){
+                        cur_route_place = parseInt(localStorage.getItem('route_place'));
+                        localStorage.removeItem('route_place')
+                    }else{
+                        cur_route_place = -1;
+                    }
+                }
                 update_markers();
             } catch (e) {
                 console.error("JSON parsing error");
@@ -296,5 +297,12 @@ setTimeout(()=>{
             console.log(response.data);
         }
     );
-    update_markers();
 },2000);
+function make_route_to_cur(){
+    if(localStorage != undefined) {
+        if (localStorage.getItem('prev_place') != null) {
+            idx = localStorage.getItem('prev_place');
+            make_route(L.latLng(pos),[locs[idx][0], locs[idx][1]]);
+        }
+    }
+}
