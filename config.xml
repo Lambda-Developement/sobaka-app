@@ -12,4 +12,11 @@
     <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />
     <preference name="android-maxSdkVersion" value="27" />
+    <universal-links>
+        <host name="io.cordova.tripar" scheme="http">
+            <path url="/password/*" />
+            <path url="/mail/*" />
+        </host>
+    </universal-links>
+    <preference name="AndroidLaunchMode" value="singleInstance" />
 </widget>
