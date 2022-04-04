@@ -266,4 +266,35 @@ function search_clicked(coords){
 setInterval(()=>{
     search(document.getElementById('line-edit').value);
 },1000);
-update_markers();
+setTimeout(()=>{
+    if(localStorage != undefined){
+        if(localStorage.getItem('auth_key') == null){
+            document.location.href = '../../screens/loginka/loginka.html'
+        }
+        auth_key = localStorage.getItem('auth_key');
+    }
+    cordovaHTTP.post("https://trip.backend.xredday.ru/",
+        {
+            'request':
+                {
+                    "action": "data",
+                    "user_key": auth_key,
+                }
+        },
+        {},
+        function (response) {
+            console.log(response.status);
+            try {
+                locs = JSON.parse(response.data);
+                update_markers();
+            } catch (e) {
+                console.error("JSON parsing error");
+            }
+        },
+        function (response) {
+            console.log(response.status);
+            console.log(response.data);
+        }
+    );
+    update_markers();
+},2000);
