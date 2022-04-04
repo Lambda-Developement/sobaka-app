@@ -43,7 +43,7 @@
         </div>
 
         <div class="mb-3" style="display:flex; flex-direction: column;">
-            <button class="btn btn-hollow mb-3" id="login_button">
+            <button class="btn btn-hollow mb-3" id="login_button" onclick="send_bug()">
                 <p class="btn-text">Отправить</p>
             </button>
             <button class="btn btn-hollow2" onclick="location.href='../Profile-main/profile-main.html'">
@@ -52,6 +52,35 @@
         </div>
     </div>
 </body>
+
+<script>
+    var error_message = document.getElementById("error_text").value
+    function send_bug() {
+        loginButton.style.display = "None";
+        errorField.style.display = "None";
+        emailField.style.display = "None";
+        successMessage.style.display = "inline-flex";
+        cordovaHTTP.post("https://trip.backend.xredday.ru/",
+            {
+                'request':
+                {
+                    "action": "emsg",
+                    "data": error_message,
+                }
+            },
+            {},
+            function (response) {
+                // prints 200
+                console.log(response.status);
+            },
+            function (response) {
+                // prints 403
+                console.log(response.status);
+            }
+        );
+    }
+</script>
+<script src="../../cordova.js"></script>
 <script>
     const validateEmail = (email) => {
         var re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -86,12 +115,6 @@
         } else if (emailField.value) {
             emailField.classList.add("line-danger");
         }
-    };
-    loginButton.onclick = function () {
-        loginButton.style.display = "None";
-        errorField.style.display = "None";
-        emailField.style.display = "None";
-        successMessage.style.display = "inline-flex";
     };
     emailField.onchange = callbackFunction;
     errorField.onchange = callbackFunction;
