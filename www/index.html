@@ -19,10 +19,16 @@
     </div>
     <script>
         setTimeout(() => {
+            universalLinks.subscribe(null, function (eventData) {
+                // do some work
+                console.log(eventData);
+                console.log('Link: ' + eventData.url);
+                console.log('Args: ' + eventData.params);
+            });
             document.location.href = "screens/loginka/loginka.html";
         }, 3000);
     </script>
-
+    <script src="cordova.js"></script>
 </body>
 
 </html>
