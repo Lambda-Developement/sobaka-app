@@ -1,6 +1,15 @@
 <html lang="en">
 
 <!-- TODO: добавить валидацию ключа -->
+<script>
+    if (localStorage != undefined) {
+        auth_key = localStorage.getItem('auth_key') != null;
+        if (auth_key) {
+            window.location.href = '../Geoposition/home.html';
+        }
+    }
+</script>
+
 
 <head>
     <meta charset="utf-8" />
