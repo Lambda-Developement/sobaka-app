@@ -117,6 +117,17 @@ body {
     width: 100%;
 }
 
+#btn-exit-account {
+    background: none;
+    background-image: none;
+    background-color: white;
+    border-radius: 0;
+    width: 100%;
+}
+#btn-exit-account > p {
+    color : rgba(139, 0, 0, 0.63) !important;
+}
+
 .nav-section .button-area{
     display: flex;
     flex-direction: column;

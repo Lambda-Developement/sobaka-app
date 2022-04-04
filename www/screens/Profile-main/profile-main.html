@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -10,6 +11,7 @@
 
     <title>Profile+avatar</title>
 </head>
+
 <body onload="check_credentials()">
     <div class="screen-hat">
         <button class="btn arrow-back">
@@ -29,100 +31,126 @@
             <img src="../../ui-kit/img/avatar.png" alt="gregory" class="avatar-area__image">
             <h3 id="header-name" class="text-bold" style="margin-top: 1rem;">
                 Григорий
-            </h3>    
+            </h3>
             <div>
-                <a href="../ProfileIzmenit/profile_main.html" class = "link-orange"><img src = "../../ui-kit/svg/icon_orange.svg"> Изменить</a>
+                <a href="../ProfileIzmenit/profile_main.html" class="link-orange"><img
+                        src="../../ui-kit/svg/icon_orange.svg"> Изменить</a>
 
             </div>
         </div>
         <div class="nav-section">
             <a href="#" style="text-decoration: none; color:initial;">
                 <div class="nav-item" onclick="location.href='../Achievements/achievements.html'">
-                    <img src="../../ui-kit/svg/achievka.svg" alt="achievement.svg" class="nav-item_icon nav-item_counter" >
+                    <img src="../../ui-kit/svg/achievka.svg" alt="achievement.svg"
+                        class="nav-item_icon nav-item_counter">
                     <p class="title nav-item_counter">Достижения</p>
                     <img src="../../ui-kit/svg/arrow_gray_right.svg" alt="arrow_gray_right.svg" class="nav-item__arrow">
-    
+
                 </div>
             </a>
-            
+
 
 
             <div class="nav-item">
-                <img src="../../ui-kit/svg/notifications.svg" alt="notifications.svg" class="nav-item_icon" >
+                <img src="../../ui-kit/svg/notifications.svg" alt="notifications.svg" class="nav-item_icon">
                 <p class="title">Уведомления</p>
                 <div class="form-check form-switch">
                     <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" checked>
                 </div>
             </div>
 
-           
+
             <div class="nav-item dropdown" style="height: 42px">
                 <img src="../../ui-kit/svg/language_icon.svg" alt="icon.svg" class="dropdown-icon">
                 <header class="dropdown-title">Язык</header>
                 <select class="form-select-updated">
-                    <option value="1" >Русский</option>
+                    <option value="1">Русский</option>
                     <option value="2">Английский</option>
-                </select>     
+                </select>
             </div>
-            
+
             <a href="#" style="text-decoration: none; color:initial;">
 
-            <div class="nav-item" onclick="location.href='../Map/map.html'">
-                <img src="../../ui-kit/svg/map.svg" alt="map.svg" class="nav-item_icon">
-                <p class="title">Карта</p>
-                <img src="../../ui-kit/svg/arrow_gray_right.svg" alt="arrow_gray_right.svg" class="nav-item__arrow">
+                <div class="nav-item" onclick="location.href='../Map/map.html'">
+                    <img src="../../ui-kit/svg/map.svg" alt="map.svg" class="nav-item_icon">
+                    <p class="title">Карта</p>
+                    <img src="../../ui-kit/svg/arrow_gray_right.svg" alt="arrow_gray_right.svg" class="nav-item__arrow">
 
-            </div>
+                </div>
             </a>
 
             <a href="#" style="text-decoration: none; color:initial;">
 
-            <div class="nav-item" onclick="location.href='../error call/error_call.html'">
-                <img src="../../ui-kit/svg/chatbox.svg" alt="chatbox.svg" class="nav-item_icon">
-                <p class="title">Сообщить об ошибке</p>
-                <img src="../../ui-kit/svg/arrow_gray_right.svg" alt="arrow_gray_right.svg" class="nav-item__arrow">
+                <div class="nav-item" onclick="location.href='../error call/error_call.html'">
+                    <img src="../../ui-kit/svg/chatbox.svg" alt="chatbox.svg" class="nav-item_icon">
+                    <p class="title">Сообщить об ошибке</p>
+                    <img src="../../ui-kit/svg/arrow_gray_right.svg" alt="arrow_gray_right.svg" class="nav-item__arrow">
 
-            </div>
+                </div>
             </a>
             <a href="#" style="text-decoration: none; color:initial;">
 
-            <div class="nav-item" onclick="location.href='../about отдельный экран/about экран.html'">
-                <img src="../../ui-kit/svg/pin_menu.svg" alt="pin_menu.svg" class="nav-item_icon">
-                <p class="title">О приложении</p>
-                <img src="../../ui-kit/svg/arrow_gray_right.svg" alt="arrow_gray_right.svg" class="nav-item__arrow">
-            </div>
+                <div class="nav-item" onclick="location.href='../about отдельный экран/about экран.html'">
+                    <img src="../../ui-kit/svg/pin_menu.svg" alt="pin_menu.svg" class="nav-item_icon">
+                    <p class="title">О приложении</p>
+                    <img src="../../ui-kit/svg/arrow_gray_right.svg" alt="arrow_gray_right.svg" class="nav-item__arrow">
+                </div>
             </a>
-            
+
             <div class="button-area">
-                <button class="btn btn-hollow" id="btn-clean-history" onclick="callpopup()"><p class="btn-text">Очистить историю поиска</p></button>
+                <button class="btn btn-hollow" id="btn-clean-history" onclick="callpopup()">
+                    <p class="btn-text">Очистить историю поиска</p>
+                </button>
+                <button class="btn btn-hollow" id="btn-exit-account" onclick="callpopup_exit_account()">
+                    <p class="btn-text">Выйти из аккаунта</p>
+                </button>
             </div>
         </div>
         <div class="favourites-popup" id="popup2">
             <div class="favourites-popup-wrapper d-flex justify-content-center">
                 <div>
                     <div class="mb-1" style="width: 335px">
-                        <div class="panel round-up d-flex align-items-center justify-content-center" onclick="delete_history()">
-                            <h3 class="text-common"><a
-                                    style="color:rgba(221, 58, 58, 1);">Подтвердить</a></h3>
+                        <div class="panel round-up d-flex align-items-center justify-content-center"
+                            onclick="delete_history()">
+                            <h3 class="text-common"><a style="color:rgba(221, 58, 58, 1);">Подтвердить</a></h3>
                         </div>
                     </div>
                     <div class="mb-3" style="width: 335px">
-                        <div class="panel round-down round-down d-flex align-items-center justify-content-center" onclick="closepopup()">
-                            <h3 class="text-common"><a
-                                                       style="font-weight: 600; color:rgba(65,65,65,1);">Отменить</a></h3>
+                        <div class="panel round-down round-down d-flex align-items-center justify-content-center"
+                            onclick="closepopup_exit_account()">
+                            <h3 class="text-common"><a style="font-weight: 600; color:rgba(65,65,65,1);">Отменить</a>
+                            </h3>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        
+
+        <div class="favourites-popup" id="popup3">
+            <div class="favourites-popup-wrapper d-flex justify-content-center">
+                <div>
+                    <div class="mb-1" style="width: 335px">
+                        <div class="panel round-up d-flex align-items-center justify-content-center" onclick="logout()">
+                            <h3 class="text-common"><a style="color:rgba(221, 58, 58, 1);">Подтвердить</a></h3>
+                        </div>
+                    </div>
+                    <div class="mb-3" style="width: 335px">
+                        <div class="panel round-down round-down d-flex align-items-center justify-content-center"
+                            onclick="closepopup()">
+                            <h3 class="text-common"><a style="font-weight: 600; color:rgba(65,65,65,1);">Отменить</a>
+                            </h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
     </div>
 
     <script>
-        function check_credentials(){
-            if(localStorage != undefined){
-                if (localStorage.getItem('name') != null && localStorage.getItem('name').length > 0){
+        function check_credentials() {
+            if (localStorage != undefined) {
+                if (localStorage.getItem('name') != null && localStorage.getItem('name').length > 0) {
                     document.getElementById('header-name').innerHTML = localStorage.getItem('name');
                 }
             }
@@ -133,9 +161,21 @@
         function closepopup() {
             document.getElementById('popup2').style.display = 'none';
         }
-        function delete_history(){
+        function delete_history() {
             closepopup();
+        }
+
+        function callpopup_exit_account() {
+            document.getElementById('popup3').style.display = 'block';
+        }
+        function closepopup_exit_account() {
+            document.getElementById('popup3').style.display = 'none';
+        }
+        function logout() {
+            localStorage.removeItem('auth_key');
+            document.location.href = '../loginka/loginka.html';
         }
     </script>
 </body>
+
 </html>
