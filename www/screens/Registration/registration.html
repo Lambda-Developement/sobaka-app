@@ -57,8 +57,12 @@
         </div>
         <div class="spacer"></div>
         <div class="button-footer" style="display:flex; flex-direction: column; align-content: center;">
-
-            <button class="btn btn-filled2 mb-3" onclick="location.href='../loginka/loginka.html'">
+            <div class="d-inline-flex align-items-center" id="error-msg">
+                <div class="danger-icon"></div>
+                <div id="error-msg-text" style="color:white">Что-то пошло не так...</div>
+            </div>
+            <button class="btn btn-hollow mb-3" id="login_button" onclick="register()"
+                style="border-radius:12px; margin-top: 4rem;" disabled>
                 <p class="btn-text">Зарегистрироваться</p>
             </button>
             <button class="btn btn-hollow" onclick="location.href='../loginka/loginka.html'">
@@ -91,7 +95,9 @@
         checkBoxPassword = document.getElementById("checkbox-password");
         emailField = document.getElementById("email_input");
         passwordField = document.getElementById("password_field_1");
+        nameField = document.getElementById("name_input")
         passwordFieldRepeat = document.getElementById("password_field_2");
+        loginButton = document.getElementById("login_button");
         // cityDropdown = document.getElementById("cityDropdown");
         const callbackFunction = function () {
             emailField.classList.remove("line-success");
@@ -104,11 +110,17 @@
             emailField.closest(".input-field").classList.add("hide-before");
             passwordField.closest(".input-field").classList.add("hide-before");
             passwordFieldRepeat.closest(".input-field").classList.add("hide-before");
+            loginButton.disabled = true;
 
 
 
             console.log(emailField.value);
-            if (nameField.value.length > 2) {
+
+            a = passwordField.value.length > 3 && passwordFieldRepeat.value == passwordField.value
+            b = validateEmail(emailField.value)
+            c = nameField.value.length > 2
+
+            if (c) {
                 nameField.classList.add("line-success");
                 nameField.closest(".input-field").classList.remove("hide-before");
 
@@ -118,14 +130,14 @@
 
                 passwordField.classList.add("line-success");
             }
-            if (validateEmail(emailField.value)) {
+            if (b) {
                 emailField.closest(".input-field").classList.remove("hide-before");
                 emailField.classList.add("line-success");
 
             } else if (emailField.value) {
                 emailField.classList.add("line-danger");
             };
-            if (passwordField.value.length > 3 && passwordFieldRepeat.value == passwordField.value) {
+            if (a) {
                 passwordFieldRepeat.closest(".input-field").classList.remove("hide-before");
 
                 passwordFieldRepeat.classList.add("line-success");
@@ -133,6 +145,11 @@
             if (passwordFieldRepeat.value != passwordField.value) {
                 passwordFieldRepeat.classList.add("line-danger");
             }
+            if (a && b && c) {
+                loginButton.disabled = false;
+            }
+
+
         };
         emailField.onchange = callbackFunction;
         passwordField.onchange = callbackFunction;
@@ -155,5 +172,104 @@
     </script>
 
 </body>
+<script>
+    emailField = document.getElementById("email_input");
+
+
+</script>
+<script src="../../cordova.js"></script>
+<script>
+    errorMessage = document.getElementById("error-msg");
+    errorMessage.style.visibility = "hidden";
+
+    function register(name, email, password) {
+        errorMessage.style.visibility = "hidden";
+
+        if (!email) email = emailField.value;
+        if (!password) password = passwordField.value;
+        if (!name) name = nameField.value;
+
+        var a = create_user(name, email, password);
+        if (a) {
+            api_authorize(email, password, '../Profile-main/profile-main.html');
+        } else {
+            errorMessage.style.visibility = "visible";
+
+        }
+    }
+
+    function create_user(name, mail, pass) {
+        var success = true;
+        cordovaHTTP.post("https://trip.backend.xredday.ru/",
+            {
+                'request':
+                {
+                    "action": "reg",
+                    "data": {
+                        "name": name,
+                        "mail": mail,
+                        "pass": pass,
+                    }
+                }
+            },
+            {},
+            function (response) {
+                // prints 200
+                console.log(response.status);
+                console.log("--- RESPONSE DATA START ---\n" + response.data + "\n--- RESPONSE DATA END ---");
+
+                success = true;
+            },
+            function (response) {
+                // prints 403
+                console.log(response.status);
+                console.log(response.data);
+                errorMessage.style.visibility = "visible";
+                success = false;
+            }
+        );
+        return success;
+    }
+
+    function api_authorize(email, password, href) {
+        // Recieves email and password in plain.
+
+        cordovaHTTP.post("https://trip.backend.xredday.ru/",
+            {
+                'request':
+                {
+                    "action": "login",
+                    "data": { "login": email, "pass": password }
+                }
+            },
+            {},
+            function (response) {
+                // prints 200
+                console.log(response.status);
+
+                try {
+                    console.log(response.data);
+                    localStorage.setItem("auth_key", response.data);
+                    if (response.data) {
+                        window.location.href = href;
+                    }
+                } catch (e) {
+                    console.error("JSON parsing error");
+                }
+            },
+            function (response) {
+                // prints 403
+                console.log("--- AUTH FAIL ---\n")
+                console.log(response.status);
+                console.log(response.data);
+                errorMessage.style.visibility = "visible";
+                //prints Permission denied
+
+
+            }
+        );
+
+    }
+</script>
 
 </html>
