@@ -1,0 +1,48 @@
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no" />
+    <title>MailConfirmation</title>
+    <style>
+        body {
+            background: url("../../ui-kit/svg/background_orange.svg");
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+    </style>
+    <link rel="stylesheet" href="../../ui-kit/css/styles.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="../../ui-kit/css/bootstrap.css">
+</head>
+
+<body style="height: 100vh;">
+    <div
+        style="display: flex; flex-direction: column; align-items:center; justify-content: center; height: 100%; padding: 3.5rem;">
+        <p
+            style="text-align: center; font-size: 18px; font-family: gilroy; color:rgba(255, 255, 255, 1); max-width: 470px; margin-bottom: 35px;">
+            На вашу почту было выслано письмо с кодом подтверждения.
+            Пожалуйста, введите код ниже.
+        </p>
+        
+
+     <div class="mb-3">
+            <label for="exampleFormControlInput1" class="form-label"></label>
+            <input type="text" class="form-control" style="border: 1.5px solid #C7C7C7; margin-bottom: 35px;
+        height: 50px; " id="code_input" placeholder="Введите код подтверждения">
+        </div>
+
+        <button class="btn btn-hollow2"
+            style="border-radius:12px; margin-bottom: 14px;">
+            <p class="btn-text">Подтвердить</p>
+        </button>
+
+        <button class="btn btn-hollow2"
+            style="border-radius:12px;">
+            <p class="btn-text">Отправить код еще раз</p>
+        </button>
+
+    </div>
+</body>
+
+</html>
