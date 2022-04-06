@@ -24,6 +24,12 @@
                 console.log(eventData);
                 console.log('Link: ' + eventData.url);
                 console.log('Args: ' + eventData.params);
+                if (eventData.url.includes('password')){
+                    document.location.href='screens/ResetPassword/resetPassword.html';
+                }
+                if (eventData.url.includes('mail')){
+                    document.location.href='screens/Mail confirmation/mailConfirmation.html';
+                }
             });
             document.location.href = "screens/loginka/loginka.html";
         }, 3000);
