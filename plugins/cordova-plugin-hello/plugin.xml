@@ -30,6 +30,7 @@
         <resource-file src="src/android/com/dennis/sceneformanim/res/mipmap-xhdpi/ic_launcher_round.png" target="res/mipmap-xhdpi/ic_launcher_round.png" />
         <resource-file src="src/android/com/dennis/sceneformanim/res/mipmap-xhdpi/ic_launcher.png" target="res/mipmap-xhdpi/ic_launcher.png" />
         <resource-file src="src/android/com/dennis/sceneformanim/res/raw/cangrejo.sfb" target="res/raw/cangrejo.sfb" />
+        <resource-file src="src/android/com/dennis/sceneformanim/res/raw/cangrejo_talk.sfb" target="res/raw/cangrejo_talk.sfb" />
         <resource-file src="src/android/com/dennis/sceneformanim/res/mipmap-anydpi-v26/ic_launcher.xml" target="res/mipmap-anydpi-v26/ic_launcher.xml" />
         <resource-file src="src/android/com/dennis/sceneformanim/res/mipmap-anydpi-v26/ic_launcher_round.xml" target="res/mipmap-anydpi-v26/ic_launcher_round.xml" />
         <resource-file src="src/android/com/dennis/sceneformanim/res/drawable/ic_baseline_play_arrow_24.xml" target="res/drawable/ic_baseline_play_arrow_24.xml" />

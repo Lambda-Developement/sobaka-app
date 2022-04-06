@@ -53,6 +53,7 @@ public class HelloArActivity extends AppCompatActivity {
     private int nextAnimation;
     private Button btn_anim;
     private ModelRenderable animationCrab;
+    private ModelRenderable animationTalkCangrejo;
     private TransformableNode transformableNode;
     private Resources R;
     private boolean walkForward = false;
@@ -150,6 +151,9 @@ public class HelloArActivity extends AppCompatActivity {
         arFragment.getArSceneView().getScene()
                 .addOnUpdateListener(new Scene.OnUpdateListener() {
                     public void onUpdate(FrameTime frameTime) {
+                        if ( HelloArActivity.this.mp != null && HelloArActivity.this.mp.isPlaying() && animator != null && !animator.isRunning()) {
+                            animator.start();
+                        }
                         if (anchorNode == null) {
                             if (btn_anim.isEnabled()) {
                                 btn_anim.setBackgroundTintList(ColorStateList.valueOf(Color.GRAY));
@@ -198,6 +202,15 @@ public class HelloArActivity extends AppCompatActivity {
                                     } catch (Exception e) {
                                         e.printStackTrace();
                                     }
+                                    // использовать animator.stop, чтобы стоп собака рот
+
+                                    transformableNode.setRenderable(animationTalkCangrejo);
+                                    // Не должнотак использовать но пока так
+                                    AnimationData data = animationTalkCangrejo.getAnimationData(nextAnimation);
+                                    nextAnimation = nextAnimation % animationTalkCangrejo.getAnimationDataCount();
+                                    animator = new ModelAnimator(data, animationTalkCangrejo);
+                                    animator.start();
+
 
                                 }
                             }
@@ -230,6 +243,7 @@ public class HelloArActivity extends AppCompatActivity {
         });
 
         setupModel();
+        setupModelTalk();
     }
 
     private void setupModel() {
@@ -237,6 +251,17 @@ public class HelloArActivity extends AppCompatActivity {
                 .setSource(this, HelloArActivity.this.R.getIdentifier("cangrejo", "raw", getApplicationContext().getPackageName()))
                 .build()
                 .thenAccept(renderable -> animationCrab = renderable)
+                .exceptionally(throwable -> {
+                    Toast.makeText(this, "" + throwable.getMessage(), Toast.LENGTH_SHORT).show();
+                    return null;
+                });
+    }
+
+    private void setupModelTalk() {
+        ModelRenderable.builder()
+                .setSource(this, HelloArActivity.this.R.getIdentifier("cangrejo_talk", "raw", getApplicationContext().getPackageName()))
+                .build()
+                .thenAccept(renderable -> animationTalkCangrejo = renderable)
                 .exceptionally(throwable -> {
                     Toast.makeText(this, "" + throwable.getMessage(), Toast.LENGTH_SHORT).show();
                     return null;
