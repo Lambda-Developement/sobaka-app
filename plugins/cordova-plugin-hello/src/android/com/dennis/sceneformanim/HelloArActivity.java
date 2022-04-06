@@ -73,6 +73,7 @@ public class HelloArActivity extends AppCompatActivity {
         String result = "";
         setContentView(HelloArActivity.this.R.getIdentifier("activity_main", "layout", getApplicationContext().getPackageName()));
 		WebView mywebview = (WebView) findViewById(this.R.getIdentifier("webview-ui", "id", getApplicationContext().getPackageName()));
+		String subtitles = "[['sadasd',33],]";
         if (mywebview != null) {
 	        try(InputStream inputStream = getApplicationContext().getAssets().open("top.html")){
 	        	Scanner s = new Scanner(inputStream).useDelimiter("\\A");
@@ -118,6 +119,7 @@ public class HelloArActivity extends AppCompatActivity {
         } else {
             Log.e("ERORRR!!! --> ", "Webview bottom is null");
         }
+        mywebview.loadUrl("javascript:my_callback_function('"+message+"')");
 
         arFragment = (ArFragment) getSupportFragmentManager()
                 .findFragmentById(HelloArActivity.this.R.getIdentifier("sceneform_fragment", "id", getApplicationContext().getPackageName()));

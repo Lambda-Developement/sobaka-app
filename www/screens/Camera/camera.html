@@ -84,6 +84,51 @@
         }
 
         function onDeviceReady() {
+            let auth_key;
+            if (localStorage != undefined){
+                auth_key = localStorage.getItem('auth_key');
+            }
+            let resp;
+            cordovaHTTP.post("https://trip.backend.xredday.ru/",
+                {
+                    'request':
+                        {
+                            "action": "tourdata",
+                            "user_key": auth_key,
+                            "data": {"id":33}
+                        }
+                },
+                {},
+                function (response) {
+                    // prints 200
+                    console.log(response.status);
+
+                    try {
+                        console.log(response.data);
+                        resp = response.data;
+                        console.log(resp);
+                        cordova.plugins.startActivity(
+
+                            function (res) {
+                                console.log(`yes: ${res}`);
+                            }, function (res) {
+                                console.log(`nononononononono: ${res}`);
+                            },
+                            resp
+                        );
+                    } catch (e) {
+                        console.error("JSON parsing error");
+                    }
+                },
+                function (response) {
+                    // prints 403
+                    console.log(response.status);
+                    errorMessage.style.visibility = "visible";
+                    //prints Permission denied
+                    console.log(response.data);
+
+                }
+            );
             console.log("onDeviceReady()");
 
             // alert(" It's loaded! (JavaScript)");
@@ -94,16 +139,6 @@
             //     }, function (res) {
             //         alert(`Fail (Javascript negative callback); ${res}`);
             //     });
-
-            cordova.plugins.startActivity(
-
-                function (res) {
-                    console.log(`yes: ${res}`);
-                }, function (res) {
-                    console.log(`nononononononono: ${res}`);
-                },
-                'aboba'
-            );
         }
 
         window.addEventListener("cordovacallbackerror", function (event) {
