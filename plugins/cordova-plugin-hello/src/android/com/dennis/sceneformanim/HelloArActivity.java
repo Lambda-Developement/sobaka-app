@@ -194,8 +194,9 @@ public class HelloArActivity extends AppCompatActivity {
 
                                     HelloArActivity.this.mp = new MediaPlayer();
                                     try {
-                                        HelloArActivity.this.afd = getAssets().openFd("museum.mp3");
-                                        HelloArActivity.this.mp.setDataSource(HelloArActivity.this.afd.getFileDescriptor(), HelloArActivity.this.afd.getStartOffset(), HelloArActivity.this.afd.getLength());
+                                      //  HelloArActivity.this.afd = getAssets().openFd("museum.mp3");
+                                     //   HelloArActivity.this.mp.setDataSource(HelloArActivity.this.afd.getFileDescriptor(), HelloArActivity.this.afd.getStartOffset(), HelloArActivity.this.afd.getLength());
+                                        HelloArActivity.this.mp.setDataSource("https://trip.backend.xredday.ru/audio/33_ca67c3d6eb.mp3");
                                         HelloArActivity.this.mp.prepare();
                                         HelloArActivity.this.mp.start();
                                         mywebview_bottom.loadUrl("javascript:playSubtitles()");
