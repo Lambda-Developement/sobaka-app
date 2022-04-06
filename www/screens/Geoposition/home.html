@@ -170,18 +170,20 @@
         	if(popup_collapsed){
 				setTimeout(()=>{
 					document.getElementsByClassName('near-popup')[0].style.borderBottom = '2px solid rgba(243, 243, 243, 1)';
-	        		document.getElementById('near-popup-text').style.display = 'flex';
+                    document.getElementsByClassName('near-popup')[0].style.borderRadius = 'unset';
+                    document.getElementById('near-popup-text').style.display = 'flex';
 					document.getElementById('inner-reviews').style.display = 'block';
 					document.getElementById('popup-wrapper').style.bottom = '0px';
 				},300);
 				document.getElementById('popup-wrapper').style.width = '100%';
 
         	}else{
-				setTimeout(()=>{				
-        			document.getElementsByClassName('near-popup')[0].style.borderBottom = '0'; 
-	        		document.getElementById('near-popup-text').style.display = 'none';
+				setTimeout(()=>{
+                    document.getElementsByClassName('near-popup')[0].style.borderBottom = '0';
+                    document.getElementsByClassName('near-popup')[0].style.borderRadius = '12px';
+                    document.getElementById('near-popup-text').style.display = 'none';
 					document.getElementById('inner-reviews').style.display = 'none';
-					document.getElementById('popup-wrapper').style.bottom = '82px';
+					document.getElementById('popup-wrapper').style.bottom = opened ? '210px' : '82px';
 				},600);
 				document.getElementById('popup-wrapper').style.width = '140px';	
         	}
@@ -200,9 +202,13 @@
         function collapse_open() {
             document.getElementById("info").style.display = 'block';
             document.getElementById('info-name').innerHTML = locs[park_id][2];
+            popup_collapsed = !popup_collapsed;
+            toggle_collapse();
         }
         function collapse_close() {
             document.getElementById("info").style.display = 'none';
+            popup_collapsed = !popup_collapsed;
+            toggle_collapse();
         }
         function collapse_toggle(park) {
             opened = !opened;

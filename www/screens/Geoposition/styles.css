@@ -365,6 +365,7 @@ button.btn.btn-filled{
     width: 100%;
     border-bottom: 2px solid rgba(243, 243, 243, 1);
     font-size: 18px;
+    transform: translate(0, 10px);
     transition: width 1s ease-in-out;
 }
 #near-popup-text{
