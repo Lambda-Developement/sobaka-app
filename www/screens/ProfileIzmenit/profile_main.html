@@ -52,7 +52,7 @@
                     <h3 class="text-common">Пол</h3>
                 </div>
                 <div class="w-100">
-                    <input type="text" class="form-control" id="sex" placeholder="">
+                    <input type="text" class="form-control" id="gender" placeholder="">
                 </div>
             </div>
             <div class="panel d-inline-flex align-items-center">
@@ -60,13 +60,13 @@
                     <h3 class="text-common">Дата рождения</h3>
                 </div>
                 <div class="me-3">
-                    <input type="text" class="form-control" id="birth1" placeholder="">
+                    <input type="text" class="form-control" id="birth1" placeholder="Год">
                 </div>
                 <div class="me-3">
-                    <input type="text" class="form-control" id="birth2" placeholder="">
+                    <input type="text" class="form-control" id="birth2" placeholder="Месяц">
                 </div>
                 <div class="w-100">
-                    <input type="text" class="form-control" id="birth3" placeholder="">
+                    <input type="text" class="form-control" id="birth3" placeholder="День">
                 </div>
             </div>
             <div class="panel d-inline-flex align-items-center">
@@ -74,7 +74,7 @@
                     <h3 class="text-common">E-mail</h3>
                 </div>
                 <div class="w-100">
-                    <input type="email" class="form-control" id="email" placeholder="">
+                    <input type="email" class="form-control" id="login" placeholder="">
                 </div>
             </div>
             <div class="panel d-inline-flex align-items-center">
@@ -96,8 +96,7 @@
     <script>
         function check_credentials() {
             if (localStorage != undefined) {
-                //['name', 'sex', 'birth1', 'birth2', 'birth3', 'email', 'phone'].forEach(el => {
-                ['name'].forEach(el => {
+                ['name','gender','login','phone','birth1','birth2','birth3'].forEach(el => {
                     if (localStorage.getItem(el) != null && localStorage.getItem(el).length > 0) {
                         document.getElementById(el).value = localStorage.getItem(el);
                     } else {
@@ -125,12 +124,13 @@
                         "data": {
                             field: value,
                         },
-                        "user_key": localStorage.getItem('auth_key'),
+                        "user_key": auth_key,
                     }
                 },
                 {},
                 function (response) {
                     // prints 200
+                    localStorage.setItem(field, value);
                     console.log(response.status);
                     console.log(response.data);
                 },
@@ -146,9 +146,19 @@
         function apply_changes() {
             if (localStorage != undefined) {
                 //['name','sex','birth1','birth2','birth3','email','phone'].forEach(el=>{
-                ['name'].forEach(el => {
+                let value;
+                ['name','gender','dob','login','phone'].forEach(el => {
+                    if (el == 'dob'){
+                        time = new Date(
+                            document.getElementById('birth1').value,
+                            document.getElementById('birth2').value,
+                            document.getElementById('birth3').value,
+                        )
+                        value = time.getTime();
+                    }else{
+                        value = document.getElementById(el).value;
+                    }
                     console.log(document.getElementById(el))
-                    value = document.getElementById(el).value;
                     update_user(el, value);
                     localStorage.setItem(el, document.getElementById(el).value);
                 });
