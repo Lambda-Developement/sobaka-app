@@ -44,6 +44,8 @@ import java.util.Scanner;
 import android.util.Base64;
 import android.content.Intent;
 
+import android.webkit.JavascriptInterface;
+
 public class HelloArActivity extends AppCompatActivity {
 
     //Variable
@@ -61,6 +63,12 @@ public class HelloArActivity extends AppCompatActivity {
     private boolean positioned = true;
     private AssetFileDescriptor afd;
     private MediaPlayer mp;
+    private String  audio;
+
+    @JavascriptInterface
+    public void onData(String value) {
+        HelloArActivity.this.audio  =  value;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -119,7 +127,8 @@ public class HelloArActivity extends AppCompatActivity {
         } else {
             Log.e("ERORRR!!! --> ", "Webview bottom is null");
         }
-        mywebview.loadUrl("javascript:my_callback_function('"+message+"')");
+        mywebview_bottom.addJavascriptInterface(this, "android");
+        mywebview_bottom.loadUrl("javascript:android.onData(my_callback_function(`" + message + "`))");
 
         arFragment = (ArFragment) getSupportFragmentManager()
                 .findFragmentById(HelloArActivity.this.R.getIdentifier("sceneform_fragment", "id", getApplicationContext().getPackageName()));
@@ -198,7 +207,7 @@ public class HelloArActivity extends AppCompatActivity {
                                     try {
                                       //  HelloArActivity.this.afd = getAssets().openFd("museum.mp3");
                                      //   HelloArActivity.this.mp.setDataSource(HelloArActivity.this.afd.getFileDescriptor(), HelloArActivity.this.afd.getStartOffset(), HelloArActivity.this.afd.getLength());
-                                        HelloArActivity.this.mp.setDataSource("https://trip.backend.xredday.ru/audio/33_ca67c3d6eb.mp3");
+                                        HelloArActivity.this.mp.setDataSource("https://trip.backend.xredday.ru/"+HelloArActivity.this.audio);
                                         HelloArActivity.this.mp.prepare();
                                         HelloArActivity.this.mp.start();
                                         mywebview_bottom.loadUrl("javascript:playSubtitles()");

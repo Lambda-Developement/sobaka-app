@@ -586,6 +586,7 @@
             font-family: gilroy;
         }
     </style>
+
     <style>
         .nav-bar {
             height: 148px;
@@ -719,41 +720,57 @@
         </div>
     </div>
 </div>
-
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script>
-    var subtitles = [['asd',3],  ];
-    function my_callback_function(arg){
+        var subtitles = [['asd', 3],];
+    var responsibility = {};
+    function my_callback_function(arg) {
         console.log(arg);
-        subtitles = arg;
+        var idhelp = JSON.parse(arg)['id'];
+        var userhelp = JSON.parse(arg)['user_key'];
+        return getSubtitles(userhelp, idhelp);
+    }
+    function getSubtitles(user_key, id) {
+        const RAPIDAPI_API_URL = 'https://trip.backend.xredday.ru/'
+        let data = {
+            "action": "tourdata",
+            "user_key": user_key,
+            "data": { "id": id }
+        }
+        axios.post(RAPIDAPI_API_URL, data).then(responsibility => {
+            responsibility = JSON.parse(xhr.responseText);
+            subtitles = responsibility['subtitles'];
+            return responsibility["audio"];
+        }).catch(error => console.error('On create student error', error));
     }
     function playSubtitles() {
-        //var subtitles = [['asd',3],  ];
-        var idx = 0;
-        var media;
-        var timer_start;
-        setTimeout(() => {
-            // document.getElementById('museum').play();
-            timer_start = new Date().getTime();
-            s = subtitles[idx][0];
-            document.getElementById("subtitle").innerHTML = s;
-            // next_text();
-        }, 1);
+      //var subtitles = [['asd',3],  ];
+      var idx = 0;
+      var media;
+      var timer_start;
+      setTimeout(() => {
+        // document.getElementById('museum').play();
+        timer_start = new Date().getTime();
+        s = subtitles[idx][0];
+        document.getElementById("subtitle").innerHTML = s;
+        // next_text();
+      }, 1);
 
-        setInterval(() => {
-            while (
-                new Date().getTime() - timer_start >=
-                subtitles[idx][1] * 1000
-                ) {
-                idx++;
-                if (idx >= subtitles.length) {
-                    idx = subtitles.length;
-                    document.getElementById("subtitles").style.display = "none";
-                }
-                s = subtitles[idx][0];
-                document.getElementById("subtitle").innerHTML = s;
-            }
-        }, 200);
+      setInterval(() => {
+        while (
+          new Date().getTime() - timer_start >=
+          subtitles[idx][1] * 1000
+        ) {
+          idx++;
+          if (idx >= subtitles.length) {
+            idx = subtitles.length;
+            document.getElementById("subtitles").style.display = "none";
+          }
+          s = subtitles[idx][0];
+          document.getElementById("subtitle").innerHTML = s;
+        }
+      }, 200);
     }
-</script>
+  </script>
 </body>
 </html>

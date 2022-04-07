@@ -62,7 +62,7 @@
 <body
     style="margin: 0; overflow: hidden; display:flex; flex-direction: column; justify-content: center; align-items: center; height: 99vh;" ">
 
-    <!-- <audio id="museum">
+    <!-- <audio id=" museum">
     <source src="museum.mp3" type="audio/mpeg">
     </audio> -->
 
@@ -85,49 +85,19 @@
 
         function onDeviceReady() {
             let auth_key;
-            if (localStorage != undefined){
+            if (localStorage != undefined) {
                 auth_key = localStorage.getItem('auth_key');
             }
-            let resp;
-            cordovaHTTP.post("https://trip.backend.xredday.ru/",
-                {
-                    'request':
-                        {
-                            "action": "tourdata",
-                            "user_key": auth_key,
-                            "data": {"id":33}
-                        }
+            let id = 33;
+            let resp = `{"id":${id},"user_key":'${auth_key}'}`;
+            cordova.plugins.startActivity(
+
+                function (res) {
+                    console.log(`yes: ${res}`);
+                }, function (res) {
+                    console.log(`nononononononono: ${res}`);
                 },
-                {},
-                function (response) {
-                    // prints 200
-                    console.log(response.status);
-
-                    try {
-                        console.log(response.data);
-                        resp = response.data;
-                        console.log(resp);
-                        cordova.plugins.startActivity(
-
-                            function (res) {
-                                console.log(`yes: ${res}`);
-                            }, function (res) {
-                                console.log(`nononononononono: ${res}`);
-                            },
-                            resp
-                        );
-                    } catch (e) {
-                        console.error("JSON parsing error");
-                    }
-                },
-                function (response) {
-                    // prints 403
-                    console.log(response.status);
-                    errorMessage.style.visibility = "visible";
-                    //prints Permission denied
-                    console.log(response.data);
-
-                }
+                resp
             );
             console.log("onDeviceReady()");
 
