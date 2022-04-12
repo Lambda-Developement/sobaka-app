@@ -60,8 +60,11 @@
         </div>
     </div>
 </body>
+<script src="../../cordova.js"></script>
 <script>
     emailField = document.getElementById("email_input");
+    loginButton = document.getElementById("login_button");
+
     function send_reset_request() {
         var email = emailField.value;
         loginButton.style.display = "None";
@@ -103,7 +106,6 @@
     };
 
 
-    loginButton = document.getElementById("login_button");
     textAttention = document.getElementsByClassName("text-attention");
     successText = document.getElementById("success");
     //passwordField = document.getElementById("password_field");
@@ -134,6 +136,7 @@
     //passwordField.onchange = callbackFunction;
 
     callbackFunction();
+
 </script>
 
 </html>
