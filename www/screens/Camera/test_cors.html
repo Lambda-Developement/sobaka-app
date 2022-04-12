@@ -1,0 +1,33 @@
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script>
+    var subtitles = [['asd', 3],];
+    var responsibility = {};
+    function my_callback_function(arg) {
+        console.log(arg);
+        var idhelp = JSON.parse(arg)['id'];
+        var userhelp = JSON.parse(arg)['user_key'];
+        return getSubtitles(userhelp, idhelp);
+    }
+    function getSubtitles(user_key, id) {
+        let config = {
+            headers: {
+                'Access-Control-Allow-Origin': "true",
+            },
+        };
+        axios.post('http://localhost:6971/', {
+            "request": {
+                "action": "tourdata",
+                "user_key": user_key,
+                "data": { "id": id },
+            }
+        }
+            , config).then(responsibility => {
+                responsibility = JSON.parse(xhr.responseText);
+                console.log(responsibility);
+                subtitles = responsibility['subtitles'];
+                return responsibility["audio"];
+            }).catch(error => console.error('On create student error', error));
+    }
+
+    my_callback_function(33);
+</script>

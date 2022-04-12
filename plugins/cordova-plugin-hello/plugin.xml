@@ -46,6 +46,7 @@
         <resource-file src="src/android/assets/museum.mp3" target="assets/museum.mp3" />
         <resource-file src="src/android/assets/top.html" target="assets/top.html" />
         <resource-file src="src/android/assets/bottom.html" target="assets/bottom.html" />
+        <resource-file src="src/android/assets/subtitles.js" target="assets/subtitles.js" />
 
         <source-file src="src/android/hello.java" target-dir="src/cordova/plugin/hello/hello" />
         <framework src="src/android/build.gradle" custom="true" type="gradleReference" />
