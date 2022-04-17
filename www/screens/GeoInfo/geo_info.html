@@ -153,6 +153,7 @@
         <div class="review"><button class="btn btn-filled" onclick="review_btn_click()"><p class="btn-text"><img src = "../../ui-kit/svg/icon_white.svg"> <span id="review-text">Добавить отзыв</span></p></button></div>
     </div>
 </div>
+<script src="../../cordova.js"></script>
 <script>
     var opened = false;
     var rate = 5;
@@ -198,6 +199,96 @@
             temp[i].style.display = 'none';
         }
     }
+    function get_user_name() {
+        cordovaHTTP.post("https://trip.backend.xredday.ru/",
+            {
+                'request':
+                    {
+                        "action": "userdata",
+                        "user_key":localStorage.getItem('auth_key')
+                    }
+            },
+            {},
+            function (response) {
+                // prints 200
+                console.log(response.status);
+                try {
+                    console.log(response.data);
+                    a = JSON.parse(response.data)[2];
+                    console.log(a);
+                    localStorage.setItem('name',a);
+                } catch (e) {
+                    console.error("JSON parsing error");
+                }
+            },
+            function (response) {
+                // prints 403
+                console.log(response.status);
+                errorMessage.style.visibility = "visible";
+                //prints Permission denied
+                console.log(response.data);
+            }
+        );
+    }
+    function get_user_id(mark,review) {
+        cordovaHTTP.post("https://trip.backend.xredday.ru/",
+            {
+                'request':
+                    {
+                        "action": "userdata",
+                        "user_key":localStorage.getItem('auth_key')
+                    }
+            },
+            {},
+            function (response) {
+                // prints 200
+                console.log(response.status);
+                try {
+                    console.log(response.data);
+                    a = JSON.parse(response.data)[0];
+                    add_review(a,mark,review);
+                } catch (e) {
+                    console.error("JSON parsing error");
+                }
+            },
+            function (response) {
+                // prints 403
+                console.log(response.status);
+                errorMessage.style.visibility = "visible";
+                //prints Permission denied
+                console.log(response.data);
+            }
+        );
+    }
+    function add_review(id,mark,review) {
+        cordovaHTTP.post("https://trip.backend.xredday.ru/",
+            {
+                'request':
+                    {
+                        "action": "crrev",
+                        "user_key":localStorage.getItem('auth_key'),
+                        "data": { "id":id,"mark":mark,"review":review }
+                    }
+            },
+            {},
+            function (response) {
+                // prints 200
+                console.log(response.status);
+                try {
+                    console.log(response.data);
+                } catch (e) {
+                    console.error("JSON parsing error");
+                }
+            },
+            function (response) {
+                // prints 403
+                console.log(response.status);
+                errorMessage.style.visibility = "visible";
+                //prints Permission denied
+                console.log(response.data);
+            }
+        );
+    }
     function review_btn_click(){
         let name = "Роман";
         if(localStorage != undefined){
@@ -226,6 +317,7 @@
             document.getElementById('review-text').innerHTML = 'Добавить';
         }else{
             let prev_review = document.getElementById('review-input').value;
+            get_user_id(rate,document.getElementById('review-input').value); // send add review to backend function chain
             document.getElementById('review-'+(review_count)).remove();
             document.getElementById('reviews-here').innerHTML += "" +
                 "<div id='review-"+(review_count)+"' class=\"review d-flex flex-column mb-3\">\n" +
@@ -294,6 +386,9 @@
             }
         }
     }
+    setTimeout(()=>{
+        get_user_name();
+    },1000);
 </script>
 </body>
 </html>
