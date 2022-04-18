@@ -146,8 +146,42 @@
         </div>
 
     </div>
+    <script src="../../cordova.js"></script>
+
 
     <script>
+        function get_user_name() {
+            cordovaHTTP.post("https://trip.backend.xredday.ru/",
+                {
+                    'request':
+                        {
+                            "action": "userdata",
+                            "user_key":localStorage.getItem('auth_key')
+                        }
+                },
+                {},
+                function (response) {
+                    // prints 200
+                    console.log(response.status);
+                    try {
+                        console.log(response.data);
+                        a = JSON.parse(response.data)[2];
+                        console.log(a);
+                        localStorage.setItem('name',a);
+                        check_credentials();
+                    } catch (e) {
+                        console.error("JSON parsing error");
+                    }
+                },
+                function (response) {
+                    // prints 403
+                    console.log(response.status);
+                    errorMessage.style.visibility = "visible";
+                    //prints Permission denied
+                    console.log(response.data);
+                }
+            );
+        }
         function check_credentials() {
             if (localStorage != undefined) {
                 if (localStorage.getItem('name') != null && localStorage.getItem('name').length > 0) {
@@ -175,6 +209,9 @@
             localStorage.removeItem('auth_key');
             document.location.href = '../loginka/loginka.html';
         }
+        setTimeout(()=>{
+            get_user_name();
+        },1000);
     </script>
 </body>
 
