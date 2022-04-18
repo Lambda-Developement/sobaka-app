@@ -103,6 +103,8 @@ public class HelloArActivity extends AppCompatActivity {
     private Button btn_anim;
     private ModelRenderable animationCrab;
     private ModelRenderable animationTalkCangrejo;
+    private int current_model = 1;
+    private boolean played = false;
     private TransformableNode transformableNode;
     private Resources R;
     private boolean walkForward = false;
@@ -137,7 +139,7 @@ public class HelloArActivity extends AppCompatActivity {
     {
 // The message that is going to be sent to the server
 // using the POST request
-        final String messageContent = "{\"request\":{\"action\":\"tourdata\", \"data\":{\"id\":"+HelloArActivity.this.id+"}, \"user_key\":\"ec8c77dfbff47adffa3ec10b207b5a6059ac12f334fe4927a3\"}}";
+        final String messageContent = "{\"request\":{\"action\":\"tourdata\", \"data\":{\"id\":"+HelloArActivity.this.id+"}, \"user_key\":\""+HelloArActivity.this.auth_key+"\"}}";
 // Printing the message
         System.out.println(messageContent);
 // URL of the API or Server
@@ -311,9 +313,18 @@ public class HelloArActivity extends AppCompatActivity {
                                     if ((System.currentTimeMillis() - HelloArActivity.this.time)/1000 > Long.parseLong( HelloArActivity.this.list_lengths.get(idx))){
                                         idx++;
                                         mywebview_bottom.loadUrl("javascript:playSubtitles('"+ HelloArActivity.this.list_text.get(idx)+"')");
+                                        played = true;
                                     }
                                 }
                             }
+                        } else if (HelloArActivity.this.current_model == 2 && animator != null && HelloArActivity.this.mp != null && HelloArActivity.this.played && !HelloArActivity.this.mp.isPlaying()){
+                            transformableNode.setRenderable(animationCrab);
+                            AnimationData data = animationCrab.getAnimationData(nextAnimation);
+                            nextAnimation = nextAnimation % animationCrab.getAnimationDataCount();
+                            animator = new ModelAnimator(data, animationCrab);
+                            HelloArActivity.this.current_model = 1;
+                            HelloArActivity.this.played = false;
+                            HelloArActivity.this.idx = 0;
 
                         }
                         if (anchorNode == null) {
@@ -455,11 +466,13 @@ public class HelloArActivity extends AppCompatActivity {
                                     // использовать animator.stop, чтобы стоп собака рот
 
                                     transformableNode.setRenderable(animationTalkCangrejo);
-                                    // Не должнотак использовать но пока так
                                     AnimationData data = animationTalkCangrejo.getAnimationData(nextAnimation);
                                     nextAnimation = nextAnimation % animationTalkCangrejo.getAnimationDataCount();
                                     animator = new ModelAnimator(data, animationTalkCangrejo);
+                                    current_model = 2;
                                     animator.start();
+
+
 
 
 
