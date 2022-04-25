@@ -24,15 +24,44 @@
                 console.log(eventData);
                 console.log('Link: ' + eventData.url);
                 console.log('Args: ' + eventData.params);
-                if (eventData.url.includes('password')){
-                    document.location.href='screens/ResetPassword/resetPassword.html';
+                if (eventData.url.includes('password')) {
+                    document.location.href = 'screens/ResetPassword/resetPassword.html';
                 }
-                if (eventData.url.includes('mail')){
-                    document.location.href='screens/Mail confirmation/mailConfirmation.html';
+                if (eventData.url.includes('mail')) {
+                    // Подтверждение регистрации
+                    console.log("CONFIRM: " + eventData.url.split("/")[eventData.url.split("/").length - 1]);
+                    cordovaHTTP.post("https://trip.backend.xredday.ru/",
+                        {
+                            'request':
+                            {
+                                "action": "regconf",
+                                "data": {
+                                    "conf": eventData.url.split("/")[eventData.url.split("/").length - 1],
+                                }
+                            }
+                        },
+                        {},
+                        function (response) {
+                            // prints 200
+                            console.log(response.status);
+                            console.log("--- RESPONSE DATA START ---\n" + response.data + "\n--- RESPONSE DATA END ---");
+
+                            success = true;
+                        },
+                        function (response) {
+                            // prints 403
+                            console.log(response.status);
+                            console.log(response.data);
+                            errorMessage.style.visibility = "visible";
+                            success = false;
+                        }
+                    );
+
+                    document.location.href = 'screens/Mail confirmation/mailConfirmation.html';
                 }
             });
             document.location.href = "screens/loginka/loginka.html";
-        }, 3000);
+        }, 1000);
     </script>
     <script src="cordova.js"></script>
 </body>

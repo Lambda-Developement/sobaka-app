@@ -96,7 +96,7 @@
     <script>
         function check_credentials() {
             if (localStorage != undefined) {
-                ['name','gender','login','phone','birth1','birth2','birth3'].forEach(el => {
+                ['name', 'gender', 'login', 'phone', 'birth1', 'birth2', 'birth3'].forEach(el => {
                     if (localStorage.getItem(el) != null && localStorage.getItem(el).length > 0) {
                         document.getElementById(el).value = localStorage.getItem(el);
                     } else {
@@ -114,8 +114,6 @@
                 return false;
             }
             console.log(`update_user(${field}, ${value}, ${auth_key})\n`);
-
-            //TODO: CALL TO PUPD 
             cordovaHTTP.post("https://trip.backend.xredday.ru/",
                 {
                     'request':
@@ -147,15 +145,15 @@
             if (localStorage != undefined) {
                 //['name','sex','birth1','birth2','birth3','email','phone'].forEach(el=>{
                 let value;
-                ['name','gender','dob','phone'].forEach(el => {
-                    if (el == 'dob'){
+                ['name', 'gender', 'dob', 'phone'].forEach(el => {
+                    if (el == 'dob') {
                         time = new Date(
                             document.getElementById('birth1').value,
                             document.getElementById('birth2').value,
                             document.getElementById('birth3').value,
                         )
                         value = time.getTime();
-                    }else{
+                    } else {
                         value = document.getElementById(el).value;
                     }
                     console.log(document.getElementById(el))

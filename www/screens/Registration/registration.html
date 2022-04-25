@@ -191,9 +191,9 @@
 
         var a = create_user(name, email, password);
         if (a) {
-            setTimeout(()=>{
-                api_authorize(email, password, '../Profile-main/profile-main.html');
-            },1000);
+            setTimeout(() => {
+                window.location.href = '../Mail confirmation/mailConfirmationInfo.html'
+            }, 2000);
         } else {
             errorMessage.style.visibility = "visible";
 
@@ -235,6 +235,7 @@
 
     function api_authorize(email, password, href) {
         // Recieves email and password in plain.
+        console.log("Logging in...");
 
         cordovaHTTP.post("https://trip.backend.xredday.ru/",
             {
