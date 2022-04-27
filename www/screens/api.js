@@ -82,6 +82,7 @@ async function api_regconf(conf) {
 }
 
 
+
 function api_test() {
     // Credentials
     login = "mfh53342@jiooq.com"
@@ -121,4 +122,5 @@ function api_test() {
     //no working example because you get conf in runtime
     conf = ""
     api_regconf().then((res) => console.log(`regconf: ${res == 0}`), err);
+
 }
