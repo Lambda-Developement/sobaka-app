@@ -33,10 +33,10 @@ async function __basic_api_call(method, data, auth_key = null) {
                 // prints 403
                 console.log(`=== API CALL: "action":"${method} ==="`);
                 console.log(`FAIL:${response.status}`);
-                console.log(`FAIL LOG:\n{response.data}\nFAIL LOG END.`);
+                console.log(`FAIL LOG:\n${response.data}\nFAIL LOG END.`);
                 console.log(`=== API CALL: "action":"${method} END ==="`);
                 // Callback
-                reject(response.data);
+                reject(response.status);
             }
         );
     });
@@ -54,12 +54,33 @@ async function api_login(login, password) {
 
 async function api_kval(auth_key) {
     // "kval" api call (auth_key not required)
-    // Returns bool
+    // returns nothing (resolve if good reject if bad)
     let data = {
         'key': auth_key,
     }
     return await __basic_api_call("kval", data);
 }
+
+async function api_register(name, mail, pass) {
+    // "reg" api call (auth_key not required)
+    // returns nothing (resolve if good reject if bad)
+    let data = {
+        'name': name,
+        'mail': mail,
+        'pass': pass,
+    }
+    return await __basic_api_call("reg", data);
+}
+
+async function api_regconf(conf) {
+    // "regconf" api call (auth_key not required)
+    // returns nothing (resolve if good reject if bad)
+    let data = {
+        'conf': conf,
+    }
+    return await __basic_api_call("regconf", data);
+}
+
 
 function api_test() {
     // Credentials
@@ -87,7 +108,17 @@ function api_test() {
         err
     );
 
+    // reg
+    name_t = "Коков Степан";
+    mail_t = "bzo07598@jiooq.com";
+    pass_t = "koko3214";
+    api_register(name_t, mail_t, pass_t).then(
+        (res) => console.log(`reg: success ${res}`)
+        , err
+    );
 
+    //regconf
+    //no working example because you get conf in runtime
+    conf = ""
+    api_regconf().then((res) => console.log(`regconf: ${res == 0}`), err);
 }
-
-// setTimeout(api_test(), 4000);
