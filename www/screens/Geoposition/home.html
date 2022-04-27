@@ -217,7 +217,8 @@
             park_id = park;
             console.log(park);
             if (localStorage != undefined) {
-                localStorage.setItem('prev_place', park_id);
+                if(opened) localStorage.setItem('prev_place', park_id);
+                else localStorage.removeItem('prev_place');
             }
         }
         function update_zoom() {
