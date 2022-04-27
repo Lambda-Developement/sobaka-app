@@ -140,6 +140,17 @@ async function api_getrev(id, auth_key) {
 }
 
 // Sobaka-app
+async function api_groutes(auth_key) {
+    // "getrev" api call (auth_key required)
+    // returns [id, name, points, distance, duration, description]
+    // Поле description может быть NULL.
+    let data = {
+        //Empty
+    }
+    return await __basic_api_call("groutes", data, auth_key);
+}
+
+// Sobaka-app
 async function api_data(auth_key) {
     // "data" api call (auth_key required)
     // returns array of [lat, lon, description]
@@ -205,6 +216,10 @@ function api_test() {
             auth_key = localStorage.getItem("auth_key");
             api_tourdata(id, auth_key).then((res) => console.log(`tourdata: ${res}`), err);
 
+            //groutes
+            auth_key = localStorage.getItem("auth_key");
+            api_tourdata(auth_key).then((res) => console.log(`groutes: ${res}`), err);
+
             //crrev
             id = 33
             mark = 4
@@ -254,6 +269,4 @@ function api_test() {
     //emsg
     emsg = "Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing industries for previewing layouts and visual mockups";
     api_emsg(emsg).then((res) => console.log(`emsg: ${res == ""}`), err);
-
-
 }
