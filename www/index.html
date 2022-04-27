@@ -17,6 +17,7 @@
             TripAR
         </p>
     </div>
+    <script src="cordova.js"></script>
     <script>
         setTimeout(() => {
             universalLinks.subscribe(null, function (eventData) {
@@ -33,12 +34,12 @@
                     cordovaHTTP.post("https://trip.backend.xredday.ru/",
                         {
                             'request':
-                            {
-                                "action": "regconf",
-                                "data": {
-                                    "conf": eventData.url.split("/")[eventData.url.split("/").length - 1],
+                                {
+                                    "action": "regconf",
+                                    "data": {
+                                        "conf": eventData.url.split("/")[eventData.url.split("/").length - 1],
+                                    }
                                 }
-                            }
                         },
                         {},
                         function (response) {
@@ -61,9 +62,8 @@
                 }
             });
             document.location.href = "screens/loginka/loginka.html";
-        }, 1000);
+        }, 2000);
     </script>
-    <script src="cordova.js"></script>
 </body>
 
 </html>

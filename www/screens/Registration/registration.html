@@ -8,8 +8,8 @@
     <link rel="stylesheet" href="../../ui-kit/css/bootstrap.css">
     <link rel="stylesheet" href="../../ui-kit/css/styles.css">
     <link rel="stylesheet" href="style.css">
-
     <title>Registration</title>
+    <script src="../../ui-kit/js/redirects.js"></script>
 </head>
 
 <body
@@ -65,7 +65,7 @@
                 style="border-radius:12px; margin-top: 4rem;" disabled>
                 <p class="btn-text">Зарегистрироваться</p>
             </button>
-            <button class="btn btn-hollow" onclick="location.href='../loginka/loginka.html'">
+            <button class="btn btn-hollow" onclick="redirect_login()">
                 <p class="btn-text">Отменить</p>
             </button>
 
@@ -192,7 +192,7 @@
         var a = create_user(name, email, password);
         if (a) {
             setTimeout(() => {
-                window.location.href = '../Mail confirmation/mailConfirmationInfo.html'
+                redirect_mail_confirmation();
             }, 2000);
         } else {
             errorMessage.style.visibility = "visible";
@@ -254,7 +254,7 @@
                     console.log(response.data);
                     localStorage.setItem("auth_key", response.data);
                     if (response.data) {
-                        window.location.href = href;
+                        location.href = href;
                     }
                 } catch (e) {
                     console.error("JSON parsing error");

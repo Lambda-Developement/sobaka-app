@@ -25,6 +25,7 @@
     <link rel="stylesheet" href="../../ui-kit/css/styles.css">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="../../ui-kit/css/bootstrap.css">
+    <script src="../../ui-kit/js/redirects.js"></script>
 </head>
 
 <body style="height: 100vh;">
@@ -40,13 +41,13 @@
             <div id="error-msg-text" style="color:white">Неправильный логин или пароль</div>
         </div>
         <div class="mb-3">
-            <label for="exampleFormControlInput1" class="form-label"></label>
+            <label for="email_input" class="form-label"></label>
             <input type="email" class="form-control" style="border: 1.5px solid #C7C7C7;
         height: 50px; " id="email_input" placeholder="name@example.com">
         </div>
 
         <div class="mb-3">
-            <label for="exampleFormControlInput2" class="form-label"></label>
+            <label for="password_field" class="form-label"></label>
             <input type="password" class="form-control" style="border: 1.5px solid #C7C7C7; height: 50px;"
                 id="password_field" placeholder="******">
         </div>
@@ -60,7 +61,7 @@
             style="border-radius:12px; margin-top: 4rem;" disabled>
             <p class="btn-text">Войти</p>
         </button>
-        <button class="btn btn-hollow2" onclick="location.href='../Registration/registration.html'"
+        <button class="btn btn-hollow2" onclick="redirect_registration()"
             style="border-radius:12px;">
             <p class="btn-text">Зарегистрироваться</p>
         </button>
@@ -145,7 +146,7 @@
                     console.log(response.data);
                     localStorage.setItem("auth_key", response.data);
                     if (response.data) {
-                        window.location.href = '../Geoposition/home.html';
+                        redirect_home();
                     }
 
 

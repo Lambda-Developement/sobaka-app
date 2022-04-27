@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="../../ui-kit/css/bootstrap.css">
     <link rel="stylesheet" href="../../ui-kit/css/styles.css">
     <link rel="stylesheet" href="style.css">
-
+    <script src="../../ui-kit/js/redirects.js"></script>
 </head>
 
 <body>
@@ -29,7 +29,7 @@
         style="color: #C0C0C0; display:flex; align-items: center; flex-direction: column; height: 85%; overflow:hidden; padding-top: 3rem;">
 
         <div class="mb-3">
-            <label for="exampleFormControlInput1" class="form-label"></label>
+            <label for="email_input" class="form-label"></label>
             <input type="email" class="form-control" id="email_input" placeholder="name@gmail.com"
                 style=" height: 48px; border: 1.5px solid #C7C7C7;">
         </div>
@@ -46,7 +46,7 @@
             <button class="btn btn-hollow mb-3" id="login_button" onclick="send_bug()">
                 <p class="btn-text">Отправить</p>
             </button>
-            <button class="btn btn-hollow2" onclick="location.href='../Profile-main/profile-main.html'">
+            <button class="btn btn-hollow2" onclick="redirect_profile()">
                 <p class="btn-text">Назад</p>
             </button>
         </div>

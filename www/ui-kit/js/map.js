@@ -5,6 +5,7 @@ var cur_route_id = -1;
 var cur_route_place = -1;
 
 var permissions;
+var index;
 
 var onSuccess = function(position) {
     pos = [position.coords.latitude,position.coords.longitude];
@@ -212,21 +213,6 @@ function redraw(){
 //     pos = [e.latlng.lat, e.latlng.lng];
 //     update_markers();
 // })
-var index = elasticlunr(function () {
-    this.use(elasticlunr.ru);
-    this.addField('latitude');
-    this.addField('longitude');
-    this.addField('body');
-    this.setRef('id');
-});
-locs.forEach((el,t)=>{
-    index.addDoc({
-        'body':el[2],
-        'latitude':el[0],
-        'longitude':el[1],
-        'id':t
-    })
-})
 function search(input_str){
     results = index.search(input_str);
     document.getElementById("search-results1").innerHTML = "";
@@ -245,7 +231,7 @@ function search_clicked(coords){
     search_history_close();
 }
 setInterval(()=>{
-    search(document.getElementById('line-edit').value);
+    if (locs.length > 0) search(document.getElementById('line-edit').value,{});
 },1000);
 setTimeout(()=>{
     if(localStorage != undefined){
@@ -267,6 +253,21 @@ setTimeout(()=>{
             console.log(response.status);
             try {
                 locs = JSON.parse(response.data);
+                index = elasticlunr(function () {
+                    this.use(elasticlunr.ru);
+                    this.addField('latitude');
+                    this.addField('longitude');
+                    this.addField('body');
+                    this.setRef('id');
+                });
+                locs.forEach((el,t)=>{
+                    index.addDoc({
+                        'body':el[2],
+                        'latitude':el[0],
+                        'longitude':el[1],
+                        'id':t
+                    })
+                })
                 if(localStorage != undefined){
                     if(localStorage.getItem('prev_place') != null){
                         idx = localStorage.getItem('prev_place');
