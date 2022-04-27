@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="../../ui-kit/css/bootstrap.css">
     <link rel="stylesheet" href="../../ui-kit/css/styles.css">
     <link rel="stylesheet" href="style.css">
+    <script src="../../ui-kit/js/redirects.js"></script>
 </head>
 <body>
     <main>
@@ -124,11 +125,11 @@
             
         </div>
         <footer class="nav-bar">
-            <button class="nav-bar__element">
+            <button class="nav-bar__element" onclick="redirect_home()">
                 <img src="../../ui-kit/svg/search_icon.svg" alt="search_ico" class="nav-bar__element__icon">
                 <div class="nav-bar__element__title">Поиск</div>
             </button>
-            <button class="nav-bar__element">
+            <button class="nav-bar__element" onclick="redirect_profile()">
                 <img src="../../ui-kit/svg/profile_icon.svg" alt="search_ico" class="nav-bar__element__icon">
                 <div class="nav-bar__element__title">Профиль</div>
             </button>
@@ -139,11 +140,14 @@
         </footer>
     </main>
     <script>
+        if (localStorage != undefined) {
+            localStorage.setItem('prev_page', '../../screens/Routes/routes.html');
+        }
         function start_route(route_id){
             if(localStorage != undefined){
                 localStorage.setItem('route_id',route_id);
                 localStorage.setItem('route_place',0);
-                location.href='../Route details/route_details.html';
+                redirect_route_details();
             }
         }
     </script>

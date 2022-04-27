@@ -12,7 +12,7 @@
     </style>
     <link rel="stylesheet" href="../../ui-kit/css/styles.css">
     <link rel="stylesheet" href="style.css">
-
+    <script src="../../ui-kit/js/redirects.js"></script>
 </head>
 
 <body>
@@ -41,7 +41,7 @@
         </h3>
 
         <div class="mb-3">
-            <label for="exampleFormControlInput1" class="form-label"></label>
+            <label for="email_input" class="form-label"></label>
             <input type="email" class="form-control" style="
         height: 50px; margin-top: 3rem;" id="email_input" placeholder="name@gmail.com">
         </div>
@@ -53,7 +53,7 @@
             <button class="btn btn-filled2" id="login_button" onclick="send_reset_request()" style="margin-top: 16px;">
                 <p class="btn-text">Восстановить</p>
             </button>
-            <button class="btn btn-hollow" onclick="location.href='../loginka/loginka.html'" style="margin-top: 8px;"
+            <button class="btn btn-hollow" onclick="redirect_login()" style="margin-top: 8px;"
                 id="return-button">
                 <p class="btn-text">Назад</p>
             </button>

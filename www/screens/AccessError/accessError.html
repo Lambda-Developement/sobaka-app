@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="../../ui-kit/css/styles.css">
     <link rel="stylesheet" href="style.css">
     <title>AccessError</title>
+    <script src="../../ui-kit/js/redirects.js"></script>
 </head>
 <body style="background: #F0F0F0">
     <div class="screen-hat">
@@ -36,9 +37,9 @@
             if(localStorage != undefined){
                 prev = localStorage.getItem('prev_page');
                 if(prev != null){
-                    document.location.href = prev;
+                    redirect(prev);
                 }else{
-                    document.location.href = '../../screens/Geoposition/home.html';
+                    redirect_home();
                 }
             }
         }

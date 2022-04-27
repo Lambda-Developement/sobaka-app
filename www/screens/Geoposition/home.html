@@ -18,6 +18,7 @@
     <script src="../../ui-kit/js/lunr.stemmer.support.js"></script>
     <script src="../../ui-kit/js/lunr.ru.js"></script>
     <title>Home</title>
+    <script src="../../ui-kit/js/redirects.js"></script>
 </head>
 
 <body onload="update_zoom()" style="z-index: -2;">
@@ -36,15 +37,15 @@
         <!--        </div>-->
     </div>
     <footer class="nav-bar">
-        <button class="nav-bar__element active" onclick="location.href='#'">
+        <button class="nav-bar__element active">
             <img src="../../ui-kit/svg/orange_search.svg" alt="search_ico" class="nav-bar__element__icon">
             <div class="nav-bar__element__title">Поиск</div>
         </button>
-        <button class="nav-bar__element" onclick="location.href='../Profile-main/profile-main.html'">
+        <button class="nav-bar__element" onclick="redirect_profile()">
             <img src="../../ui-kit/svg/profile_icon.svg" alt="search_ico" class="nav-bar__element__icon">
             <div class="nav-bar__element__title">Профиль</div>
         </button>
-        <button class="nav-bar__element" onclick="location.href='../Routes/routes.html'">
+        <button class="nav-bar__element" onclick="redirect_routes()">
             <img src="../../ui-kit/svg/routes_grey.svg" alt="search_ico" class="nav-bar__element__icon">
             <div class="nav-bar__element__title">Маршруты</div>
         </button>
@@ -77,7 +78,7 @@
     </div>
     <div id="info">
         <div class="geopoint-popup d-flex flex-column justify-content-center align-items-center">
-            <div onclick="location.href='../GeoInfo/geo_info.html'"
+            <div onclick="redirect_geoinfo()"
                 class="geopoint-info d-flex align-items-center justify-content-between p-3">
                 <div class="d-flex flex-column me-3">
                     <div>
@@ -137,7 +138,7 @@
             </div>
             <div id='inner-reviews' class="reviews">
                 <div class="justify-content-center align-items-center w-100 p-3">
-                    <button id='excursion-btn' class="btn btn-filled" onclick="location.href='../ExcursionStart/ExcursionStart.html'">
+                    <button id='excursion-btn' class="btn btn-filled" onclick="redirect_excursion_start()">
                         <p class="btn-text">Начать экскурсию</p>
                     </button>
                 </div>

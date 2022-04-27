@@ -10,12 +10,13 @@
     <link rel="stylesheet" href="style.css">
 
     <title>Profile+avatar</title>
+    <script src="../../ui-kit/js/redirects.js"></script>
 </head>
 
 <body onload="check_credentials()">
     <div class="screen-hat">
-        <button class="btn arrow-back">
-            <a href="../Geoposition/home.html">
+        <button class="btn arrow-back" onclick="go_back()">
+            <a>
                 <img src="../../ui-kit/svg/arrow_back.svg" alt="arrow-back">
             </a>
         </button>
@@ -40,7 +41,7 @@
         </div>
         <div class="nav-section">
             <a href="#" style="text-decoration: none; color:initial;">
-                <div class="nav-item" onclick="location.href='../Achievements/achievements.html'">
+                <div class="nav-item" onclick="redirect_achievements()">
                     <img src="../../ui-kit/svg/achievka.svg" alt="achievement.svg"
                         class="nav-item_icon nav-item_counter">
                     <p class="title nav-item_counter">Достижения</p>
@@ -71,7 +72,7 @@
 
             <a href="#" style="text-decoration: none; color:initial;">
 
-                <div class="nav-item" onclick="location.href='../Map/map.html'">
+                <div class="nav-item" onclick="redirect_map_settings()">
                     <img src="../../ui-kit/svg/map.svg" alt="map.svg" class="nav-item_icon">
                     <p class="title">Карта</p>
                     <img src="../../ui-kit/svg/arrow_gray_right.svg" alt="arrow_gray_right.svg" class="nav-item__arrow">
@@ -81,7 +82,7 @@
 
             <a href="#" style="text-decoration: none; color:initial;">
 
-                <div class="nav-item" onclick="location.href='../error call/error_call.html'">
+                <div class="nav-item" onclick="redirect_error_call()">
                     <img src="../../ui-kit/svg/chatbox.svg" alt="chatbox.svg" class="nav-item_icon">
                     <p class="title">Сообщить об ошибке</p>
                     <img src="../../ui-kit/svg/arrow_gray_right.svg" alt="arrow_gray_right.svg" class="nav-item__arrow">
@@ -90,7 +91,7 @@
             </a>
             <a href="#" style="text-decoration: none; color:initial;">
 
-                <div class="nav-item" onclick="location.href='../about отдельный экран/about экран.html'">
+                <div class="nav-item" onclick="redirect_about()">
                     <img src="../../ui-kit/svg/pin_menu.svg" alt="pin_menu.svg" class="nav-item_icon">
                     <p class="title">О приложении</p>
                     <img src="../../ui-kit/svg/arrow_gray_right.svg" alt="arrow_gray_right.svg" class="nav-item__arrow">
@@ -150,6 +151,16 @@
 
 
     <script>
+        function go_back(){
+            if(localStorage != undefined){
+                prev = localStorage.getItem('prev_page');
+                if(prev != null){
+                    redirect(prev);
+                }else{
+                    redirect_home();
+                }
+            }
+        }
         function get_user_name() {
             cordovaHTTP.post("https://trip.backend.xredday.ru/",
                 {
