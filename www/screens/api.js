@@ -115,6 +115,8 @@ async function api_pupd(name = null, gender = null, dob = null, phone = null, pa
     return await __basic_api_call("pupd", data);
 }
 
+
+
 // Sobaka-app
 async function api_getrev(id, auth_key) {
     // "getrev" api call (auth_key required)
@@ -126,6 +128,16 @@ async function api_getrev(id, auth_key) {
         'id': id,
     }
     return await __basic_api_call("getrev", data, auth_key);
+}
+
+// Sobaka-app
+async function api_data(auth_key) {
+    // "data" api call (auth_key required)
+    // returns array of [lat, lon, description]
+    let data = {
+        // Empty
+    }
+    return await __basic_api_call("data", data, auth_key);
 }
 
 
@@ -151,6 +163,15 @@ function api_test() {
                     console.log(`kval: ${res == ""}`);
                 }, err
             );
+
+            //getrev
+            id = 33
+            auth_key = localStorage.getItem("auth_key");
+            api_getrev(id, auth_key).then((res) => console.log(`getrev(${id}): ${res}`), err);
+
+            //api_data
+            auth_key = localStorage.getItem("auth_key");
+            api_data(auth_key).then((res) => console.log(`data: ${res}`), err);
         },
         err
     );
@@ -177,8 +198,5 @@ function api_test() {
     emsg = "Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing industries for previewing layouts and visual mockups";
     api_emsg(emsg).then((res) => console.log(`emsg: ${res == ""}`), err);
 
-    //getrev
-    id = 33
-    auth_key = localStorage.getItem("auth_key");
-    api_getrev(id, auth_key).then((res) => console.log(`getrev(${id}): ${res}`), err);
+
 }
