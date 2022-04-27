@@ -81,6 +81,52 @@ async function api_regconf(conf) {
     return await __basic_api_call("regconf", data);
 }
 
+async function api_remind(mail) {
+    // TODO: Warning! Untested method! (and password change also is not tested)
+    // "remind" api call (auth_key not required)
+    // returns nothing (resolve if good reject if bad)
+    let data = {
+        'mail': mail,
+    }
+    return await __basic_api_call("remind", data);
+}
+
+async function api_emsg(text) {
+    // "emsg" api call (auth_key not required)
+    // returns nothing (resolve if good reject if bad)
+    let data = {
+        'text': text,
+    }
+    return await __basic_api_call("emsg", data);
+}
+
+async function api_pupd(name = null, gender = null, dob = null, phone = null, pass = null) {
+    // "pupd" api call (auth_key not required)
+    // returns nothing (resolve if good reject if bad)
+    // types: name - str; gender - 0, 1 man, 2 girl; dob - ???; phone - str???; pass - str
+    // TODO: requirements: dob - unix timestamp, gender
+    let data = {
+        'name': name,
+        'gender': gender,
+        'dob': dob,
+        'phone': phone,
+        'pass': pass,
+    }
+    return await __basic_api_call("pupd", data);
+}
+
+// Sobaka-app
+async function api_getrev(id, auth_key) {
+    // "getrev" api call (auth_key required)
+    // returns [average, reviews[]], где average - средняя оценка экскурсии,
+    // reviews[] - массив, содержащий все оценки. Массив reviews состоит из
+    // [udata[], mark, review], где udata[] - массив [name, avatarloc] содержащий
+    // информацию о пользователя, mark - оценка, review (может быть NULL) - текст оценки.
+    let data = {
+        'id': id,
+    }
+    return await __basic_api_call("getrev", data, auth_key);
+}
 
 
 function api_test() {
@@ -118,9 +164,21 @@ function api_test() {
         , err
     );
 
-    //regconf
-    //no working example because you get conf in runtime
-    conf = ""
-    api_regconf().then((res) => console.log(`regconf: ${res == 0}`), err);
+    // //regconf
+    // //no working example because you get conf in runtime
+    // conf = ""
+    // api_regconf().then((res) => console.log(`regconf: ${res == ""}`), err);
 
+    //remind
+    //haven't tested well...
+    api_remind(mail_t).then((res) => console.log(`remind: ${res == ""}`), err);
+
+    //emsg
+    emsg = "Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing industries for previewing layouts and visual mockups";
+    api_emsg(emsg).then((res) => console.log(`emsg: ${res == ""}`), err);
+
+    //getrev
+    id = 33
+    auth_key = localStorage.getItem("auth_key");
+    api_getrev(id, auth_key).then((res) => console.log(`getrev(${id}): ${res}`), err);
 }
