@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="styles.css">
     <title>GeoInfo</title>
     <script src="../../ui-kit/js/redirects.js"></script>
+    <script src="../api.js"></script>
 </head>
 
 <body>
@@ -90,7 +91,7 @@
             <div class="panel-grey-up">
                 <div class="d-inline-flex align-items-center">
                     <div style="margin-right: 10px;">
-                        <h3 class="text-attention">4,9</h3>
+                        <h3 class="text-attention" id="average-score">4,9</h3>
                     </div>
                     <div class="d-flex flex-column">
                         <div class="d-inline-flex">
@@ -257,10 +258,10 @@
             cordovaHTTP.post("https://trip.backend.xredday.ru/",
                 {
                     'request':
-                    {
-                        "action": "userdata",
-                        "user_key": localStorage.getItem('auth_key')
-                    }
+                        {
+                            "action": "userdata",
+                            "user_key": localStorage.getItem('auth_key')
+                        }
                 },
                 {},
                 function (response) {
@@ -271,65 +272,6 @@
                         a = JSON.parse(response.data)[2];
                         console.log(a);
                         localStorage.setItem('name', a);
-                    } catch (e) {
-                        console.error("JSON parsing error");
-                    }
-                },
-                function (response) {
-                    // prints 403
-                    console.log(response.status);
-                    errorMessage.style.visibility = "visible";
-                    //prints Permission denied
-                    console.log(response.data);
-                }
-            );
-        }
-        function get_user_id(mark, review) {
-            cordovaHTTP.post("https://trip.backend.xredday.ru/",
-                {
-                    'request':
-                    {
-                        "action": "userdata",
-                        "user_key": localStorage.getItem('auth_key')
-                    }
-                },
-                {},
-                function (response) {
-                    // prints 200
-                    console.log(response.status);
-                    try {
-                        console.log(response.data);
-                        a = JSON.parse(response.data)[0];
-                        add_review(a, mark, review);
-                    } catch (e) {
-                        console.error("JSON parsing error");
-                    }
-                },
-                function (response) {
-                    // prints 403
-                    console.log(response.status);
-                    errorMessage.style.visibility = "visible";
-                    //prints Permission denied
-                    console.log(response.data);
-                }
-            );
-        }
-        function add_review(id, mark, review) {
-            cordovaHTTP.post("https://trip.backend.xredday.ru/",
-                {
-                    'request':
-                    {
-                        "action": "crrev",
-                        "user_key": localStorage.getItem('auth_key'),
-                        "data": { "id": id, "mark": mark, "review": review }
-                    }
-                },
-                {},
-                function (response) {
-                    // prints 200
-                    console.log(response.status);
-                    try {
-                        console.log(response.data);
                     } catch (e) {
                         console.error("JSON parsing error");
                     }
@@ -371,7 +313,9 @@
                 document.getElementById('review-text').innerHTML = 'Добавить';
             } else {
                 let prev_review = document.getElementById('review-input').value;
-                get_user_id(rate, document.getElementById('review-input').value); // send add review to backend function chain
+                api_crrev(33,0,rate,localStorage.getItem('auth_key'),prev_review).then((res) => {
+                    console.log('done');
+                }, ()=>console.log('error'));
                 document.getElementById('review-' + (review_count)).remove();
                 document.getElementById('reviews-here').innerHTML += "" +
                     "<div id='review-" + (review_count) + "' class=\"review d-flex flex-column mb-3\">\n" +
@@ -445,61 +389,42 @@
         }, 1000);
     </script>
     <script>
-        function load_reviews(id) {
-            console.log("Loading...");
-            cordovaHTTP.post("https://trip.backend.xredday.ru/",
-                {
-                    'request':
-                    {
-                        "data": { "id": id },
-                        "user_key": localStorage.getItem('auth_key')
-                    }
-                },
-                {},
-                function (response) {
-                    // prints 200
-                    console.log(response.status);
-                    try {
-                        console.log(response.data);
-                        a = JSON.parse(response.data)[2];
-                        console.log(a);
-                        localStorage.setItem('name', a);
-                    } catch (e) {
-                        console.error("JSON parsing error");
-                    }
-                },
-                function (response) {
-                    // prints 403
-                    console.log(response.status);
-                    errorMessage.style.visibility = "visible";
-                    //prints Permission denied
-                    console.log(response.data);
-                }
-            );
-            document.getElementById('reviews-here').innerHTML += "" +
-                "<div id='review-" + (review_count) + "' class=\"review d-flex flex-column mb-3\">\n" +
-                "                    <div class=\"d-inline-flex align-items-center mb-2\">\n" +
-                "                        <div class=\"circle d-flex justify-content-center align-items-center me-3\"><div><h3 class=\"text-attention in-circle\">" + name[0].toUpperCase() + "</h3></div></div>\n" +
-                "                        <div><h3 class=\"text-common\">" + name + "</h3></div>\n" +
-                "                    </div>\n" +
-                "                    <div class=\"d-inline-flex align-items-center mb-2\">\n" +
-                "                        <div class=\"d-inline-flex justify-content-center align-items-center me-3\">\n" +
-                "                            <div class=\"" + (rate >= 1 ? "rate-icon" : "star-icon-rate") + " small\"></div>\n" +
-                "                            <div class=\"" + (rate >= 2 ? "rate-icon" : "star-icon-rate") + " small\"></div>\n" +
-                "                            <div class=\"" + (rate >= 3 ? "rate-icon" : "star-icon-rate") + " small\"></div>\n" +
-                "                            <div class=\"" + (rate >= 4 ? "rate-icon" : "star-icon-rate") + " small\"></div>\n" +
-                "                            <div class=\"" + (rate >= 5 ? "rate-icon" : "star-icon-rate") + " small\"></div>\n" +
-                "                        </div>\n" +
-                "                        <div><h3 class=\"text-description\">Только что</h3></div>\n" +
-                "                    </div>\n" +
-                "                    <div>\n" +
-                "                        <p class=\"text-common\">\n" +
-                "                            " + prev_review + "\n" +
-                "                        </p>\n" +
-                "                    </div>\n" +
-                "                </div>";
+        function load_reviews(result) {
+            document.getElementById('average-score').innerHTML = Math.round(result[0]);
+            let reviews = result[1];
+            console.log(reviews);
+            reviews.forEach(el=>{
+                let name = el[0][0];
+                console.log(el);
+                console.log(name);
+                let rate = el[1];
+                let body = el[2];
+                document.getElementById('reviews-here').innerHTML += "" +
+                    "<div id='review-" + (review_count) + "' class=\"review d-flex flex-column mb-3\">\n" +
+                    "                    <div class=\"d-inline-flex align-items-center mb-2\">\n" +
+                    "                        <div class=\"circle d-flex justify-content-center align-items-center me-3\"><div><h3 class=\"text-attention in-circle\">" + name[0].toUpperCase() + "</h3></div></div>\n" +
+                    "                        <div><h3 class=\"text-common\">" + name + "</h3></div>\n" +
+                    "                    </div>\n" +
+                    "                    <div class=\"d-inline-flex align-items-center mb-2\">\n" +
+                    "                        <div class=\"d-inline-flex justify-content-center align-items-center me-3\">\n" +
+                    "                            <div class=\"" + (rate >= 1 ? "rate-icon" : "star-icon-rate") + " small\"></div>\n" +
+                    "                            <div class=\"" + (rate >= 2 ? "rate-icon" : "star-icon-rate") + " small\"></div>\n" +
+                    "                            <div class=\"" + (rate >= 3 ? "rate-icon" : "star-icon-rate") + " small\"></div>\n" +
+                    "                            <div class=\"" + (rate >= 4 ? "rate-icon" : "star-icon-rate") + " small\"></div>\n" +
+                    "                            <div class=\"" + (rate >= 5 ? "rate-icon" : "star-icon-rate") + " small\"></div>\n" +
+                    "                        </div>\n" +
+                    // "                        <div><h3 class=\"text-description\">Только что</h3></div>\n" +
+                    "                    </div>\n" +
+                    "                    <div>\n" +
+                    "                        <p class=\"text-common\">\n" +
+                    "                            " + body + "\n" +
+                    "                        </p>\n" +
+                    "                    </div>\n" +
+                    "                </div>";
+                review_count++;
+            });
         }
-        setTimeout(load_reviews(1), 1000);
+        setTimeout(()=>api_getrev(33,localStorage.getItem('auth_key')).then((res) => load_reviews(res), ()=>console.log('error')), 2000);
     </script>
 </body>
 
