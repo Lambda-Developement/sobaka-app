@@ -140,6 +140,16 @@ async function api_data(auth_key) {
     return await __basic_api_call("data", data, auth_key);
 }
 
+// Sobaka-app
+async function api_tourdata(id, auth_key) {
+    // "tourdata" api call (auth_key required)
+    // returns array of [audio, subtitles]
+    let data = {
+        'id': id
+    }
+    return await __basic_api_call("tourdata", data, auth_key);
+}
+
 
 function api_test() {
     // Credentials
@@ -169,9 +179,14 @@ function api_test() {
             auth_key = localStorage.getItem("auth_key");
             api_getrev(id, auth_key).then((res) => console.log(`getrev(${id}): ${res}`), err);
 
-            //api_data
+            //data
             auth_key = localStorage.getItem("auth_key");
             api_data(auth_key).then((res) => console.log(`data: ${res}`), err);
+
+            //tourdata
+            id = 33
+            auth_key = localStorage.getItem("auth_key");
+            api_tourdata(id, auth_key).then((res) => console.log(`tourdata: ${res}`), err);
         },
         err
     );
