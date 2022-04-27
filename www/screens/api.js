@@ -54,11 +54,22 @@ async function api_login(login, password) {
 
 async function api_kval(auth_key) {
     // "kval" api call (auth_key not required)
-    // Returns bool
+    // returns nothing (resolve if good reject if bad)
     let data = {
         'key': auth_key,
     }
     return await __basic_api_call("kval", data);
+}
+
+async function api_register(name, mail, pass) {
+    // "reg" api call (auth_key not required)
+    // returns nothing (resolve if good reject if bad)
+    let data = {
+        'name': name,
+        'mail': mail,
+        'pass': pass,
+    }
+    return await __basic_api_call("reg", data);
 }
 
 function api_test() {
@@ -87,7 +98,12 @@ function api_test() {
         err
     );
 
-
+    // reg
+    name_t = "Коков Степан";
+    mail_t = "petuhovich.com@mail.ru";
+    pass_t = "koko3214";
+    api_register(name_t, mail_t, pass_t).then(
+        (res) => console.log(`reg: success ${res}`)
+        , err
+    );
 }
-
-// setTimeout(api_test(), 4000);
