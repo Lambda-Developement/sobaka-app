@@ -151,16 +151,18 @@ async function api_tourdata(id, auth_key) {
 }
 
 // Sobaka-app
-async function api_crrev(id, type, mark, auth_key) {
+async function api_crrev(id, type, mark, auth_key, review = "") {
     // "crrev" api call (auth_key required)
     // returns nothing
     let data = {
         'id': id,
         'type': type, // 0 for excursion, 1 for route
         'mark': mark, // 1-5
+        'review': review,
     }
     return await __basic_api_call("crrev", data, auth_key);
 }
+
 
 
 function api_test() {
@@ -200,7 +202,7 @@ function api_test() {
             type = 0
             auth_key = localStorage.getItem("auth_key");
             review_message = `Last_auth_key: ${auth_key}`;
-            api_crrev(id, type, mark, auth_key).then((res) => console.log(`tourdata: ${res}`), err);
+            api_crrev(id, type, mark, auth_key, review_message).then((res) => console.log(`tourdata: ${res}`), err);
 
             //getrev
             id = 33
