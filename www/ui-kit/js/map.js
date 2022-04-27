@@ -177,7 +177,12 @@ function update_markers(){
     });
     if(cur_route_id != -1){
         make_route(L.latLng(pos),L.latLng(locs[routes[cur_route_id][cur_route_place]][0],locs[routes[cur_route_id][cur_route_place]][1]));
-    }else{
+    }else if(localStorage != undefined && localStorage.getItem('make_route') != null){
+        g_id = localStorage.getItem('make_route');
+        make_route(L.latLng(pos),L.latLng(locs[g_id][0],locs[g_id][1]));
+        localStorage.removeItem('make_route');
+    }
+    else{
         make_route(null,null);
     }
     if(info2_appear){
@@ -288,7 +293,35 @@ setTimeout(()=>{
                         cur_route_place = -1;
                     }
                 }
-                update_markers();
+                cordovaHTTP.post("https://trip.backend.xredday.ru/",
+                    {
+                        'request':
+                            {
+                                "action": "groutes",
+                                "user_key": auth_key,
+                            }
+                    },
+                    {},
+                    function (response) {
+                        console.log(response.status);
+                        try {
+                            groutes = JSON.parse(response.data);
+                            routes = [];
+                            groutes.forEach(el=>{
+                                routes.push(el[2].split(',').map(x=>{
+                                    return parseInt(x);
+                                }));
+                            });
+                            update_markers();
+                        } catch (e) {
+                            console.error("JSON parsing error");
+                        }
+                    },
+                    function (response) {
+                        console.log(response.status);
+                        console.log(response.data);
+                    }
+                );
             } catch (e) {
                 console.error("JSON parsing error");
             }
@@ -304,6 +337,7 @@ function make_route_to_cur(){
         if (localStorage.getItem('prev_place') != null) {
             idx = localStorage.getItem('prev_place');
             make_route(L.latLng(pos),[locs[idx][0], locs[idx][1]]);
+            localStorage.removeItem('prev_place');
         }
     }
 }

@@ -46,10 +46,10 @@
                             
                         </div>
                         
-                        <h2 class="trip-card__title">Пешая прогулка в сердце Ярославля</h2>
+                        <h2 class="trip-card__title" id="1-text">Пешая прогулка в сердце Ярославля</h2>
                         <div class="trip-card__footer">
-                            <div class="trip-card__footer__length"><img src="../../ui-kit/svg/person_walk.svg" alt="person_walk.svg">6 km</div>
-                            <div class="trip-card__footer__time">1ч 3мин</div>
+                            <div class="trip-card__footer__length"><img src="../../ui-kit/svg/person_walk.svg" alt="person_walk.svg"><div id="1-length"></div></div>
+                            <div class="trip-card__footer__time" id="1-duration">1ч 3мин</div>
                             <div class="spacer"></div>
                             <button class="trip-card__footer__fake-button"><img src="../../ui-kit/svg/arrow_back.svg" alt="arrow-back.svg but reversed" class="arrow-forward"></button>
                         </div>
@@ -79,10 +79,10 @@
                             
                         </div>
                         
-                        <h2 class="trip-card__title">Per aspera ad Astra</h2>
+                        <h2 class="trip-card__title" id="3-text">Per aspera ad Astra</h2>
                         <div class="trip-card__footer">
-                            <div class="trip-card__footer__length"><img src="../../ui-kit/svg/person_walk.svg" alt="person_walk.svg">1,5 km</div>
-                            <div class="trip-card__footer__time">46мин</div>
+                            <div class="trip-card__footer__length"><img src="../../ui-kit/svg/person_walk.svg" alt="person_walk.svg"><div id="3-length">1asdassad,5 km</div></div>
+                            <div class="trip-card__footer__time" id="3-duration">46мин</div>
                             <div class="spacer"></div>
                             <button class="trip-card__footer__fake-button"><img src="../../ui-kit/svg/arrow_back.svg" alt="arrow-back.svg but reversed" class="arrow-forward"></button>
                         </div>
@@ -112,10 +112,10 @@
                             
                         </div>
                         
-                        <h2 class="trip-card__title">Ярославские купола</h2>
+                        <h2 class="trip-card__title" id="2-text">Ярославские купола</h2>
                         <div class="trip-card__footer">
-                            <div class="trip-card__footer__length"><img src="../../ui-kit/svg/person_walk.svg" alt="person_walk.svg">3 km</div>
-                            <div class="trip-card__footer__time">2ч 14мин</div>
+                            <div class="trip-card__footer__length"><img src="../../ui-kit/svg/person_walk.svg" alt="person_walk.svg"><div id="2-length">3 km</div></div>
+                            <div class="trip-card__footer__time" id="2-duration">2ч 14мин</div>
                             <div class="spacer"></div>
                             <button class="trip-card__footer__fake-button"><img src="../../ui-kit/svg/arrow_back.svg" alt="arrow-back.svg but reversed" class="arrow-forward"></button>
                         </div>
@@ -150,7 +150,43 @@
                 redirect_route_details();
             }
         }
+        setTimeout(()=>{
+            if(localStorage != undefined){
+                if(localStorage.getItem('auth_key') == null){
+                    document.location.href = '../../screens/loginka/loginka.html'
+                }
+                auth_key = localStorage.getItem('auth_key');
+            }
+            cordovaHTTP.post("https://trip.backend.xredday.ru/",
+                {
+                    'request':
+                        {
+                            "action": "groutes",
+                            "user_key": auth_key,
+                        }
+                },
+                {},
+                function (response) {
+                    console.log(response.status);
+                    try {
+                        groutes = JSON.parse(response.data);
+                        groutes.forEach(el=>{
+                            document.getElementById(`${el[0]}-text`).innerText = el[1];
+                            document.getElementById(`${el[0]}-length`).innerText = el[4]+'km';
+                            document.getElementById(`${el[0]}-duration`).innerText = el[3]+'hr.';
+                        });
+                    } catch (e) {
+                        console.error("JSON parsing error");
+                    }
+                },
+                function (response) {
+                    console.log(response.status);
+                    console.log(response.data);
+                }
+            );
+        },1000);
     </script>
+    <script src="../../cordova.js"></script>
 
     
 

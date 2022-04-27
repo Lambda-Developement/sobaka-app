@@ -37,7 +37,10 @@ function redirect_routes(){
 function redirect_geoinfo(){
     redirect('../GeoInfo/geo_info.html');
 }
-function redirect_excursion_start(){
+function redirect_excursion_start(elem_id){
+    if (localStorage != undefined) {
+        localStorage.setItem('prev_place', elem_id);
+    }
     redirect('../ExcursionStart/ExcursionStart.html');
 }
 function redirect_camera(){

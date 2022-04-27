@@ -211,13 +211,12 @@
             popup_collapsed = !popup_collapsed;
             toggle_collapse();
         }
-        function collapse_toggle(park) {
+        function collapse_toggle(g_id) {
             opened = !opened;
             opened ? collapse_open() : collapse_close();
-            park_id = park;
-            console.log(park);
+            console.log(g_id);
             if (localStorage != undefined) {
-                if(opened) localStorage.setItem('prev_place', park_id);
+                if(opened) localStorage.setItem('prev_place', g_id);
                 else localStorage.removeItem('prev_place');
             }
         }

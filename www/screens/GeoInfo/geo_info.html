@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="../../ui-kit/css/styles.css">
     <link rel="stylesheet" href="styles.css">
     <title>GeoInfo</title>
+    <script src="../../ui-kit/js/redirects.js"></script>
 </head>
 
 <body>
@@ -189,8 +190,8 @@
 
     <div class="btn-panel">
         <div class="d-inline-flex justify-content-center w-100">
-            <div class="geoinfo"><button class="btn btn-hollow2 me-2">Маршрут</button> </div>
-            <div class="geoinfo"><button class="btn btn-hollow">Отсюда</button> </div>
+            <div class="geoinfo"><button class="btn btn-hollow2 me-2" onclick="get_route()">Маршрут</button> </div>
+            <div class="geoinfo"><button class="btn btn-hollow" onclick="get_route()">Отсюда</button> </div>
             <div class="geoinfo"><button class="btn btn-hollow ms-2">
                     <div class="download-icon"></div>
                 </button> </div>
@@ -206,6 +207,16 @@
         var rate = 5;
         var review_btn_state = true;
         var review_count = 0;
+        var prev_place = null;
+        if (localStorage != undefined) {
+            if(localStorage.getItem('prev_place') != null){
+                prev_place = localStorage.getItem('prev_place');
+            }
+        }
+        function get_route(){
+            localStorage.setItem('make_route',prev_place);
+            redirect_home();
+        }
         function collapse_open() {
             document.getElementById("info").style.height = "fit-content";
             document.getElementById("dropdown").classList.add("dropdown-icon-down");
