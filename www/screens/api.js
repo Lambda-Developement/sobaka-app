@@ -20,7 +20,7 @@ async function __basic_api_call(method, data, auth_key = null) {
                 console.log(`=== API CALL: "action":"${method}" ===`);
                 console.log(`SUCCESS:${response.status}`);
                 console.log(`RESPONSE DATA:${response.data}`);
-                console.log(`=== API CALL: "action":"${method} END ==="`);
+                console.log(`=== API CALL: "action":"${method}" END ===`);
                 // Get JSON
                 try {
                     resolve(JSON.parse(response.data));
@@ -31,10 +31,10 @@ async function __basic_api_call(method, data, auth_key = null) {
             function (response) {
                 // Fail
                 // prints 403
-                console.log(`=== API CALL: "action":"${method} ==="`);
+                console.log(`=== API CALL: "action":"${method}" ===`);
                 console.log(`FAIL:${response.status}`);
                 console.log(`FAIL LOG:\n${response.data}\nFAIL LOG END.`);
-                console.log(`=== API CALL: "action":"${method} END ==="`);
+                console.log(`=== API CALL: "action":"${method}" END ===`);
                 // Callback
                 reject(response.status);
             }
@@ -100,22 +100,31 @@ async function api_emsg(text) {
     return await __basic_api_call("emsg", data);
 }
 
-async function api_pupd(name = null, gender = null, dob = null, phone = null, pass = null) {
+async function api_pupd(auth_key, diff) {
     // "pupd" api call (auth_key not required)
     // returns nothing (resolve if good reject if bad)
     // types: name - str; gender - 0, 1 man, 2 girl; dob - ???; phone - str???; pass - str
-    // TODO: requirements: dob - unix timestamp, gender
+    // TODO: check dob - unix timestamp
     let data = {
-        'name': name,
-        'gender': gender,
-        'dob': dob,
-        'phone': phone,
-        'pass': pass,
-    }
-    return await __basic_api_call("pupd", data);
+        'name': diff['name'],
+        'gender': diff['gender'],
+        'dob': diff['dob'],
+        'phone': diff['phone'],
+        'pass': diff['pass'],
+    } // explicitly specify allowed fields
+    return await __basic_api_call("pupd", data, auth_key);
 }
 
-
+async function api_userdata(auth_key) {
+    // "pupd" api call (auth_key required)
+    // returns [id, avatar_loc, name, gender, dob, login, phone]
+    //  dob - это int, в котором 0 - н/опр, 1 - М, 2 - Ж, а для получения
+    // avatar_loc, перед полученной ссылкой добавьте https://trip.backend.xredday.ru/
+    let data = {
+        // Empty
+    }
+    return await __basic_api_call("userdata", data, auth_key);
+}
 
 // Sobaka-app
 async function api_getrev(id, auth_key) {
@@ -128,6 +137,17 @@ async function api_getrev(id, auth_key) {
         'id': id,
     }
     return await __basic_api_call("getrev", data, auth_key);
+}
+
+// Sobaka-app
+async function api_groutes(auth_key) {
+    // "getrev" api call (auth_key required)
+    // returns [id, name, points, distance, duration, description]
+    // Поле description может быть NULL.
+    let data = {
+        //Empty
+    }
+    return await __basic_api_call("groutes", data, auth_key);
 }
 
 // Sobaka-app
@@ -196,18 +216,34 @@ function api_test() {
             auth_key = localStorage.getItem("auth_key");
             api_tourdata(id, auth_key).then((res) => console.log(`tourdata: ${res}`), err);
 
+            //groutes
+            auth_key = localStorage.getItem("auth_key");
+            api_tourdata(auth_key).then((res) => console.log(`groutes: ${res}`), err);
+
             //crrev
             id = 33
             mark = 4
             type = 0
             auth_key = localStorage.getItem("auth_key");
             review_message = `Last_auth_key: ${auth_key}`;
-            api_crrev(id, type, mark, auth_key, review_message).then((res) => console.log(`tourdata: ${res}`), err);
+            api_crrev(id, type, mark, auth_key, review_message).then((res) => console.log(`crrev: ${res}`), err);
 
             //getrev
             id = 33
             auth_key = localStorage.getItem("auth_key");
             api_getrev(id, auth_key).then((res) => console.log(`getrev(${id}): ${res}`), err);
+
+            //pupd
+            diff = {
+                phone: "+79611616996",
+            };
+            auth_key = localStorage.getItem("auth_key");
+            api_pupd(auth_key, diff).then((res) => console.log(`pupd: ${res}`), err);
+
+            //userdata
+            auth_key = localStorage.getItem("auth_key");
+            api_userdata(auth_key).then((res) => console.log(`userdata(${auth_key}): ${res}`), err);
+
         },
         err
     );
@@ -233,6 +269,4 @@ function api_test() {
     //emsg
     emsg = "Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing industries for previewing layouts and visual mockups";
     api_emsg(emsg).then((res) => console.log(`emsg: ${res == ""}`), err);
-
-
 }
