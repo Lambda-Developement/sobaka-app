@@ -190,7 +190,7 @@ document.addEventListener('deviceready',() => {
     }
     if(localStorage != undefined){
         if(localStorage.getItem('auth_key') == null){
-            document.location.href = '../../screens/loginka/loginka.html'
+            document.location.href = '../../screens/Login/login.html'
         }
         auth_key = localStorage.getItem('auth_key');
     }

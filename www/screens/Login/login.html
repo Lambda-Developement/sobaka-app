@@ -5,7 +5,7 @@
     if (localStorage != undefined) {
         auth_key = localStorage.getItem('auth_key') != null;
         if (auth_key) {
-            window.location.href = '../Geoposition/home.html';
+            window.location.href = '../Map/map.html';
         }
     }
 </script>
@@ -55,7 +55,7 @@
         <a href="../forget%20password/foget.html"
             style="color:rgba(57, 57, 57, 1); text-decoration: none; position:relative; left: 5rem;">Забыли пароль?</a>
 
-        <!-- <button class="btn btn-hollow mb-3" id="login_button" onclick="location.href='../Geoposition/home.html'" style="border-radius:12px; margin-top: 4rem;"> -->
+        <!-- <button class="btn btn-hollow mb-3" id="login_button" onclick="location.href='../Map/map.html'" style="border-radius:12px; margin-top: 4rem;"> -->
 
         <button class="btn btn-hollow mb-3" id="login_button" onclick="login()"
             style="border-radius:12px; margin-top: 4rem;" disabled>
@@ -117,7 +117,7 @@
 </script>
 <script src="../../cordova.js"></script>
 <script>
-    //window.location.href = '../Geoposition/home.html';
+    //window.location.href = '../Map/map.html';
     function login(email, password) {
         errorMessage.style.visibility = "hidden";
 

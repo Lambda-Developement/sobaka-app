@@ -56,5 +56,13 @@
     },
     "is_top_level": true,
     "variables": {}
+  },
+  "cordova-universal-links-plugin": {
+    "source": {
+      "type": "registry",
+      "id": "https://github.com/walteram/cordova-universal-links-plugin"
+    },
+    "is_top_level": true,
+    "variables": {}
   }
 }

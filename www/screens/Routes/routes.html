@@ -14,7 +14,7 @@
     <main>
         <div class="screen-hat">
             <button class="btn arrow-back">
-                <a href="../Geoposition/home.html">
+                <a href="../Map/map.html">
                     <img src="../../ui-kit/svg/arrow_back.svg" alt="arrow-back">
                 </a>
             </button>
@@ -154,7 +154,7 @@
         document.addEventListener('deviceready',() => {
             if(localStorage != undefined){
                 if(localStorage.getItem('auth_key') == null){
-                    document.location.href = '../../screens/loginka/loginka.html'
+                    document.location.href = '../Login/login.html'
                 }
                 auth_key = localStorage.getItem('auth_key');
             }

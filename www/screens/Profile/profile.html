@@ -34,7 +34,7 @@
                 Григорий
             </h3>
             <div>
-                <a href="../ProfileIzmenit/profile_main.html" class="link-orange"><img
+                <a href="../ProfileEdit/profileEdit.html" class="link-orange"><img
                         src="../../ui-kit/svg/icon_orange.svg"> Изменить</a>
 
             </div>
@@ -218,7 +218,7 @@
         }
         function logout() {
             localStorage.removeItem('auth_key');
-            document.location.href = '../loginka/loginka.html';
+            document.location.href = '../Login/login.html';
         }
         document.addEventListener('deviceready',() => {
             get_user_name();
