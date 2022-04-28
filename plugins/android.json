@@ -23,6 +23,9 @@
     "cordova-plugin-http": {
       "PACKAGE_NAME": "io.cordova.tripar"
     },
+    "cordova-plugin-screen-orientation": {
+      "PACKAGE_NAME": "io.cordova.tripar"
+    },
     "cordova-plugin-tts": {
       "PACKAGE_NAME": "io.cordova.tripar"
     },
@@ -32,6 +35,9 @@
   },
   "dependent_plugins": {
     "cordova-plugin-file": {
+      "PACKAGE_NAME": "io.cordova.tripar"
+    },
+    "es6-promise-plugin": {
       "PACKAGE_NAME": "io.cordova.tripar"
     }
   }

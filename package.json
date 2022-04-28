@@ -21,9 +21,11 @@
     "cordova-plugin-geolocation": "^4.1.0",
     "cordova-plugin-hello": "file: plugins/cordova-plugin-hello",
     "cordova-plugin-http": "^1.2.0",
+    "cordova-plugin-screen-orientation": "^3.0.2",
     "cordova-plugin-tts": "^0.2.3",
     "cordova-plugin-webintent2": "^1.0.4",
     "cordova-universal-links-plugin": "github:walteram/cordova-universal-links-plugin",
+    "es6-promise-plugin": "^4.2.2",
     "http": "^0.0.1-security"
   },
   "cordova": {
@@ -40,6 +42,7 @@
       "cordova-plugin-tts": {},
       "cordova-plugin-http": {},
       "cordova-plugin-hello": {},
+      "cordova-plugin-screen-orientation": {},
       "cordova-universal-links-plugin": {}
     }
   }
