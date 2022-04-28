@@ -150,7 +150,8 @@
                 redirect_route_details();
             }
         }
-        setTimeout(()=>{
+        //document.addEventListener('deviceready',() => {});
+        document.addEventListener('deviceready',() => {
             if(localStorage != undefined){
                 if(localStorage.getItem('auth_key') == null){
                     document.location.href = '../../screens/loginka/loginka.html'
@@ -184,12 +185,7 @@
                     console.log(response.data);
                 }
             );
-        },1000);
+        });
     </script>
     <script src="../../cordova.js"></script>
-
-    
-
-
-    
 </body>

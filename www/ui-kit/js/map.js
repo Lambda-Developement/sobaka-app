@@ -1,11 +1,17 @@
-var HEIGHT = window.innerHeight+'px';
+const HEIGHT = window.innerHeight+'px';
 var pos = [57.621166, 39.888228];
 var scale = 15;
+const minDistance = 50; // metres
+
 var cur_route_id = -1;
 var cur_route_place = -1;
 
 var permissions;
 var index;
+var map;
+var routing_control;
+var pos_marker;
+var markers;
 
 var onSuccess = function(position) {
     pos = [position.coords.latitude,position.coords.longitude];
@@ -18,92 +24,15 @@ var onSuccess = function(position) {
         'Speed: '             + position.coords.speed             + '\n' +
         'Timestamp: '         + position.timestamp                + '\n');
 };
-
-// onError Callback receives a PositionError object
-//
 function onError(error) {
     alert('code: '    + error.code    + '\n' +
         'message: ' + error.message + '\n');
 }
-
-setTimeout(()=>{
-    permissions = cordova.plugins.permissions;
-    var list = [
-        permissions.ACCESS_FINE_LOCATION
-    ];
-
-    permissions.checkPermission(list, success, null);
-
-    function error() {
-        console.warn('Camera or Accounts permission is not turned on');
-        document.location.href = "../../screens/AccessError/accessError.html";
-    }
-
-    function success( status ) {
-        if( !status.hasPermission ) {
-
-            permissions.requestPermissions(
-                list,
-                function(status) {
-                    if( !status.hasPermission ) error();
-                },
-                error);
-        }
-    }
-},2000);
-
 function get_location(){
     navigator.geolocation.getCurrentPosition(onSuccess, onError);
     update_markers();
     map.flyTo(pos,18);
 }
-
-var minDistance = 50; // metres
-
-document.getElementById("map").style.height = HEIGHT;
-
-var map = L.map('map', {
-    center: pos,
-    zoom:scale,
-    zoomControl: false,
-})
-
-L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
-    attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
-    maxZoom: 18,
-    id: 'mapbox/streets-v11',
-    tileSize: 512,
-    zoomOffset: -1,
-    accessToken: 'pk.eyJ1IjoiaHVzY2tlciIsImEiOiJja3pkMTZ0cmUwNGYzMm9tcW5pa200dDJkIn0.-NLqcskaelmtyL5zpaBLzQ'
-}).addTo(map);
-map.on('move',redraw);
-map.on('scale',redraw);
-var markers = L.markerClusterGroup({
-    showCoverageOnHover: false,
-    maxClusterRadius: 80
-});
-var pos_marker = L.marker(new L.LatLng(pos[0], pos[1]), );
-
-var routing_control = L.Routing.control({
-    waypoints: [
-        null
-    ],
-    createMarker: function() { return null; },
-    show: false,
-    showAlternatives: false,
-    addWaypoints:false,
-    draggableWaypoints: false,
-    lineOptions : {
-        addWaypoints:false,
-        draggableWaypoints: false,
-    },
-    router: L.Routing.mapbox('pk.eyJ1IjoiaHVzY2tlciIsImEiOiJja3pkMTZ0cmUwNGYzMm9tcW5pa200dDJkIn0.-NLqcskaelmtyL5zpaBLzQ')
-});
-routing_control.addTo(map);
-// make_route(
-//     L.latLng(57.59918048960674, 39.845160556393985),
-//     L.latLng(57.626237457771296, 39.86840435639479));
-redraw();
 function make_route(start, end){
     map.removeControl(routing_control);
     routing_control = L.Routing.control({
@@ -170,8 +99,6 @@ function update_markers(){
             }
         }
         var marker = L.marker(new L.LatLng(el[0], el[1]), { title: title ,icon: icon});
-
-        //marker.bindPopup(title);
         markers.addLayer(marker);
         idx++;
     });
@@ -211,13 +138,6 @@ function zoomin(){
 function zoomout(){
     map.zoomOut(1);
 }
-function redraw(){
-
-}
-// map.on("click", function(e){
-//     pos = [e.latlng.lat, e.latlng.lng];
-//     update_markers();
-// })
 function search(input_str){
     results = index.search(input_str);
     document.getElementById("search-results1").innerHTML = "";
@@ -235,10 +155,39 @@ function search_clicked(coords){
     map.flyTo(coords,16);
     search_history_close();
 }
-setInterval(()=>{
-    if (locs.length > 0) search(document.getElementById('line-edit').value,{});
-},1000);
-setTimeout(()=>{
+function make_route_to_cur(){
+    if(localStorage != undefined) {
+        if (localStorage.getItem('prev_place') != null) {
+            idx = localStorage.getItem('prev_place');
+            make_route(L.latLng(pos),[locs[idx][0], locs[idx][1]]);
+            localStorage.removeItem('prev_place');
+        }
+    }
+}
+document.addEventListener('deviceready',() => {
+    permissions = cordova.plugins.permissions;
+    var list = [
+        permissions.ACCESS_FINE_LOCATION
+    ];
+
+    permissions.checkPermission(list, success, null);
+
+    function error() {
+        console.warn('Camera or Accounts permission is not turned on');
+        document.location.href = "../../screens/AccessError/accessError.html";
+    }
+
+    function success( status ) {
+        if( !status.hasPermission ) {
+
+            permissions.requestPermissions(
+                list,
+                function(status) {
+                    if( !status.hasPermission ) error();
+                },
+                error);
+        }
+    }
     if(localStorage != undefined){
         if(localStorage.getItem('auth_key') == null){
             document.location.href = '../../screens/loginka/loginka.html'
@@ -331,13 +280,43 @@ setTimeout(()=>{
             console.log(response.data);
         }
     );
-},2000);
-function make_route_to_cur(){
-    if(localStorage != undefined) {
-        if (localStorage.getItem('prev_place') != null) {
-            idx = localStorage.getItem('prev_place');
-            make_route(L.latLng(pos),[locs[idx][0], locs[idx][1]]);
-            localStorage.removeItem('prev_place');
-        }
-    }
-}
+});
+setInterval(()=>{
+    if (locs.length > 0) search(document.getElementById('line-edit').value,{});
+},1000);
+
+document.getElementById("map").style.height = HEIGHT;
+map = L.map('map', {
+    center: pos,
+    zoom:scale,
+    zoomControl: false,
+})
+L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
+    attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+    maxZoom: 18,
+    id: 'mapbox/streets-v11',
+    tileSize: 512,
+    zoomOffset: -1,
+    accessToken: 'pk.eyJ1IjoiaHVzY2tlciIsImEiOiJja3pkMTZ0cmUwNGYzMm9tcW5pa200dDJkIn0.-NLqcskaelmtyL5zpaBLzQ'
+}).addTo(map);
+markers = L.markerClusterGroup({
+    showCoverageOnHover: false,
+    maxClusterRadius: 80
+});
+pos_marker = L.marker(new L.LatLng(pos[0], pos[1]), );
+routing_control = L.Routing.control({
+    waypoints: [
+        null
+    ],
+    createMarker: function() { return null; },
+    show: false,
+    showAlternatives: false,
+    addWaypoints:false,
+    draggableWaypoints: false,
+    lineOptions : {
+        addWaypoints:false,
+        draggableWaypoints: false,
+    },
+    router: L.Routing.mapbox('pk.eyJ1IjoiaHVzY2tlciIsImEiOiJja3pkMTZ0cmUwNGYzMm9tcW5pa200dDJkIn0.-NLqcskaelmtyL5zpaBLzQ')
+});
+routing_control.addTo(map);

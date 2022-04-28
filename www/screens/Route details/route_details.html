@@ -396,10 +396,8 @@
             }
         }
     }
-    setTimeout(()=>{
+    document.addEventListener('deviceready',() => {
         get_user_name();
-    },1000);
-    setTimeout(()=>{
         if(localStorage != undefined){
             if(localStorage.getItem('auth_key') == null){
                 document.location.href = '../../screens/loginka/loginka.html'
@@ -447,7 +445,7 @@
                 console.log(response.data);
             }
         );
-    },1000);
+    });
 </script>
 </body>
 </html>

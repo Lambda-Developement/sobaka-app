@@ -384,9 +384,9 @@
                 }
             }
         }
-        setTimeout(() => {
+        document.addEventListener('deviceready',() => {
             get_user_name();
-        }, 1000);
+        });
     </script>
     <script>
         function load_reviews(result) {
@@ -424,7 +424,9 @@
                 review_count++;
             });
         }
-        setTimeout(()=>api_getrev(33,localStorage.getItem('auth_key')).then((res) => load_reviews(res), ()=>console.log('error')), 2000);
+        document.addEventListener('deviceready',() => {
+            api_getrev(33,localStorage.getItem('auth_key')).then((res) => load_reviews(res), ()=>console.log('error'));
+        });
     </script>
 </body>
 
