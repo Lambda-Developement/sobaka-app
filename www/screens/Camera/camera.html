@@ -2,13 +2,13 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../../ui-kit/css/bootstrap.css">
-    <link rel="stylesheet" href="../../ui-kit/css/styles.css">
-    <link rel="stylesheet" href="style.css">
-    <title>Cordova PlugTest</title>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../../ui-kit/css/bootstrap.css" />
+    <link rel="stylesheet" href="../../ui-kit/css/styles.css" />
+    <link rel="stylesheet" href="style.css" />
+    <title>Camera redirect</title>
 
     <style>
         /* Loader css */
@@ -58,27 +58,27 @@
     </style>
 </head>
 
-
-<body
-    style="margin: 0; overflow: hidden; display:flex; flex-direction: column; justify-content: center; align-items: center; height: 99vh;">
-
-    <!-- <audio id=" museum">
-    <source src="museum.mp3" type="audio/mpeg">
-    </audio> -->
-
+<body style="
+      margin: 0;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 99vh;
+    ">
+    <!-- Loading -->
     <div class="lds-facebook">
         <div></div>
         <div></div>
         <div></div>
     </div>
-
-
+    <script src="../../ui-kit/js/redirects.js"></script>
     <script>
         console.log("loading functions");
 
-
         function onLoad() {
-            document.addEventListener('deviceready',() => {
+            document.addEventListener("deviceready", () => {
                 console.log("onLoad()");
                 onDeviceReady();
             });
@@ -87,29 +87,20 @@
         function onDeviceReady() {
             let auth_key;
             if (localStorage != undefined) {
-                auth_key = localStorage.getItem('auth_key');
+                auth_key = localStorage.getItem("auth_key");
             }
             let id = 33;
             let resp = `{"id":${id},"user_key":'${auth_key}'}`;
             cordova.plugins.startActivity(
-
                 function (res) {
                     console.log(`yes: ${res}`);
-                }, function (res) {
+                },
+                function (res) {
                     console.log(`nononononononono: ${res}`);
                 },
                 resp
             );
-            console.log("onDeviceReady()");
-
-            // alert(" It's loaded! (JavaScript)");
-            // cordova.plugins.showConsole(
-            //     "Success (Java Native)",
-            //     function (res) {
-            //         alert(`Success (Javascript positive callback); ${res}`);
-            //     }, function (res) {
-            //         alert(`Fail (Javascript negative callback); ${res}`);
-            //     });
+            redirect_home();
         }
 
         window.addEventListener("cordovacallbackerror", function (event) {
@@ -123,7 +114,5 @@
         window.setTimeout(onLoad, 1000);
     </script>
 </body>
-
-
 
 </html>
