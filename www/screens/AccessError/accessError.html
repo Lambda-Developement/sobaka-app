@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -10,6 +11,7 @@
     <title>AccessError</title>
     <script src="../../ui-kit/js/redirects.js"></script>
 </head>
+
 <body style="background: #F0F0F0">
     <div class="screen-hat">
         <div class="mb-3">
@@ -18,31 +20,34 @@
             </h3>
         </div>
     </div>
-<div class="d-flex flex-column justify-content-center align-items-center">
-    <div class="d-flex flex-column">
-    <div class="card">
-        <img src="png/dog.png"> 
-        <p>
-            Пожалуйста, предоставьте доступ для корректной работы приложения.
-        </p>
-    </div> 
+    <div class="d-flex flex-column justify-content-center align-items-center">
+        <div class="d-flex flex-column">
+            <div class="card">
+                <img src="../../ui-kit/img/dog.png">
+                <p>
+                    Пожалуйста, предоставьте доступ для корректной работы приложения.
+                </p>
+            </div>
+        </div>
+        <div>
+            <button class="btn btn-filled" onclick="go_back()">
+                <p class="btn-text">Назад</p>
+            </button>
+        </div>
     </div>
-    <div>
-        <button class="btn btn-filled" onclick="go_back()"><p class="btn-text">Назад</p></button>
-    </div>
-</div>
     <script src="../../cordova.js"></script>
     <script>
-        function go_back(){
-            if(localStorage != undefined){
+        function go_back() {
+            if (localStorage != undefined) {
                 prev = localStorage.getItem('prev_page');
-                if(prev != null){
+                if (prev != null) {
                     redirect(prev);
-                }else{
+                } else {
                     redirect_home();
                 }
             }
         }
     </script>
 </body>
+
 </html>
