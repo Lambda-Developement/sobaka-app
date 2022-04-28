@@ -194,92 +194,62 @@ document.addEventListener('deviceready',() => {
         }
         auth_key = localStorage.getItem('auth_key');
     }
-    cordovaHTTP.post("https://trip.backend.xredday.ru/",
-        {
-            'request':
-                {
-                    "action": "data",
-                    "user_key": auth_key,
-                }
-        },
-        {},
-        function (response) {
-            console.log(response.status);
-            try {
-                locs = JSON.parse(response.data);
-                index = elasticlunr(function () {
-                    this.use(elasticlunr.ru);
-                    this.addField('latitude');
-                    this.addField('longitude');
-                    this.addField('body');
-                    this.setRef('id');
-                });
-                locs.forEach((el,t)=>{
-                    index.addDoc({
-                        'body':el[2],
-                        'latitude':el[0],
-                        'longitude':el[1],
-                        'id':t
-                    })
+    api_data(auth_key).then((res) => {
+        try {
+            locs = JSON.parse(response.data);
+            index = elasticlunr(function () {
+                this.use(elasticlunr.ru);
+                this.addField('latitude');
+                this.addField('longitude');
+                this.addField('body');
+                this.setRef('id');
+            });
+            locs.forEach((el,t)=>{
+                index.addDoc({
+                    'body':el[2],
+                    'latitude':el[0],
+                    'longitude':el[1],
+                    'id':t
                 })
-                if(localStorage != undefined){
-                    if(localStorage.getItem('prev_place') != null){
-                        idx = localStorage.getItem('prev_place');
-                        map.flyTo([locs[idx][0],locs[idx][1]],18);
-                        collapse_toggle(parseInt(idx));
+            })
+            if(localStorage != undefined){
+                if(localStorage.getItem('prev_place') != null){
+                    idx = localStorage.getItem('prev_place');
+                    map.flyTo([locs[idx][0],locs[idx][1]],18);
+                    collapse_toggle(parseInt(idx));
 
-                    }
-                    if(localStorage.getItem('route_id') != null){
-                        cur_route_id = parseInt(localStorage.getItem('route_id'));
-                        localStorage.removeItem('route_id');
-                    }else{
-                        cur_route_id = -1;
-                    }
-                    if(localStorage.getItem('route_place') != null){
-                        cur_route_place = parseInt(localStorage.getItem('route_place'));
-                        localStorage.removeItem('route_place')
-                    }else{
-                        cur_route_place = -1;
-                    }
                 }
-                cordovaHTTP.post("https://trip.backend.xredday.ru/",
-                    {
-                        'request':
-                            {
-                                "action": "groutes",
-                                "user_key": auth_key,
-                            }
-                    },
-                    {},
-                    function (response) {
-                        console.log(response.status);
-                        try {
-                            groutes = JSON.parse(response.data);
-                            routes = [];
-                            groutes.forEach(el=>{
-                                routes.push(el[2].split(',').map(x=>{
-                                    return parseInt(x);
-                                }));
-                            });
-                            update_markers();
-                        } catch (e) {
-                            console.error("JSON parsing error");
-                        }
-                    },
-                    function (response) {
-                        console.log(response.status);
-                        console.log(response.data);
-                    }
-                );
-            } catch (e) {
-                console.error("JSON parsing error");
+                if(localStorage.getItem('route_id') != null){
+                    cur_route_id = parseInt(localStorage.getItem('route_id'));
+                    localStorage.removeItem('route_id');
+                }else{
+                    cur_route_id = -1;
+                }
+                if(localStorage.getItem('route_place') != null){
+                    cur_route_place = parseInt(localStorage.getItem('route_place'));
+                    localStorage.removeItem('route_place')
+                }else{
+                    cur_route_place = -1;
+                }
             }
-        },
-        function (response) {
-            console.log(response.status);
-            console.log(response.data);
+            api_groutes(auth_key).then((res) => {
+                try {
+                    groutes = JSON.parse(response.data);
+                    routes = [];
+                    groutes.forEach(el=>{
+                        routes.push(el[2].split(',').map(x=>{
+                            return parseInt(x);
+                        }));
+                    });
+                    update_markers();
+                } catch (e) {
+                    console.error("JSON parsing error");
+                }
+            }, ()=>console.log('error'));
+        } catch (e) {
+            console.error("JSON parsing error");
         }
-    );
+    }, ()=>console.log('error'));
 });
 setInterval(()=>{
     if (locs.length > 0) search(document.getElementById('line-edit').value,{});

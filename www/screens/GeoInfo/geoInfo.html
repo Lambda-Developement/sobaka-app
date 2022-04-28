@@ -254,37 +254,6 @@
                 temp[i].style.display = 'none';
             }
         }
-        function get_user_name() {
-            cordovaHTTP.post("https://trip.backend.xredday.ru/",
-                {
-                    'request':
-                        {
-                            "action": "userdata",
-                            "user_key": localStorage.getItem('auth_key')
-                        }
-                },
-                {},
-                function (response) {
-                    // prints 200
-                    console.log(response.status);
-                    try {
-                        console.log(response.data);
-                        a = JSON.parse(response.data)[2];
-                        console.log(a);
-                        localStorage.setItem('name', a);
-                    } catch (e) {
-                        console.error("JSON parsing error");
-                    }
-                },
-                function (response) {
-                    // prints 403
-                    console.log(response.status);
-                    errorMessage.style.visibility = "visible";
-                    //prints Permission denied
-                    console.log(response.data);
-                }
-            );
-        }
         function review_btn_click() {
             let name = "Роман";
             if (localStorage != undefined) {
@@ -385,7 +354,7 @@
             }
         }
         document.addEventListener('deviceready',() => {
-            get_user_name();
+            api_userdata(auth_key).then((userdata) => { localStorage.setItem('name', userdata[2]); });
         });
     </script>
     <script>

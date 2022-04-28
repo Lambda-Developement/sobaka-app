@@ -158,33 +158,18 @@
                 }
                 auth_key = localStorage.getItem('auth_key');
             }
-            cordovaHTTP.post("https://trip.backend.xredday.ru/",
-                {
-                    'request':
-                        {
-                            "action": "groutes",
-                            "user_key": auth_key,
-                        }
-                },
-                {},
-                function (response) {
-                    console.log(response.status);
-                    try {
-                        groutes = JSON.parse(response.data);
-                        groutes.forEach(el=>{
-                            document.getElementById(`${el[0]}-text`).innerText = el[1];
-                            document.getElementById(`${el[0]}-length`).innerText = el[4]+'km';
-                            document.getElementById(`${el[0]}-duration`).innerText = el[3]+'hr.';
-                        });
-                    } catch (e) {
-                        console.error("JSON parsing error");
-                    }
-                },
-                function (response) {
-                    console.log(response.status);
-                    console.log(response.data);
+            api_userdata(auth_key).then((userdata) => {
+                try {
+                    groutes = JSON.parse(response.data);
+                    groutes.forEach(el=>{
+                        document.getElementById(`${el[0]}-text`).innerText = el[1];
+                        document.getElementById(`${el[0]}-length`).innerText = el[4]+'km';
+                        document.getElementById(`${el[0]}-duration`).innerText = el[3]+'hr.';
+                    });
+                } catch (e) {
+                    console.error("JSON parsing error");
                 }
-            );
+            });
         });
     </script>
     <script src="../../cordova.js"></script>

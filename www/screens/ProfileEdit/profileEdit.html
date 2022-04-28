@@ -109,41 +109,11 @@
                 }
             }
         }
-        function update_user(field, value, auth_key = localStorage.getItem("auth_key")) {
-            if (!value || !field) {
-                return false;
-            }
-            console.log(`update_user(${field}, ${value}, ${auth_key})\n`);
-            cordovaHTTP.post("https://trip.backend.xredday.ru/",
-                {
-                    'request':
-                    {
-                        "action": "pupd",
-                        "data": {
-                            field: value,
-                        },
-                        "user_key": auth_key,
-                    }
-                },
-                {},
-                function (response) {
-                    // prints 200
-                    localStorage.setItem(field, value);
-                    console.log(response.status);
-                    console.log(response.data);
-                },
-                function (response) {
-                    // prints 403
-                    console.log(response.status);
-                    console.log(response.data);
-                }
-            );
-            return true;
-        }
 
         function apply_changes() {
             if (localStorage != undefined) {
                 //['name','sex','birth1','birth2','birth3','email','phone'].forEach(el=>{
+                let values = {};
                 let value;
                 ['name', 'gender', 'dob', 'phone'].forEach(el => {
                     if (el == 'dob') {
@@ -157,8 +127,11 @@
                         value = document.getElementById(el).value;
                     }
                     console.log(document.getElementById(el))
-                    update_user(el, value);
+                    values[el]=value;
                     localStorage.setItem(el, document.getElementById(el).value);
+                });
+                api_pupd(auth_key,values).then((a) => {
+                    console.log('userdata updated');
                 });
                 el = document.getElementById('new-prof-pic');
                 if (el.value) {

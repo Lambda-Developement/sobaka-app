@@ -189,89 +189,15 @@
         if (!password) password = passwordField.value;
         if (!name) name = nameField.value;
 
-        var a = create_user(name, email, password);
-        if (a) {
-            setTimeout(() => {
-                redirect_mail_confirmation();
-            }, 2000);
-        } else {
-            errorMessage.style.visibility = "visible";
-
-        }
-    }
-
-    function create_user(name, mail, pass) {
-        var success = true;
-        cordovaHTTP.post("https://trip.backend.xredday.ru/",
-            {
-                'request':
-                {
-                    "action": "reg",
-                    "data": {
-                        "name": name,
-                        "mail": mail,
-                        "pass": pass,
-                    }
-                }
-            },
-            {},
-            function (response) {
-                // prints 200
-                console.log(response.status);
-                console.log("--- RESPONSE DATA START ---\n" + response.data + "\n--- RESPONSE DATA END ---");
-
-                success = true;
-            },
-            function (response) {
-                // prints 403
-                console.log(response.status);
-                console.log(response.data);
+        api_register(name, email, password).then((a) => {
+            if(a){
+                setTimeout(() => {
+                    redirect_mail_confirmation();
+                }, 2000);
+            }else{
                 errorMessage.style.visibility = "visible";
-                success = false;
             }
-        );
-        return success;
-    }
-
-    function api_authorize(email, password, href) {
-        // Recieves email and password in plain.
-        console.log("Logging in...");
-
-        cordovaHTTP.post("https://trip.backend.xredday.ru/",
-            {
-                'request':
-                {
-                    "action": "login",
-                    "data": { "login": email, "pass": password }
-                }
-            },
-            {},
-            function (response) {
-                // prints 200
-                console.log(response.status);
-
-                try {
-                    console.log(response.data);
-                    localStorage.setItem("auth_key", response.data);
-                    if (response.data) {
-                        location.href = href;
-                    }
-                } catch (e) {
-                    console.error("JSON parsing error");
-                }
-            },
-            function (response) {
-                // prints 403
-                console.log("--- AUTH FAIL ---\n")
-                console.log(response.status);
-                console.log(response.data);
-                errorMessage.style.visibility = "visible";
-                //prints Permission denied
-
-
-            }
-        );
-
+        });
     }
 </script>
 

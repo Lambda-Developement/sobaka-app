@@ -60,24 +60,7 @@
         errorField.style.display = "None";
         emailField.style.display = "None";
         successMessage.style.display = "inline-flex";
-        cordovaHTTP.post("https://trip.backend.xredday.ru/",
-            {
-                'request':
-                {
-                    "action": "emsg",
-                    "data": error_message,
-                }
-            },
-            {},
-            function (response) {
-                // prints 200
-                console.log(response.status);
-            },
-            function (response) {
-                // prints 403
-                console.log(response.status);
-            }
-        );
+        api_emsg(error_message).then((res) => console.log(res), ()=>console.log('error'));
     }
 </script>
 <script src="../../cordova.js"></script>
