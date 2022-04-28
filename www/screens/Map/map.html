@@ -123,7 +123,8 @@
     </div>
     <div id="info2">
         <div id='popup-wrapper' class="position-fixed" style="z-index: 3;bottom:0; width:100%;">
-            <div onclick='toggle_collapse()' class="near-popup d-inline-flex justify-content-between align-items-center">
+            <div onclick='toggle_collapse()'
+                class="near-popup d-inline-flex justify-content-between align-items-center">
                 <div class="dog-img-big"></div>
                 <div id='near-popup-text' style='display:flex;' class="justify-content-center align-items-center h-100">
                     <div class="d-flex flex-column">
@@ -167,28 +168,28 @@
         var opened = false;
         var popup_collapsed = false;
         var park_id = 0;
-        function toggle_collapse(){
-        	if(popup_collapsed){
-				setTimeout(()=>{
-					document.getElementsByClassName('near-popup')[0].style.borderBottom = '2px solid rgba(243, 243, 243, 1)';
+        function toggle_collapse() {
+            if (popup_collapsed) {
+                setTimeout(() => {
+                    document.getElementsByClassName('near-popup')[0].style.borderBottom = '2px solid rgba(243, 243, 243, 1)';
                     document.getElementsByClassName('near-popup')[0].style.borderRadius = 'unset';
                     document.getElementById('near-popup-text').style.display = 'flex';
-					document.getElementById('inner-reviews').style.display = 'block';
-					document.getElementById('popup-wrapper').style.bottom = '0px';
-				},300);
-				document.getElementById('popup-wrapper').style.width = '100%';
+                    document.getElementById('inner-reviews').style.display = 'block';
+                    document.getElementById('popup-wrapper').style.bottom = '0px';
+                }, 300);
+                document.getElementById('popup-wrapper').style.width = '100%';
 
-        	}else{
-				setTimeout(()=>{
+            } else {
+                setTimeout(() => {
                     document.getElementsByClassName('near-popup')[0].style.borderBottom = '0';
                     document.getElementsByClassName('near-popup')[0].style.borderRadius = '12px';
                     document.getElementById('near-popup-text').style.display = 'none';
-					document.getElementById('inner-reviews').style.display = 'none';
-					document.getElementById('popup-wrapper').style.bottom = opened ? '210px' : '82px';
-				},600);
-				document.getElementById('popup-wrapper').style.width = '140px';	
-        	}
-        	popup_collapsed = !popup_collapsed;
+                    document.getElementById('inner-reviews').style.display = 'none';
+                    document.getElementById('popup-wrapper').style.bottom = opened ? '210px' : '82px';
+                }, 600);
+                document.getElementById('popup-wrapper').style.width = '140px';
+            }
+            popup_collapsed = !popup_collapsed;
         }
         function search_history_open() {
             document.getElementById('search-history').style.display = 'block';
@@ -216,7 +217,7 @@
             opened ? collapse_open() : collapse_close();
             console.log(g_id);
             if (localStorage != undefined) {
-                if(opened) localStorage.setItem('prev_place', g_id);
+                if (opened) localStorage.setItem('prev_place', g_id);
                 else localStorage.removeItem('prev_place');
             }
         }
@@ -230,7 +231,7 @@
             }
         }
         if (localStorage != undefined) {
-            localStorage.setItem('prev_page', '../../screens/Geoposition/home.html');
+            localStorage.setItem('prev_page', '../../screens/Map/map.html');
         }
     </script>
     <script src="../../cordova.js"></script>

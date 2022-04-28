@@ -105,13 +105,10 @@ async function api_pupd(auth_key, diff) {
     // returns nothing (resolve if good reject if bad)
     // types: name - str; gender - 0, 1 man, 2 girl; dob - ???; phone - str???; pass - str
     // TODO: check dob - unix timestamp
-    let data = {
-        'name': diff['name'],
-        'gender': diff['gender'],
-        'dob': diff['dob'],
-        'phone': diff['phone'],
-        'pass': diff['pass'],
-    } // explicitly specify allowed fields
+    let data = {};
+    const fields = ['name', 'gender', 'dob', 'phone', 'pass'];
+    // Explicitly forbid other fields.
+    fields.forEach((field) => { if (diff[field] != undefined) data[field] = diff[field] });
     return await __basic_api_call("pupd", data, auth_key);
 }
 
@@ -125,6 +122,9 @@ async function api_userdata(auth_key) {
     }
     return await __basic_api_call("userdata", data, auth_key);
 }
+
+// Getting field
+// api_userdata(auth_key).then((userdata) => { var name = userdata[2]; });
 
 // Sobaka-app
 async function api_getrev(id, auth_key) {
