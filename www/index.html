@@ -21,8 +21,14 @@
         var isIndex = true;
     </script>
     <script src="cordova.js"></script>
-    <script src="ui-kit/js/deeplinks.js"></script>
     <script src="./screens/api.js"></script>
+    <script src="ui-kit/js/redirects.js"></script>
+    <script src="ui-kit/js/deeplinks.js"></script>
+    <script>
+        try {
+            if (isIndex) redirect("./screens/Login/login.html");
+        } catch (except) { }
+    </script>
 </body>
 
 </html>

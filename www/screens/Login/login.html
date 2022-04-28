@@ -1,4 +1,5 @@
 <html lang="en">
+
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no" />
@@ -40,7 +41,7 @@
                 id="password_field" placeholder="******">
         </div>
 
-        <a href="../forget%20password/foget.html"
+        <a href="../ForgetPassword/forgetPassword.html"
             style="color:rgba(57, 57, 57, 1); text-decoration: none; position:relative; left: 5rem;">Забыли пароль?</a>
 
         <!-- <button class="btn btn-hollow mb-3" id="login_button" onclick="location.href='../Map/map.html'" style="border-radius:12px; margin-top: 4rem;"> -->
@@ -49,8 +50,7 @@
             style="border-radius:12px; margin-top: 4rem;" disabled>
             <p class="btn-text">Войти</p>
         </button>
-        <button class="btn btn-hollow2" onclick="redirect_registration()"
-            style="border-radius:12px;">
+        <button class="btn btn-hollow2" onclick="redirect_registration()" style="border-radius:12px;">
             <p class="btn-text">Зарегистрироваться</p>
         </button>
 
@@ -104,6 +104,9 @@
     callbackFunction();
 </script>
 <script src="../../cordova.js"></script>
+<script src="../api.js"></script>
+<script src="../../ui-kit/js/redirects.js"></script>
+<script src="../../ui-kit/js/deeplinks.js"></script>
 <script>
     //window.location.href = '../Map/map.html';
     function login(email, password) {
@@ -111,26 +114,23 @@
 
         if (!email) email = emailField.value;
         if (!password) password = passwordField.value;
-        api_login(email, password).then((response) => {
-            try {
-                console.log(response.data);
-                localStorage.setItem("auth_key", response.data);
-                if (response.data) {
-                    redirect_home();
-                }
-            } catch (e) {
-                console.error("JSON parsing error");
+        api_login(email, password).then(
+            (response) => {
+                localStorage.setItem("auth_key", response);
+                redirect_home();
+            },
+            (error) => {
+                errorMessage.style.visibility = "visible";
             }
-        }, ()=>{
-            errorMessage.style.visibility = "visible";
-        });
+        );
     }
-    document.addEventListener('deviceready',() => {
+    document.addEventListener('deviceready', () => {
         api_kval(localStorage.getItem('auth_key')).then((res) => {
-            if(localStorage.getItem('auth_key') != null){
+            if (localStorage.getItem('auth_key') != null) {
                 redirect_home();
             }
-        }, ()=>{});
+        }, () => { });
     });
 </script>
+
 </html>

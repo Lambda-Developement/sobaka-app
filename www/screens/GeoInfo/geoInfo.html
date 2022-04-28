@@ -8,9 +8,7 @@
     <link rel="stylesheet" href="../../ui-kit/css/styles.css">
     <link rel="stylesheet" href="styles.css">
     <title>GeoInfo</title>
-    <script src="../../ui-kit/js/redirects.js"></script>
-    <script src="../api.js"></script>
-    <script src="../../ui-kit/js/deeplinks.js"></script>
+
 </head>
 
 <body>
@@ -211,12 +209,12 @@
         var review_count = 0;
         var prev_place = null;
         if (localStorage != undefined) {
-            if(localStorage.getItem('prev_place') != null){
+            if (localStorage.getItem('prev_place') != null) {
                 prev_place = localStorage.getItem('prev_place');
             }
         }
-        function get_route(){
-            localStorage.setItem('make_route',prev_place);
+        function get_route() {
+            localStorage.setItem('make_route', prev_place);
             redirect_home();
         }
         function collapse_open() {
@@ -283,9 +281,9 @@
                 document.getElementById('review-text').innerHTML = 'Добавить';
             } else {
                 let prev_review = document.getElementById('review-input').value;
-                api_crrev(33,0,rate,localStorage.getItem('auth_key'),prev_review).then((res) => {
+                api_crrev(33, 0, rate, localStorage.getItem('auth_key'), prev_review).then((res) => {
                     console.log('done');
-                }, ()=>console.log('error'));
+                }, () => console.log('error'));
                 document.getElementById('review-' + (review_count)).remove();
                 document.getElementById('reviews-here').innerHTML += "" +
                     "<div id='review-" + (review_count) + "' class=\"review d-flex flex-column mb-3\">\n" +
@@ -354,7 +352,7 @@
                 }
             }
         }
-        document.addEventListener('deviceready',() => {
+        document.addEventListener('deviceready', () => {
             api_userdata(auth_key).then((userdata) => { localStorage.setItem('name', userdata[2]); });
         });
     </script>
@@ -363,7 +361,7 @@
             document.getElementById('average-score').innerHTML = Math.round(result[0]);
             let reviews = result[1];
             console.log(reviews);
-            reviews.forEach(el=>{
+            reviews.forEach(el => {
                 let name = el[0][0];
                 console.log(el);
                 console.log(name);
@@ -394,10 +392,14 @@
                 review_count++;
             });
         }
-        document.addEventListener('deviceready',() => {
-            api_getrev(33,localStorage.getItem('auth_key')).then((res) => load_reviews(res), ()=>console.log('error'));
+        document.addEventListener('deviceready', () => {
+            api_getrev(33, localStorage.getItem('auth_key')).then((res) => load_reviews(res), () => console.log('error'));
         });
     </script>
 </body>
+<script src="../../cordova.js"></script>
+<script src="../api.js"></script>
+<script src="../../ui-kit/js/redirects.js"></script>
+<script src="../../ui-kit/js/deeplinks.js"></script>
 
 </html>

@@ -9,9 +9,7 @@
     <link rel="stylesheet" href="../../ui-kit/css/styles.css">
     <link rel="stylesheet" href="style.css">
 
-    <title>Profile+avatar</title>
-    <script src="../../ui-kit/js/deeplinks.js"></script>
-    <script src="../../ui-kit/js/redirects.js"></script>
+    <title>Profile</title>
 </head>
 
 <body onload="check_credentials()">
@@ -149,15 +147,18 @@
 
     </div>
     <script src="../../cordova.js"></script>
+    <script src="../api.js"></script>
+    <script src="../../ui-kit/js/redirects.js"></script>
+    <script src="../../ui-kit/js/deeplinks.js"></script>
 
 
     <script>
-        function go_back(){
-            if(localStorage != undefined){
+        function go_back() {
+            if (localStorage != undefined) {
                 prev = localStorage.getItem('prev_page');
-                if(prev != null){
+                if (prev != null) {
                     redirect(prev);
-                }else{
+                } else {
                     redirect_home();
                 }
             }
@@ -189,10 +190,11 @@
             localStorage.removeItem('auth_key');
             document.location.href = '../Login/login.html';
         }
-        document.addEventListener('deviceready',() => {
+        document.addEventListener('deviceready', () => {
             api_userdata(auth_key).then((userdata) => { localStorage.setItem('name', userdata[2]); });
         });
     </script>
+
 </body>
 
 </html>

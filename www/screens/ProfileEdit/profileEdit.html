@@ -8,9 +8,8 @@
     <link rel="stylesheet" href="../../ui-kit/css/bootstrap.css">
     <link rel="stylesheet" href="../../ui-kit/css/styles.css">
     <link rel="stylesheet" href="style.css">
-    <title>Profile+avatar</title>
-    <script src="../../ui-kit/js/deeplinks.js"></script>
-    <script src="../../ui-kit/js/redirects.js"></script>
+    <title>profileEdit</title>
+
 </head>
 
 <body onload="check_credentials()">
@@ -94,6 +93,11 @@
 
         </div>
     </form>
+    <script src="../../cordova.js"></script>
+    <script src="../api.js"></script>
+    <script src="../../ui-kit/js/redirects.js"></script>
+    <script src="../../ui-kit/js/deeplinks.js"></script>
+
     <script>
         function check_credentials() {
             if (localStorage != undefined) {
@@ -128,10 +132,10 @@
                         value = document.getElementById(el).value;
                     }
                     console.log(document.getElementById(el))
-                    values[el]=value;
+                    values[el] = value;
                     localStorage.setItem(el, document.getElementById(el).value);
                 });
-                api_pupd(auth_key,values).then((a) => {
+                api_pupd(auth_key, values).then((a) => {
                     console.log('userdata updated');
                 });
                 el = document.getElementById('new-prof-pic');

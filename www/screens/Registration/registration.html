@@ -179,6 +179,10 @@
 
 </script>
 <script src="../../cordova.js"></script>
+<script src="../api.js"></script>
+<script src="../../ui-kit/js/redirects.js"></script>
+<script src="../../ui-kit/js/deeplinks.js"></script>
+
 <script>
     errorMessage = document.getElementById("error-msg");
     errorMessage.style.visibility = "hidden";
@@ -191,11 +195,11 @@
         if (!name) name = nameField.value;
 
         api_register(name, email, password).then((a) => {
-            if(a){
+            if (a) {
                 setTimeout(() => {
                     redirect_mail_confirmation();
                 }, 2000);
-            }else{
+            } else {
                 errorMessage.style.visibility = "visible";
             }
         });
