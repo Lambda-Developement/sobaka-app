@@ -18,47 +18,27 @@
         </p>
     </div>
     <script src="cordova.js"></script>
+    <script src="./screens/api.js"></script>
     <script>
-        document.addEventListener('deviceready',() => {
+        document.addEventListener('deviceready', () => {
             universalLinks.subscribe(null, function (eventData) {
-                // do some work
                 console.log(eventData);
                 console.log('Link: ' + eventData.url);
                 console.log('Args: ' + eventData.params);
+
                 if (eventData.url.includes('password')) {
+                    // Смена пароля
                     document.location.href = 'screens/ResetPassword/resetPassword.html';
                 }
-                if (eventData.url.includes('mail')) {
+                else if (eventData.url.includes('mail')) {
                     // Подтверждение регистрации
-                    console.log("CONFIRM: " + eventData.url.split("/")[eventData.url.split("/").length - 1]);
-                    cordovaHTTP.post("https://trip.backend.xredday.ru/",
-                        {
-                            'request':
-                                {
-                                    "action": "regconf",
-                                    "data": {
-                                        "conf": eventData.url.split("/")[eventData.url.split("/").length - 1],
-                                    }
-                                }
-                        },
-                        {},
-                        function (response) {
-                            // prints 200
-                            console.log(response.status);
-                            console.log("--- RESPONSE DATA START ---\n" + response.data + "\n--- RESPONSE DATA END ---");
-
-                            success = true;
-                        },
-                        function (response) {
-                            // prints 403
-                            console.log(response.status);
-                            console.log(response.data);
-                            errorMessage.style.visibility = "visible";
-                            success = false;
+                    conf = eventData.url.split("/")[eventData.url.split("/").length - 1];
+                    console.log(`api_regconf(${conf})`);
+                    api_regconf(conf).then(
+                        (success) => {
+                            document.location.href = 'screens/Mail confirmation/mailConfirmation.html';
                         }
                     );
-
-                    document.location.href = 'screens/MailConfirmation/mailConfirmation.html';
                 }
             });
             document.location.href = "screens/Login/login.html";
