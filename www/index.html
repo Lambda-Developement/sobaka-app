@@ -17,34 +17,12 @@
             TripAR
         </p>
     </div>
-    <script src="cordova.js"></script>
-    <script src="./screens/api.js"></script>
     <script>
-        document.addEventListener('deviceready', () => {
-            universalLinks.subscribe(null, function (eventData) {
-                console.log(eventData);
-                console.log('Link: ' + eventData.url);
-                console.log('Args: ' + eventData.params);
-
-                if (eventData.url.includes('password')) {
-                    // Смена пароля
-                    document.location.href = 'screens/ResetPassword/resetPassword.html';
-                }
-                else if (eventData.url.includes('mail')) {
-                    // Подтверждение регистрации
-                    conf = eventData.url.split("/")[eventData.url.split("/").length - 1];
-                    console.log(`api_regconf(${conf})`);
-                    api_regconf(conf).then(
-                        (success) => {
-                            document.location.href = 'screens/Mail confirmation/mailConfirmation.html';
-                        }
-                    );
-                }
-            });
-            window.screen.orientation.lock('portrait');
-            document.location.href = "screens/Login/login.html";
-        });
+        var isIndex = true;
     </script>
+    <script src="cordova.js"></script>
+    <script src="ui-kit/js/deeplinks.js"></script>
+    <script src="./screens/api.js"></script>
 </body>
 
 </html>

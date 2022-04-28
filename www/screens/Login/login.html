@@ -1,16 +1,4 @@
 <html lang="en">
-
-<!-- TODO: добавить валидацию ключа -->
-<script>
-    if (localStorage != undefined) {
-        auth_key = localStorage.getItem('auth_key') != null;
-        if (auth_key) {
-            window.location.href = '../Map/map.html';
-        }
-    }
-</script>
-
-
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no" />
@@ -123,49 +111,26 @@
 
         if (!email) email = emailField.value;
         if (!password) password = passwordField.value;
-        api_authorize(email, password);
-    }
-
-    function api_authorize(email, password) {
-        // Recieves email and password in plain.
-
-        cordovaHTTP.post("https://trip.backend.xredday.ru/",
-            {
-                'request':
-                {
-                    "action": "login",
-                    "data": { "login": email, "pass": password }
-                }
-            },
-            {},
-            function (response) {
-                // prints 200
-                console.log(response.status);
-
-                try {
-                    console.log(response.data);
-                    localStorage.setItem("auth_key", response.data);
-                    if (response.data) {
-                        redirect_home();
-                    }
-
-
-
-                } catch (e) {
-                    console.error("JSON parsing error");
-                }
-            },
-            function (response) {
-                // prints 403
-                console.log(response.status);
-                errorMessage.style.visibility = "visible";
-                //prints Permission denied
+        api_login(email, password).then((response) => {
+            try {
                 console.log(response.data);
-
+                localStorage.setItem("auth_key", response.data);
+                if (response.data) {
+                    redirect_home();
+                }
+            } catch (e) {
+                console.error("JSON parsing error");
             }
-        );
-
+        }, ()=>{
+            errorMessage.style.visibility = "visible";
+        });
     }
+    document.addEventListener('deviceready',() => {
+        api_kval(localStorage.getItem('auth_key')).then((res) => {
+            if(localStorage.getItem('auth_key') != null){
+                redirect_home();
+            }
+        }, ()=>{});
+    });
 </script>
-
 </html>
