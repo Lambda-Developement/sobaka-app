@@ -29,7 +29,7 @@
 <div class="flex-row align-items-center mb-5">
     <a href="#" onclick="collapse_toggle()">
         <div class="panel-fill d-inline-flex justify-content-between align-items-center px-3">
-            <div><h3 class="text-header">Тип карты</h3></div>
+            <div><h3 class="text-common">Тип карты</h3></div>
             <div class="d-inline-flex align-items-center">
                 <div><h3 class="text-description" id="MapType">Схема</h3></div>
                 <div class="dropdown-up-icon dropdown-down-icon"></div>
@@ -37,17 +37,17 @@
         </div>
     </a>
     <div id="collapseExample">
-        <div class="panel-fill select-item d-inline-flex justify-content-end align-items-center px-3">
+        <div class="panel-fill select-item d-inline-flex justify-content-end align-items-center px-3" onclick="schema_clicked(this)">
             <div class="choose-icon" id="scheme"></div>
-            <div><h3 class="text-description"><a href="#" onclick="schema_clicked(this)">Схема</a></h3></div>
+            <div><h3 class="text-description"><a href="#">Схема</a></h3></div>
         </div>
-        <div class="panel-fill select-item d-inline-flex justify-content-end align-items-center px-3">
+        <div class="panel-fill select-item d-inline-flex justify-content-end align-items-center px-3" onclick="schema_clicked(this)">
             <div class="empty-icon" id="sputnik"></div>
-            <div><h3 class="text-description"><a href="#" onclick="schema_clicked(this)">Cпутник</a></h3></div>
+            <div><h3 class="text-description"><a href="#">Cпутник</a></h3></div>
         </div>
-        <div class="panel-fill select-item d-inline-flex justify-content-end align-items-center px-3">
+        <div class="panel-fill select-item d-inline-flex justify-content-end align-items-center px-3" onclick="schema_clicked(this)">
             <div class="empty-icon" id="hybrid"></div>
-            <div><h3 class="text-description"><a href="#" onclick="schema_clicked(this)">Гибрид</a></h3></div>
+            <div><h3 class="text-description"><a href="#">Гибрид</a></h3></div>
         </div>
     </div>
 </div>
@@ -81,6 +81,7 @@
         }
     }
     function schema_clicked(e){
+        e = e.children[1].children[0].children[0];
         console.log(e.innerText);
         document.getElementById("MapType").innerText = e.innerText;
         let a = document.getElementsByClassName("choose-icon")[0];
