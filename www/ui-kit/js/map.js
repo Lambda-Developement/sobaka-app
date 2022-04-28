@@ -1,4 +1,4 @@
-const HEIGHT = window.innerHeight+'px';
+const HEIGHT = window.innerHeight + 'px';
 var pos = [57.621166, 39.888228];
 var scale = 15;
 const minDistance = 50; // metres
@@ -6,54 +6,54 @@ const minDistance = 50; // metres
 var cur_route_id = -1;
 var cur_route_place = -1;
 
-var permissions;
+// var permissions;
 var index;
 var map;
 var routing_control;
 var pos_marker;
 var markers;
 
-var onSuccess = function(position) {
-    pos = [position.coords.latitude,position.coords.longitude];
-    console.log('Latitude: '          + position.coords.latitude          + '\n' +
-        'Longitude: '         + position.coords.longitude         + '\n' +
-        'Altitude: '          + position.coords.altitude          + '\n' +
-        'Accuracy: '          + position.coords.accuracy          + '\n' +
-        'Altitude Accuracy: ' + position.coords.altitudeAccuracy  + '\n' +
-        'Heading: '           + position.coords.heading           + '\n' +
-        'Speed: '             + position.coords.speed             + '\n' +
-        'Timestamp: '         + position.timestamp                + '\n');
+var onSuccess = function (position) {
+    pos = [position.coords.latitude, position.coords.longitude];
+    console.log('Latitude: ' + position.coords.latitude + '\n' +
+        'Longitude: ' + position.coords.longitude + '\n' +
+        'Altitude: ' + position.coords.altitude + '\n' +
+        'Accuracy: ' + position.coords.accuracy + '\n' +
+        'Altitude Accuracy: ' + position.coords.altitudeAccuracy + '\n' +
+        'Heading: ' + position.coords.heading + '\n' +
+        'Speed: ' + position.coords.speed + '\n' +
+        'Timestamp: ' + position.timestamp + '\n');
 };
 function onError(error) {
-    alert('code: '    + error.code    + '\n' +
+    alert('code: ' + error.code + '\n' +
         'message: ' + error.message + '\n');
 }
-function get_location(){
+function get_location() {
     navigator.geolocation.getCurrentPosition(onSuccess, onError);
     update_markers();
-    map.flyTo(pos,18);
+    map.flyTo(pos, 18);
 }
-function make_route(start, end){
+function make_route(start, end) {
     map.removeControl(routing_control);
     routing_control = L.Routing.control({
         waypoints: [
             start,
             end
         ],
-        createMarker: function() { return null; },
+        createMarker: function () { return null; },
         show: false,
         showAlternatives: false,
-        addWaypoints:false,
+        addWaypoints: false,
         draggableWaypoints: false,
-        lineOptions : {
-            addWaypoints:false,
+        lineOptions: {
+            addWaypoints: false,
             draggableWaypoints: false,
         },
         router: L.Routing.mapbox('pk.eyJ1IjoiaHVzY2tlciIsImEiOiJja3pkMTZ0cmUwNGYzMm9tcW5pa200dDJkIn0.-NLqcskaelmtyL5zpaBLzQ')
     });
     routing_control.addTo(map);
 }
-function update_markers(){
+function update_markers() {
     map.removeLayer(markers);
     markers = L.markerClusterGroup({
         showCoverageOnHover: false,
@@ -61,18 +61,18 @@ function update_markers(){
     });
     info2_appear = false;
     let idx = 0;
-    locs.forEach((el)=>{
+    locs.forEach((el) => {
         var title = el[2];
-        glow = map.distance(L.latLng(pos),L.latLng(el[0],el[1]))  <= minDistance ? "glow" : "";
+        glow = map.distance(L.latLng(pos), L.latLng(el[0], el[1])) <= minDistance ? "glow" : "";
         let route_near = false;
-        if(cur_route_id != -1){
-            route_near = map.distance(L.latLng(pos),L.latLng(locs[routes[cur_route_id][cur_route_place]][0],locs[routes[cur_route_id][cur_route_place]][1]))  <= minDistance ? true : false;
+        if (cur_route_id != -1) {
+            route_near = map.distance(L.latLng(pos), L.latLng(locs[routes[cur_route_id][cur_route_place]][0], locs[routes[cur_route_id][cur_route_place]][1])) <= minDistance ? true : false;
         }
         icon = L.divIcon({
             className: 'custom-div-icon',
             html: "<div>\n" +
-                "            <a href=\"#\" onclick=\"collapse_toggle("+idx+")\">\n" +
-                "                <div class=\"geopoint d-flex justify-content-center align-items-center "+glow+" pb-2 \">\n" +
+                "            <a href=\"#\" onclick=\"collapse_toggle(" + idx + ")\">\n" +
+                "                <div class=\"geopoint d-flex justify-content-center align-items-center " + glow + " pb-2 \">\n" +
                 "                    <div class=\"dog-img\"></div>\n" +
                 "                </div>\n" +
                 "            </a>\n" +
@@ -80,41 +80,41 @@ function update_markers(){
             iconSize: [30, 42],
             iconAnchor: [15, 42]
         });
-        if(glow){
+        if (glow) {
             info2_appear = true;
         }
-        if(route_near){
+        if (route_near) {
             cur_route_place += 1;
-            if(cur_route_place >= routes[cur_route_id].length){
+            if (cur_route_place >= routes[cur_route_id].length) {
                 cur_route_id = -1;
                 cur_route_place = -1;
-                if(localStorage != undefined){
+                if (localStorage != undefined) {
                     localStorage.removeItem('route_place');
                     localStorage.removeItem('route_id');
                 }
-            }else{
-                if(localStorage != undefined) {
+            } else {
+                if (localStorage != undefined) {
                     localStorage.setItem('route_place', cur_route_place);
                 }
             }
         }
-        var marker = L.marker(new L.LatLng(el[0], el[1]), { title: title ,icon: icon});
+        var marker = L.marker(new L.LatLng(el[0], el[1]), { title: title, icon: icon });
         markers.addLayer(marker);
         idx++;
     });
-    if(cur_route_id != -1){
-        make_route(L.latLng(pos),L.latLng(locs[routes[cur_route_id][cur_route_place]][0],locs[routes[cur_route_id][cur_route_place]][1]));
-    }else if(localStorage != undefined && localStorage.getItem('make_route') != null){
+    if (cur_route_id != -1) {
+        make_route(L.latLng(pos), L.latLng(locs[routes[cur_route_id][cur_route_place]][0], locs[routes[cur_route_id][cur_route_place]][1]));
+    } else if (localStorage != undefined && localStorage.getItem('make_route') != null) {
         g_id = localStorage.getItem('make_route');
-        make_route(L.latLng(pos),L.latLng(locs[g_id][0],locs[g_id][1]));
+        make_route(L.latLng(pos), L.latLng(locs[g_id][0], locs[g_id][1]));
         localStorage.removeItem('make_route');
     }
-    else{
-        make_route(null,null);
+    else {
+        make_route(null, null);
     }
-    if(info2_appear){
+    if (info2_appear) {
         document.getElementById("info2").style.display = "block";
-    }else{
+    } else {
         document.getElementById("info2").style.display = "none";
     }
     icon = L.divIcon({
@@ -125,71 +125,72 @@ function update_markers(){
         iconSize: [30, 42],
         iconAnchor: [15, 42]
     });
-    if (map.hasLayer(pos_marker)){
+    if (map.hasLayer(pos_marker)) {
         map.removeLayer(pos_marker);
     }
-    pos_marker = L.marker(new L.LatLng(pos[0], pos[1]), { icon: icon});
+    pos_marker = L.marker(new L.LatLng(pos[0], pos[1]), { icon: icon });
     map.addLayer(markers);
     map.addLayer(pos_marker);
 }
-function zoomin(){
+function zoomin() {
     map.zoomIn(1);
 }
-function zoomout(){
+function zoomout() {
     map.zoomOut(1);
 }
-function search(input_str){
+function search(input_str) {
     results = index.search(input_str);
     document.getElementById("search-results1").innerHTML = "";
-    results.forEach((el)=>{
+    results.forEach((el) => {
         document.getElementById('search-results1').innerHTML += "" +
-            "<div><a onclick='search_clicked(["+el.doc.latitude+","+el.doc.longitude+"])'>\n" +
+            "<div><a onclick='search_clicked([" + el.doc.latitude + "," + el.doc.longitude + "])'>\n" +
             "                    <div class=\"bg-white w-100 d-inline-flex p-2\">\n" +
             "                        <div class=\"time-icon me-3\"></div>\n" +
-            "                        <div><h3 class=\"text-common\">"+el.doc.body+"</h3></div>\n" +
+            "                        <div><h3 class=\"text-common\">" + el.doc.body + "</h3></div>\n" +
             "                    </div>\n" +
             "                </a></div>";
     });
 }
-function search_clicked(coords){
-    map.flyTo(coords,16);
+function search_clicked(coords) {
+    map.flyTo(coords, 16);
     search_history_close();
 }
-function make_route_to_cur(){
-    if(localStorage != undefined) {
+function make_route_to_cur() {
+    if (localStorage != undefined) {
         if (localStorage.getItem('prev_place') != null) {
             idx = localStorage.getItem('prev_place');
-            make_route(L.latLng(pos),[locs[idx][0], locs[idx][1]]);
+            make_route(L.latLng(pos), [locs[idx][0], locs[idx][1]]);
             localStorage.removeItem('prev_place');
         }
     }
 }
-document.addEventListener('deviceready',() => {
-    permissions = cordova.plugins.permissions;
-    var list = [
-        permissions.ACCESS_FINE_LOCATION
-    ];
+document.addEventListener('deviceready', () => {
+    console.log(`[INFO] :  Attempt to run cordova permissions...`);
+    // permissions = cordova.plugins.permissions;
+    // var list = [
+    //     permissions.ACCESS_FINE_LOCATION
+    // ];
 
-    permissions.checkPermission(list, success, null);
+    // permissions.checkPermission(list, success, null);
 
-    function error() {
-        console.warn('Camera or Accounts permission is not turned on');
-        document.location.href = "../../screens/AccessError/accessError.html";
-    }
+    // function error() {
+    //     console.warn('Camera or Accounts permission is not turned on');
+    //     document.location.href = "../../screens/AccessError/accessError.html";
+    // }
 
-    function success( status ) {
-        if( !status.hasPermission ) {
+    // function success(status) {
+    //     if (!status.hasPermission) {
 
-            permissions.requestPermissions(
-                list,
-                function(status) {
-                    if( !status.hasPermission ) error();
-                },
-                error);
-        }
-    }
-    if(localStorage != undefined){
-        if(localStorage.getItem('auth_key') == null){
+    //         permissions.requestPermissions(
+    //             list,
+    //             function (status) {
+    //                 if (!status.hasPermission) error();
+    //             },
+    //             error);
+    //     }
+    // }
+    if (localStorage != undefined) {
+        if (localStorage.getItem('auth_key') == null) {
             document.location.href = '../../screens/Login/login.html'
         }
         auth_key = localStorage.getItem('auth_key');
@@ -197,10 +198,10 @@ document.addEventListener('deviceready',() => {
     cordovaHTTP.post("https://trip.backend.xredday.ru/",
         {
             'request':
-                {
-                    "action": "data",
-                    "user_key": auth_key,
-                }
+            {
+                "action": "data",
+                "user_key": auth_key,
+            }
         },
         {},
         function (response) {
@@ -214,41 +215,41 @@ document.addEventListener('deviceready',() => {
                     this.addField('body');
                     this.setRef('id');
                 });
-                locs.forEach((el,t)=>{
+                locs.forEach((el, t) => {
                     index.addDoc({
-                        'body':el[2],
-                        'latitude':el[0],
-                        'longitude':el[1],
-                        'id':t
+                        'body': el[2],
+                        'latitude': el[0],
+                        'longitude': el[1],
+                        'id': t
                     })
                 })
-                if(localStorage != undefined){
-                    if(localStorage.getItem('prev_place') != null){
+                if (localStorage != undefined) {
+                    if (localStorage.getItem('prev_place') != null) {
                         idx = localStorage.getItem('prev_place');
-                        map.flyTo([locs[idx][0],locs[idx][1]],18);
+                        map.flyTo([locs[idx][0], locs[idx][1]], 18);
                         collapse_toggle(parseInt(idx));
 
                     }
-                    if(localStorage.getItem('route_id') != null){
+                    if (localStorage.getItem('route_id') != null) {
                         cur_route_id = parseInt(localStorage.getItem('route_id'));
                         localStorage.removeItem('route_id');
-                    }else{
+                    } else {
                         cur_route_id = -1;
                     }
-                    if(localStorage.getItem('route_place') != null){
+                    if (localStorage.getItem('route_place') != null) {
                         cur_route_place = parseInt(localStorage.getItem('route_place'));
                         localStorage.removeItem('route_place')
-                    }else{
+                    } else {
                         cur_route_place = -1;
                     }
                 }
                 cordovaHTTP.post("https://trip.backend.xredday.ru/",
                     {
                         'request':
-                            {
-                                "action": "groutes",
-                                "user_key": auth_key,
-                            }
+                        {
+                            "action": "groutes",
+                            "user_key": auth_key,
+                        }
                     },
                     {},
                     function (response) {
@@ -256,8 +257,8 @@ document.addEventListener('deviceready',() => {
                         try {
                             groutes = JSON.parse(response.data);
                             routes = [];
-                            groutes.forEach(el=>{
-                                routes.push(el[2].split(',').map(x=>{
+                            groutes.forEach(el => {
+                                routes.push(el[2].split(',').map(x => {
                                     return parseInt(x);
                                 }));
                             });
@@ -281,14 +282,14 @@ document.addEventListener('deviceready',() => {
         }
     );
 });
-setInterval(()=>{
-    if (locs.length > 0) search(document.getElementById('line-edit').value,{});
-},1000);
+setInterval(() => {
+    if (locs.length > 0) search(document.getElementById('line-edit').value, {});
+}, 1000);
 
 document.getElementById("map").style.height = HEIGHT;
 map = L.map('map', {
     center: pos,
-    zoom:scale,
+    zoom: scale,
     zoomControl: false,
 })
 L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
@@ -303,18 +304,18 @@ markers = L.markerClusterGroup({
     showCoverageOnHover: false,
     maxClusterRadius: 80
 });
-pos_marker = L.marker(new L.LatLng(pos[0], pos[1]), );
+pos_marker = L.marker(new L.LatLng(pos[0], pos[1]),);
 routing_control = L.Routing.control({
     waypoints: [
         null
     ],
-    createMarker: function() { return null; },
+    createMarker: function () { return null; },
     show: false,
     showAlternatives: false,
-    addWaypoints:false,
+    addWaypoints: false,
     draggableWaypoints: false,
-    lineOptions : {
-        addWaypoints:false,
+    lineOptions: {
+        addWaypoints: false,
         draggableWaypoints: false,
     },
     router: L.Routing.mapbox('pk.eyJ1IjoiaHVzY2tlciIsImEiOiJja3pkMTZ0cmUwNGYzMm9tcW5pa200dDJkIn0.-NLqcskaelmtyL5zpaBLzQ')
