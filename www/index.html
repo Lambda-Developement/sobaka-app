@@ -19,7 +19,7 @@
     </div>
     <script src="cordova.js"></script>
     <script>
-        setTimeout(() => {
+        document.addEventListener('deviceready',() => {
             universalLinks.subscribe(null, function (eventData) {
                 // do some work
                 console.log(eventData);
@@ -62,7 +62,7 @@
                 }
             });
             document.location.href = "screens/loginka/loginka.html";
-        }, 2000);
+        });
     </script>
 </body>
 
