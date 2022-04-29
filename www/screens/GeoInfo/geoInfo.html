@@ -281,7 +281,7 @@
                 document.getElementById('review-text').innerHTML = 'Добавить';
             } else {
                 let prev_review = document.getElementById('review-input').value;
-                api_crrev(33, 0, rate, localStorage.getItem('auth_key'), prev_review).then((res) => {
+                api_crrev(localStorage.id_geoinfo, 0, rate, localStorage.getItem('auth_key'), prev_review).then((res) => {
                     console.log('done');
                 }, () => console.log('error'));
                 document.getElementById('review-' + (review_count)).remove();
@@ -360,7 +360,7 @@
                 let name = el[0][0];
                 console.log(el);
                 console.log(name);
-                if (name == localStorage.getItem('name')){
+                if (name == localStorage.getItem('name')) {
                     document.getElementById('add_btn').disabled = true;
                 }
                 let rate = el[1];
@@ -393,7 +393,7 @@
         document.addEventListener('deviceready', () => {
             api_userdata(localStorage.getItem('auth_key')).then((userdata) => {
                 localStorage.setItem('name', userdata[2]);
-                api_getrev(33, localStorage.getItem('auth_key')).then((res) => load_reviews(res), () => console.log('error'));
+                api_getrev(localStorage.id_geoinfo, localStorage.getItem('auth_key')).then((res) => load_reviews(res), () => console.log('error'));
             });
         });
     </script>

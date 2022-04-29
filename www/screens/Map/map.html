@@ -78,8 +78,13 @@
     </div>
     <div id="info">
         <div class="geopoint-popup d-flex flex-column justify-content-center align-items-center">
-            <div onclick="redirect_geoinfo()"
-                class="geopoint-info d-flex align-items-center justify-content-between p-3">
+            <script>
+                function geoinfo() {
+                    localStorage.id_geoinfo = 33;
+                    redirect_geoinfo();
+                }
+            </script>
+            <div onclick="geoinfo()" class="geopoint-info d-flex align-items-center justify-content-between p-3">
                 <div class="d-flex flex-column me-3">
                     <div>
                         <h3 class="text-bold" id="info-name">Памятник медведю "Символ России, легенда Ярославля"</h3>
