@@ -95,18 +95,18 @@
             <div class="panel-grey-up">
                 <div class="d-inline-flex align-items-center">
                     <div style="margin-right: 10px;">
-                        <h3 class="text-attention">4,9</h3>
+                        <h3 class="text-attention" id="average-score">4,9</h3>
                     </div>
                     <div class="d-flex flex-column">
                         <div class="d-inline-flex">
-                            <div class="rate-icon"></div>
-                            <div class="rate-icon"></div>
-                            <div class="rate-icon"></div>
-                            <div class="rate-icon"></div>
-                            <div class="rate-icon"></div>
+                            <div class="rate-icon" id="rate-1"></div>
+                            <div class="rate-icon" id="rate-2"></div>
+                            <div class="rate-icon" id="rate-3"></div>
+                            <div class="rate-icon" id="rate-4"></div>
+                            <div class="rate-icon" id="rate-5"></div>
                         </div>
                         <div>
-                            <p class="text-common">6 оценок</p>
+                            <p class="text-common" id="reviews-cnt">6 оценок</p>
                         </div>
                     </div>
                 </div>
@@ -194,7 +194,7 @@
 
     <div class="btn-panel">
         <div class="d-inline-flex justify-content-center w-100 align-items-center">
-            <div><button class="btn btn-hollow2 me-2" onclick="btn_click()">
+            <div><button id="add_btn" class="btn btn-hollow2 me-2" onclick="btn_click()">
                     <p class="btn-text" id="review-text">Начать экскурсию</p>
                 </button> </div>
         </div>
@@ -236,8 +236,10 @@
             }
             document.getElementById('review-text').innerHTML = "Написать отзыв";
             review_opened = true;
+            update_page();
         }
         function switch_geoinfo() {
+            document.getElementById('add_btn').disable = false;
             document.getElementById('review').classList.remove('active');
             document.getElementById('geoinfo').classList.add('active');
             var temp = document.getElementsByClassName("geoinfo");
@@ -250,67 +252,6 @@
             }
             document.getElementById('review-text').innerHTML = "Начать экскурсию";
             review_opened = false;
-        }
-        function get_user_name() {
-            cordovaHTTP.post("https://trip.backend.xredday.ru/",
-                {
-                    'request':
-                    {
-                        "action": "userdata",
-                        "user_key": localStorage.getItem('auth_key')
-                    }
-                },
-                {},
-                function (response) {
-                    // prints 200
-                    console.log(response.status);
-                    try {
-                        console.log(response.data);
-                        a = JSON.parse(response.data)[2];
-                        console.log(a);
-                        localStorage.setItem('name', a);
-                    } catch (e) {
-                        console.error("JSON parsing error");
-                    }
-                },
-                function (response) {
-                    // prints 403
-                    console.log(response.status);
-                    errorMessage.style.visibility = "visible";
-                    //prints Permission denied
-                    console.log(response.data);
-                }
-            );
-        }
-        function get_user_id(mark, review) {
-            cordovaHTTP.post("https://trip.backend.xredday.ru/",
-                {
-                    'request':
-                    {
-                        "action": "userdata",
-                        "user_key": localStorage.getItem('auth_key')
-                    }
-                },
-                {},
-                function (response) {
-                    // prints 200
-                    console.log(response.status);
-                    try {
-                        console.log(response.data);
-                        a = JSON.parse(response.data)[0];
-                        add_review(a, mark, review);
-                    } catch (e) {
-                        console.error("JSON parsing error");
-                    }
-                },
-                function (response) {
-                    // prints 403
-                    console.log(response.status);
-                    errorMessage.style.visibility = "visible";
-                    //prints Permission denied
-                    console.log(response.data);
-                }
-            );
         }
         function add_review(id, mark, review) {
             cordovaHTTP.post("https://trip.backend.xredday.ru/",
@@ -357,15 +298,15 @@
                     "                        <div class=\"circle d-flex justify-content-center align-items-center me-3\"><div><h3 class=\"text-attention in-circle\">" + name[0].toUpperCase() + "</h3></div></div>\n" +
                     "                        <div><h3 class=\"text-common\">" + name + "</h3></div>\n" +
                     "                    </div>\n" +
-                    "                    <div class=\"d-inline-flex align-items-center mb-2\">\n" +
-                    "                        <div class=\"d-inline-flex justify-content-center align-items-center me-3\">\n" +
-                    "                            <div class=\"rate-icon small\" id='rate-1' onclick='rate_clicked(this)'></div>\n" +
-                    "                            <div class=\"rate-icon small\" id='rate-2' onclick='rate_clicked(this)'></div>\n" +
-                    "                            <div class=\"rate-icon small\" id='rate-3' onclick='rate_clicked(this)'></div>\n" +
-                    "                            <div class=\"rate-icon small\" id='rate-4' onclick='rate_clicked(this)'></div>\n" +
-                    "                            <div class=\"rate-icon small\" id='rate-5' onclick='rate_clicked(this)'></div>\n" +
-                    "                        </div>\n" +
-                    "                    </div>\n" +
+                    // "                    <div class=\"d-inline-flex align-items-center mb-2\">\n" +
+                    // "                        <div class=\"d-inline-flex justify-content-center align-items-center me-3\">\n" +
+                    // "                            <div class=\"rate-icon small\" id='rate-1' onclick='rate_clicked(this)'></div>\n" +
+                    // "                            <div class=\"rate-icon small\" id='rate-2' onclick='rate_clicked(this)'></div>\n" +
+                    // "                            <div class=\"rate-icon small\" id='rate-3' onclick='rate_clicked(this)'></div>\n" +
+                    // "                            <div class=\"rate-icon small\" id='rate-4' onclick='rate_clicked(this)'></div>\n" +
+                    // "                            <div class=\"rate-icon small\" id='rate-5' onclick='rate_clicked(this)'></div>\n" +
+                    // "                        </div>\n" +
+                    // "                    </div>\n" +
                     "                    <div class=\"new-review-input\">\n" +
                     "                        <input type=\"text\" class=\"form-control\" id='review-input' placeholder=\"...\">\n" +
                     "                    </div>\n" +
@@ -373,7 +314,9 @@
                 document.getElementById('review-text').innerHTML = 'Добавить';
             } else {
                 let prev_review = document.getElementById('review-input').value;
-                get_user_id(rate, document.getElementById('review-input').value); // send add review to backend function chain
+                api_crrev(parseInt(localStorage.getItem('route_id'))+1, 0, rate, localStorage.getItem('auth_key'), prev_review).then((res) => {
+                    console.log('done');
+                }, () => console.log('error'));
                 document.getElementById('review-' + (review_count)).remove();
                 document.getElementById('reviews-here').innerHTML += "" +
                     "<div id='review-" + (review_count) + "' class=\"review d-flex flex-column mb-3\">\n" +
@@ -400,28 +343,31 @@
                 document.getElementById('review-text').innerHTML = 'Написать отзыв';
                 review_count++;
                 document.getElementById('reviews-count').innerHTML = "Отзывов: " + (review_count + 2);
+                update_page();
             }
             review_btn_state = !review_btn_state;
         }
         function rate_clicked(el) {
-            ['1', '2', '3', '4', '5'].forEach(b => {
-                if (el.id == 'rate-' + b) {
-                    rate = parseInt(b);
-                }
-            })
-            update_icons();
+            if(document.getElementById('add_btn').disabled != true){
+                ['1', '2', '3', '4', '5'].forEach(b => {
+                    if (el.id == 'rate-' + b) {
+                        rate = parseInt(b);
+                    }
+                })
+                update_icons();
 
+            }
         }
         function star_rate_clicked(el) {
-            ['1', '2', '3', '4', '5'].forEach(b => {
-                if (el.id == 'star-rate-' + b) {
-                    rate = parseInt(b);
-                    if (review_btn_state)
-                        btn_click();
-                }
-            })
-            update_icons();
+            if(document.getElementById('add_btn').disabled != true){
+                ['1', '2', '3', '4', '5'].forEach(b => {
+                    if (el.id == 'rate-' + b) {
+                        rate = parseInt(b);
+                    }
+                })
+                update_icons();
 
+            }
         }
         function update_icons() {
             for (i = 1; i <= 5; i++) {
@@ -443,55 +389,80 @@
                 }
             }
         }
+        function load_reviews(result) {
+            let rate = parseFloat(result[0]).toFixed(1);
+            document.getElementById('average-score').innerHTML = rate;
+            [1,2,3,4,5].forEach((el)=>{
+                document.getElementById(`rate-${el}`).className = (rate >= el) ? "rate-icon" : "unrate-icon";
+            })
+            let reviews = result[1];
+            document.getElementById('reviews-count').innerHTML = `Отзывов: ${result[1].length}`;
+            document.getElementById('reviews-cnt').innerHTML = `Оценок: ${result[1].length}`;
+            console.log(reviews);
+            reviews.forEach(el => {
+                let name = el[0][0];
+                console.log(el);
+                console.log(name);
+                if (name == localStorage.getItem('name')) {
+                    document.getElementById('add_btn').disabled = true;
+                }
+                let rate = el[1];
+                let body = el[2];
+                document.getElementById('reviews-here').innerHTML += "" +
+                    "<div id='review-" + (review_count) + "' class=\"review d-flex flex-column mb-3\">\n" +
+                    "                    <div class=\"d-inline-flex align-items-center mb-2\">\n" +
+                    "                        <div class=\"circle d-flex justify-content-center align-items-center me-3\"><div><h3 class=\"text-attention in-circle\">" + name[0].toUpperCase() + "</h3></div></div>\n" +
+                    "                        <div><h3 class=\"text-common\">" + name + "</h3></div>\n" +
+                    "                    </div>\n" +
+                    "                    <div class=\"d-inline-flex align-items-center mb-2\">\n" +
+                    "                        <div class=\"d-inline-flex justify-content-center align-items-center me-3\">\n" +
+                    "                            <div class=\"" + (rate >= 1 ? "rate-icon" : "star-icon-rate") + " small\"></div>\n" +
+                    "                            <div class=\"" + (rate >= 2 ? "rate-icon" : "star-icon-rate") + " small\"></div>\n" +
+                    "                            <div class=\"" + (rate >= 3 ? "rate-icon" : "star-icon-rate") + " small\"></div>\n" +
+                    "                            <div class=\"" + (rate >= 4 ? "rate-icon" : "star-icon-rate") + " small\"></div>\n" +
+                    "                            <div class=\"" + (rate >= 5 ? "rate-icon" : "star-icon-rate") + " small\"></div>\n" +
+                    "                        </div>\n" +
+                    // "                        <div><h3 class=\"text-description\">Только что</h3></div>\n" +
+                    "                    </div>\n" +
+                    "                    <div>\n" +
+                    "                        <p class=\"text-common\">\n" +
+                    "                            " + body + "\n" +
+                    "                        </p>\n" +
+                    "                    </div>\n" +
+                    "                </div>";
+                review_count++;
+            });
+        }
+        function update_page(){
+            document.getElementById('reviews-here').innerHTML = "";
+            api_userdata(localStorage.getItem('auth_key')).then((userdata) => {
+                localStorage.setItem('name', userdata[2]);
+                api_getrev(parseInt(localStorage.getItem('route_id'))+1, localStorage.getItem('auth_key'),1).then((res) => load_reviews(res), () => console.log('error'));
+            });
+            api_groutes(localStorage.getItem('auth_key')).then((groutes)=>{
+                let t = localStorage.getItem('route_id');
+                console.log(groutes);
+                groutes.forEach(el => {
+                    if (el[0] == parseInt(t) + 1) {
+                        let s = el[1];
+                        let d = el[5];
+                        let l = "url('../../ui-kit/img/icg4y3j7.bmp')";
+                        if (t == '2') {
+                            l = "url('../../ui-kit/img/zsmhme2t.bmp')";
+                        } else if (t == '1') {
+                            l = "url('../../ui-kit/img/lvsls0y5.bmp')";
+                        }
+                        document.getElementById('route-name').innerHTML = s;
+                        document.getElementById('route-description').innerHTML = d;
+                        document.getElementById('route-logo').style.backgroundImage = l;
+                        document.getElementById('route-duration').innerText = el[3] + 'hr.';
+                        document.getElementById('route-length').innerText = el[4] + 'km';
+                    }
+                });
+            });
+        }
         document.addEventListener('deviceready', () => {
-            get_user_name();
-            if (localStorage != undefined) {
-                if (localStorage.getItem('auth_key') == null) {
-                    document.location.href = '../Login/login.html'
-                }
-                auth_key = localStorage.getItem('auth_key');
-            }
-            cordovaHTTP.post("https://trip.backend.xredday.ru/",
-                {
-                    'request':
-                    {
-                        "action": "groutes",
-                        "user_key": auth_key,
-                    }
-                },
-                {},
-                function (response) {
-                    console.log(response.status);
-                    try {
-                        groutes = JSON.parse(response.data);
-                        let t = localStorage.getItem('route_id');
-                        console.log(groutes);
-                        groutes.forEach(el => {
-                            if (el[0] == parseInt(t) + 1) {
-                                let s = el[1];
-                                let d = el[5];
-                                let l = "url('../../ui-kit/img/icg4y3j7.bmp')";
-                                if (t == '2') {
-                                    l = "url('../../ui-kit/img/zsmhme2t.bmp')";
-                                } else if (t == '1') {
-                                    l = "url('../../ui-kit/img/lvsls0y5.bmp')";
-                                }
-                                document.getElementById('route-name').innerHTML = s;
-                                document.getElementById('route-description').innerHTML = d;
-                                document.getElementById('route-logo').style.backgroundImage = l;
-                                document.getElementById('route-duration').innerText = el[3] + 'hr.';
-                                document.getElementById('route-length').innerText = el[4] + 'km';
-                            }
-                        });
-                    } catch (e) {
-                        console.error("JSON parsing error");
-                    }
-                },
-                function (response) {
-                    console.log(response.status);
-                    console.log(response.data);
-                }
-            );
+            update_page();
         });
     </script>
 </body>
