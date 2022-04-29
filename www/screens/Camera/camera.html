@@ -89,7 +89,7 @@
             if (localStorage != undefined) {
                 auth_key = localStorage.getItem("auth_key");
             }
-            let id = 33;
+            let id = localStorage.excursion_id;
             let resp = `{"id":${id},"user_key":'${auth_key}'}`;
             cordova.plugins.startActivity(
                 function (res) {
