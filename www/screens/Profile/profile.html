@@ -173,6 +173,13 @@
         function update_userdata(){
             api_userdata(localStorage.getItem('auth_key')).then((userdata) => {
                 localStorage.setItem('name', userdata[2]);
+                localStorage.setItem('gender',userdata[3]);
+                localStorage.setItem('login',userdata[5]);
+                localStorage.setItem('phone',userdata[6]);
+                let dob = new Date(userdata[4]);
+                localStorage.setItem('birth1',dob.getFullYear());
+                localStorage.setItem('birth2',dob.getMonth());
+                localStorage.setItem('birth3',dob.getDay());
                 check_credentials();
             });
         }
