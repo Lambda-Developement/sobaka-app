@@ -32,7 +32,7 @@
                 <label for="image" style="cursor:pointer;">
                     <!-- Добавить визуальнуюиндикацию? -->
                     <input type='file' name="image" style="display: none;" id="image" accept="image/jpeg, image/png" />
-                    <img src="../../ui-kit/img/avatar.png" alt="roma.jpeg" class="avatar-area__image">
+                    <img id="avatar" src="../../ui-kit/img/avatar.png" alt="roma.jpeg" class="avatar-area__image">
                 </label>
 
                 <h3 class="text-bold" id="header-name" style="margin-top: 1rem;">
@@ -99,6 +99,7 @@
     <script src="../../ui-kit/js/deeplinks.js"></script>
 
     <script>
+        const url = 'https://trip.backend.xredday.ru';
         function check_credentials() {
             if (localStorage != undefined) {
                 ['name', 'gender', 'login', 'phone', 'birth1', 'birth2', 'birth3'].forEach(el => {
@@ -146,6 +147,13 @@
             check_credentials();
             redirect_profile();
         }
+        document.addEventListener('deviceready', () => {
+            api_userdata(localStorage('auth_key')).then((res)=>{
+                if (userdata[1] != null){
+                    document.getElementById('avatar').src = `${url}/${userdata[1]}`;
+                }
+            });
+        });
     </script>
 
 </body>

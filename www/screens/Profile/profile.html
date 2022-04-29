@@ -153,6 +153,7 @@
 
 
     <script>
+        const url = 'https://trip.backend.xredday.ru';
         function go_back() {
             if (localStorage != undefined) {
                 prev = localStorage.getItem('prev_page');
@@ -180,6 +181,9 @@
                 localStorage.setItem('birth1',dob.getFullYear());
                 localStorage.setItem('birth2',dob.getMonth());
                 localStorage.setItem('birth3',dob.getDay());
+                if (userdata[1] != null){
+                    document.getElementById('avatar').src = `${url}/${userdata[1]}`;
+                }
                 check_credentials();
             });
         }
@@ -206,6 +210,7 @@
         document.addEventListener('deviceready', () => {
             update_userdata();
         });
+
     </script>
 
 </body>
