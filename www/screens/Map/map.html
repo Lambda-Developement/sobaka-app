@@ -78,13 +78,7 @@
     </div>
     <div id="info">
         <div class="geopoint-popup d-flex flex-column justify-content-center align-items-center">
-            <script>
-                function geoinfo() {
-                    localStorage.id_geoinfo = 33;
-                    redirect_geoinfo();
-                }
-            </script>
-            <div onclick="geoinfo()" class="geopoint-info d-flex align-items-center justify-content-between p-3">
+            <div onclick="redirect_geoinfo()" class="geopoint-info d-flex align-items-center justify-content-between p-3">
                 <div class="d-flex flex-column me-3">
                     <div>
                         <h3 class="text-bold" id="info-name">Памятник медведю "Символ России, легенда Ярославля"</h3>
@@ -102,15 +96,15 @@
                 <div class="d-inline-flex justify-content-center align-items-center me-4">
                     <div class="d-inline-flex justify-content-center align-items-center">
                         <div style="margin-right: 10px;">
-                            <h3 class="text-attention">4,9</h3>
+                            <h3 class="text-attention" id="rate">4,9</h3>
                         </div>
                         <div class="d-flex flex-column">
                             <div class="d-inline-flex">
-                                <div class="rate-icon"></div>
-                                <div class="rate-icon"></div>
-                                <div class="rate-icon"></div>
-                                <div class="rate-icon"></div>
-                                <div class="rate-icon"></div>
+                                <div class="rate-icon" id="rate-1"></div>
+                                <div class="rate-icon" id="rate-2"></div>
+                                <div class="rate-icon" id="rate-3"></div>
+                                <div class="rate-icon" id="rate-4"></div>
+                                <div class="rate-icon" id="rate-5"></div>
                             </div>
                             <div>
                                 <p class="text-common">6 оценок</p>
@@ -178,7 +172,6 @@
     <script>
         var opened = false;
         var popup_collapsed = false;
-        var park_id = 0;
         function toggle_collapse() {
             if (popup_collapsed) {
                 setTimeout(() => {
@@ -214,7 +207,14 @@
         }
         function collapse_open() {
             document.getElementById("info").style.display = 'block';
-            document.getElementById('info-name').innerHTML = locs[park_id][2];
+            document.getElementById('info-name').innerHTML = locs[localStorage.getItem('prev_place')][2];
+            api_getrev(localStorage.getItem('prev_place'), localStorage.getItem('auth_key')).then((res) => {
+                let rate = Math.round(res[0]).toFixed(1);
+                document.getElementById('rate').innerText = rate;
+                [1,2,3,4,5].forEach((el)=>{
+                    document.getElementById(`rate-${el}`).className = (rate > el) ? "rate-icon" : "unrate-icon";
+                })
+            }, () => console.log('error'));
             popup_collapsed = !popup_collapsed;
             toggle_collapse();
         }
@@ -225,11 +225,16 @@
         }
         function collapse_toggle(g_id) {
             opened = !opened;
-            opened ? collapse_open() : collapse_close();
             console.log(g_id);
             if (localStorage != undefined) {
-                if (opened) localStorage.setItem('prev_place', g_id);
-                else localStorage.removeItem('prev_place');
+                if (opened) {
+                    localStorage.setItem('prev_place', g_id);
+                    collapse_open();
+                }
+                else {
+                    localStorage.removeItem('prev_place');
+                    collapse_close();
+                }
             }
         }
         function update_zoom() {

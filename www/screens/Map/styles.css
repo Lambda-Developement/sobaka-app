@@ -328,6 +328,14 @@ img{
     background-position: center center;
     background-size:15px;
 }
+.unrate-icon{
+    width: 18px;
+    height: 20px;
+    background: url("../../ui-kit/svg/grey_star.svg");
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size:15px;
+}
 h3.text-attention{
     font-weight: 700;
     font-size: 36px;
