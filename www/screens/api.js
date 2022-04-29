@@ -127,7 +127,7 @@ async function api_userdata(auth_key) {
 // api_userdata(auth_key).then((userdata) => { var name = userdata[2]; });
 
 // Sobaka-app
-async function api_getrev(id, auth_key) {
+async function api_getrev(id, auth_key, type = 0) {
     // "getrev" api call (auth_key required)
     // returns [average, reviews[]], где average - средняя оценка экскурсии,
     // reviews[] - массив, содержащий все оценки. Массив reviews состоит из
@@ -135,6 +135,7 @@ async function api_getrev(id, auth_key) {
     // информацию о пользователя, mark - оценка, review (может быть NULL) - текст оценки.
     let data = {
         'id': id,
+        'type': type,
     }
     return await __basic_api_call("getrev", data, auth_key);
 }
