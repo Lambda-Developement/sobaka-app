@@ -337,6 +337,7 @@
             });
         }
         function update_page(){
+            document.getElementById('reviews-here').innerHTML = "";
             api_userdata(localStorage.getItem('auth_key')).then((userdata) => {
                 localStorage.setItem('name', userdata[2]);
                 api_data(localStorage.getItem('auth_key')).then((res) => {
