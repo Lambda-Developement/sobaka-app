@@ -195,14 +195,11 @@
         if (!name) name = nameField.value;
 
         api_register(name, email, password).then((a) => {
-            if (a) {
-                setTimeout(() => {
-                    redirect_mail_confirmation();
-                }, 2000);
-            } else {
-                errorMessage.style.visibility = "visible";
-            }
-        });
+            redirect_mail_confirmation();
+        }, () => {
+            errorMessage.style.visibility = "visible";
+        }
+        );
     }
 </script>
 

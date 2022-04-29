@@ -12,7 +12,7 @@
     <title>Profile</title>
 </head>
 
-<body onload="check_credentials()">
+<body onload="">
     <div class="screen-hat">
         <button class="btn arrow-back" onclick="go_back()">
             <a>
@@ -191,8 +191,12 @@
             document.location.href = '../Login/login.html';
         }
         document.addEventListener('deviceready', () => {
-            api_userdata(auth_key).then((userdata) => { localStorage.setItem('name', userdata[2]); });
+            api_userdata(localStorage.auth_key).then((userdata) => { localStorage.setItem('name', userdata[2]); });
         });
+    </script>
+    <script>
+
+        setTimeout(check_credentials(), 2000);
     </script>
 
 </body>
