@@ -28,7 +28,7 @@
 
     <div class="profile-screen">
         <div class="avatar-area">
-            <img src="../../ui-kit/img/avatar.png" alt="gregory" class="avatar-area__image">
+            <img src="../../ui-kit/img/avatar.png" alt="gregory" class="avatar-area__image" id="avatar">
             <h3 id="header-name" class="text-bold" style="margin-top: 1rem;">
                 Григорий
             </h3>
@@ -171,17 +171,17 @@
                 }
             }
         }
-        function update_userdata(){
+        function update_userdata() {
             api_userdata(localStorage.getItem('auth_key')).then((userdata) => {
                 localStorage.setItem('name', userdata[2]);
-                localStorage.setItem('gender',userdata[3]);
-                localStorage.setItem('login',userdata[5]);
-                localStorage.setItem('phone',userdata[6]);
+                localStorage.setItem('gender', userdata[3]);
+                localStorage.setItem('login', userdata[5]);
+                localStorage.setItem('phone', userdata[6]);
                 let dob = new Date(userdata[4]);
-                localStorage.setItem('birth1',dob.getFullYear());
-                localStorage.setItem('birth2',dob.getMonth());
-                localStorage.setItem('birth3',dob.getDay());
-                if (userdata[1] != null){
+                localStorage.setItem('birth1', dob.getFullYear());
+                localStorage.setItem('birth2', dob.getMonth());
+                localStorage.setItem('birth3', dob.getDay());
+                if (userdata[1] != null) {
                     document.getElementById('avatar').src = `${url}/${userdata[1]}`;
                 }
                 check_credentials();

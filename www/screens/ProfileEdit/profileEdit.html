@@ -155,8 +155,8 @@
             redirect_profile();
         }
         document.addEventListener('deviceready', () => {
-            api_userdata(localStorage('auth_key')).then((res)=>{
-                if (userdata[1] != null){
+            api_userdata(localStorage.auth_key).then((userdata) => {
+                if (userdata[1] != null) {
                     document.getElementById('avatar').src = `${url}/${userdata[1]}`;
                 }
             });
