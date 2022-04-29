@@ -12,7 +12,7 @@
     <title>Profile</title>
 </head>
 
-<body onload="check_credentials()">
+<body>
     <div class="screen-hat">
         <button class="btn arrow-back" onclick="go_back()">
             <a>
@@ -171,8 +171,9 @@
             }
         }
         function update_userdata(){
-            api_userdata(auth_key).then((userdata) => {
+            api_userdata(localStorage.getItem('auth_key')).then((userdata) => {
                 localStorage.setItem('name', userdata[2]);
+                check_credentials();
             });
         }
         function callpopup() {

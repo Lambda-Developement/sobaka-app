@@ -139,10 +139,16 @@
             </div>
             <div id='inner-reviews' class="reviews">
                 <div class="justify-content-center align-items-center w-100 p-3">
-                    <button id='excursion-btn' class="btn btn-filled" onclick="redirect_excursion_start()">
+                    <button id='excursion-btn' class="btn btn-filled" onclick="excursion_start()">
                         <p class="btn-text">Начать экскурсию</p>
                     </button>
                 </div>
+                <script>
+                    function excursion_start() {
+                        localStorage.excursion_id = 33;
+                        redirect_excursion_start();
+                    }
+                </script>
             </div>
         </div>
     </div>

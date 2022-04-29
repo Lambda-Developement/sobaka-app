@@ -19,7 +19,9 @@ setTimeout(() => {
                 (success) => {
                     redirect("/screens/MailConfirmation/mailConfirmation.html");
                 }
-            );
+                , (fail) => {
+                    redirect("/screens/MailConfirmation/mailConfirmationFail.html");
+                });
         }
     });
 
