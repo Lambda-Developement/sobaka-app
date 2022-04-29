@@ -195,7 +195,7 @@
             <div class="geoinfo"><button class="btn btn-hollow ms-2">
                     <div class="download-icon"></div>
                 </button> </div>
-            <div class="review"><button class="btn btn-filled" onclick="review_btn_click()">
+            <div class="review"><button class="btn btn-filled" id="add_btn" onclick="review_btn_click()">
                     <p class="btn-text"><img src="../../ui-kit/svg/icon_white.svg"> <span id="review-text">Добавить
                             отзыв</span></p>
                 </button></div>
@@ -352,11 +352,6 @@
                 }
             }
         }
-        document.addEventListener('deviceready', () => {
-            api_userdata(auth_key).then((userdata) => { localStorage.setItem('name', userdata[2]); });
-        });
-    </script>
-    <script>
         function load_reviews(result) {
             document.getElementById('average-score').innerHTML = Math.round(result[0]);
             let reviews = result[1];
@@ -365,6 +360,9 @@
                 let name = el[0][0];
                 console.log(el);
                 console.log(name);
+                if (name == localStorage.getItem('name')){
+                    document.getElementById('add_btn').disabled = true;
+                }
                 let rate = el[1];
                 let body = el[2];
                 document.getElementById('reviews-here').innerHTML += "" +
@@ -393,11 +391,13 @@
             });
         }
         document.addEventListener('deviceready', () => {
-            api_getrev(33, localStorage.getItem('auth_key')).then((res) => load_reviews(res), () => console.log('error'));
+            api_userdata(localStorage.getItem('auth_key')).then((userdata) => {
+                localStorage.setItem('name', userdata[2]);
+                api_getrev(33, localStorage.getItem('auth_key')).then((res) => load_reviews(res), () => console.log('error'));
+            });
         });
     </script>
 </body>
-<script src="../../cordova.js"></script>
 <script src="../api.js"></script>
 <script src="../../ui-kit/js/redirects.js"></script>
 <script src="../../ui-kit/js/deeplinks.js"></script>

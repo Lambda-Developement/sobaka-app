@@ -9,7 +9,7 @@ setTimeout(() => {
 
         if (eventData.url.includes('password')) {
             // Смена пароля
-            redirect("./screens/ResetPassword/resetPassword.html");
+            redirect("/screens/ResetPassword/resetPassword.html");
         }
         else if (eventData.url.includes('mail')) {
             // Подтверждение регистрации
@@ -17,7 +17,7 @@ setTimeout(() => {
             console.log(`api_regconf(${conf})`);
             api_regconf(conf).then(
                 (success) => {
-                    redirect("./screens/MailConfirmation/mailConfirmation.html");
+                    redirect("/screens/MailConfirmation/mailConfirmation.html");
                 }
             );
         }
@@ -28,7 +28,7 @@ setTimeout(() => {
 
     // Redirect to login if invalid key and skip login if key
     try {
-        if (isIndex) redirect("./screens/Login/login.html");
+        if (isIndex) redirect("/screens/Login/login.html");
     } catch (except) { }
     var cur_page = location.href.split('/').slice(-1)[0];
     const no_redirect = [

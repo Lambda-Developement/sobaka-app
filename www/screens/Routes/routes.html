@@ -156,7 +156,7 @@
     </main>
     <script>
         if (localStorage != undefined) {
-            localStorage.setItem('prev_page', '../../screens/Routes/routes.html');
+            localStorage.setItem('prev_page', '/screens/Routes/routes.html');
         }
         function start_route(route_id) {
             if (localStorage != undefined) {
@@ -169,7 +169,7 @@
         document.addEventListener('deviceready', () => {
             if (localStorage != undefined) {
                 if (localStorage.getItem('auth_key') == null) {
-                    document.location.href = '../Login/login.html'
+                    document.location.href = '/Login/login.html'
                 }
                 auth_key = localStorage.getItem('auth_key');
             }
