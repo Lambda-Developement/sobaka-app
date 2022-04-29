@@ -1,5 +1,5 @@
-setTimeout(() => {
-    // document.addEventListener('deviceready', () => {
+// setTimeout(() => {
+document.addEventListener('deviceready', () => {
 
     // Deeplinks
     universalLinks.subscribe(null, function (eventData) {
@@ -9,6 +9,8 @@ setTimeout(() => {
 
         if (eventData.url.includes('password')) {
             // Смена пароля
+            localStorage.conf = eventData.url.split("/")[eventData.url.split("/").length - 1];
+
             redirect("/screens/ResetPassword/resetPassword.html");
         }
         else if (eventData.url.includes('mail')) {
@@ -46,5 +48,5 @@ setTimeout(() => {
     api_kval(localStorage.getItem('auth_key')).then(
         () => { if (cur_page == "login.html") redirect("../Map/map.html") },
         () => { if (!no_redirect.includes(cur_page)) redirect_login(); });
-    // });
-}, 5000);
+});
+// }, 3000);

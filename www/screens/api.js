@@ -113,7 +113,7 @@ async function api_pupd(auth_key, diff) {
 }
 
 async function api_userdata(auth_key) {
-    // "pupd" api call (auth_key required)
+    // "userdata" api call (auth_key required)
     // returns [id, avatar_loc, name, gender, dob, login, phone]
     //  dob - это int, в котором 0 - н/опр, 1 - М, 2 - Ж, а для получения
     // avatar_loc, перед полученной ссылкой добавьте https://trip.backend.xredday.ru/
@@ -121,6 +121,16 @@ async function api_userdata(auth_key) {
         // Empty
     }
     return await __basic_api_call("userdata", data, auth_key);
+}
+
+async function api_remindconf(pass, conf) {
+    // "remindconf" api call
+    // returns [id, avatar_loc, name, gender, dob, login, phone]
+    let data = {
+        'pass': pass,
+        'conf': conf
+    }
+    return await __basic_api_call("remindconf", data);
 }
 
 // Getting field
