@@ -13,32 +13,58 @@
 </head>
 
 <body onload="check_credentials()">
-    <form action="#" method="post" enctype="multipart/form-data">
-        <div class="screen-hat">
-            <button class="btn arrow-back">
-                <a href="../Profile/profile.html">
-                    <img src="../../ui-kit/svg/arrow_back.svg" alt="arrow-back">
-                </a>
-            </button>
-            <div class="mb-3">
-                <h3 class="text-header">
-                    Профиль
-                </h3>
-            </div>
+    <div class="screen-hat">
+        <button class="btn arrow-back">
+            <a href="../Profile/profile.html">
+                <img src="../../ui-kit/svg/arrow_back.svg" alt="arrow-back">
+            </a>
+        </button>
+        <div class="mb-3">
+            <h3 class="text-header">
+                Профиль
+            </h3>
         </div>
+    </div>
+    <iframe name="dummyframe" id="dummyframe" style="display: none;"></iframe>
 
-        <div class="profile-screen">
-            <div class="avatar-area">
-                <label for="image" style="cursor:pointer;">
-                    <!-- Добавить визуальнуюиндикацию? -->
-                    <input type='file' name="image" style="display: none;" id="image" accept="image/jpeg, image/png" />
-                    <img id="avatar" src="../../ui-kit/img/avatar.png" alt="roma.jpeg" class="avatar-area__image">
-                </label>
+    <form action="https://trip.backend.xredday.ru/" method="post" enctype="multipart/form-data" target="dummyframe">
+        <div class="avatar-area" style="display:flex;flex-direction:column;justify-content: center;">
+            <label for="image" style="cursor:pointer;">
 
-                <h3 class="text-bold" id="header-name" style="margin-top: 1rem;">
+                <input type="text" name="request" style="display:none;" id="hidden_input">
+                <script>
+                    document.getElementById("hidden_input").value = `{"action":"picupd","user_key":"${localStorage.auth_key}"}`;
+                </script>
+                <input type='file' name="new_avatar_img" style="display: none;" id="image"
+                    accept="image/jpeg, image/png">
+                <div style="display:flex; justify-content:center;align-items:center;">
+                    <img id="avatar" src="../../ui-kit/img/avatar.png" alt="avatar" class="avatar-area__image">
+                    <img src="../../ui-kit/img/pencil.svg" alt=""
+                        style="position: absolute; height:64px; background-color: #FFFFFFAA; border-radius: 50% 0 50% 0; visibility: 0.5;">
+                </div>
+                <script>
+                    image.onchange = evt => {
+                        const [file] = image.files
+                        if (file) {
+                            avatar.src = URL.createObjectURL(file)
+                        }
+                        document.getElementById("image").form.submit()
+                    }
+                </script>
+                <h3 class="text-bold" id="header-name" style="margin-top: 2rem;">
                     Григорий
                 </h3>
-            </div>
+            </label>
+            <!-- <button type="submit"
+                style="all:unset; color:black; text-decoration:underline; text-align: center; font-size: 0.8rem;"
+                onsubmit="">Сменить<br>изображение</button> -->
+        </div>
+
+    </form>
+    <form action="#" method="post" enctype="multipart/form-data">
+
+        <div class="profile-screen">
+
             <div class="panel d-inline-flex align-items-center mt-3">
                 <div class="me-3">
                     <h3 class="text-common">Имя</h3>
@@ -108,6 +134,10 @@
     <script>
         const url = 'https://trip.backend.xredday.ru';
         function check_credentials() {
+
+            api_userdata(localStorage.auth_key).then((res) => localStorage.name = res[2]);
+            document.getElementById('header-name').innerHTML = localStorage.name;
+
             if (localStorage != undefined) {
                 ['name', 'gender', 'login', 'phone', 'birth1', 'birth2', 'birth3'].forEach(el => {
                     if (localStorage.getItem(el) != 'null' && localStorage.getItem(el) != null && localStorage.getItem(el).length > 0) {
@@ -115,11 +145,9 @@
                     } else {
                         document.getElementById(el).value = '';
                     }
-                });
-                if (localStorage.getItem('name') != 'null' && localStorage.getItem(el) != null && localStorage.getItem('name').length > 0) {
 
-                    document.getElementById('header-name').innerHTML = localStorage.getItem('name');
-                }
+                });
+
             }
         }
 
