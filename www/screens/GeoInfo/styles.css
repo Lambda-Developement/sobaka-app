@@ -118,6 +118,14 @@ span.text-description{
     background-position: center center;
     background-size:15px;
 }
+.unrate-icon{
+    width: 18px;
+    height: 20px;
+    background: url("../../ui-kit/svg/grey_star.svg");
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size:15px;
+}
 .rate-icon-big{
     width: 24px;
     height: 24px;

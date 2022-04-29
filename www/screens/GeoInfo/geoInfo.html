@@ -21,7 +21,7 @@
             </a>
         </button>
         <div class="mb-3">
-            <h3 class="text-header">
+            <h3 class="text-header" id="text-header">
                 Парк 1000 летия
             </h3>
         </div>
@@ -37,7 +37,7 @@
             </div>
         </div>
         <div class="panel panel-up">
-            <h3 class="text-bold">Памятник медведю</h3>
+            <h3 class="text-bold" id="info-name">Памятник медведю</h3>
             <h3 class="text-description">Россия, Ярославль, улица Которосльная набережная</h3>
             <div class="d-inline-flex justify-content-between align-items-center " style="width: 100%">
                 <div>
@@ -94,14 +94,14 @@
                     </div>
                     <div class="d-flex flex-column">
                         <div class="d-inline-flex">
-                            <div class="rate-icon"></div>
-                            <div class="rate-icon"></div>
-                            <div class="rate-icon"></div>
-                            <div class="rate-icon"></div>
-                            <div class="rate-icon"></div>
+                            <div class="rate-icon" id="rate-1"></div>
+                            <div class="rate-icon" id="rate-2"></div>
+                            <div class="rate-icon" id="rate-3"></div>
+                            <div class="rate-icon" id="rate-4"></div>
+                            <div class="rate-icon" id="rate-5"></div>
                         </div>
                         <div>
-                            <p class="text-common">6 оценок</p>
+                            <p class="text-common" id="reviews-cnt">6 оценок</p>
                         </div>
                     </div>
                 </div>
@@ -120,68 +120,6 @@
                 <h3 class="text-common my-3" id="reviews-count">Отзывов: 2</h3>
                 <div id="reviews-here">
 
-                    <div class="review d-flex flex-column mb-3">
-                        <div class="d-inline-flex align-items-center mb-2">
-                            <div class="circle d-flex justify-content-center align-items-center me-3">
-                                <div>
-                                    <h3 class="text-attention in-circle">А</h3>
-                                </div>
-                            </div>
-                            <div>
-                                <h3 class="text-common">Александр</h3>
-                            </div>
-                        </div>
-                        <div class="d-inline-flex align-items-center mb-2">
-                            <div class="d-inline-flex justify-content-center align-items-center me-3">
-                                <div class="rate-icon small"></div>
-                                <div class="rate-icon small"></div>
-                                <div class="rate-icon small"></div>
-                                <div class="rate-icon small"></div>
-                                <div class="rate-icon small"></div>
-                            </div>
-                            <div>
-                                <h3 class="text-description">12 января 2022 г.</h3>
-                            </div>
-                        </div>
-                        <div>
-                            <p class="text-common">
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Magna nulla convallis convallis
-                                porta. Sed eget scelerisque hac nec dignissim morbi eu faucibus. Eget aliquet magna
-                                nulla convallis convallis...
-                            </p>
-                        </div>
-                    </div>
-                    <div class="review d-flex flex-column mb-3">
-                        <div class="d-inline-flex align-items-center mb-2">
-                            <div class="circle d-flex justify-content-center align-items-center me-3">
-                                <div>
-                                    <h3 class="text-attention in-circle">В</h3>
-                                </div>
-                            </div>
-                            <div>
-                                <h3 class="text-common">Владислав</h3>
-                            </div>
-                        </div>
-                        <div class="d-inline-flex align-items-center mb-2">
-                            <div class="d-inline-flex justify-content-center align-items-center me-3">
-                                <div class="rate-icon small"></div>
-                                <div class="rate-icon small"></div>
-                                <div class="rate-icon small"></div>
-                                <div class="rate-icon small"></div>
-                                <div class="rate-icon small"></div>
-                            </div>
-                            <div>
-                                <h3 class="text-description">11 января 2022 г.</h3>
-                            </div>
-                        </div>
-                        <div>
-                            <p class="text-common">
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Magna nulla convallis convallis
-                                porta. Sed eget scelerisque hac nec dignissim morbi eu faucibus. Eget aliquet magna
-                                nulla convallis convallis...
-                            </p>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>
@@ -265,15 +203,15 @@
                     "                        <div class=\"circle d-flex justify-content-center align-items-center me-3\"><div><h3 class=\"text-attention in-circle\">" + name[0].toUpperCase() + "</h3></div></div>\n" +
                     "                        <div><h3 class=\"text-common\">" + name + "</h3></div>\n" +
                     "                    </div>\n" +
-                    "                    <div class=\"d-inline-flex align-items-center mb-2\">\n" +
-                    "                        <div class=\"d-inline-flex justify-content-center align-items-center me-3\">\n" +
-                    "                            <div class=\"rate-icon small\" id='rate-1' onclick='rate_clicked(this)'></div>\n" +
-                    "                            <div class=\"rate-icon small\" id='rate-2' onclick='rate_clicked(this)'></div>\n" +
-                    "                            <div class=\"rate-icon small\" id='rate-3' onclick='rate_clicked(this)'></div>\n" +
-                    "                            <div class=\"rate-icon small\" id='rate-4' onclick='rate_clicked(this)'></div>\n" +
-                    "                            <div class=\"rate-icon small\" id='rate-5' onclick='rate_clicked(this)'></div>\n" +
-                    "                        </div>\n" +
-                    "                    </div>\n" +
+                    // "                    <div class=\"d-inline-flex align-items-center mb-2\">\n" +
+                    // "                        <div class=\"d-inline-flex justify-content-center align-items-center me-3\">\n" +
+                    // "                            <div class=\"rate-icon small\" id='rate-1' onclick='rate_clicked(this)'></div>\n" +
+                    // "                            <div class=\"rate-icon small\" id='rate-2' onclick='rate_clicked(this)'></div>\n" +
+                    // "                            <div class=\"rate-icon small\" id='rate-3' onclick='rate_clicked(this)'></div>\n" +
+                    // "                            <div class=\"rate-icon small\" id='rate-4' onclick='rate_clicked(this)'></div>\n" +
+                    // "                            <div class=\"rate-icon small\" id='rate-5' onclick='rate_clicked(this)'></div>\n" +
+                    // "                        </div>\n" +
+                    // "                    </div>\n" +
                     "                    <div class=\"new-review-input\">\n" +
                     "                        <input type=\"text\" class=\"form-control\" id='review-input' placeholder=\"...\">\n" +
                     "                    </div>\n" +
@@ -310,6 +248,7 @@
                 document.getElementById('review-text').innerHTML = 'Написать отзыв';
                 review_count++;
                 document.getElementById('reviews-count').innerHTML = "Отзывов: " + (review_count + 2);
+                update_page();
             }
             review_btn_state = !review_btn_state;
         }
@@ -322,15 +261,16 @@
             update_icons();
         }
         function star_rate_clicked(el) {
-            ['1', '2', '3', '4', '5'].forEach(b => {
-                if (el.id == 'star-rate-' + b) {
-                    rate = parseInt(b);
-                    if (review_btn_state)
-                        review_btn_click();
-                }
-            })
-            update_icons();
-
+            if(document.getElementById('add_btn').disabled != true){
+                ['1', '2', '3', '4', '5'].forEach(b => {
+                    if (el.id == 'star-rate-' + b) {
+                        rate = parseInt(b);
+                        if (review_btn_state)
+                            review_btn_click();
+                    }
+                })
+                update_icons();
+            }
         }
         function update_icons() {
             for (i = 1; i <= 5; i++) {
@@ -353,8 +293,14 @@
             }
         }
         function load_reviews(result) {
-            document.getElementById('average-score').innerHTML = Math.round(result[0]).toFixed(1);
+            let rate = Math.round(result[0]).toFixed(1);
+            document.getElementById('average-score').innerHTML = rate;
+            [1,2,3,4,5].forEach((el)=>{
+                document.getElementById(`rate-${el}`).className = (rate >= el) ? "rate-icon" : "unrate-icon";
+            })
             let reviews = result[1];
+            document.getElementById('reviews-count').innerHTML = `Отзывов: ${result[1].length}`;
+            document.getElementById('reviews-cnt').innerHTML = `Оценок: ${result[1].length}`;
             console.log(reviews);
             reviews.forEach(el => {
                 let name = el[0][0];
@@ -390,11 +336,18 @@
                 review_count++;
             });
         }
-        document.addEventListener('deviceready', () => {
+        function update_page(){
             api_userdata(localStorage.getItem('auth_key')).then((userdata) => {
                 localStorage.setItem('name', userdata[2]);
+                api_data(localStorage.getItem('auth_key')).then((res) => {
+                    document.getElementById('info-name').innerHTML = res[localStorage.getItem('prev_place')][2];
+                    document.getElementById('text-header').innerHTML =  res[localStorage.getItem('prev_place')][2];
+                });
                 api_getrev(localStorage.getItem('prev_place'), localStorage.getItem('auth_key')).then((res) => load_reviews(res), () => console.log('error'));
             });
+        }
+        document.addEventListener('deviceready', () => {
+            update_page();
         });
     </script>
 </body>
