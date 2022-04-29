@@ -50,7 +50,7 @@ function redirect_not_available() {
     redirect('/screens/License/license.html');
 }
 function redirect_reset_password() {
-    redirect('screens/ResetPassword/resetPassword.html');
+    redirect('/screens/ResetPassword/resetPassword.html');
 }
 function redirect_route_details() {
     redirect('/screens/RouteDetails/routeDetails.html');
