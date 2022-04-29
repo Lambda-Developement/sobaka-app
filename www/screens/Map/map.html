@@ -87,7 +87,7 @@
                         <h3 class="text-description">Россия, Ярославль, улица Которосльная набережная</h3>
                     </div>
                     <div>
-                        <h3 class="text-description">0,6 km от вас</h3>
+                        <h3 class="text-description" id="info-distance">0,6 km от вас</h3>
                     </div>
                 </div>
                 <div class="geopoint-photo"></div>
@@ -208,8 +208,10 @@
         function collapse_open() {
             document.getElementById("info").style.display = 'block';
             document.getElementById('info-name').innerHTML = locs[localStorage.getItem('prev_place')][2];
+            document.getElementById('info-distance').innerHTML = `${calc_distance_to_geopoint(localStorage.getItem('prev_place'))} км от вас`;
+            localStorage.setItem('g_distance',calc_distance_to_geopoint(localStorage.getItem('prev_place')));
             api_getrev(localStorage.getItem('prev_place'), localStorage.getItem('auth_key')).then((res) => {
-                let rate = Math.round(res[0]).toFixed(1);
+                let rate = parseFloat(res[0]).toFixed(1);
                 document.getElementById('reviews-cnt').innerHTML = `отзывов: ${res[1].length}`;
                 document.getElementById('rate').innerText = rate;
                 [1,2,3,4,5].forEach((el)=>{

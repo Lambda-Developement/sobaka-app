@@ -164,6 +164,10 @@ function make_route_to_cur() {
         }
     }
 }
+function calc_distance_to_geopoint(g_id){
+    let meters = map.distance(L.latLng(pos[0],pos[1]),L.latLng(locs[g_id][0],locs[g_id][1]));
+    return parseFloat(meters/1000.0).toFixed(1);
+}
 document.addEventListener('deviceready', () => {
     console.log(`[INFO] :  Attempt to run cordova permissions...`);
     // permissions = cordova.plugins.permissions;
