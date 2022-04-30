@@ -90,7 +90,7 @@
             </a>
         </div>
     </div>
-    <div class="container" style="padding: 0" onclick="switch_review()">
+    <div class="container" style="padding: 0">
         <div class="panel">
             <div class="panel-grey-up">
                 <div class="d-inline-flex align-items-center">
@@ -253,35 +253,6 @@
             document.getElementById('review-text').innerHTML = "Начать экскурсию";
             review_opened = false;
         }
-        function add_review(id, mark, review) {
-            cordovaHTTP.post("https://trip.backend.xredday.ru/",
-                {
-                    'request':
-                    {
-                        "action": "crrev",
-                        "user_key": localStorage.getItem('auth_key'),
-                        "data": { "id": id, "mark": mark, "review": review }
-                    }
-                },
-                {},
-                function (response) {
-                    // prints 200
-                    console.log(response.status);
-                    try {
-                        console.log(response.data);
-                    } catch (e) {
-                        console.error("JSON parsing error");
-                    }
-                },
-                function (response) {
-                    // prints 403
-                    console.log(response.status);
-                    errorMessage.style.visibility = "visible";
-                    //prints Permission denied
-                    console.log(response.data);
-                }
-            );
-        }
         function btn_click() {
             if (!review_opened) {
                 redirect_geoposition();
@@ -291,6 +262,7 @@
             if (localStorage != undefined) {
                 name = Boolean(localStorage.getItem('name')) ? localStorage.getItem('name') : 'Роман';
             }
+            debugger;
             if (review_btn_state) {
                 document.getElementById('reviews-here').innerHTML += "" +
                     "<div id='review-" + (review_count) + "' class=\"review d-flex flex-column mb-3\">\n" +
@@ -317,32 +289,6 @@
                 api_crrev(parseInt(localStorage.getItem('route_id'))+1, 0, rate, localStorage.getItem('auth_key'), prev_review).then((res) => {
                     console.log('done');
                 }, () => console.log('error'));
-                document.getElementById('review-' + (review_count)).remove();
-                document.getElementById('reviews-here').innerHTML += "" +
-                    "<div id='review-" + (review_count) + "' class=\"review d-flex flex-column mb-3\">\n" +
-                    "                    <div class=\"d-inline-flex align-items-center mb-2\">\n" +
-                    "                        <div class=\"circle d-flex justify-content-center align-items-center me-3\"><div><h3 class=\"text-attention in-circle\">" + name[0].toUpperCase() + "</h3></div></div>\n" +
-                    "                        <div><h3 class=\"text-common\">" + name + "</h3></div>\n" +
-                    "                    </div>\n" +
-                    "                    <div class=\"d-inline-flex align-items-center mb-2\">\n" +
-                    "                        <div class=\"d-inline-flex justify-content-center align-items-center me-3\">\n" +
-                    "                            <div class=\"" + (rate >= 1 ? "rate-icon" : "star-icon-rate") + " small\"></div>\n" +
-                    "                            <div class=\"" + (rate >= 2 ? "rate-icon" : "star-icon-rate") + " small\"></div>\n" +
-                    "                            <div class=\"" + (rate >= 3 ? "rate-icon" : "star-icon-rate") + " small\"></div>\n" +
-                    "                            <div class=\"" + (rate >= 4 ? "rate-icon" : "star-icon-rate") + " small\"></div>\n" +
-                    "                            <div class=\"" + (rate >= 5 ? "rate-icon" : "star-icon-rate") + " small\"></div>\n" +
-                    "                        </div>\n" +
-                    "                        <div><h3 class=\"text-description\">Только что</h3></div>\n" +
-                    "                    </div>\n" +
-                    "                    <div>\n" +
-                    "                        <p class=\"text-common\">\n" +
-                    "                            " + prev_review + "\n" +
-                    "                        </p>\n" +
-                    "                    </div>\n" +
-                    "                </div>";
-                document.getElementById('review-text').innerHTML = 'Написать отзыв';
-                review_count++;
-                document.getElementById('reviews-count').innerHTML = "Отзывов: " + (review_count + 2);
                 update_page();
             }
             review_btn_state = !review_btn_state;
