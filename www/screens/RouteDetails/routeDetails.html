@@ -262,6 +262,7 @@
             if (localStorage != undefined) {
                 name = Boolean(localStorage.getItem('name')) ? localStorage.getItem('name') : 'Роман';
             }
+
             if (review_btn_state) {
                 document.getElementById('reviews-here').innerHTML += "" +
                     "<div id='review-" + (review_count) + "' class=\"review d-flex flex-column mb-3\">\n" +
@@ -285,15 +286,16 @@
                 document.getElementById('review-text').innerHTML = 'Добавить';
             } else {
                 let prev_review = document.getElementById('review-input').value;
-                api_crrev(parseInt(localStorage.getItem('route_id'))+1, 1, rate, localStorage.getItem('auth_key'), prev_review).then((res) => {
+                api_crrev(parseInt(localStorage.getItem('route_id')) + 1, 1, rate, localStorage.getItem('auth_key'), prev_review).then((res) => {
                     console.log(res);
+
                 }, () => console.log('error'));
                 update_page();
             }
             review_btn_state = !review_btn_state;
         }
         function rate_clicked(el) {
-            if(document.getElementById('add_btn').disabled != true){
+            if (document.getElementById('add_btn').disabled != true) {
                 ['1', '2', '3', '4', '5'].forEach(b => {
                     if (el.id == 'star-rate-' + b) {
                         rate = parseInt(b);
@@ -304,7 +306,7 @@
             }
         }
         function star_rate_clicked(el) {
-            if(document.getElementById('add_btn').disabled != true){
+            if (document.getElementById('add_btn').disabled != true) {
                 ['1', '2', '3', '4', '5'].forEach(b => {
                     if (el.id == 'star-rate-' + b) {
                         rate = parseInt(b);
@@ -337,8 +339,9 @@
         function load_reviews(result) {
             let rate2 = parseFloat(result[0]).toFixed(1);
             document.getElementById('average-score').innerHTML = rate2;
-            [1,2,3,4,5].forEach((el)=>{
+            [1, 2, 3, 4, 5].forEach((el) => {
                 document.getElementById(`rate-${el}`).className = (rate2 >= el) ? "rate-icon" : "unrate-icon";
+
             })
             let reviews = result[1];
             document.getElementById('reviews-count').innerHTML = `Отзывов: ${result[1].length}`;
@@ -378,13 +381,13 @@
                 review_count++;
             });
         }
-        function update_page(){
+        function update_page() {
             document.getElementById('reviews-here').innerHTML = "";
             api_userdata(localStorage.getItem('auth_key')).then((userdata) => {
                 localStorage.setItem('name', userdata[2]);
-                api_getrev(parseInt(localStorage.getItem('route_id'))+1, localStorage.getItem('auth_key'),1).then((res) => load_reviews(res), () => console.log('error'));
+                api_getrev(parseInt(localStorage.getItem('route_id')) + 1, localStorage.getItem('auth_key'), 1).then((res) => load_reviews(res), () => console.log('error'));
             });
-            api_groutes(localStorage.getItem('auth_key')).then((groutes)=>{
+            api_groutes(localStorage.getItem('auth_key')).then((groutes) => {
                 let t = localStorage.getItem('route_id');
                 console.log(groutes);
                 groutes.forEach(el => {

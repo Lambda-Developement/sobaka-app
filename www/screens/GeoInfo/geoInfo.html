@@ -28,17 +28,17 @@
     </div>
 
     <div class="container">
-        <div class="image-frame my-3">
+        <div class="image-frame my-3" id="info-photo">
             <div class="ontop d-inline-flex align-items-center">
                 <div class="photos-icon"></div>
                 <div>
-                    <p class="text-attention">3</p>
+                    <p class="text-attention">1</p>
                 </div>
             </div>
         </div>
         <div class="panel panel-up">
             <h3 class="text-bold" id="info-name">Памятник медведю</h3>
-            <h3 class="text-description">Россия, Ярославль, улица Которосльная набережная</h3>
+            <h3 class="text-description" id="info-description">Россия, Ярославль, улица Которосльная набережная</h3>
             <div class="d-inline-flex justify-content-between align-items-center " style="width: 100%">
                 <div>
                     <h3 class="text-description" style="color: rgba(168, 168, 168, 1)">Круглосуточно</h3>
@@ -261,7 +261,7 @@
             update_icons();
         }
         function star_rate_clicked(el) {
-            if(document.getElementById('add_btn').disabled != true){
+            if (document.getElementById('add_btn').disabled != true) {
                 ['1', '2', '3', '4', '5'].forEach(b => {
                     if (el.id == 'star-rate-' + b) {
                         rate = parseInt(b);
@@ -295,7 +295,7 @@
         function load_reviews(result) {
             let rate = parseFloat(result[0]).toFixed(1);
             document.getElementById('average-score').innerHTML = rate;
-            [1,2,3,4,5].forEach((el)=>{
+            [1, 2, 3, 4, 5].forEach((el) => {
                 document.getElementById(`rate-${el}`).className = (rate >= el) ? "rate-icon" : "unrate-icon";
             })
             let reviews = result[1];
@@ -336,16 +336,18 @@
                 review_count++;
             });
         }
-        function update_page(){
+        function update_page() {
             document.getElementById('reviews-here').innerHTML = "";
             api_userdata(localStorage.getItem('auth_key')).then((userdata) => {
                 localStorage.setItem('name', userdata[2]);
                 api_data(localStorage.getItem('auth_key')).then((res) => {
                     document.getElementById('info-name').innerHTML = res[localStorage.getItem('prev_place')][2];
-                    document.getElementById('text-header').innerHTML =  res[localStorage.getItem('prev_place')][2];
-                    if(localStorage.getItem('g_distance') != null){
+                    document.getElementById('info-description').innerHTML = res[localStorage.getItem('prev_place')][3];
+                    document.getElementById('text-header').innerHTML = res[localStorage.getItem('prev_place')][2];
+                    if (localStorage.getItem('g_distance') != null) {
                         document.getElementById('info-distance').innerHTML = `${localStorage.getItem('g_distance')} km`
                     }
+                    document.getElementById('info-photo').style.background = `url(https://trip.backend.xredday.ru/${res[localStorage.getItem('prev_place')][4]})`;
                 });
                 api_getrev(localStorage.getItem('prev_place'), localStorage.getItem('auth_key')).then((res) => load_reviews(res), () => console.log('error'));
             });
