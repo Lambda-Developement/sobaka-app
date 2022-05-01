@@ -162,9 +162,9 @@
                 ['name', 'gender', 'dob', 'phone'].forEach(el => {
                     if (el == 'dob') {
                         time = new Date(
-                            document.getElementById('birth1').value,
-                            document.getElementById('birth2').value,
-                            document.getElementById('birth3').value,
+                            document.getElementById('birth1').value,  // year
+                            document.getElementById('birth2').value, // month
+                            document.getElementById('birth3').value, // daY
                         )
                         value = time.getTime();
                     } else {
@@ -172,9 +172,10 @@
                     }
                     console.log(document.getElementById(el))
                     values[el] = value;
-                    localStorage.setItem(el, document.getElementById(el).value);
+                    localStorage.setItem(el, value);
                 });
-                api_pupd(auth_key, values).then((a) => {
+                console.log(values);
+                api_pupd(localStorage.auth_key, values).then((a) => {
                     console.log('userdata updated');
                 });
                 el = document.getElementById('new-prof-pic');
@@ -187,16 +188,23 @@
         }
         document.addEventListener('deviceready', () => {
             api_userdata(localStorage.auth_key).then((userdata) => {
+                localStorage.setItem('name', userdata[2]);
+                localStorage.setItem('gender', userdata[3]);
+                localStorage.setItem('login', userdata[5]);
+                localStorage.setItem('phone', userdata[6]);
+                let dob = new Date(userdata[4]);
+                localStorage.setItem('birth1', dob.getFullYear());
+                localStorage.setItem('birth2', dob.getMonth());
+                localStorage.setItem('birth3', dob.getDate());
                 if (userdata[1] != null) {
                     document.getElementById('avatar').src = `${url}/${userdata[1]}`;
                 }
+                setTimeout(()=>{
+                    document.getElementById('gender').value = localStorage.getItem('gender') ;
+                },1000);
+                check_credentials();
             });
         });
-    </script>
-    <script>
-        setTimeout(()=>{
-            document.getElementById('gender').value = "1";
-        },1000);
     </script>
 </body>
 
