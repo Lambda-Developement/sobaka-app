@@ -262,7 +262,6 @@
             if (localStorage != undefined) {
                 name = Boolean(localStorage.getItem('name')) ? localStorage.getItem('name') : 'Роман';
             }
-            debugger;
             if (review_btn_state) {
                 document.getElementById('reviews-here').innerHTML += "" +
                     "<div id='review-" + (review_count) + "' class=\"review d-flex flex-column mb-3\">\n" +
@@ -286,8 +285,8 @@
                 document.getElementById('review-text').innerHTML = 'Добавить';
             } else {
                 let prev_review = document.getElementById('review-input').value;
-                api_crrev(parseInt(localStorage.getItem('route_id'))+1, 0, rate, localStorage.getItem('auth_key'), prev_review).then((res) => {
-                    console.log('done');
+                api_crrev(parseInt(localStorage.getItem('route_id'))+1, 1, rate, localStorage.getItem('auth_key'), prev_review).then((res) => {
+                    console.log(res);
                 }, () => console.log('error'));
                 update_page();
             }
@@ -296,7 +295,7 @@
         function rate_clicked(el) {
             if(document.getElementById('add_btn').disabled != true){
                 ['1', '2', '3', '4', '5'].forEach(b => {
-                    if (el.id == 'rate-' + b) {
+                    if (el.id == 'star-rate-' + b) {
                         rate = parseInt(b);
                     }
                 })
@@ -307,7 +306,7 @@
         function star_rate_clicked(el) {
             if(document.getElementById('add_btn').disabled != true){
                 ['1', '2', '3', '4', '5'].forEach(b => {
-                    if (el.id == 'rate-' + b) {
+                    if (el.id == 'star-rate-' + b) {
                         rate = parseInt(b);
                     }
                 })
@@ -336,10 +335,10 @@
             }
         }
         function load_reviews(result) {
-            let rate = parseFloat(result[0]).toFixed(1);
-            document.getElementById('average-score').innerHTML = rate;
+            let rate2 = parseFloat(result[0]).toFixed(1);
+            document.getElementById('average-score').innerHTML = rate2;
             [1,2,3,4,5].forEach((el)=>{
-                document.getElementById(`rate-${el}`).className = (rate >= el) ? "rate-icon" : "unrate-icon";
+                document.getElementById(`rate-${el}`).className = (rate2 >= el) ? "rate-icon" : "unrate-icon";
             })
             let reviews = result[1];
             document.getElementById('reviews-count').innerHTML = `Отзывов: ${result[1].length}`;
@@ -352,7 +351,7 @@
                 if (name == localStorage.getItem('name')) {
                     document.getElementById('add_btn').disabled = true;
                 }
-                let rate = el[1];
+                let rate3 = el[1];
                 let body = el[2];
                 document.getElementById('reviews-here').innerHTML += "" +
                     "<div id='review-" + (review_count) + "' class=\"review d-flex flex-column mb-3\">\n" +
@@ -362,11 +361,11 @@
                     "                    </div>\n" +
                     "                    <div class=\"d-inline-flex align-items-center mb-2\">\n" +
                     "                        <div class=\"d-inline-flex justify-content-center align-items-center me-3\">\n" +
-                    "                            <div class=\"" + (rate >= 1 ? "rate-icon" : "star-icon-rate") + " small\"></div>\n" +
-                    "                            <div class=\"" + (rate >= 2 ? "rate-icon" : "star-icon-rate") + " small\"></div>\n" +
-                    "                            <div class=\"" + (rate >= 3 ? "rate-icon" : "star-icon-rate") + " small\"></div>\n" +
-                    "                            <div class=\"" + (rate >= 4 ? "rate-icon" : "star-icon-rate") + " small\"></div>\n" +
-                    "                            <div class=\"" + (rate >= 5 ? "rate-icon" : "star-icon-rate") + " small\"></div>\n" +
+                    "                            <div class=\"" + (rate3 >= 1 ? "rate-icon" : "star-icon-rate") + " small\"></div>\n" +
+                    "                            <div class=\"" + (rate3 >= 2 ? "rate-icon" : "star-icon-rate") + " small\"></div>\n" +
+                    "                            <div class=\"" + (rate3 >= 3 ? "rate-icon" : "star-icon-rate") + " small\"></div>\n" +
+                    "                            <div class=\"" + (rate3 >= 4 ? "rate-icon" : "star-icon-rate") + " small\"></div>\n" +
+                    "                            <div class=\"" + (rate3 >= 5 ? "rate-icon" : "star-icon-rate") + " small\"></div>\n" +
                     "                        </div>\n" +
                     // "                        <div><h3 class=\"text-description\">Только что</h3></div>\n" +
                     "                    </div>\n" +
