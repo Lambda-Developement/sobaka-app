@@ -84,13 +84,13 @@
                         <h3 class="text-bold" id="info-name">Памятник медведю "Символ России, легенда Ярославля"</h3>
                     </div>
                     <div>
-                        <h3 class="text-description">Россия, Ярославль, улица Которосльная набережная</h3>
+                        <h3 class="text-description" id="info-description">Россия, Ярославль, улица Которосльная набережная</h3>
                     </div>
                     <div>
                         <h3 class="text-description" id="info-distance">0,6 km от вас</h3>
                     </div>
                 </div>
-                <div class="geopoint-photo"></div>
+                <div class="geopoint-photo" id="info-photo"></div>
             </div>
             <div class="reviews d-inline-flex justify-content-between p-2">
                 <div class="d-inline-flex justify-content-center align-items-center me-4">
@@ -209,6 +209,8 @@
             document.getElementById("info").style.display = 'block';
             document.getElementById('info-name').innerHTML = locs[localStorage.getItem('prev_place')][2];
             document.getElementById('info-distance').innerHTML = `${calc_distance_to_geopoint(localStorage.getItem('prev_place'))} км от вас`;
+            document.getElementById('info-description').innerHTML = locs[localStorage.getItem('prev_place')][3];
+            document.getElementById('info-photo').style.background = `url(https://trip.backend.xredday.ru/${locs[localStorage.getItem('prev_place')][4]})`;
             localStorage.setItem('g_distance',calc_distance_to_geopoint(localStorage.getItem('prev_place')));
             api_getrev(localStorage.getItem('prev_place'), localStorage.getItem('auth_key')).then((res) => {
                 let rate = parseFloat(res[0]).toFixed(1);
