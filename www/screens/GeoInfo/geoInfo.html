@@ -253,12 +253,15 @@
             review_btn_state = !review_btn_state;
         }
         function rate_clicked(el) {
-            ['1', '2', '3', '4', '5'].forEach(b => {
-                if (el.id == 'rate-' + b) {
-                    rate = parseInt(b);
-                }
-            })
-            update_icons();
+            if (document.getElementById('add_btn').disabled != true){
+                ['1', '2', '3', '4', '5'].forEach(b => {
+                    if (el.id == 'rate-' + b) {
+                        rate = parseInt(b);
+                    }
+                })
+                update_icons();
+            }
+
         }
         function star_rate_clicked(el) {
             if (document.getElementById('add_btn').disabled != true) {
