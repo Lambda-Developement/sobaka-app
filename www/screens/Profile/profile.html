@@ -159,6 +159,8 @@
 
     <script>
         const url = 'https://trip.backend.xredday.ru';
+
+        // Возвращение на предыдущий экран
         function go_back() {
             if (localStorage != undefined) {
                 prev = localStorage.getItem('prev_page');
@@ -169,6 +171,8 @@
                 }
             }
         }
+
+        // Обновление данных пользователя
         function check_credentials() {
             if (localStorage != undefined) {
                 if (localStorage.getItem('name') != null && localStorage.getItem('name').length > 0) {
@@ -176,6 +180,8 @@
                 }
             }
         }
+
+        // Запоминание данных пользователя
         function update_userdata() {
             api_userdata(localStorage.getItem('auth_key')).then((userdata) => {
                 localStorage.setItem('name', userdata[2]);
@@ -196,6 +202,8 @@
                 check_credentials();
             });
         }
+
+        // Открытие, закрытие попап окон подтверждения очистки истории
         function callpopup() {
             document.getElementById('popup2').style.display = 'block';
         }
@@ -207,12 +215,15 @@
             closepopup();
         }
 
+        // Открытие, закртыие попап окон подтверждения выхода из аккаунта
         function callpopup_exit_account() {
             document.getElementById('popup3').style.display = 'block';
         }
         function closepopup_exit_account() {
             document.getElementById('popup3').style.display = 'none';
         }
+
+        // Выход из аккаунта
         function logout() {
             localStorage.removeItem('auth_key');
             document.location.href = '../Login/login.html';

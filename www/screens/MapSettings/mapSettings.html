@@ -75,6 +75,8 @@
     </div>
     <script>
         var opened = false;
+
+        // Открытие, закрытие попап окон
         function collapse_show() {
             document.getElementById("collapseExample").style.display = "block";
             let a = document.getElementsByClassName('dropdown-up-icon')[0];
@@ -106,6 +108,8 @@
             b.classList.add('choose-icon');
             collapse_close();
         }
+
+        // Обновление настроек
         function update_settings() {
             if (localStorage != undefined) {
                 localStorage.setItem('mapType', document.getElementById("MapType").innerText);
@@ -115,6 +119,8 @@
                 console.log("No support");
             }
         }
+
+        // Получение настроек
         function get_settings() {
             if (localStorage != undefined) {
                 console.log(localStorage.getItem('mapType'));

@@ -28,11 +28,15 @@ function onError(error) {
     alert('code: ' + error.code + '\n' +
         'message: ' + error.message + '\n');
 }
+
+// Получить текущее местоположение
 function get_location() {
     navigator.geolocation.getCurrentPosition(onSuccess, onError);
     update_markers();
     map.flyTo(pos, 18);
 }
+
+// Построить маршрут между двумя точками
 function make_route(start, end) {
     map.removeControl(routing_control);
     routing_control = L.Routing.control({
@@ -53,6 +57,8 @@ function make_route(start, end) {
     });
     routing_control.addTo(map);
 }
+
+// Обновление маркеров
 function update_markers() {
     map.removeLayer(markers);
     markers = L.markerClusterGroup({
@@ -132,12 +138,18 @@ function update_markers() {
     map.addLayer(markers);
     map.addLayer(pos_marker);
 }
+
+// Приближение карты
 function zoomin() {
     map.zoomIn(1);
 }
+
+// Отдаление карты
 function zoomout() {
     map.zoomOut(1);
 }
+
+// Поиск геоточек
 function search(input_str) {
     results = index.search(input_str);
     document.getElementById("search-results1").innerHTML = "";
@@ -172,6 +184,8 @@ function search(input_str) {
             "                </a></div>";
     });
 }
+
+// Обработчик клика в поиске
 function search_clicked(coords,id) {
     map.flyTo(coords, 16);
     let hs = localStorage.getItem('history');
@@ -190,6 +204,8 @@ function search_clicked(coords,id) {
     }
     search_history_close();
 }
+
+// Строит маршурт до текущей геоточки
 function make_route_to_cur() {
     if (localStorage != undefined) {
         if (localStorage.getItem('prev_place') != null) {
@@ -199,10 +215,14 @@ function make_route_to_cur() {
         }
     }
 }
+
+// Подсчитывает дистанцию между текущим положением и геоточкой в км
 function calc_distance_to_geopoint(g_id){
     let meters = map.distance(L.latLng(pos[0],pos[1]),L.latLng(locs[g_id][0],locs[g_id][1]));
     return parseFloat(meters/1000.0).toFixed(1);
 }
+
+// Получение данных с сервера
 document.addEventListener('deviceready', () => {
     console.log(`[INFO] :  Attempt to run cordova permissions...`);
     // permissions = cordova.plugins.permissions;
@@ -300,6 +320,7 @@ setInterval(() => {
     if (locs.length > 0) search(document.getElementById('line-edit').value, {});
 }, 1000);
 
+// Подготовка карты
 document.getElementById("map").style.height = HEIGHT;
 map = L.map('map', {
     center: pos,

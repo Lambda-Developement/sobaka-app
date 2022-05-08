@@ -211,6 +211,8 @@
         var review_btn_state = true;
         var review_count = 0;
         var review_opened = false;
+
+        // Открытие закртие попап окон
         function collapse_open() {
             document.getElementById("info").style.height = "fit-content";
             document.getElementById("dropdown").classList.add("dropdown-icon-down");
@@ -223,6 +225,8 @@
             opened = !opened;
             opened ? collapse_open() : collapse_close();
         }
+
+        // Переключение в режим отзывов
         function switch_review() {
             document.getElementById('geoinfo').classList.remove('active');
             document.getElementById('review').classList.add('active');
@@ -238,6 +242,8 @@
             review_opened = true;
             update_page();
         }
+
+        // Переключение в режим осмотра маршрута
         function switch_geoinfo() {
             // document.getElementById('add_btn').disable = false;
             document.getElementById('review').classList.remove('active');
@@ -253,6 +259,8 @@
             document.getElementById('review-text').innerHTML = "Начать экскурсию";
             review_opened = false;
         }
+
+        // Обработчик нажатия на кнопку добавления отзыва
         function btn_click() {
             if (!review_opened) {
                 redirect_geoposition();
@@ -294,6 +302,8 @@
             }
             review_btn_state = !review_btn_state;
         }
+
+        // Обработчик нажатия кнопки рейтинга
         function rate_clicked(el) {
             if (document.getElementById('add_btn').disabled != true) {
                 ['1', '2', '3', '4', '5'].forEach(b => {
@@ -316,6 +326,8 @@
 
             }
         }
+
+        // Обновление рейтинга
         function update_icons() {
             for (i = 1; i <= 5; i++) {
                 if (i <= rate) {
@@ -336,6 +348,8 @@
                 }
             }
         }
+
+        // Загрузка отзывов с сервера
         function load_reviews(result) {
             let rate2 = parseFloat(result[0]).toFixed(1);
             document.getElementById('average-score').innerHTML = rate2;
@@ -381,6 +395,8 @@
                 review_count++;
             });
         }
+
+        // Обновление страницы
         function update_page() {
             document.getElementById('reviews-here').innerHTML = "";
             api_userdata(localStorage.getItem('auth_key')).then((userdata) => {

@@ -158,6 +158,8 @@
         if (localStorage != undefined) {
             localStorage.setItem('prev_page', '/screens/Routes/routes.html');
         }
+
+        // Начать маршрут
         function start_route(route_id) {
             if (localStorage != undefined) {
                 localStorage.setItem('route_id', route_id);
@@ -165,7 +167,8 @@
                 redirect_route_details();
             }
         }
-        //document.addEventListener('deviceready',() => {});
+
+        // Проверка ключа, получение маршрутов
         document.addEventListener('deviceready', () => {
             if (localStorage != undefined) {
                 if (localStorage.getItem('auth_key') == null) {

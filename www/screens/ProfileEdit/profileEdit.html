@@ -136,6 +136,8 @@
 
     <script>
         const url = 'https://trip.backend.xredday.ru';
+
+        // Обновление данных пользователя
         function check_credentials() {
 
             api_userdata(localStorage.auth_key).then((res) => localStorage.name = res[2]);
@@ -154,6 +156,7 @@
             }
         }
 
+        // Изменение данных пользователя
         function apply_changes() {
             if (localStorage != undefined) {
                 //['name','sex','birth1','birth2','birth3','email','phone'].forEach(el=>{
@@ -186,6 +189,8 @@
             check_credentials();
             redirect_profile();
         }
+
+        // Получение данных пользователя
         document.addEventListener('deviceready', () => {
             api_userdata(localStorage.auth_key).then((userdata) => {
                 localStorage.setItem('name', userdata[2]);

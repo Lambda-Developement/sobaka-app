@@ -174,6 +174,8 @@
     <script>
         var opened = false;
         var popup_collapsed = false;
+
+        // Открытие, закрытие попап окон
         function toggle_collapse() {
             if (popup_collapsed) {
                 setTimeout(() => {
@@ -197,6 +199,8 @@
             }
             popup_collapsed = !popup_collapsed;
         }
+
+        // Открытие, закрытие строчки поиска
         function search_history_open() {
             document.getElementById('search-history').style.display = 'block';
             document.getElementById('search-icon').classList.add('grey-close-icon');
@@ -207,6 +211,8 @@
             document.getElementById('search-icon').classList.remove('grey-close-icon');
             document.getElementById('search-icon').classList.add('grey-search-icon');
         }
+
+        // Открытие, закрытие краткой информации о геоточке
         function collapse_open() {
             document.getElementById("info").style.display = 'block';
             document.getElementById('info-name').innerHTML = locs[localStorage.getItem('prev_place')][2];
@@ -246,6 +252,8 @@
                 }
             }
         }
+
+        // Изменение приближения карты
         function update_zoom() {
             if (localStorage != undefined) {
                 if (localStorage.getItem('zoomControl') == 'true') {

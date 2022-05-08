@@ -86,6 +86,8 @@
         </p>
     </div>
     <script>
+
+        // Валидация введенных пользователем данных
         var styleElem = document.head.appendChild(document.createElement("style"));
 
         const validateEmail = (email) => {
@@ -187,6 +189,7 @@
     errorMessage = document.getElementById("error-msg");
     errorMessage.style.visibility = "hidden";
 
+    // Запрос на регистрацию пользователя
     function register(name, email, password) {
         errorMessage.style.visibility = "hidden";
 
