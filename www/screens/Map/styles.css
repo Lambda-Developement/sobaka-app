@@ -176,6 +176,48 @@ a {
     width: 100%;
     z-index: 3;
 }
+.progress-popup{
+    height: 60px;
+    background: #ffffff;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.17);
+    border-radius: 12px;
+    width: 100%;
+    border-bottom: 2px solid rgba(243, 243, 243, 1);
+}
+.progress-circle{
+    background-color: #FC913B;
+    min-width:25px;
+    max-width: 25px;
+    height:25px;
+    border-radius: 15px;
+}
+.outlined{
+    background-color: #ffffff;
+    border: 5px solid #FC913B;
+}
+.progress-path{
+    width:100%;
+    border-bottom: 5px solid rgba(0,0,0,0.05);
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+.progress-current{
+    margin:auto;
+    background: url("../../ui-kit/img/progress.gif");
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size:50px;
+    width:25px;
+    height:25px;
+    position: fixed;
+}
+#progress-wrapper{
+    z-index: 3;
+    top: 100px;
+    bottom:unset;
+}
 .new{
     width:fit-content;
     background: rgba(240, 240, 240, 1);

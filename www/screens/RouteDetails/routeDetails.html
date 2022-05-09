@@ -11,7 +11,7 @@
 
 </head>
 
-<body>
+<body onload="switch_geoinfo()">
 
 
     <div class="screen-hat">
@@ -211,6 +211,7 @@
         var review_btn_state = true;
         var review_count = 0;
         var review_opened = false;
+        var geo_or_review = 0;
 
         // Открытие закртие попап окон
         function collapse_open() {
@@ -228,6 +229,7 @@
 
         // Переключение в режим отзывов
         function switch_review() {
+            geo_or_review = 1;
             document.getElementById('geoinfo').classList.remove('active');
             document.getElementById('review').classList.add('active');
             var temp = document.getElementsByClassName("geoinfo");
@@ -245,7 +247,8 @@
 
         // Переключение в режим осмотра маршрута
         function switch_geoinfo() {
-            // document.getElementById('add_btn').disable = false;
+            geo_or_review = 0;
+            document.getElementById('add_btn').disabled = false;
             document.getElementById('review').classList.remove('active');
             document.getElementById('geoinfo').classList.add('active');
             var temp = document.getElementsByClassName("geoinfo");

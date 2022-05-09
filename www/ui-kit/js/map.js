@@ -67,47 +67,50 @@ function update_markers() {
     });
     info2_appear = false;
     let idx = 0;
-    locs.forEach((el) => {
-        var title = el[2];
-        glow = map.distance(L.latLng(pos), L.latLng(el[0], el[1])) <= minDistance ? "glow" : "";
-        let route_near = false;
-        if (cur_route_id != -1) {
-            route_near = map.distance(L.latLng(pos), L.latLng(locs[routes[cur_route_id][cur_route_place]][0], locs[routes[cur_route_id][cur_route_place]][1])) <= minDistance ? true : false;
-        }
-        icon = L.divIcon({
-            className: 'custom-div-icon',
-            html: "<div>\n" +
-                "            <a href=\"#\" onclick=\"collapse_toggle(" + idx + ")\">\n" +
-                "                <div class=\"geopoint d-flex justify-content-center align-items-center " + glow + " pb-2 \">\n" +
-                "                    <div class=\"dog-img\"></div>\n" +
-                "                </div>\n" +
-                "            </a>\n" +
-                "        </div>",
-            iconSize: [30, 42],
-            iconAnchor: [15, 42]
-        });
-        if (glow) {
-            info2_appear = true;
-        }
-        if (route_near) {
-            cur_route_place += 1;
-            if (cur_route_place >= routes[cur_route_id].length) {
-                cur_route_id = -1;
-                cur_route_place = -1;
-                if (localStorage != undefined) {
-                    localStorage.removeItem('route_place');
-                    localStorage.removeItem('route_id');
-                }
-            } else {
-                if (localStorage != undefined) {
-                    localStorage.setItem('route_place', cur_route_place);
+    locs.forEach((el,t) => {
+        if(cur_route_id == -1 || (cur_route_id != -1 && routes[cur_route_id].includes(t))){
+            var title = el[2];
+            glow = map.distance(L.latLng(pos), L.latLng(el[0], el[1])) <= minDistance ? "glow" : "";
+            let route_near = false;
+            if (cur_route_id != -1) {
+                route_near = map.distance(L.latLng(pos), L.latLng(locs[routes[cur_route_id][cur_route_place]][0], locs[routes[cur_route_id][cur_route_place]][1])) <= minDistance ? true : false;
+            }
+            icon = L.divIcon({
+                className: 'custom-div-icon',
+                html: "<div>\n" +
+                    "            <a href=\"#\" onclick=\"collapse_toggle(" + idx + ")\">\n" +
+                    "                <div class=\"geopoint d-flex justify-content-center align-items-center " + glow + " pb-2 \">\n" +
+                    "                    <div class=\"dog-img\"></div>\n" +
+                    "                </div>\n" +
+                    "            </a>\n" +
+                    "        </div>",
+                iconSize: [30, 42],
+                iconAnchor: [15, 42]
+            });
+            if (glow) {
+                info2_appear = true;
+            }
+            if (route_near) {
+                cur_route_place += 1;
+                if (cur_route_place >= routes[cur_route_id].length) {
+                    cur_route_id = -1;
+                    cur_route_place = -1;
+                    if (localStorage != undefined) {
+                        localStorage.removeItem('route_place');
+                        localStorage.removeItem('route_id');
+                    }
+                } else {
+                    if (localStorage != undefined) {
+                        localStorage.setItem('route_place', cur_route_place);
+                    }
                 }
             }
+            var marker = L.marker(new L.LatLng(el[0], el[1]), { title: title, icon: icon });
+            markers.addLayer(marker);
         }
-        var marker = L.marker(new L.LatLng(el[0], el[1]), { title: title, icon: icon });
-        markers.addLayer(marker);
         idx++;
     });
+    update_progress();
     if (cur_route_id != -1) {
         make_route(L.latLng(pos), L.latLng(locs[routes[cur_route_id][cur_route_place]][0], locs[routes[cur_route_id][cur_route_place]][1]));
     } else if (localStorage != undefined && localStorage.getItem('make_route') != null) {
@@ -282,9 +285,11 @@ document.addEventListener('deviceready', () => {
                             return parseInt(x);
                         }));
                     });
-                    update_markers();
+                    setTimeout(()=>{
+                        update_markers()
+                    },100);
                 } catch (e) {
-                    console.error("excepitonal error");
+                    console.error(e);
                 }
             },
                 () => console.log('error')
@@ -292,7 +297,7 @@ document.addEventListener('deviceready', () => {
 
             // TODO: проверить что ничего не сломалось в этом куске
             if (localStorage != undefined) {
-                if (localStorage.getItem('prev_place') != null) {
+                if (localStorage.getItem('prev_place') != null && localStorage.getItem('prev_place') !='undefined') {
                     idx = localStorage.getItem('prev_place');
                     map.flyTo([locs[idx][0], locs[idx][1]], 18);
                     collapse_toggle(parseInt(idx));
@@ -312,7 +317,7 @@ document.addEventListener('deviceready', () => {
             }
 
         } catch (e) {
-            console.error(" exceptional error");
+            console.error(e);
         }
     }, () => console.log('error'));
 });

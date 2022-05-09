@@ -153,6 +153,20 @@
             </div>
         </div>
     </div>
+    <div id="info3" style="display: none; position: fixed; top: 0;">
+        <div id="progress-wrapper" class="geopoint-popup position-fixed d-flex flex-column justify-content-center align-items-center">
+            <div
+                 class="progress-popup d-flex align-items-center justify-content-between p-3">
+                <div id="progress-here" class="w-100 d-flex flex-row justify-content-evenly align-items-center me-3">
+                    <div class="progress-circle outlined me-2" onclick="progress_clicked(0)"></div>
+                    <div class="progress-path"></div>
+                    <div class="progress-circle me-2" onclick="progress_clicked(0)"></div>
+                    <div class="progress-path"><div class="progress-current"></div></div>
+                    <div class="progress-circle me-2" onclick="progress_clicked(0)"></div>
+                </div>
+            </div>
+        </div>
+    </div>
     <div id="search-history">
         <div class="search-history">
             <div class="d-flex flex-column px-2" id="search-results1">
@@ -262,6 +276,36 @@
                     document.getElementById('zoomControl').style.display = 'none';
                 }
             }
+        }
+
+        // Обновление прогресса маршрута
+        function update_progress(){
+            if(cur_route_id != -1){
+                document.getElementById('info3').style.display = 'block';
+                let done = cur_route_place;
+                document.getElementById('progress-here').innerHTML = "";
+                for(i = 0;i<routes[cur_route_id].length;i++){
+                    document.getElementById('progress-here').innerHTML += `
+                            <div class="progress-circle ${i>=done? "outlined": ""}" onclick="progress_clicked(${i})"></div>`;
+                    if (i < routes[cur_route_id].length -1){
+                        if(i == done-1){
+                            document.getElementById('progress-here').innerHTML += `
+                            <div class="progress-path"><div class="progress-current"></div></div>`;
+                        }else{
+                            document.getElementById('progress-here').innerHTML += `
+                            <div class="progress-path"></div>`;
+                        }
+                    }
+                }
+            }else{
+                document.getElementById('info3').style.display = 'none';
+            }
+        }
+
+        // Обработчик клика по точке на прогресс баре маршрутов
+        function progress_clicked(num){
+            cur_route_place = num;
+            update_markers();
         }
         if (localStorage != undefined) {
             localStorage.setItem('prev_page', '/screens/Map/map.html');
