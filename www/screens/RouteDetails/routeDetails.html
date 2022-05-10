@@ -266,7 +266,7 @@
         // Обработчик нажатия на кнопку добавления отзыва
         function btn_click() {
             if (!review_opened) {
-                localStorage.setItem('route_start','start');
+                localStorage.setItem('route_start',localStorage.getItem('route_id'));
                 redirect_geoposition();
                 return;
             }

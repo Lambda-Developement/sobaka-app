@@ -304,6 +304,7 @@ document.addEventListener('deviceready', () => {
                     collapse_toggle(parseInt(idx));
                 }
                 if (localStorage.getItem('route_id') != null && localStorage.getItem('route_start') != null) {
+                    localStorage.setItem('route_id', localStorage.getItem('route_start'));
                     cur_route_id = parseInt(localStorage.getItem('route_id'));
                 } else {
                     cur_route_id = -1;
