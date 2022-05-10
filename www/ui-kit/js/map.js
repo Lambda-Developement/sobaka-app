@@ -57,6 +57,24 @@ function make_route(start, end) {
     });
     routing_control.addTo(map);
 }
+function make_route_pts(pts){
+    map.removeControl(routing_control);
+    routing_control = L.Routing.control({
+        waypoints: pts,
+        createMarker: function () { return null; },
+        show: false,
+        showAlternatives: false,
+        addWaypoints: false,
+        draggableWaypoints: false,
+        lineOptions: {
+            addWaypoints: false,
+            draggableWaypoints: false,
+            styles: [{color: '#FC913B', dashArray: '4 8'}]
+        },
+        router: L.Routing.mapbox('pk.eyJ1IjoiaHVzY2tlciIsImEiOiJja3pkMTZ0cmUwNGYzMm9tcW5pa200dDJkIn0.-NLqcskaelmtyL5zpaBLzQ')
+    });
+    routing_control.addTo(map);
+}
 
 // Обновление маркеров
 function update_markers() {
@@ -113,7 +131,12 @@ function update_markers() {
     });
     update_progress();
     if (cur_route_id != -1) {
-        make_route(L.latLng(pos), L.latLng(locs[routes[cur_route_id][cur_route_place]][0], locs[routes[cur_route_id][cur_route_place]][1]));
+        pts = [];
+        for(let k = 0;k < routes[cur_route_id].length;k++){
+            pts.push(L.latLng(locs[routes[cur_route_id][k]][0], locs[routes[cur_route_id][k]][1]));
+        }
+        make_route_pts(pts);
+        // make_route(L.latLng(pos), L.latLng(locs[routes[cur_route_id][cur_route_place]][0], locs[routes[cur_route_id][cur_route_place]][1]));
     } else if (localStorage != undefined && localStorage.getItem('make_route') != null) {
         g_id = localStorage.getItem('make_route');
         make_route(L.latLng(pos), L.latLng(locs[g_id][0], locs[g_id][1]));
