@@ -146,26 +146,19 @@
                 </div>
                 <script>
                     function excursion_start() {
-                        localStorage.excursion_id = 33;
+                        localStorage.excursion_id = 4;
                         redirect_excursion_start();
                     }
                 </script>
             </div>
         </div>
     </div>
-    <div id="info3" style="display: none; position: fixed; top: 0;">
-        <div id="progress-wrapper" class="geopoint-popup position-fixed d-flex flex-column justify-content-center align-items-center">
+    <div id="info3" style="display: block; position: fixed; top: 0;">
+        <div id="progress-wrapper" style="width: fit-content" class="geopoint-popup position-fixed d-flex flex-column justify-content-start align-items-center">
             <div
                  class="progress-popup d-flex align-items-around justify-content-between p-3">
-                <div class="d-flex me-3 justify-content-center align-items-center">
+                <div class="d-flex justify-content-center align-items-center">
                     <div class="close-icon2" onclick="progress_end()"></div>
-                </div>
-                <div id="progress-here" class="w-100 d-flex flex-row justify-content-evenly align-items-center me-3">
-<!--                    <div class="progress-circle outlined me-2" onclick="progress_clicked(0)"></div>-->
-<!--                    <div class="progress-path"></div>-->
-<!--                    <div class="progress-circle me-2" onclick="progress_clicked(0)"></div>-->
-<!--                    <div class="progress-path"><div class="progress-current"></div></div>-->
-<!--                    <div class="progress-circle me-2" onclick="progress_clicked(0)"></div>-->
                 </div>
             </div>
         </div>
@@ -287,21 +280,6 @@
                 localStorage.setItem('route_id', cur_route_id);
                 localStorage.setItem('route_place',cur_route_place);
                 document.getElementById('info3').style.display = 'block';
-                let done = cur_route_place;
-                document.getElementById('progress-here').innerHTML = "";
-                for(i = 0;i<routes[cur_route_id].length;i++){
-                    document.getElementById('progress-here').innerHTML += `
-                            <div class="progress-circle ${i>=done? "outlined": ""}" onclick="progress_clicked(${i})"></div>`;
-                    if (i < routes[cur_route_id].length -1){
-                        if(i == done-1){
-                            document.getElementById('progress-here').innerHTML += `
-                            <div class="progress-path"><div class="progress-current"></div></div>`;
-                        }else{
-                            document.getElementById('progress-here').innerHTML += `
-                            <div class="progress-path"></div>`;
-                        }
-                    }
-                }
             }else{
                 document.getElementById('info3').style.display = 'none';
             }

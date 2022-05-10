@@ -413,18 +413,13 @@
                 groutes.forEach(el => {
                     if (el[0] == parseInt(t) + 1) {
                         let s = el[1];
-                        let d = el[5];
-                        let l = "url('../../ui-kit/img/icg4y3j7.bmp')";
-                        if (t == '2') {
-                            l = "url('../../ui-kit/img/zsmhme2t.bmp')";
-                        } else if (t == '1') {
-                            l = "url('../../ui-kit/img/lvsls0y5.bmp')";
-                        }
+                        let d = el[6];
+                        let l = 'https://trip.backend.xredday.ru/'+el[2];
                         document.getElementById('route-name').innerHTML = s;
                         document.getElementById('route-description').innerHTML = d;
-                        document.getElementById('route-logo').style.backgroundImage = l;
-                        document.getElementById('route-duration').innerText = el[3] + 'hr.';
-                        document.getElementById('route-length').innerText = el[4] + 'km';
+                        document.getElementById('route-logo').style.backgroundImage = `url(${l})`;
+                        document.getElementById('route-duration').innerText = el[4] + 'hr.';
+                        document.getElementById('route-length').innerText = el[5] + 'km';
                     }
                 });
             });

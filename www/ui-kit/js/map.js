@@ -305,8 +305,8 @@ document.addEventListener('deviceready', () => {
                     groutes = res;
                     routes = [];
                     groutes.forEach(el => {
-                        routes.push(el[2].split(',').map(x => {
-                            return parseInt(x);
+                        routes.push(el[3].split(',').map(x => {
+                            return parseInt(x)-1;
                         }));
                     });
                     setTimeout(()=>{
