@@ -246,7 +246,7 @@ function api_test() {
 
             //pupd
             diff = {
-                phone: "+79611616996",
+                phone: "",
             };
             auth_key = localStorage.getItem("auth_key");
             api_pupd(auth_key, diff).then((res) => console.log(`pupd: ${res}`), err);
