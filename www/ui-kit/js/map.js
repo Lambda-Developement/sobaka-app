@@ -130,6 +130,13 @@ function update_markers() {
         idx++;
     });
     update_progress();
+    if(cur_route_id == -1){
+        document.getElementById('make-route-btn').style.display = 'block';
+        document.getElementById('excursion-btn2').style.display = 'none';
+    }else{
+        document.getElementById('make-route-btn').style.display = 'none';
+        document.getElementById('excursion-btn2').style.display = 'block';
+    }
     if (cur_route_id != -1) {
         pts = [];
         for(let k = 0;k < routes[cur_route_id].length;k++){

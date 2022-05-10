@@ -115,8 +115,11 @@
                     </div>
                 </div>
                 <div class="d-flex justify-content-center align-items-center mx-1 w-100">
-                    <button class="btn btn-filled h-auto" onclick="make_route_to_cur()">
+                    <button id="make-route-btn" class="btn btn-filled h-auto" onclick="make_route_to_cur()">
                         <p class="btn-text"><img src="../../ui-kit/svg/white_gps.svg"> Построить маршрут</p>
+                    </button>
+                    <button id='excursion-btn2' class="btn btn-filled" onclick="excursion_start()">
+                        <p class="btn-text">Начать экскурсию</p>
                     </button>
                 </div>
             </div>
@@ -146,7 +149,7 @@
                 </div>
                 <script>
                     function excursion_start() {
-                        localStorage.excursion_id = 4;
+                        localStorage.excursion_id = parseInt(routes[localStorage.getItem('route_id')][localStorage.getItem('route_place')])+1;
                         redirect_excursion_start();
                     }
                 </script>
