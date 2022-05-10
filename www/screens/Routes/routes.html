@@ -202,11 +202,11 @@
                                 <div class="trip-card__content">
                                     <div class="trip-card__rating">
                                         <div class="trip-card__rating__stars">
-                                            <img src="../../ui-kit/svg/small_star_full.svg" alt="s">
-                                            <img src="../../ui-kit/svg/small_star_full.svg" alt="s">
-                                            <img src="../../ui-kit/svg/small_star_full.svg" alt="s">
-                                            <img src="../../ui-kit/svg/small_star_full.svg" alt="s">
-                                            <img src="../../ui-kit/svg/small_star_full.svg" alt="s">
+                                            ${(res[0] > 0 ? "<img src=\"../../ui-kit/svg/small_star_full.svg\" alt=\"s\">" : "")}
+                                            ${(res[0] > 1 ? "<img src=\"../../ui-kit/svg/small_star_full.svg\" alt=\"s\">" : "")}
+                                            ${(res[0] > 2 ? "<img src=\"../../ui-kit/svg/small_star_full.svg\" alt=\"s\">" : "")}
+                                            ${(res[0] > 3 ? "<img src=\"../../ui-kit/svg/small_star_full.svg\" alt=\"s\">" : "")}
+                                            ${(res[0] > 4 ? "<img src=\"../../ui-kit/svg/small_star_full.svg\" alt=\"s\">" : "")}
                                         </div>
                                         <div class="trip-card__rating__number">
                                             ${res[0]}
