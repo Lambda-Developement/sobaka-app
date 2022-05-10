@@ -304,13 +304,11 @@ document.addEventListener('deviceready', () => {
                 }
                 if (localStorage.getItem('route_id') != null) {
                     cur_route_id = parseInt(localStorage.getItem('route_id'));
-                    localStorage.removeItem('route_id');
                 } else {
                     cur_route_id = -1;
                 }
                 if (localStorage.getItem('route_place') != null) {
                     cur_route_place = parseInt(localStorage.getItem('route_place'));
-                    localStorage.removeItem('route_place')
                 } else {
                     cur_route_place = -1;
                 }

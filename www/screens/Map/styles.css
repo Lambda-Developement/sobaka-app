@@ -253,6 +253,14 @@ p.btn-text{
     box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.14);
     border-radius: 8px;
 }
+.close-icon2{
+    width:20px;
+    height: 20px;
+    background: url("../../ui-kit/svg/xmark.svg");
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size:18px;
+}
 .park-photo{
     border-radius: 12px;
     width: 80px;

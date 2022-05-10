@@ -156,13 +156,16 @@
     <div id="info3" style="display: none; position: fixed; top: 0;">
         <div id="progress-wrapper" class="geopoint-popup position-fixed d-flex flex-column justify-content-center align-items-center">
             <div
-                 class="progress-popup d-flex align-items-center justify-content-between p-3">
+                 class="progress-popup d-flex align-items-around justify-content-between p-3">
+                <div class="d-flex me-3 justify-content-center align-items-center">
+                    <div class="close-icon2" onclick="progress_end()"></div>
+                </div>
                 <div id="progress-here" class="w-100 d-flex flex-row justify-content-evenly align-items-center me-3">
-                    <div class="progress-circle outlined me-2" onclick="progress_clicked(0)"></div>
-                    <div class="progress-path"></div>
-                    <div class="progress-circle me-2" onclick="progress_clicked(0)"></div>
-                    <div class="progress-path"><div class="progress-current"></div></div>
-                    <div class="progress-circle me-2" onclick="progress_clicked(0)"></div>
+<!--                    <div class="progress-circle outlined me-2" onclick="progress_clicked(0)"></div>-->
+<!--                    <div class="progress-path"></div>-->
+<!--                    <div class="progress-circle me-2" onclick="progress_clicked(0)"></div>-->
+<!--                    <div class="progress-path"><div class="progress-current"></div></div>-->
+<!--                    <div class="progress-circle me-2" onclick="progress_clicked(0)"></div>-->
                 </div>
             </div>
         </div>
@@ -305,6 +308,13 @@
         // Обработчик клика по точке на прогресс баре маршрутов
         function progress_clicked(num){
             cur_route_place = num;
+            update_markers();
+        }
+        function progress_end(){
+            localStorage.removeItem('route_id');
+            localStorage.removeItem('route_place');
+            cur_route_id = -1;
+            cur_route_place = -1;
             update_markers();
         }
         if (localStorage != undefined) {
