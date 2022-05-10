@@ -284,6 +284,8 @@
         // Обновление прогресса маршрута
         function update_progress(){
             if(cur_route_id != -1){
+                localStorage.setItem('route_id', cur_route_id);
+                localStorage.setItem('route_place',cur_route_place);
                 document.getElementById('info3').style.display = 'block';
                 let done = cur_route_place;
                 document.getElementById('progress-here').innerHTML = "";
@@ -313,6 +315,7 @@
         function progress_end(){
             localStorage.removeItem('route_id');
             localStorage.removeItem('route_place');
+            localStorage.removeItem('route_start');
             cur_route_id = -1;
             cur_route_place = -1;
             update_markers();

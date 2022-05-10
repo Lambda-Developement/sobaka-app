@@ -266,6 +266,7 @@
         // Обработчик нажатия на кнопку добавления отзыва
         function btn_click() {
             if (!review_opened) {
+                localStorage.setItem('route_start','start');
                 redirect_geoposition();
                 return;
             }
@@ -368,7 +369,7 @@
                 let name = el[0][0];
                 console.log(el);
                 console.log(name);
-                if (name == localStorage.getItem('name')) {
+                if (name == localStorage.getItem('name') && geo_or_review != 0) {
                     document.getElementById('add_btn').disabled = true;
                 }
                 let rate3 = el[1];

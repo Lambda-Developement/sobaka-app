@@ -98,6 +98,7 @@ function update_markers() {
                     if (localStorage != undefined) {
                         localStorage.removeItem('route_place');
                         localStorage.removeItem('route_id');
+                        localStorage.removeItem('route_start');
                     }
                 } else {
                     if (localStorage != undefined) {
@@ -302,12 +303,12 @@ document.addEventListener('deviceready', () => {
                     map.flyTo([locs[idx][0], locs[idx][1]], 18);
                     collapse_toggle(parseInt(idx));
                 }
-                if (localStorage.getItem('route_id') != null) {
+                if (localStorage.getItem('route_id') != null && localStorage.getItem('route_start') != null) {
                     cur_route_id = parseInt(localStorage.getItem('route_id'));
                 } else {
                     cur_route_id = -1;
                 }
-                if (localStorage.getItem('route_place') != null) {
+                if (localStorage.getItem('route_place') != null && localStorage.getItem('route_start') != null) {
                     cur_route_place = parseInt(localStorage.getItem('route_place'));
                 } else {
                     cur_route_place = -1;
