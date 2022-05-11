@@ -150,14 +150,22 @@
                 <script>
                     function excursion_start() {
                         localStorage.excursion_id = parseInt([localStorage.getItem('prev_place')]) + 1;
-                        // localStorage.excursion_id = parseInt(locs[localStorage.getItem('prev_place')][0]) + 1;
+                        if(localStorage.getItem('passed') != null && localStorage.getItem('passed') != 'undefined'){
+                            let favs = localStorage.getItem('passed');
+                            favs = JSON.parse(favs);
+                            favs.push(localStorage.excursion_id);
+                            favs = JSON.stringify(favs)
+                            localStorage.setItem('passed',favs);
+                        }else{
+                            localStorage.setItem('passed',JSON.stringify([localStorage.excursion_id]));
+                        }
                         redirect_excursion_start();
                     }
                 </script>
             </div>
         </div>
     </div>
-    <div id="info3" style="display: block; position: fixed; top:0;">
+    <div id="info3" style="display: none; position: fixed; top:0;">
         <div id="progress-wrapper" style="width: 100%;"
             class="geopoint-popup position-fixed d-flex flex-column justify-content-start align-items-center">
             <div class="progress-popup d-flex align-items-around justify-content-between p-3"
@@ -288,6 +296,31 @@
                 localStorage.setItem('route_id', cur_route_id);
                 localStorage.setItem('route_place', cur_route_place);
                 document.getElementById('info3').style.display = 'block';
+                let flag = true;
+                let favs = localStorage.getItem('passed');
+                if (favs == null || favs == 'undefined'){
+                    favs = []
+                }else{
+                    favs = JSON.parse(favs);
+                }
+                for(let i = 0;i<routes[cur_route_id].length;i++){
+                    if(!favs.includes(`${routes[cur_route_id][i]+1}`)){
+                        flag = false;
+                    }
+                }
+                if(flag){
+                    localStorage.removeItem('route_id');
+                    localStorage.removeItem('route_place');
+                    localStorage.removeItem('route_start');
+                    for(let i = 0;i<routes[cur_route_id].length;i++){
+                        favs = favs.filter(function (e) {
+                            return e != `${routes[cur_route_id][i]+1}`;
+                        });
+                    }
+                    favs = JSON.stringify(favs)
+                    localStorage.setItem('passed',favs);
+                   redirect_excursion_finale();
+                }
             } else {
                 document.getElementById('info3').style.display = 'none';
             }

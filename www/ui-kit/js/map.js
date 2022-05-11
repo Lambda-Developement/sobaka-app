@@ -85,10 +85,17 @@ function update_markers() {
     });
     info2_appear = false;
     let idx = 0;
+    let favs = localStorage.getItem('passed');
+    if (favs == null || favs == 'undefined'){
+        favs = []
+    }else{
+        favs = JSON.parse(favs);
+    }
     locs.forEach((el,t) => {
         if(cur_route_id == -1 || (cur_route_id != -1 && routes[cur_route_id].includes(t))){
             var title = el[2];
             glow = map.distance(L.latLng(pos), L.latLng(el[0], el[1])) <= minDistance ? "glow" : "";
+            glow2 = (favs.includes(`${t+1}`)?'glow':'');
             let route_near = false;
             if (cur_route_id != -1) {
                 route_near = map.distance(L.latLng(pos), L.latLng(locs[routes[cur_route_id][cur_route_place]][0], locs[routes[cur_route_id][cur_route_place]][1])) <= minDistance ? true : false;
@@ -97,7 +104,7 @@ function update_markers() {
                 className: 'custom-div-icon',
                 html: "<div>\n" +
                     "            <a href=\"#\" onclick=\"collapse_toggle(" + idx + ")\">\n" +
-                    "                <div class=\"geopoint d-flex justify-content-center align-items-center " + glow + " pb-2 \">\n" +
+                    "                <div class=\"geopoint d-flex justify-content-center align-items-center " + glow2 + " pb-2 \">\n" +
                     "                    <div class=\"dog-img\"></div>\n" +
                     "                </div>\n" +
                     "            </a>\n" +
