@@ -149,7 +149,8 @@
                 </div>
                 <script>
                     function excursion_start() {
-                        localStorage.excursion_id = parseInt(routes[localStorage.getItem('route_id')][localStorage.getItem('route_place')])+1;
+                        localStorage.excursion_id = parseInt([localStorage.getItem('prev_place')]) + 1;
+                        // localStorage.excursion_id = parseInt(locs[localStorage.getItem('prev_place')][0]) + 1;
                         redirect_excursion_start();
                     }
                 </script>
@@ -157,9 +158,9 @@
         </div>
     </div>
     <div id="info3" style="display: block; position: fixed; top: 0;">
-        <div id="progress-wrapper" style="width: fit-content" class="geopoint-popup position-fixed d-flex flex-column justify-content-start align-items-center">
-            <div
-                 class="progress-popup d-flex align-items-around justify-content-between p-3">
+        <div id="progress-wrapper" style="width: fit-content"
+            class="geopoint-popup position-fixed d-flex flex-column justify-content-start align-items-center">
+            <div class="progress-popup d-flex align-items-around justify-content-between p-3">
                 <div class="d-flex justify-content-center align-items-center">
                     <div class="close-icon2" onclick="progress_end()"></div>
                 </div>
@@ -278,22 +279,22 @@
         }
 
         // Обновление прогресса маршрута
-        function update_progress(){
-            if(cur_route_id != -1){
+        function update_progress() {
+            if (cur_route_id != -1) {
                 localStorage.setItem('route_id', cur_route_id);
-                localStorage.setItem('route_place',cur_route_place);
+                localStorage.setItem('route_place', cur_route_place);
                 document.getElementById('info3').style.display = 'block';
-            }else{
+            } else {
                 document.getElementById('info3').style.display = 'none';
             }
         }
 
         // Обработчик клика по точке на прогресс баре маршрутов
-        function progress_clicked(num){
+        function progress_clicked(num) {
             cur_route_place = num;
             update_markers();
         }
-        function progress_end(){
+        function progress_end() {
             localStorage.removeItem('route_id');
             localStorage.removeItem('route_place');
             localStorage.removeItem('route_start');
