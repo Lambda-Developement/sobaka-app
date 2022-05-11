@@ -73,3 +73,7 @@ function redirect_reset_password() {
 function redirect_route_details() {
     redirect('/screens/RouteDetails/routeDetails.html');
 }
+// Функция редиректа в Конец маршрута
+function redirect_excursion_finale() {
+    redirect('/screens/ExcursionFinale/excursionFinale.html');
+}

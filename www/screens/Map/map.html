@@ -157,12 +157,16 @@
             </div>
         </div>
     </div>
-    <div id="info3" style="display: block; position: fixed; top: 0;">
-        <div id="progress-wrapper" style="width: fit-content"
+    <div id="info3" style="display: block; position: fixed; top:0;">
+        <div id="progress-wrapper" style="width: 100%;"
             class="geopoint-popup position-fixed d-flex flex-column justify-content-start align-items-center">
-            <div class="progress-popup d-flex align-items-around justify-content-between p-3">
-                <div class="d-flex justify-content-center align-items-center">
-                    <div class="close-icon2" onclick="progress_end()"></div>
+            <div class="progress-popup d-flex align-items-around justify-content-between p-3"
+                style="margin-left:20px; max-width: 250px; ">
+                <div class="d-flex justify-content-center align-items-center" onclick="progress_end()">
+                    <div class="close-icon2"></div>
+                    <p style="color:rgba(189, 189, 189, 1); font-size: 14px;padding-left:0.5rem; margin-bottom: 0;">
+                        Завершить экскурсию
+                    </p>
                 </div>
             </div>
         </div>
@@ -301,6 +305,7 @@
             cur_route_id = -1;
             cur_route_place = -1;
             update_markers();
+            redirect_excursion_finale();
         }
         if (localStorage != undefined) {
             localStorage.setItem('prev_page', '/screens/Map/map.html');
