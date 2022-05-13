@@ -121,8 +121,8 @@ function update_markers() {
             if (glow) {
                 info2_appear = true;
                 cordova.plugins.notification.local.schedule({
-                    title: 'My first notification',
-                    text: 'Thats pretty easy...',
+                    title: 'Вы рядом с точкой',
+                    text: 'Зайдите в приложение, чтобы узнать подробнее...',
                     foreground: true
                 });
             }
@@ -276,14 +276,7 @@ function calc_distance_to_geopoint(g_id){
 
 // Получение данных с сервера
 document.addEventListener('deviceready', () => {
-    // cordova.plugins.backgroundMode.enable();
-    // setInterval(()=>{
-    //     cordova.plugins.notification.local.schedule({
-    //         title: 'My first notification',
-    //         text: 'Thats pretty easy...',
-    //         foreground: true
-    //     });
-    // },10000);
+    cordova.plugins.backgroundMode.enable();
     console.log(`[INFO] :  Attempt to run cordova permissions...`);
     // permissions = cordova.plugins.permissions;
     // var list = [
