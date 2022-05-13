@@ -31,6 +31,15 @@
     },
     "cordova-universal-links-plugin": {
       "PACKAGE_NAME": "io.cordova.tripar"
+    },
+    "cordova-plugin-local-notification": {
+      "PACKAGE_NAME": "io.cordova.tripar"
+    },
+    "cordova-plugin-androidx-adapter": {
+      "PACKAGE_NAME": "io.cordova.tripar"
+    },
+    "cordova-plugin-background-mode": {
+      "PACKAGE_NAME": "io.cordova.tripar"
     }
   },
   "dependent_plugins": {
@@ -38,6 +47,12 @@
       "PACKAGE_NAME": "io.cordova.tripar"
     },
     "es6-promise-plugin": {
+      "PACKAGE_NAME": "io.cordova.tripar"
+    },
+    "cordova-plugin-device": {
+      "PACKAGE_NAME": "io.cordova.tripar"
+    },
+    "cordova-plugin-badge": {
       "PACKAGE_NAME": "io.cordova.tripar"
     }
   }

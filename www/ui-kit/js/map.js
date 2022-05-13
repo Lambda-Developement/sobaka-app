@@ -12,6 +12,7 @@ var map;
 var routing_control;
 var pos_marker;
 var markers;
+var geolocation_started = false;
 
 var onSuccess = function (position) {
     pos = [position.coords.latitude, position.coords.longitude];
@@ -31,8 +32,13 @@ function onError(error) {
 
 // Получить текущее местоположение
 function get_location() {
-    navigator.geolocation.getCurrentPosition(onSuccess, onError);
-    update_markers();
+    if(!geolocation_started){
+        setInterval(()=>{
+            navigator.geolocation.getCurrentPosition(onSuccess, onError);
+            update_markers();
+        },20000);
+        geolocation_started = true;
+    }
     map.flyTo(pos, 18);
 }
 
@@ -270,6 +276,14 @@ function calc_distance_to_geopoint(g_id){
 
 // Получение данных с сервера
 document.addEventListener('deviceready', () => {
+    // cordova.plugins.backgroundMode.enable();
+    // setInterval(()=>{
+    //     cordova.plugins.notification.local.schedule({
+    //         title: 'My first notification',
+    //         text: 'Thats pretty easy...',
+    //         foreground: true
+    //     });
+    // },10000);
     console.log(`[INFO] :  Attempt to run cordova permissions...`);
     // permissions = cordova.plugins.permissions;
     // var list = [
