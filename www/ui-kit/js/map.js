@@ -114,6 +114,11 @@ function update_markers() {
             });
             if (glow) {
                 info2_appear = true;
+                cordova.plugins.notification.local.schedule({
+                    title: 'My first notification',
+                    text: 'Thats pretty easy...',
+                    foreground: true
+                });
             }
             if (route_near) {
                 cur_route_place += 1;
