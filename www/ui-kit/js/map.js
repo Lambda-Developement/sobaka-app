@@ -16,6 +16,8 @@ var pos_marker;
 var markers;
 var geolocation_started = false;
 
+var onFirstZoom = true;
+
 
 var onSuccess = function (position) {
     pos = [position.coords.latitude, position.coords.longitude];
@@ -30,6 +32,10 @@ var onSuccess = function (position) {
         heading = "not moving";
     }
     update_markers();
+    if(onFirstZoom){
+        map.flyTo(pos, 18);
+        onFirstZoom = false;
+    }
     console.log('Latitude: ' + position.coords.latitude + '\n' +
         'Longitude: ' + position.coords.longitude + '\n' +
         'Altitude: ' + position.coords.altitude + '\n' +
