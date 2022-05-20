@@ -128,8 +128,8 @@
     <div id="info2">
         <div id='popup-wrapper' class="position-fixed" style="z-index: 3;bottom:0; width:100%;">
             <div onclick='toggle_collapse()'
-                class="near-popup d-inline-flex justify-content-between align-items-center">
-                <div class="dog-img-big"></div>
+                class="px-3 near-popup d-inline-flex justify-content-between align-items-center">
+                <div id="sobaka-head" class="dog-img-big"></div>
                 <div id='near-popup-text' style='display:flex;' class="justify-content-center align-items-center h-100">
                     <div class="d-flex flex-column">
                         <div>
@@ -139,6 +139,9 @@
                             <h3 class="text-description">Памятник медведю "Символ России, легенда Ярославля"</h3>
                         </div>
                     </div>
+                </div>
+                <div style="height: 100%">
+                    <div id="less-sign" class="less-sign"></div>
                 </div>
             </div>
             <div id='inner-reviews' class="reviews">
@@ -206,22 +209,31 @@
             if (popup_collapsed) {
                 setTimeout(() => {
                     document.getElementsByClassName('near-popup')[0].style.borderBottom = '2px solid rgba(243, 243, 243, 1)';
+                    document.getElementsByClassName('near-popup')[0].classList.remove('px-3');
+                    document.getElementsByClassName('near-popup')[0].classList.add('px-3');
                     document.getElementsByClassName('near-popup')[0].style.borderRadius = 'unset';
                     document.getElementById('near-popup-text').style.display = 'flex';
                     document.getElementById('inner-reviews').style.display = 'block';
                     document.getElementById('popup-wrapper').style.bottom = '0px';
-                }, 300);
+                    document.getElementById('less-sign').style.display = 'block';
+                }, 600);
+                document.getElementById('sobaka-head').classList.remove('dog-img-big-small');
+                document.getElementById('sobaka-head').classList.add('dog-img-big');
                 document.getElementById('popup-wrapper').style.width = '100%';
 
             } else {
                 setTimeout(() => {
                     document.getElementsByClassName('near-popup')[0].style.borderBottom = '0';
+                    document.getElementsByClassName('near-popup')[0].classList.remove('px-3');
                     document.getElementsByClassName('near-popup')[0].style.borderRadius = '12px';
                     document.getElementById('near-popup-text').style.display = 'none';
                     document.getElementById('inner-reviews').style.display = 'none';
                     document.getElementById('popup-wrapper').style.bottom = opened ? '210px' : '82px';
-                }, 600);
-                document.getElementById('popup-wrapper').style.width = '140px';
+                    document.getElementById('less-sign').style.display = 'none';
+                }, 0);
+                document.getElementById('sobaka-head').classList.remove('dog-img-big');
+                document.getElementById('sobaka-head').classList.add('dog-img-big-small');
+                document.getElementById('popup-wrapper').style.width = 'calc(70px)';
             }
             popup_collapsed = !popup_collapsed;
         }

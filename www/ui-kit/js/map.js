@@ -20,6 +20,7 @@ var onFirstZoom = true;
 
 
 var onSuccess = function (position) {
+    return;
     pos = [position.coords.latitude, position.coords.longitude];
     if(map.distance(L.latLng(pos[0],pos[1]),L.latLng(prev[0],prev[1])) > 20){
         let dx = pos[0] - prev[0];
