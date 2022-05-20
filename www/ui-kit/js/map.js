@@ -1,5 +1,7 @@
 const HEIGHT = window.innerHeight + 'px';
 var pos = [57.621166, 39.888228];
+var prev = [57.621136, 39.888221];
+var heading = 0;
 var scale = 15;
 const minDistance = 50; // metres
 
@@ -14,8 +16,17 @@ var pos_marker;
 var markers;
 var geolocation_started = false;
 
+
 var onSuccess = function (position) {
     pos = [position.coords.latitude, position.coords.longitude];
+    if(map.distance(L.latLng(pos[0],pos[1]),L.latLng(prev[0],prev[1])) > 20){
+        let dx = pos[0] - prev[0];
+        let dy = pos[1] - prev[1];
+        console.log(prev,pos,dx,dy);
+        heading = parseInt(Math.atan2(-dx,dy)*180/Math.PI)-45;
+        prev = pos;
+    };
+    update_markers();
     console.log('Latitude: ' + position.coords.latitude + '\n' +
         'Longitude: ' + position.coords.longitude + '\n' +
         'Altitude: ' + position.coords.altitude + '\n' +
@@ -30,13 +41,12 @@ function onError(error) {
         'message: ' + error.message + '\n');
 }
 
+setInterval(()=>{
+    navigator.geolocation.getCurrentPosition(onSuccess, onError);
+},20000);
 // Получить текущее местоположение
 function get_location() {
     if(!geolocation_started){
-        setInterval(()=>{
-            navigator.geolocation.getCurrentPosition(onSuccess, onError);
-            update_markers();
-        },20000);
         geolocation_started = true;
     }
     map.flyTo(pos, 18);
@@ -177,7 +187,7 @@ function update_markers() {
     }
     icon = L.divIcon({
         className: 'custom-div-icon',
-        html: "<div class=\"my-position d-flex justify-content-center align-items-center\">\n" +
+        html: `<div style='transform: rotate(${parseInt(heading)}deg);' class=\"my-position d-flex justify-content-center align-items-center\">\n` +
             "            <div class=\"orange-circle\"></div>\n" +
             "        </div>",
         iconSize: [30, 42],
