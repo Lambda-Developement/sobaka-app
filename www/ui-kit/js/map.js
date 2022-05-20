@@ -286,7 +286,7 @@ function calc_distance_to_geopoint(g_id){
 
 // Получение данных с сервера
 document.addEventListener('deviceready', () => {
-    cordova.plugins.backgroundMode.enable();
+    if(cordova.plugins.backgroundMode != undefined) cordova.plugins.backgroundMode.enable();
     console.log(`[INFO] :  Attempt to run cordova permissions...`);
     // permissions = cordova.plugins.permissions;
     // var list = [
