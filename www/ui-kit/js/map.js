@@ -130,11 +130,13 @@ function update_markers() {
             });
             if (glow) {
                 info2_appear = true;
-                cordova.plugins.notification.local.schedule({
-                    title: 'Вы рядом с точкой',
-                    text: 'Зайдите в приложение, чтобы узнать подробнее...',
-                    foreground: true
-                });
+                if(localStorage.getItem('notifications') != null){
+                    cordova.plugins.notification.local.schedule({
+                        title: 'Вы рядом с точкой',
+                        text: 'Зайдите в приложение, чтобы узнать подробнее...',
+                        foreground: true
+                    });
+                }
             }
             if (route_near) {
                 cur_route_place += 1;

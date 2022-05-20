@@ -55,7 +55,7 @@
                 <img src="../../ui-kit/svg/notifications.svg" alt="notifications.svg" class="nav-item_icon">
                 <p class="title">Уведомления</p>
                 <div class="form-check form-switch">
-                    <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" checked>
+                    <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" checked onchange="handle_notification(this)">
                 </div>
             </div>
 
@@ -181,6 +181,15 @@
             }
         }
 
+        // Обработчик нажатия на чекбокс
+        function handle_notification(el){
+            if(el.checked){
+                localStorage.setItem('notifications','r');
+            }else{
+                localStorage.removeItem('notifications');
+            }
+        }
+
         // Запоминание данных пользователя
         function update_userdata() {
             api_userdata(localStorage.getItem('auth_key')).then((userdata) => {
@@ -230,6 +239,11 @@
         }
         document.addEventListener('deviceready', () => {
             update_userdata();
+            if(localStorage.getItem('notifications') != null){
+                document.getElementById('flexSwitchCheckChecked').checked = true;
+            }else{
+                document.getElementById('flexSwitchCheckChecked').checked = false;
+            }
         });
 
     </script>
