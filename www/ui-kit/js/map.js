@@ -1,7 +1,7 @@
 const HEIGHT = window.innerHeight + 'px';
 var pos = [57.621166, 39.888228];
 var prev = [57.621136, 39.888221];
-var heading = 0;
+var heading = 'not moving';
 var scale = 15;
 const minDistance = 50; // metres
 
@@ -25,7 +25,10 @@ var onSuccess = function (position) {
         console.log(prev,pos,dx,dy);
         heading = parseInt(Math.atan2(-dx,dy)*180/Math.PI)-45;
         prev = pos;
-    };
+    }
+    else if(map.distance(L.latLng(pos[0],pos[1]),L.latLng(prev[0],prev[1])) < 3){
+        heading = "not moving";
+    }
     update_markers();
     console.log('Latitude: ' + position.coords.latitude + '\n' +
         'Longitude: ' + position.coords.longitude + '\n' +
@@ -43,7 +46,7 @@ function onError(error) {
 
 setInterval(()=>{
     navigator.geolocation.getCurrentPosition(onSuccess, onError);
-},20000);
+},5000);
 // Получить текущее местоположение
 function get_location() {
     if(!geolocation_started){
@@ -189,12 +192,13 @@ function update_markers() {
     }
     icon = L.divIcon({
         className: 'custom-div-icon',
-        html: `<div style='transform: rotate(${parseInt(heading)}deg);' class=\"my-position d-flex justify-content-center align-items-center\">\n` +
+        html: `<div style='transform: rotate(${parseInt(heading == "not moving"? 0 : heading)}deg);' class=\"${heading != "not moving" ? "my-position-heading" : "my-position"} d-flex justify-content-center align-items-center\">\n` +
             "            <div class=\"orange-circle\"></div>\n" +
             "        </div>",
         iconSize: [30, 42],
         iconAnchor: [15, 42]
     });
+
     if (map.hasLayer(pos_marker)) {
         map.removeLayer(pos_marker);
     }
@@ -288,6 +292,7 @@ function calc_distance_to_geopoint(g_id){
 
 // Получение данных с сервера
 document.addEventListener('deviceready', () => {
+    navigator.geolocation.getCurrentPosition(onSuccess, onError);
     if(cordova.plugins.backgroundMode != undefined) cordova.plugins.backgroundMode.enable();
     console.log(`[INFO] :  Attempt to run cordova permissions...`);
     // permissions = cordova.plugins.permissions;
