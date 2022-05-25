@@ -89,13 +89,17 @@
                     <h3 class="text-common">Дата рождения</h3>
                 </div>
                 <div class="w-100 me-3">
-                    <input type="number" class="form-control" id="birth1" placeholder="Год">
+                    <input type="number" class="form-control" id="birth1" placeholder="Год" min="1900" max="2020">
                 </div>
                 <div class="me-3">
-                    <input type="number" class="form-control" id="birth2" placeholder="Месяц">
+                    <input type="number" class="form-control" id="birth2" placeholder="Месяц" min="1" max="12" style="padding-left: 0;width:2rem;
+                    padding-right: 0;
+                    text-align: center">
                 </div>
                 <div class="me-3">
-                    <input type="number" class="form-control" id="birth3" placeholder="День">
+                    <input type="number" class="form-control" id="birth3" placeholder="День" min="1" max="31" style="padding-left: 0;width:2rem;
+                    padding-right: 0;
+                    text-align: center">
                 </div>
             </div>
             <div class="panel d-inline-flex align-items-center">
@@ -103,7 +107,7 @@
                     <h3 class="text-common">E-mail</h3>
                 </div>
                 <div class="w-100">
-                    <input type="email" class="form-control" id="login" placeholder="">
+                    <input type="email" class="form-control" id="login" disabled>
                 </div>
             </div>
             <div class="panel d-inline-flex align-items-center">
@@ -111,7 +115,7 @@
                     <h3 class="text-common">Телефон</h3>
                 </div>
                 <div class="w-100">
-                    <input type="tel" class="form-control" id="phone" placeholder="">
+                    <input type="tel" class="form-control" id="phone" pattern="[0-9]{10}">
                 </div>
             </div>
             <a href="../ResetPassword/changePassword.html">
@@ -162,14 +166,18 @@
                 //['name','sex','birth1','birth2','birth3','email','phone'].forEach(el=>{
                 let values = {};
                 let value;
-                ['name', 'gender', 'dob', 'phone'].forEach(el => {
+                ['name', 'gender', 'dob', 'phone', 'login'].forEach(el => {
                     if (el == 'dob') {
                         time = new Date(
                             document.getElementById('birth1').value,  // year
                             document.getElementById('birth2').value, // month
                             document.getElementById('birth3').value, // daY
                         )
-                        value = time.getTime();
+                        value = time.getTime() / 1000;
+                    }
+                    else if (el == 'phone') {
+                        value = parseInt(document.getElementById('phone').value);
+
                     } else {
                         value = document.getElementById(el).value;
                     }
@@ -197,16 +205,16 @@
                 localStorage.setItem('gender', userdata[3]);
                 localStorage.setItem('login', userdata[5]);
                 localStorage.setItem('phone', userdata[6]);
-                let dob = new Date(userdata[4]);
+                let dob = new Date(userdata[4] * 1000);
                 localStorage.setItem('birth1', dob.getFullYear());
                 localStorage.setItem('birth2', dob.getMonth());
-                localStorage.setItem('birth3', dob.getDate()+1);
+                localStorage.setItem('birth3', dob.getDate() + 1);
                 if (userdata[1] != null) {
                     document.getElementById('avatar').src = `${url}/${userdata[1]}`;
                 }
-                setTimeout(()=>{
-                    document.getElementById('gender').value = localStorage.getItem('gender') ;
-                },1000);
+                setTimeout(() => {
+                    document.getElementById('gender').value = localStorage.getItem('gender');
+                }, 1000);
                 check_credentials();
             });
         });
