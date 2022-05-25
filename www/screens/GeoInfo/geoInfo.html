@@ -312,7 +312,7 @@
 
         // Обновление отзывов
         function load_reviews(result) {
-            let rate = parseFloat(result[0]).toFixed(1);
+            rate = parseFloat(result[0]).toFixed(1);
             document.getElementById('average-score').innerHTML = rate;
             [1, 2, 3, 4, 5].forEach((el) => {
                 document.getElementById(`rate-${el}`).className = (rate >= el) ? "rate-icon" : "unrate-icon";
@@ -327,8 +327,10 @@
                 console.log(name);
                 if (name == localStorage.getItem('name')) {
                     document.getElementById('add_btn').disabled = true;
+                    rate = el[1];
+                    update_icons();
                 }
-                let rate = el[1];
+                rate = el[1];
                 let body = el[2];
                 document.getElementById('reviews-here').innerHTML += "" +
                     "<div id='review-" + (review_count) + "' class=\"review d-flex flex-column mb-3\">\n" +

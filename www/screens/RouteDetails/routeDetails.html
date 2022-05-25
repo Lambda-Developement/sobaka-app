@@ -373,6 +373,8 @@
                 console.log(name);
                 if (name == localStorage.getItem('name') && geo_or_review != 0) {
                     document.getElementById('add_btn').disabled = true;
+                    rate = el[1];
+                    update_icons();
                 }
                 let rate3 = el[1];
                 let body = el[2];
