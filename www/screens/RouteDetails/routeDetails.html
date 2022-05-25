@@ -111,7 +111,7 @@
                     </div>
                 </div>
             </div>
-            <div class="panel-grey-down">
+            <div class="panel-grey-down" onclick="switch_review()">
                 <h3 class="text-description mt-3 text-center">Оцените и напишите отзыв</h3>
                 <div class="d-inline-flex justify-content-center container">
                     <div class="star-icon" id="star-rate-1" onclick="star_rate_clicked(this)"></div>
@@ -229,6 +229,7 @@
 
         // Переключение в режим отзывов
         function switch_review() {
+            if(geo_or_review) return;
             geo_or_review = 1;
             document.getElementById('geoinfo').classList.remove('active');
             document.getElementById('review').classList.add('active');
@@ -247,6 +248,7 @@
 
         // Переключение в режим осмотра маршрута
         function switch_geoinfo() {
+            if(!geo_or_review) return;
             geo_or_review = 0;
             document.getElementById('add_btn').disabled = false;
             document.getElementById('review').classList.remove('active');
@@ -342,15 +344,15 @@
                     document.getElementById('star-rate-' + i).classList.add('star-icon');
                 }
             }
-            for (i = 1; i <= 5; i++) {
-                if (i <= rate) {
-                    document.getElementById('rate-' + i).classList.remove('star-icon-rate');
-                    document.getElementById('rate-' + i).classList.add('rate-icon')
-                } else {
-                    document.getElementById('rate-' + i).classList.remove('rate-icon');
-                    document.getElementById('rate-' + i).classList.add('star-icon-rate');
-                }
-            }
+            // for (i = 1; i <= 5; i++) {
+            //     if (i <= rate) {
+            //         document.getElementById('rate-' + i).classList.remove('star-icon-rate');
+            //         document.getElementById('rate-' + i).classList.add('rate-icon')
+            //     } else {
+            //         document.getElementById('rate-' + i).classList.remove('rate-icon');
+            //         document.getElementById('rate-' + i).classList.add('star-icon-rate');
+            //     }
+            // }
         }
 
         // Загрузка отзывов с сервера
@@ -382,11 +384,11 @@
                     "                    </div>\n" +
                     "                    <div class=\"d-inline-flex align-items-center mb-2\">\n" +
                     "                        <div class=\"d-inline-flex justify-content-center align-items-center me-3\">\n" +
-                    "                            <div class=\"" + (rate3 >= 1 ? "rate-icon" : "star-icon-rate") + " small\"></div>\n" +
-                    "                            <div class=\"" + (rate3 >= 2 ? "rate-icon" : "star-icon-rate") + " small\"></div>\n" +
-                    "                            <div class=\"" + (rate3 >= 3 ? "rate-icon" : "star-icon-rate") + " small\"></div>\n" +
-                    "                            <div class=\"" + (rate3 >= 4 ? "rate-icon" : "star-icon-rate") + " small\"></div>\n" +
-                    "                            <div class=\"" + (rate3 >= 5 ? "rate-icon" : "star-icon-rate") + " small\"></div>\n" +
+                    "                            <div class=\"" + (rate3 >= 0 ? "rate-icon" : "star-icon-rate") + " small\"></div>\n" +
+                    "                            <div class=\"" + (rate3 >= 1.5 ? "rate-icon" : "star-icon-rate") + " small\"></div>\n" +
+                    "                            <div class=\"" + (rate3 >= 2.5 ? "rate-icon" : "star-icon-rate") + " small\"></div>\n" +
+                    "                            <div class=\"" + (rate3 >= 3.5 ? "rate-icon" : "star-icon-rate") + " small\"></div>\n" +
+                    "                            <div class=\"" + (rate3 >= 4.5 ? "rate-icon" : "star-icon-rate") + " small\"></div>\n" +
                     "                        </div>\n" +
                     // "                        <div><h3 class=\"text-description\">Только что</h3></div>\n" +
                     "                    </div>\n" +
