@@ -20,7 +20,6 @@ var onFirstZoom = true;
 
 
 var onSuccess = function (position) {
-    return;
     pos = [position.coords.latitude, position.coords.longitude];
     if(map.distance(L.latLng(pos[0],pos[1]),L.latLng(prev[0],prev[1])) > 20){
         let dx = pos[0] - prev[0];
@@ -56,9 +55,6 @@ setInterval(()=>{
 },5000);
 // Получить текущее местоположение
 function get_location() {
-    if(!geolocation_started){
-        geolocation_started = true;
-    }
     map.flyTo(pos, 18);
 }
 
@@ -130,8 +126,9 @@ function update_markers() {
                 className: 'custom-div-icon',
                 html: "<div>\n" +
                     "            <a href=\"#\" onclick=\"collapse_toggle(" + idx + ")\">\n" +
-                    "                <div class=\"geopoint d-flex justify-content-center align-items-center " + glow2 + " pb-2 \">\n" +
+                    "                <div class=\"geopoint d-flex justify-content-center align-items-center " + "" + " pb-2 \">\n" +
                     "                    <div class=\"dog-img\"></div>\n" +
+                    `                    ${glow2 ? "<div class='glow-check'></div>":""}` +
                     "                </div>\n" +
                     "            </a>\n" +
                     "        </div>",
@@ -387,6 +384,7 @@ document.addEventListener('deviceready', () => {
                 } else {
                     cur_route_place = -1;
                 }
+                setTimeout(toggle_collapse,1000);
             }
 
         } catch (e) {
