@@ -207,7 +207,7 @@ input[type="email"].form-control:focus,input[type="password"].form-control:focus
     box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
 }
 input[type="password"].form-control{
-    -webkit-text-security: disc; /* поменяю в будущем */
+    -webkit-text-security: disc; 
 }
 
 /* дропдауны */
@@ -221,7 +221,7 @@ select.form-select{
     font-size: 18px;
     padding-left: 60px;
 }
-option{ /* я ебал */
+option{ 
     background-color: rgb(255,255,255);
     border-bottom: 1px;
     border-style: solid;
@@ -357,7 +357,7 @@ h3.text-common{
     display:flex;
     flex-direction: column;
 
-    /* Как задать отношение сторон? Проверить!!! */
+   
     aspect-ratio: 322/233;
     overflow:hidden;
 
@@ -523,7 +523,6 @@ h3.text-common{
     font-size: 18px;
 }
 
-/* sorry */
 #success div {
     font-family: gilroy;
 }
